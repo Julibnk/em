@@ -1,0 +1,19 @@
+{
+  "name": "em-backend",
+  "version": "1.0.0",
+  "description": "EM - Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Julibnk/em-backend.git"
+  },
+  "author": "Julián Fernández Fernández",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Julibnk/em-backend/issues"
+  },
+  "homepage": "https://github.com/Julibnk/em-backend#readme"
+}
