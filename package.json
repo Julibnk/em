@@ -4,6 +4,7 @@
   "description": "EM - Backend",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Julibnk/em-backend/issues"
   },
-  "homepage": "https://github.com/Julibnk/em-backend#readme"
+  "homepage": "https://github.com/Julibnk/em-backend#readme",
+  "devDependencies": {
+    "prisma": "^3.15.1"
+  }
 }
