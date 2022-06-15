@@ -178,8 +178,8 @@ model Template {
 
   Category Category? @relation(fields: [accountId, categoryId], references: [accountId, id])
 
+
   @@id([metaAccountId, id])
-  @@unique([metaAccountId, name])
 }
 
 model Message {
