@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run start:local",
-    "start:local": "env-cmd -f .env.local nodemon index.js",
-    "start:dev": "env-cmd -f .env.dev nodemon index.js",
-    "start:prod": "env-cmd -f .env.prod nodemon index.js",
+    "start:local": "env-cmd -f .env.local nodemon app.ts",
+    "start:dev": "env-cmd -f .env.dev nodemon app.ts",
+    "start:prod": "env-cmd -f .env.prod nodemon app.ts",
     "migrate:dev": "env-cmd -f .env.dev prisma migrate dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,7 +22,14 @@
   },
   "homepage": "https://github.com/Julibnk/em-backend#readme",
   "devDependencies": {
-    "prisma": "^3.15.1"
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^17.0.43",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint": "^8.17.0",
+    "prisma": "^3.15.1",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
