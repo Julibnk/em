@@ -18,3 +18,5 @@ npm run migrate:dev -- --name=nombre_migracion
 
 Prisma
 env-cmd
+
+Pino
