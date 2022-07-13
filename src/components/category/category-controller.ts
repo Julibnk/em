@@ -1,17 +1,29 @@
 import { Request, Response, NextFunction } from 'express';
 
-export const createCategory = (_: Request, res: Response) => {
+export const validationSample = async (
+  _: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (false) {
+    res.status(400).end();
+  } else {
+    next();
+  }
+};
+
+export const create = async (_: Request, res: Response) => {
   res.status(200).json({ yeeeee: 'yeee?' });
 };
-export const readCategory = (_: Request, res: Response) => {
+export const read = async (_: Request, res: Response) => {
   res.status(200).json({ yeeeee: 'yeee?' });
 };
-export const updateCategory = (_: Request, res: Response) => {
+export const update = async (_: Request, res: Response) => {
   res.status(200).json({ yeeeee: 'yeee?' });
 };
-export const deleteCategory = (_: Request, res: Response) => {
+export const remove = async (_: Request, res: Response) => {
   res.status(200).json({ yeeeee: 'yeee?' });
 };
-export const searchCategories = (_: Request, res: Response) => {
+export const search = (_: Request, res: Response) => {
   res.status(200).json({ yeeeee: 'yeee?' });
 };

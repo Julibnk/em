@@ -1,8 +1,8 @@
 import express from 'express';
-import { categoryRouter } from '../../components/category';
+import categoryRouter from '../../components/category/category-router';
 
-const router = express.Router();
+const routerV1 = express.Router();
 
-router.use('/category', categoryRouter);
+routerV1.use('/categories', categoryRouter);
 
-export default router;
+export default routerV1;
