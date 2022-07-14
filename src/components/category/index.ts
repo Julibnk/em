@@ -1,10 +1,16 @@
-// import router from './category-router';
-import { buildMakeCategory } from './category-entity';
+import { makeCreateCategory } from './category-service';
+import makeCategoryDal from './category-dal';
+import { PrismaClient } from '@prisma/client';
+import prisma from '../../utils/db';
 
-// export { Category, buildMakeCategory } from './category-entity';
+// const prisma = new PrismaClient();
 
-// const makeCategory = buildMakeCategory();
+const categoryDal = makeCategoryDal({ db: prisma });
 
-// export default makeCategory;
+const createCategory = makeCreateCategory(categoryDal);
 
-// export const categoryRouter = router;
+const categoryService = Object.freeze({ createCategory });
+
+export default categoryService;
+
+export { createCategory };

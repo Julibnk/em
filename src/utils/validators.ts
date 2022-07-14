@@ -1,5 +1,5 @@
-export const isUIID = (text: string) => {
-  return new RegExp(
-    '\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b'
-  ).test(text);
-};
+// export const isUIID = (text: string) => {
+//   return new RegExp(
+//     '^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+//   ).test(text);
+// };

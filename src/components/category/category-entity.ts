@@ -1,31 +1,30 @@
-import { isUIID } from '../../utils/validators';
+// import { isUIID } from '../../utils/validators';
 
+import { validate as validateUuid } from 'uuid';
 export interface Category {
   // PK
   accountId: string;
-  id: string;
+  // id: string;
   name: string;
   shortDescription?: string;
 }
 
-type UuidValidator = typeof isUIID;
-
 interface BuildCategory {
-  isUIID: UuidValidator;
+  validateUuid: typeof validateUuid;
 }
 
 export const buildMakeCategory =
-  ({ isUIID }: BuildCategory) =>
-  ({ accountId, id, name, shortDescription = '' }: Category): Category => {
+  ({ validateUuid }: BuildCategory) =>
+  ({ accountId, name, shortDescription = '' }: Category): Category => {
     if (!accountId) {
       throw Error('Falta id de cuenta');
     }
 
-    if (!isUIID(id)) {
-      throw Error('Id de categoria invalido');
-    }
-
-    if (!isUIID(accountId)) {
+    // if (!isUIID(id)) {
+    //   throw Error('Id de categoria invalido');
+    // }
+    console.log(accountId);
+    if (!validateUuid(accountId)) {
       throw Error('Id de cuenta invalido');
     }
 
@@ -35,15 +34,13 @@ export const buildMakeCategory =
 
     const categoryEntity: Category = {
       accountId,
-      id,
+      // id,
       name,
       shortDescription,
     };
     return categoryEntity;
   };
 
-// return makeCategory;
-
-const makeCategory = buildMakeCategory({ isUIID });
+const makeCategory = buildMakeCategory({ validateUuid });
 
 export default makeCategory;

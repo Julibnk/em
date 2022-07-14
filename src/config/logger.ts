@@ -1,4 +1,5 @@
-import { Configuration } from 'log4js';
+import log4js, { Configuration } from 'log4js';
+// import log4js from 'log4js';
 
 const logLevel = process.env.LOGGER_LEVEL || 'OFF';
 

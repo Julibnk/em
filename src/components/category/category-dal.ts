@@ -1,11 +1,11 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 
-interface BuildCategoryDalProps {
+interface MakeCategoryDalProps {
   db: PrismaClient;
 }
 
-const buildCategoryDal = ({ db }: BuildCategoryDalProps) => {
-  return {
+const makeCategoryDal = ({ db }: MakeCategoryDalProps) => {
+  return Object.freeze({
     // Busca categoria por nombre
     findCategoryByName: async (accountId: string, name: string) => {
       return await db.category.findFirst({
@@ -22,26 +22,9 @@ const buildCategoryDal = ({ db }: BuildCategoryDalProps) => {
         data: dbCategory,
       });
     },
-  };
+  });
 };
 
-export type CategoryDal = ReturnType<typeof buildCategoryDal>;
+export type CategoryDal = ReturnType<typeof makeCategoryDal>;
 
-export default buildCategoryDal;
-
-// export const insertCategory = async ({ db, category }: IInsertCategory) => {
-//   // Prisma.
-//   const a: Category = {
-//     accountId: '899b41de-0012-4d6e-a594-24992fdd5936',
-//     id: '',
-//     name: 'asda',
-//     shortDescription: null,
-//     createdAt: new Date(),
-//     createUsername: 'You',
-//     updatedAt: new Date(),
-//     updateUsername: 'You',
-//     deleted: false,
-//   };
-
-//   db.category.create({ data: a });
-// };
+export default makeCategoryDal;

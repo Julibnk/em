@@ -2,28 +2,29 @@ import makeCategory, { Category } from './category-entity';
 import { PrismaClient, Category as DBCategory, Prisma } from '@prisma/client';
 import buildCategoryDal, { CategoryDal } from './category-dal';
 
-// PrismaClient.
+export const makeCreateCategory =
+  ({ createCategory, findCategoryByName }: CategoryDal) =>
+  async (categoryInfo: Category) => {
+    const category = makeCategory(categoryInfo);
 
-export const buildCreateCategory =
-  // (db: PrismaClient) => async (categoryInfo: Category) => {
+    const { accountId, name } = category;
 
+    const exists = await findCategoryByName(accountId, name);
 
-    ({ createCategory, findCategoryByName }: CategoryDal) =>
-    async (categoryInfo: Category) => {
-      const category = makeCategory(categoryInfo);
+    if (exists) {
+      throw Error('La categoria ya existe');
+    }
 
-      const { accountId, name } = category;
+    return createCategory({
+      name,
+      createUsername: 'You',
+      updateUsername: 'Tambien you',
+      Account: { connect: { id: accountId } },
+    });
+  };
 
-      const exists = await findCategoryByName(accountId, name);
+// const categoryService = {
+// makeCreateCategory,
+// };
 
-      if (exists) {
-        throw Error('Ya existe');
-      }
-
-      return createCategory({
-        name,
-        createUsername: 'You',
-        updateUsername: 'Tambien you',
-        Account: { connect: { id: accountId } },
-      });
-    };
+// export default Object.freeze({ makeCreateCategory });
