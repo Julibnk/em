@@ -1,12 +1,11 @@
 import { makeCreateCategory } from './category-service';
 import makeCategoryDal from './category-dal';
-import { PrismaClient } from '@prisma/client';
-import prisma from '../../utils/db';
+import { prismaClient as db } from '../../db/prisma';
 
-// const prisma = new PrismaClient();
+// Data access layer
+const categoryDal = makeCategoryDal({ db });
 
-const categoryDal = makeCategoryDal({ db: prisma });
-
+// Use cases - Services
 const createCategory = makeCreateCategory(categoryDal);
 
 const categoryService = Object.freeze({ createCategory });
