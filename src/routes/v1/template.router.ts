@@ -1,10 +1,10 @@
 import express from 'express';
 
-import factoryTemplateUseCases from '../use-cases/template.usecases';
+import factoryTemplateUseCases from '../../core/template/use-cases/template.usecases';
 
-import prismaTemplateRepository from './prisma-template.repository';
+import prismaTemplateRepository from '../../core/template/infra/prisma-template.repository';
 
-import factoryTemplateController from './template.controller';
+import factoryTemplateController from '../../core/template/infra/template.controller';
 
 // Inyecta el repositorio a los casos de uso
 const templateUseCases = factoryTemplateUseCases(prismaTemplateRepository);

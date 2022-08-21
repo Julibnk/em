@@ -1,11 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
 import { ITemplateUseCases } from '../use-cases/template.usecases';
 
+import { mapTemplateEntityToDto } from './template.mapper';
+
 const factoryTemplateController = (templateUseCases: ITemplateUseCases) => {
   const getAll = async (_: Request, res: Response) => {
     const templateEntities = await templateUseCases.getAllTemplates();
 
-    res.send(templateEntities);
+    // Mapea las entities a Dtos
+    const templateDtos = templateEntities.map((templateEntity) =>
+      mapTemplateEntityToDto(templateEntity)
+    );
+
+    res.send(templateDtos);
   };
 
   return { getAll };

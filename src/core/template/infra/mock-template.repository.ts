@@ -6,7 +6,7 @@ const templateInit = {
   description: 'descripcion plantilla mock ',
 };
 
-const prismaTemplateRepository: ITemplateRepository = {
+const mockTemplateRepository: ITemplateRepository = {
   async save(template) {
     return template;
   },
@@ -27,4 +27,4 @@ const prismaTemplateRepository: ITemplateRepository = {
   },
 };
 
-export default prismaTemplateRepository;
+export default mockTemplateRepository;
