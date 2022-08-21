@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ITemplateUseCases } from '../use-cases/template.usecases';
+import { ITemplateUseCases } from '../application/template.usecases';
 
 import { mapTemplateEntityToDto } from './template.mapper';
 
