@@ -1,14 +1,17 @@
 import { TemplateEntity } from '../domain/template.entity';
 import ITemplateRepository from '../domain/template.repository';
 
-export interface ITemplateUseCases {
-  getAllTemplates: () => Promise<TemplateEntity[]>;
-}
-
+// Definicion de la funcion factory
 type IFactoryTemplateUseCases = (
   templateRepository: ITemplateRepository
 ) => ITemplateUseCases;
 
+// Casos de uso de Plantillas
+export interface ITemplateUseCases {
+  getAllTemplates: () => Promise<TemplateEntity[]>;
+}
+
+// Factory para casos de uso que recibe por inyeccion el repository
 const factoryTemplateUseCases: IFactoryTemplateUseCases = (
   templateRepository: ITemplateRepository
 ) => {
@@ -20,15 +23,3 @@ const factoryTemplateUseCases: IFactoryTemplateUseCases = (
 };
 
 export default factoryTemplateUseCases;
-
-// export class TemplateUseCases {
-//   protected templateRepository: TemplateRepository;
-
-//   constructor(templateRepository: TemplateRepository) {
-//     this.templateRepository = templateRepository;
-//   }
-
-//   getAllTemplates(): Promise<TemplateEntity[]> {
-//     return this.templateRepository.getAll();
-//   }
-// }
