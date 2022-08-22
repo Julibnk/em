@@ -1,4 +1,4 @@
-import { Template } from '../domain/template.entity';
+import Template from '../domain/template.entity';
 import { UniqueEntityId } from '../../../common/domain/entity-id';
 import { Prisma } from '@prisma/client';
 

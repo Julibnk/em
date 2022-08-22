@@ -1,4 +1,4 @@
-import { Template } from '../domain/template.entity';
+import Template from '../domain/template.entity';
 import { TemplateDto } from '../infra/template.dto';
 import { UniqueEntityId } from '../../../common/domain/entity-id';
 

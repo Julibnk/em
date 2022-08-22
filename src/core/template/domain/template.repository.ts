@@ -1,4 +1,4 @@
-import { Template } from './template.entity';
+import Template from './template.entity';
 
 interface ITemplateRepo {
   getById(id: string): Promise<Template | null>;

@@ -5,7 +5,7 @@ interface ITemplateProps {
   shortDescription?: string;
 }
 
-export class Template implements ITemplateProps {
+class Template implements ITemplateProps {
   private constructor(
     public id: UniqueEntityId,
     public name: string,
@@ -21,3 +21,5 @@ export class Template implements ITemplateProps {
     return new Template(templateId, name, shortDescription);
   }
 }
+
+export default Template;

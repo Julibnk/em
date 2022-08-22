@@ -7,7 +7,7 @@ class TemplateController {
   constructor(private templateUseCases: ITemplateUseCases) {}
 
   async getAll(_: Request, res: Response) {
-    // const templateEntities = await this.templateUseCases.getAllTemplates();
+    const templateEntities = await this.templateUseCases.getAllTemplates();
     // Mapea las entities a Dtos
     // const templateDtos = templateEntities.map((template) =>
     //   mapTemplateToDto(template)
