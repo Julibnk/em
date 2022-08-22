@@ -1,4 +1,5 @@
 import ITemplateRepo from '../domain/template.repository';
+import prismaClient from '../../../config/prisma';
 
 class PrismaTemplateRepo implements ITemplateRepo {
   async save(template) {
@@ -14,6 +15,7 @@ class PrismaTemplateRepo implements ITemplateRepo {
   }
 
   async getAll() {
+    const allTemplates = await prismaClient.template.findMany();
     return [];
   }
 }

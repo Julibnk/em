@@ -1,4 +1,4 @@
-import { Template } from '../domain/template.entity';
+// import { Template } from '../domain/template.entity';
 import ITemplateRepo from '../domain/template.repository';
 
 const templateInit = {
@@ -20,9 +20,9 @@ class MockTemplateRepo implements ITemplateRepo {
 
   async getAll() {
     return [
-      new Template(templateInit),
-      new Template(templateInit),
-      new Template(templateInit),
+      // new Template(templateInit),
+      // new Template(templateInit),
+      // new Template(templateInit),
     ];
   }
 }
