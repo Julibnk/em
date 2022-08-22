@@ -1,4 +1,5 @@
 export type TemplateDto = {
+  id: string;
   name: string;
   description?: string;
   preview?: string;

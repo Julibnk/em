@@ -1,17 +1,16 @@
 import express from 'express';
 
-import factoryTemplateUseCases from '../../core/template/application/template.usecases';
+import TemplateUseCases from '../../core/template/application/template.usecases';
+import PrismaTemplateRepository from '../../core/template/infra/prisma-template.repository';
+import MockTemplateRepository from '../../core/template/infra/mock-template.repository';
 
-import prismaTemplateRepository from '../../core/template/infra/prisma-template.repository';
-import mockTemplateRepository from '../../core/template/infra/mock-template.repository';
-
-import factoryTemplateController from '../../core/template/infra/template.controller';
+import TemplateController from '../../core/template/infra/template.controller';
 
 // Inyecta el repositorio a los casos de uso
-const templateUseCases = factoryTemplateUseCases(mockTemplateRepository);
+const templateUseCases = new TemplateUseCases(new PrismaTemplateRepository());
 
 // Inyecta los casos de uso al controlador
-const templateController = factoryTemplateController(templateUseCases);
+const templateController = new TemplateController(templateUseCases);
 
 const templateRouter = express.Router();
 

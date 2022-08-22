@@ -1,5 +1,6 @@
-interface ConstructorProps {
-  // accountId: string;
+import { UniqueEntityId } from '../../common/domain/entity-id';
+
+interface ITemplateProps {
   name: string;
   description?: string;
   preview?: string;
@@ -8,25 +9,27 @@ interface ConstructorProps {
   variable3?: string;
 }
 
-export class TemplateEntity {
-  // public accountId: string;
-  public name: string;
-  public description?: string;
-  public preview?: string;
-  public variable1?: string;
-  public variable2?: string;
-  public variable3?: string;
+export class Template implements ITemplateProps {
+  id: UniqueEntityId;
+  name: string;
+  description?: string;
+  preview?: string;
+  variable1?: string;
+  variable2?: string;
+  variable3?: string;
 
-  constructor({
-    // accountId,
-    name,
-    description,
-    preview,
-    variable1,
-    variable2,
-    variable3,
-  }: ConstructorProps) {
-    // this.accountId = accountId;
+  constructor(
+    {
+      name,
+      description,
+      preview,
+      variable1,
+      variable2,
+      variable3,
+    }: ITemplateProps,
+    id?: UniqueEntityId
+  ) {
+    this.id = id ? id : new UniqueEntityId();
     this.name = name;
     this.description = description;
     this.preview = preview;
@@ -34,6 +37,15 @@ export class TemplateEntity {
     this.variable2 = variable2;
     this.variable3 = variable3;
   }
+
+  // public static createTemplate(
+  //   props: ITemplateProps,
+  //   id?: UniqueEntityId
+  // ): TemplateEntity {
+  //   const templateId = id ? id : new UniqueEntityId();
+
+  //   return new TemplateEntity(props, templateId);
+  // }
 
   //   set name
 }

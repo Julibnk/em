@@ -1,13 +1,13 @@
-import { TemplateEntity } from './template.entity';
+import { Template } from './template.entity';
 
 interface ITemplateRepository {
-  getById(id: string): Promise<TemplateEntity | null>;
+  getById(id: string): Promise<Template | null>;
 
-  create(template: TemplateEntity): Promise<TemplateEntity | null>;
+  create(template: Template): Promise<Template | null>;
 
-  save(template: TemplateEntity): Promise<TemplateEntity>;
+  save(template: Template): Promise<Template>;
 
-  getAll(): Promise<TemplateEntity[]>;
+  getAll(): Promise<Template[]>;
 }
 
 export default ITemplateRepository;
