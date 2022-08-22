@@ -1,6 +1,6 @@
 import { Template } from './template.entity';
 
-interface ITemplateRepository {
+interface ITemplateRepo {
   getById(id: string): Promise<Template | null>;
 
   create(template: Template): Promise<Template | null>;
@@ -10,4 +10,4 @@ interface ITemplateRepository {
   getAll(): Promise<Template[]>;
 }
 
-export default ITemplateRepository;
+export default ITemplateRepo;

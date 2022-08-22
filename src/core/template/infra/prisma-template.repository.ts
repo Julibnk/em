@@ -1,6 +1,6 @@
-import ITemplateRepository from '../domain/template.repository';
+import ITemplateRepo from '../domain/template.repository';
 
-class PrismaTemplateRepository implements ITemplateRepository {
+class PrismaTemplateRepo implements ITemplateRepo {
   async save(template) {
     return template;
   }
@@ -18,4 +18,4 @@ class PrismaTemplateRepository implements ITemplateRepository {
   }
 }
 
-export default PrismaTemplateRepository;
+export default PrismaTemplateRepo;

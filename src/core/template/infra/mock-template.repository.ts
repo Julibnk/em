@@ -1,12 +1,12 @@
 import { Template } from '../domain/template.entity';
-import ITemplateRepository from '../domain/template.repository';
+import ITemplateRepo from '../domain/template.repository';
 
 const templateInit = {
   name: 'plantilla mock',
   description: 'descripcion plantilla mock ',
 };
 
-class MockTemplateRepository implements ITemplateRepository {
+class MockTemplateRepo implements ITemplateRepo {
   async save(template) {
     return template;
   }
@@ -27,4 +27,4 @@ class MockTemplateRepository implements ITemplateRepository {
   }
 }
 
-export default MockTemplateRepository;
+export default MockTemplateRepo;
