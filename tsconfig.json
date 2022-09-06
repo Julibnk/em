@@ -2,8 +2,8 @@
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
     "types": ["node"],
-    "noImplicitAny": false,
-    "outDir": "dist"
+    "noImplicitAny": true,
+    "outDir": "./dist"
   },
   "include": ["src", "app.ts"],
   "exclude": ["node_modules"]
