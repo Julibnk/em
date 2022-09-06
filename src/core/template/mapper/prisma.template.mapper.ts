@@ -1,5 +1,5 @@
 import Template from '../domain/template.entity';
-import { UniqueEntityId } from '../../../common/domain/entity-id';
+import { UniqueEntityId } from '../../shared/domain/entity-id';
 import { Prisma } from '@prisma/client';
 
 type PrismaTemplate = Prisma.TemplateCreateInput;

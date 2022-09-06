@@ -1,5 +1,5 @@
 import ITemplateRepo from '../domain/template.repository';
-import prismaClient from '../../../config/prisma';
+import prismaClient from '../../../apps/config/prisma';
 
 class PrismaTemplateRepo implements ITemplateRepo {
   async save(template) {

@@ -1,6 +1,6 @@
 import Template from '../domain/template.entity';
-import { TemplateDto } from '../infra/template.dto';
-import { UniqueEntityId } from '../../../common/domain/entity-id';
+import { TemplateDto } from '../infrastructure/template.dto';
+import { UniqueEntityId } from '../../shared/domain/entity-id';
 
 // export const mapTemplateToDto = (template: Template): TemplateDto => {
 //   return {

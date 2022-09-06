@@ -1,4 +1,4 @@
-import { UniqueEntityId } from '../../../common/domain/entity-id';
+import { UniqueEntityId } from '../../shared/domain/entity-id';
 
 interface ITemplateProps {
   name: string;

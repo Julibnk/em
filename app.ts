@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
-import routerV1 from './src/routes/v1';
+import routerV1 from './src/apps/routes/v1';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import { logger } from './src/utils/logger';
+import { logger } from './src/apps/utils/logger';
 
 const app = express();
 const port = process.env.port || 8000;

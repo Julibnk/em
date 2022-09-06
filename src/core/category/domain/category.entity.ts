@@ -1,11 +1,21 @@
-import { UniqueEntityId } from '../../../common/domain/entity-id';
+import { UniqueEntityId } from '../../shared/domain/entity-id';
+import Template from '../../template/domain/template.entity';
 
-class Category {
-  private constructor(public id: UniqueEntityId) {}
+interface ICategoryProps {
+  templates?: Template[];
+}
+class Category implements ICategoryProps {
+  private constructor(
+    public id: UniqueEntityId,
+    public templates?: Template[]
+  ) {}
 
-  public static create(id?: UniqueEntityId): Category {
+  public static create(props: ICategoryProps, id?: UniqueEntityId): Category {
     const categoryId = id ? id : new UniqueEntityId();
-    return new Category(categoryId);
+
+    const { templates } = props;
+
+    return new Category(categoryId, templates);
   }
 }
 
