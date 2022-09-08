@@ -7,10 +7,8 @@ import { AddressNumber } from './AddressNumber';
 import { PostalCode } from './PostalCode';
 import { Region } from './Region';
 import { Country } from './Country';
-import { PhoneNumber } from '../../Shared/domain/value-object/PhoneNumber';
-import { DateValueObject } from '../../Shared/domain/value-object/DateValueObject';
-import { UserValueObject } from '../../Shared/domain/value-object/UserValueObject';
-import { BoolValueObject } from '../../Shared/domain/value-object/BoolValueObject';
+import { PhoneNumber } from '../../Shared/domain/common/PhoneNumber';
+import { NumberValueObject } from '../../Shared/domain/value-object/NumberValueObject';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -22,33 +20,46 @@ export class Account extends AggregateRoot {
     readonly postalCode: PostalCode,
     readonly region: Region,
     readonly country: Country,
-    readonly phoneNumber: PhoneNumber,
-    readonly createdAt: DateValueObject,
-    readonly createUsername: UserValueObject,
-    readonly updatedAt: DateValueObject,
-    readonly updateUsername: UserValueObject,
-    readonly disabled: BoolValueObject
+    readonly phoneNumber: PhoneNumber
   ) {
     super();
   }
 
-  toPrimitives() {
-    throw new Error('Method not implemented.');
+  static fromPrimitives(plainData: {
+    id: string;
+    companyName: string;
+    vat: string;
+    street: string;
+    addressNumber: string;
+    postalCode: string;
+    region: string;
+    country: string;
+    phoneNumber: string;
+  }): Account {
+    return new Account(
+      new AccountId(plainData.id),
+      new CompanyName(plainData.companyName),
+      new Vat(plainData.vat),
+      new Street(plainData.street),
+      new AddressNumber(plainData.addressNumber),
+      new PostalCode(plainData.postalCode),
+      new Region(plainData.region),
+      new Country(plainData.country),
+      new PhoneNumber(plainData.phoneNumber)
+    );
+  }
+
+  toPrimitives(): any {
+    return {
+      id: this.id.value,
+      companyName: this.companyName.value,
+      vat: this.vat.value,
+      street: this.street.value,
+      addressNumber: this.addressNumber.value,
+      postalCode: this.postalCode.value,
+      region: this.region.value,
+      country: this.country.value,
+      phoneNumber: this.phoneNumber.value,
+    };
   }
 }
-
-// id String @id @default(uuid()) @db.Uuid
-
-// companyName    String
-// vat            String
-// street         String
-// addressNumber  Int
-// postalCode     Int
-// region         String   @db.VarChar(2)
-// country        String   @db.VarChar(2)
-// phoneNumber    String?
-// createdAt      DateTime @default(now())
-// createUsername String
-// updatedAt      DateTime @default(now())
-// updateUsername String
-// disabled       Boolean  @default(false)

@@ -1,3 +1,3 @@
 import { ValueObject } from './ValueObject';
 
-export class DateValueObject extends ValueObject<Date> {}
+export abstract class DateValueObject extends ValueObject<Date> {}
