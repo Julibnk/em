@@ -1,4 +1,4 @@
-import { AggregateRoot } from '../../shared/domain/AggregateRoot';
+import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { CategoryId } from './CategoryId';
 import { CategoryName } from './CategoryName';
 import { CategoryShortDescription } from './CategoryShortDescription';

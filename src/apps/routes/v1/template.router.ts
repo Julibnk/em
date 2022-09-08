@@ -1,10 +1,10 @@
 import express from 'express';
 
-import TemplateUseCases from '../../../core/template/application/template.usecases';
-import PrismaTemplateRepository from '../../../core/template/infrastructure/prisma-template.repository';
-import MockTemplateRepository from '../../../core/template/infrastructure/mock-template.repository';
+import TemplateUseCases from '../../../core/Template/application/template.usecases';
+import PrismaTemplateRepository from '../../../core/Template/infrastructure/prisma-template.repository';
+import MockTemplateRepository from '../../../core/Template/infrastructure/mock-template.repository';
 
-import TemplateController from '../../../core/template/infrastructure/template.controller';
+import TemplateController from '../../../core/Template/infrastructure/template.controller';
 
 // Inyecta el repositorio a los casos de uso
 const templateUseCases = new TemplateUseCases(new PrismaTemplateRepository());
