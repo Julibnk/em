@@ -3,6 +3,7 @@ import { TemplateId } from '../../Template/domain/TemplateId';
 import { CategoryId } from './CategoryId';
 import { CategoryName } from './CategoryName';
 import { CategoryShortDescription } from './CategoryShortDescription';
+import { Primitives } from '../../Shared/domain/common/Primitives';
 
 export class Category extends AggregateRoot {
   constructor(
@@ -14,21 +15,16 @@ export class Category extends AggregateRoot {
     super();
   }
 
-  static fromPrimitives(plainData: {
-    id: string;
-    name: string;
-    shortDescription: string;
-    temmplateIds: string[];
-  }): Category {
+  static fromPrimitives(plainData: Primitives<Category>): Category {
     return new Category(
       new CategoryId(plainData.id),
       new CategoryName(plainData.name),
       new CategoryShortDescription(plainData.shortDescription),
-      plainData.temmplateIds.map((templateId) => new TemplateId(templateId))
+      plainData.templateIds.map((templateId) => new TemplateId(templateId))
     );
   }
 
-  toPrimitives(): any {
+  toPrimitives(): Primitives<Category> {
     return {
       id: this.id.value,
       name: this.name.value,

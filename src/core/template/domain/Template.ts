@@ -7,6 +7,7 @@ import { TemplatePreview } from './TemplatePreview';
 import { BoolValueObject } from '../../Shared/domain/value-object/BoolValueObject';
 import { TemplateVariable } from './TemplateVariable';
 import { InvalidArgumentError } from '../../Shared/domain/value-object/InvalidArgumentError';
+import { Primitives } from '../../Shared/domain/common/Primitives';
 
 export class Template extends AggregateRoot {
   constructor(
@@ -28,19 +29,7 @@ export class Template extends AggregateRoot {
     this.ensureVariable1Consistence();
   }
 
-  static fromPrimitives(plainData: {
-    id: string;
-    name: string;
-    status: string;
-    shortDescription: string;
-    preview: string;
-    hasVariable1: boolean;
-    hasVariable2: boolean;
-    hasVariable3: boolean;
-    variable1: string;
-    variable2: string;
-    variable3: string;
-  }): Template {
+  static fromPrimitives(plainData: Primitives<Template>): Template {
     return new Template(
       new TemplateId(plainData.id),
       new TemplateName(plainData.name),
@@ -56,19 +45,19 @@ export class Template extends AggregateRoot {
     );
   }
 
-  toPrimitives(): any {
+  toPrimitives(): Primitives<Template> {
     return {
-      id: this.id,
-      name: this.name,
-      status: this.status,
-      shortDescription: this.shortDescription,
-      preview: this.preview,
-      hasVariable1: this.hasVariable1,
-      hasVariable2: this.hasVariable2,
-      hasVariable3: this.hasVariable3,
-      variable1: this.variable1,
-      variable2: this.variable2,
-      variable3: this.variable3,
+      id: this.id.value,
+      name: this.name.value,
+      status: this.status.value,
+      shortDescription: this.shortDescription.value,
+      preview: this.preview.value,
+      hasVariable1: this.hasVariable1.value,
+      hasVariable2: this.hasVariable2.value,
+      hasVariable3: this.hasVariable3.value,
+      variable1: this.variable1.value,
+      variable2: this.variable2.value,
+      variable3: this.variable3.value,
     };
   }
 
