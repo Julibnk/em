@@ -8,7 +8,7 @@ import { PostalCode } from './PostalCode';
 import { Region } from './Region';
 import { Country } from './Country';
 import { PhoneNumber } from '../../Shared/domain/common/PhoneNumber';
-import { NumberValueObject } from '../../Shared/domain/value-object/NumberValueObject';
+import { Primitives } from '../../Shared/domain/common/Primitives';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -25,17 +25,7 @@ export class Account extends AggregateRoot {
     super();
   }
 
-  static fromPrimitives(plainData: {
-    id: string;
-    companyName: string;
-    vat: string;
-    street: string;
-    addressNumber: string;
-    postalCode: string;
-    region: string;
-    country: string;
-    phoneNumber: string;
-  }): Account {
+  static fromPrimitives(plainData: Primitives<Account>): Account {
     return new Account(
       new AccountId(plainData.id),
       new CompanyName(plainData.companyName),
@@ -49,7 +39,7 @@ export class Account extends AggregateRoot {
     );
   }
 
-  toPrimitives(): any {
+  toPrimitives(): Primitives<Account> {
     return {
       id: this.id.value,
       companyName: this.companyName.value,

@@ -24,9 +24,7 @@ export class Template extends AggregateRoot {
     readonly variable3: TemplateVariable
   ) {
     super();
-    this.ensureVariable3Consistence();
-    this.ensureVariable2Consistence();
-    this.ensureVariable1Consistence();
+    this.ensureVariableConsistence();
   }
 
   static fromPrimitives(plainData: Primitives<Template>): Template {
@@ -59,6 +57,12 @@ export class Template extends AggregateRoot {
       variable2: this.variable2.value,
       variable3: this.variable3.value,
     };
+  }
+
+  private ensureVariableConsistence() {
+    this.ensureVariable3Consistence();
+    this.ensureVariable2Consistence();
+    this.ensureVariable1Consistence();
   }
 
   private ensureVariable3Consistence() {
