@@ -1,4 +1,4 @@
-import { TemplateId } from './TemplateId';
+import { TemplateId } from './TemplateIds';
 import { Template } from './Template';
 
 export interface TemplateRepository {
