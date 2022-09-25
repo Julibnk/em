@@ -54,7 +54,9 @@
     "glob": "^8.0.3",
     "helmet": "^5.1.0",
     "http-status": "^1.5.2",
+    "inversify": "^6.0.1",
     "log4js": "^6.6.0",
+    "reflect-metadata": "^0.1.13",
     "uuid": "^8.3.2"
   }
 }

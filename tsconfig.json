@@ -1,10 +1,12 @@
 {
   "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "types": ["node"],
+    "types": ["node", "reflect-metadata"],
     "noImplicitAny": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
-  "include": ["src", "app.ts"],
+  "include": ["src", "start.ts"],
   "exclude": ["node_modules"]
 }
