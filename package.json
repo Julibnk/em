@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run start:local",
-    "start:local": "env-cmd -f .env.local nodemon app.ts",
-    "start:dev": "env-cmd -f .env.dev nodemon app.ts",
-    "start:test": "env-cmd -f .env.test nodemon app.ts",
-    "start:prod": "env-cmd -f .env.prod nodemon app.ts",
+    "start:local": "env-cmd -f .env.local nodemon start.ts",
+    "start:dev": "env-cmd -f .env.dev nodemon start.ts",
+    "start:test": "env-cmd -f .env.test nodemon start.ts",
+    "start:prod": "env-cmd -f .env.prod nodemon start.ts",
     "migrate:dev": "env-cmd -f .env.dev prisma migrate dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -7,6 +7,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["src", "start.ts"],
+  "include": ["src/**/**.ts", "start.ts"],
   "exclude": ["node_modules"]
 }
