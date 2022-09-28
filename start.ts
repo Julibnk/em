@@ -1,6 +1,6 @@
 import { BackendApp } from './src/apps/BackendApp';
 
-console.log(process.env.NODE_ENV);
+console.log('Enviroment: ' + process.env.NODE_ENV);
 
 try {
   new BackendApp().start();
