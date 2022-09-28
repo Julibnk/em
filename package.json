@@ -4,12 +4,16 @@
   "description": "EM - Backend",
   "main": "index.js",
   "scripts": {
-    "start": "npm run start:local",
-    "start:local": "env-cmd -f .env.local nodemon start.ts",
+    "start": "npm run start:test",
     "start:dev": "env-cmd -f .env.dev nodemon start.ts",
-    "start:prod": "env-cmd -f .env.prod nodemon start.ts",
-    "migrate:dev": "env-cmd -f .env.dev prisma migrate dev",
-    "test": "env-cmd -f .env.test jest"
+    "start:test": "env-cmd -f .env.test nodemon start.ts",
+    "start:prod": "env-cmd -f .env nodemon start.ts",
+    "test": "env-cmd -f .env.test jest",
+    "prisma:generate:dev": "env-cmd -f .env.dev prisma generate",
+    "prisma:generate:test": "env-cmd -f .env.test prisma generate",
+    "prisma:generate:prod": "env-cmd -f .env prisma generate",
+    "prisma:migrate:dev": "env-cmd -f .env.dev prisma migrate dev",
+    "prisma:migrate:test": "env-cmd -f .env.test prisma migrate dev"
   },
   "repository": {
     "type": "git",
@@ -53,8 +57,10 @@
     "glob": "^8.0.3",
     "helmet": "^5.1.0",
     "http-status": "^1.5.2",
+    "i": "^0.3.7",
     "inversify": "^6.0.1",
     "log4js": "^6.6.0",
+    "npm": "^8.19.2",
     "reflect-metadata": "^0.1.13",
     "uuid": "^8.3.2"
   }

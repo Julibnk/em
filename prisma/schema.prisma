@@ -31,9 +31,8 @@ enum TemplateStatus {
 }
 
 model Account {
-
   // PK
-  id String @id @default(uuid()) @db.Uuid
+  id String @id @db.Uuid
 
   companyName    String
   vat            String
@@ -54,14 +53,12 @@ model Account {
   User        User[]
   Contact     Contact[]
   Category    Category[]
-
 }
 
 model User {
-
   // PK
   accountId String @db.Uuid
-  id        String @default(uuid()) @db.Uuid
+  id        String @db.Uuid
 
   username       String   @unique
   mail           String?
@@ -78,10 +75,9 @@ model User {
 }
 
 model Contact {
-
   // PK
   accountId        String   @db.Uuid
-  id               String   @default(uuid()) @db.Uuid
+  id               String   @db.Uuid
   name             String
   prefix           String
   phoneNumber      String
@@ -101,10 +97,9 @@ model Contact {
 }
 
 model Category {
-
   // PK
   accountId        String   @db.Uuid
-  id               String   @default(uuid()) @db.Uuid
+  id               String   @db.Uuid
   name             String
   shortDescription String?
   createdAt        DateTime @default(now())
@@ -120,7 +115,6 @@ model Category {
   Template Template[]
   Message  Message[]
 
-
   @@id([accountId, id])
 }
 
@@ -128,9 +122,8 @@ model Category {
 //  META   //
 // ********//
 model MetaAccount {
-
   // PK
-  id             String   @id @default(uuid()) @db.Uuid
+  id             String   @id @db.Uuid
   createdAt      DateTime @default(now())
   createUsername String
   updatedAt      DateTime @default(now())
@@ -143,15 +136,12 @@ model MetaAccount {
   Phone    Phone[]
   Template Template[]
   Message  Message[]
-
-
 }
 
 model Template {
-
   // PK
   metaAccountId    String         @db.Uuid
-  id               String         @default(uuid()) @db.Uuid
+  id               String         @db.Uuid
   name             String
   status           TemplateStatus
   shortDescription String?
@@ -178,15 +168,13 @@ model Template {
 
   Category Category? @relation(fields: [accountId, categoryId], references: [accountId, id])
 
-
   @@id([metaAccountId, id])
 }
 
 model Message {
-
   // PK
   metaAccountId     String        @db.Uuid
-  id                String        @default(uuid()) @db.Uuid
+  id                String        @db.Uuid
   status            MessageStatus
   sentDate          DateTime
   scheduled         Boolean
@@ -223,7 +211,7 @@ model Message {
 model Phone {
   // PK
   metaAccountId  String   @db.Uuid
-  id             String   @default(uuid()) @db.Uuid
+  id             String   @db.Uuid
   prefix         String
   phoneNumber    String
   createdAt      DateTime @default(now())
@@ -244,9 +232,8 @@ model Phone {
 // ************//
 
 model Dictionary {
-
   // PK
-  id    String        @id @default(uuid()) @db.Uuid
+  id    String        @id @db.Uuid
   key   DictionaryKey
   value String
 
@@ -256,15 +243,13 @@ model Dictionary {
 }
 
 model DictionaryText {
-
   // PK
-  id String @id @default(uuid()) @db.Uuid
+  id String @id @db.Uuid
 
   key      DictionaryKey
   language String        @db.VarChar(2)
   value    String
   text     String
-
 
   // Relation
   Dictionary Dictionary @relation(fields: [key, value], references: [key, value])
