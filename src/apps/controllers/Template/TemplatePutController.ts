@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../Controller';
 import { TemplateCreator } from '../../../core/template/application/TemplateCreator';
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
+import { DI_NAMESPACES } from '../../../core/Shared/dependency-injection/namespaces';
 
 type TemplatePutRequest = Request & {
   body: {
@@ -10,8 +11,13 @@ type TemplatePutRequest = Request & {
     name: string;
   };
 };
+
+@injectable()
 export class TemplatePutController implements Controller {
-  constructor(private templateCreator: TemplateCreator) {}
+  constructor(
+    @inject(DI_NAMESPACES.TEMPLATE_CREATOR)
+    private templateCreator: TemplateCreator
+  ) {}
 
   async run(req: TemplatePutRequest, res: Response) {
     try {
@@ -19,7 +25,8 @@ export class TemplatePutController implements Controller {
       await this.templateCreator.run({ id, name });
       res.status(httpStatus.CREATED).send();
     } catch (error) {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(message);
     }
   }
 }

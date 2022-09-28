@@ -5,7 +5,8 @@
     "noImplicitAny": true,
     "outDir": "./dist",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "sourceMap": true
   },
   "include": ["src/**/**.ts", "start.ts"],
   "exclude": ["node_modules"]
