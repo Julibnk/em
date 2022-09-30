@@ -4,13 +4,12 @@ import { Controller } from '../Controller';
 import { TemplateCreator } from '../../../core/template/application/TemplateCreator';
 import { inject, injectable } from 'inversify';
 import { DI_NAMESPACES } from '../../../core/Shared/dependency-injection/namespaces';
+import { Primitives } from '../../../core/Shared/domain/common/Primitives';
+import { Template } from '../../../core/template/domain/Template';
 
-type TemplatePutRequest = Request & {
-  body: {
-    id: string;
-    name: string;
-  };
-};
+// type TemplatePutRequest = Request & {
+//   body: <Primitives<Template>>;
+// };
 
 @injectable()
 export class TemplatePutController implements Controller {
@@ -19,10 +18,9 @@ export class TemplatePutController implements Controller {
     private templateCreator: TemplateCreator
   ) {}
 
-  async run(req: TemplatePutRequest, res: Response) {
+  async run(req: Request, res: Response) {
     try {
-      const { id, name } = req.body;
-      await this.templateCreator.run({ id, name });
+      await this.templateCreator.run(req.body);
       res.status(httpStatus.CREATED).send();
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error';

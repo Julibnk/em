@@ -1,13 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 
-export class Client {
-  private static _instance: PrismaClient;
+export class PrismaClientSingleton {
+  private static client: PrismaClient;
 
   static get instance(): PrismaClient {
-    if (!Client._instance) {
-      Client._instance = new PrismaClient();
+    if (!PrismaClientSingleton.client) {
+      PrismaClientSingleton.client = new PrismaClient();
     }
 
-    return Client._instance;
+    return PrismaClientSingleton.client;
   }
 }

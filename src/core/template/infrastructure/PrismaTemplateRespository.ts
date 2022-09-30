@@ -2,16 +2,43 @@ import { Template } from '../domain/Template';
 import { TemplateId } from '../domain/TemplateId';
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { injectable } from 'inversify';
+import { Nullable } from '../../Shared/domain/Nullable';
+import { PrismaClient } from '@prisma/client';
+import { PrismaClientSingleton } from '../../Shared/infrastructure/PrismaClient';
 
 @injectable()
 export class PrismaTemplateRepository implements TemplateRepository {
-  save(template: Template): Promise<void> {
+  private client: PrismaClient;
+
+  constructor() {
+    this.client = PrismaClientSingleton.instance;
+  }
+
+  public async save(template: Template): Promise<void> {
+    const templatePrimitives = template.toPrimitives();
+
+    this.client.template.upsert({
+      where: {
+        metaAccountId_id: {
+          metaAccountId: templatePrimitives.id,
+          id: templatePrimitives.id,
+        },
+      },
+      update: {},
+      create: {
+        metaAccountId: templatePrimitives.id,
+        id: templatePrimitives.id,
+        status: templatePrimitives.status,
+        createUsername: 'PEPE',
+        updateUsername: 'PEPE',
+        name: templatePrimitives.name,
+      },
+    });
+  }
+  public async search(id: TemplateId): Promise<Nullable<Template>> {
     throw new Error('Method not implemented.');
   }
-  search(id: TemplateId): Promise<Template> {
-    throw new Error('Method not implemented.');
-  }
-  searchAll(): Promise<Array<Template>> {
+  public async searchAll(): Promise<Array<Template>> {
     throw new Error('Method not implemented.');
   }
 }
