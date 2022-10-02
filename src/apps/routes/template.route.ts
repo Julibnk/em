@@ -8,7 +8,11 @@ import { validateReqSchema } from '.';
 const putSchema = [
   body('id').exists().isString(),
   body('name').exists().isString(),
-  body('duration').exists().isString(),
+  body('shortDescription').exists().isString(),
+  body('preview').optional().isString(),
+  body('variable1').optional().isString(),
+  body('variable2').optional().isString(),
+  body('variable3').optional().isString(),
 ];
 
 export const register = (router: Router) => {

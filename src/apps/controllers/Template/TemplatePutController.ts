@@ -19,12 +19,12 @@ export class TemplatePutController implements Controller {
   ) {}
 
   async run(req: Request, res: Response) {
-    try {
-      await this.templateCreator.run(req.body);
-      res.status(httpStatus.CREATED).send();
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown error';
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(message);
-    }
+    // try {
+    await this.templateCreator.run(req.body);
+    res.status(httpStatus.CREATED).send();
+    // } catch (error) {
+    //   const message = error instanceof Error ? error.message : 'Unknown error';
+    //   res.status(httpStatus.INTERNAL_SERVER_ERROR).send(message);
+    // }
   }
 }
