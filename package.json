@@ -13,8 +13,8 @@
     "prisma:generate:test": "env-cmd -f .env.test prisma generate",
     "prisma:generate:production": "env-cmd -f .env prisma generate",
     "prisma:migrate:test": "env-cmd -f .env.test prisma migrate dev",
-    "docker:up:development": "docker-compose -f ./docker-compose.development.yml up -d",
-    "docker:up:test": "docker-compose -f ./docker-compose.test.yml up -d"
+    "docker:up:development": "docker-compose -f ./docker-compose-development.yml up -d",
+    "docker:up:test": "docker-compose -f ./docker-compose-test.yml up -d"
   },
   "repository": {
     "type": "git",
