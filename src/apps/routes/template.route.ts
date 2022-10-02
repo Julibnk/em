@@ -2,11 +2,11 @@ import { Router, Request, Response } from 'express';
 import { Controller } from '../controllers/Controller';
 import { container } from '../../core/Shared/dependency-injection';
 import { DI_NAMESPACES } from '../../core/Shared/dependency-injection/namespaces';
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 import { validateReqSchema } from '.';
 
 const putSchema = [
-  body('id').exists().isString(),
+  param('id').exists().isString(),
   body('name').exists().isString(),
   body('shortDescription').exists().isString(),
   body('preview').optional().isString(),
@@ -21,7 +21,7 @@ export const register = (router: Router) => {
   );
 
   router.put(
-    '/template',
+    '/template/:id',
     putSchema,
     validateReqSchema,
     (req: Request, res: Response) => templatePutController.run(req, res)
