@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
         with:
@@ -18,7 +18,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm install --no-audit --no-found --no-optional
+        run: npm install --no-audit --no-fund --no-optional
 
       - name: Lint code
         run: npm run lint
