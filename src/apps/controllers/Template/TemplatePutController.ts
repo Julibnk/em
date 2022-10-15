@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../Controller';
-import { TemplateCreator } from '../../../core/template/application/TemplateCreator';
+import { TemplateCreator } from '../../../core/Template/application/TemplateCreator';
 import { inject, injectable } from 'inversify';
 import { DI_NAMESPACES } from '../../../core/Shared/dependency-injection/namespaces';
-import { TemplateId } from '../../../core/template/domain/TemplateId';
-import { TemplateName } from '../../../core/template/domain/TemplateName';
-import { TemplateVariable } from '../../../core/template/domain/TemplateVariable';
-import { TemplateShortDescription } from '../../../core/template/domain/TemplateShortDescription';
-import { TemplatePreview } from '../../../core/template/domain/TemplatePreview';
+import { TemplateId } from '../../../core/Template/domain/TemplateId';
+import { TemplateName } from '../../../core/Template/domain/TemplateName';
+import { TemplateVariable } from '../../../core/Template/domain/TemplateVariable';
+import { TemplateShortDescription } from '../../../core/Template/domain/TemplateShortDescription';
+import { TemplatePreview } from '../../../core/Template/domain/TemplatePreview';
 
 // type TemplatePutRequest = Request & {
 //   body: <Primitives<Template>>;

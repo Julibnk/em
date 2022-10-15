@@ -8,6 +8,7 @@
     "start:development": "env-cmd -f .env.development nodemon start.ts",
     "start:test": "env-cmd -f .env.test nodemon start.ts",
     "start:production": "env-cmd -f .env nodemon start.ts",
+    "build": "tsc",
     "test": "env-cmd -f .env.test jest",
     "prisma:generate:development": "env-cmd -f .env.development prisma generate",
     "prisma:generate:test": "env-cmd -f .env.test prisma generate",
@@ -16,7 +17,7 @@
     "prisma:migrate:test": "env-cmd -f .env.test -- prisma migrate deploy",
     "docker:up:development": "docker-compose -f ./docker-compose-development.yml up -d",
     "docker:up:test": "docker-compose -f ./docker-compose-test.yml up -d",
-    "lint": "eslint --ext .ts src/"
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
