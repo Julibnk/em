@@ -1,13 +1,13 @@
 name: Deployment Pipeline
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
-  deploy:
-    runs-on: windows-2022
+  before-deploy:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -26,5 +26,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Test
+      - name: Set up Test DB
+        run: npm run docker:up:test
+
+      - name: Execute tests
         run: npm run test
