@@ -1,11 +1,11 @@
-// import { Template } from '../domain/Template';
-// import { TemplateId } from '../domain/TemplateId';
+import { Template } from '../domain/Template';
+import { TemplateId } from '../domain/TemplateId';
 
 import { injectable } from 'inversify';
 import { Nullable } from '../../Shared/domain/Nullable';
 import { PrismaClient } from '@prisma/client';
 import { PrismaClientSingleton } from '../../Shared/infrastructure/PrismaClient';
-// import { TemplateRepository } from '../domain/TemplateRepository';
+import { TemplateRepository } from '../domain/TemplateRepository';
 
 @injectable()
 export class PrismaTemplateRepository implements TemplateRepository {
