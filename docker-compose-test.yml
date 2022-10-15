@@ -8,5 +8,5 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_DB=local
     ports:
-      - '5433:5433'
+      - '5433:5432'
     restart: always
