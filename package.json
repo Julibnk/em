@@ -15,7 +15,8 @@
     "prisma:migrate:development": "env-cmd -f .env.development prisma migrate dev",
     "prisma:migrate:test": "env-cmd -f .env.test -- prisma migrate deploy",
     "docker:up:development": "docker-compose -f ./docker-compose-development.yml up -d",
-    "docker:up:test": "docker-compose -f ./docker-compose-test.yml up -d"
+    "docker:up:test": "docker-compose -f ./docker-compose-test.yml up -d",
+    "lint": "eslint --ext .ts src/"
   },
   "repository": {
     "type": "git",
