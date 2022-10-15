@@ -1,9 +1,9 @@
 import 'reflect-metadata';
 
 import { Container } from 'inversify';
-import { TemplateRepository } from '../../Template/domain/TemplateRepository';
-import { PrismaTemplateRepository } from '../../Template/infrastructure/PrismaTemplateRespository';
-import { TemplateCreator } from '../../Template/application/TemplateCreator';
+import { TemplateRepository } from '../../template/domain/TemplateRepository';
+import { PrismaTemplateRepository } from '../../template/infrastructure/PrismaTemplateRespository';
+import { TemplateCreator } from '../../template/application/TemplateCreator';
 import { TemplatePutController } from '../../../apps/controllers/Template/TemplatePutController';
 import { Controller } from '../../../apps/controllers/Controller';
 import { DI_NAMESPACES } from './namespaces';
