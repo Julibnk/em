@@ -10,10 +10,6 @@ import { TemplateVariable } from '../../../core/Template/domain/TemplateVariable
 import { TemplateShortDescription } from '../../../core/Template/domain/TemplateShortDescription';
 import { TemplatePreview } from '../../../core/Template/domain/TemplatePreview';
 
-// type TemplatePutRequest = Request & {
-//   body: <Primitives<Template>>;
-// };
-
 @injectable()
 export class TemplatePutController implements Controller {
   constructor(
