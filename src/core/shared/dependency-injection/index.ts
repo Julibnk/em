@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { Container, injectable, inject } from 'inversify';
+import { Container } from 'inversify';
 import { TemplateRepository } from '../../template/domain/TemplateRepository';
 import { PrismaTemplateRepository } from '../../template/infrastructure/PrismaTemplateRespository';
 import { TemplateCreator } from '../../template/application/TemplateCreator';
@@ -10,7 +10,7 @@ import { DI_NAMESPACES } from './namespaces';
 
 // import * as namespaces from './namespaces';
 
-let container = new Container();
+const container = new Container();
 
 container
   .bind<TemplateRepository>(DI_NAMESPACES.TEMPLATE_REPOSITORY)

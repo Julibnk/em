@@ -4,8 +4,6 @@ import { Controller } from '../Controller';
 import { TemplateCreator } from '../../../core/template/application/TemplateCreator';
 import { inject, injectable } from 'inversify';
 import { DI_NAMESPACES } from '../../../core/Shared/dependency-injection/namespaces';
-import { Primitives } from '../../../core/Shared/domain/common/Primitives';
-import { Template } from '../../../core/template/domain/Template';
 import { TemplateId } from '../../../core/template/domain/TemplateId';
 import { TemplateName } from '../../../core/template/domain/TemplateName';
 import { TemplateVariable } from '../../../core/template/domain/TemplateVariable';

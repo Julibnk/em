@@ -1,9 +1,7 @@
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { Template } from '../domain/Template';
-import { Primitives } from '../../Shared/domain/common/Primitives';
 import { inject, injectable } from 'inversify';
 import { DI_NAMESPACES } from '../../Shared/dependency-injection/namespaces';
-import { TemplateStatus } from '../domain/TemplateStatus';
 import { TemplateId } from '../domain/TemplateId';
 import { TemplateName } from '../domain/TemplateName';
 import { TemplateShortDescription } from '../domain/TemplateShortDescription';

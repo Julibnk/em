@@ -8,7 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:security/recommended',
-    'plugin:node/recommended',
+    // 'plugin:node/recommended',
     'prettier',
   ], // Uses the linting rules from @typescript-eslint/eslint-plugin
   env: {
