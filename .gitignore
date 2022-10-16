@@ -2,11 +2,11 @@
 
 /build
 
-.tmp/*
+/.tmp
 
 /.vscode
 
 
-.env
-.env.development
-.env.test
+/.env
+/.env.development
+/.env.test
