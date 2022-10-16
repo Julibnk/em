@@ -1,3 +1,13 @@
 /node_modules
+
+/dist
 /build
-.tmp
+
+/.tmp
+
+/.vscode
+
+
+/.env
+/.env.development
+/.env.test
