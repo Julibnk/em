@@ -6,6 +6,13 @@ on:
     types: [opened, synchronize]
 
 jobs:
+  cancel-previous:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: styfle/cancel-workflow-action
+        with:
+          access_token: ${{ github.token }}
+
   npm-ci:
     runs-on: ubuntu-22.04
     steps:
