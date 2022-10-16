@@ -45,6 +45,7 @@ jobs:
 
   test:
     runs-on: ubuntu-22.04
+    environment: test
     steps:
       - uses: actions/checkout@v3
         with:
@@ -60,28 +61,28 @@ jobs:
       - name: Execute tests
         run: npm run test
 
-  before-deploy:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+  # before-deploy:
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
 
-      - name: Install dependencies
-        run: npm ci
+  #     - name: Install dependencies
+  #       run: npm ci
 
-      - name: Lint code
-        run: npm run lint
+  #     - name: Lint code
+  #       run: npm run lint
 
-      - name: Build
-        run: npm run build
+  #     - name: Build
+  #       run: npm run build
 
-      - name: Set up Test DB
-        run: npm run docker:up:test
+  #     - name: Set up Test DB
+  #       run: npm run docker:up:test
 
-      - name: Execute tests
-        run: npm run test
+  #     - name: Execute tests
+  #       run: npm run test
