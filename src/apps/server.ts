@@ -39,11 +39,9 @@ export class Server {
     return new Promise((resolve) => {
       this.httpServer = this.express.listen(this.port, () => {
         console.log(
-          `  EM backend running at http://localhost:${
-            this.port
-          } in ${this.express.get('env')} mode`
+          `EM backend running at http://localhost:${this.port} in ${process.env.NODE_ENV} mode`
         );
-        console.log('  Press CTRL-C to stop\n');
+        console.log('Press CTRL-C to stop\n');
         resolve();
       });
     });
