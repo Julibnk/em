@@ -4,6 +4,7 @@ import { Nullable } from '../../Shared/domain/Nullable';
 
 export interface TemplateRepository {
   save(template: Template): Promise<void>;
-  search(id: TemplateId): Promise<Nullable<Template>>;
+  // search(template: Partial<TemplateId>): Promise<Nullable<Template>>;
   searchAll(): Promise<Array<Template>>;
+  findById(id: TemplateId): Promise<Template>;
 }
