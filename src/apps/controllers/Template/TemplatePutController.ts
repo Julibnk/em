@@ -18,29 +18,17 @@ export class TemplatePutController implements Controller {
   ) {}
 
   async run(req: Request, res: Response) {
-    const id = new TemplateId(req.params.id);
-    const name = new TemplateName(req.body.name);
-    const shortDescription = new TemplateShortDescription(
-      req.body.shortDescription
-    );
-    const preview = new TemplatePreview(req.body.preview);
-    const variable1 = new TemplateVariable(req.body.variable1);
-    const variable2 = new TemplateVariable(req.body.variable2);
-    const variable3 = new TemplateVariable(req.body.variable3);
+    const useCaseParams = {
+      id: req.params.id,
+      name: req.body.name,
+      shortDescription: req.body.shortDescription,
+      preview: req.body.preview,
+      variable1: req.body.variable1,
+      variable2: req.body.variable2,
+      variable3: req.body.variable3,
+    };
 
-    await this.templateCreator.run({
-      id,
-      name,
-      shortDescription,
-      preview,
-      variable1,
-      variable2,
-      variable3,
-    });
+    await this.templateCreator.run(useCaseParams);
     res.status(httpStatus.CREATED).send();
-    // } catch (error) {
-    //   const message = error instanceof Error ? error.message : 'Unknown error';
-    //   res.status(httpStatus.INTERNAL_SERVER_ERROR).send(message);
-    // }
   }
 }

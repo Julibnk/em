@@ -9,13 +9,13 @@ import { TemplateVariable } from '../domain/TemplateVariable';
 import { TemplatePreview } from '../domain/TemplatePreview';
 
 type Params = {
-  id: TemplateId;
-  name: TemplateName;
-  shortDescription: TemplateShortDescription;
-  preview: TemplatePreview;
-  variable1: TemplateVariable;
-  variable2: TemplateVariable;
-  variable3: TemplateVariable;
+  id: string;
+  name: string;
+  shortDescription: string;
+  preview: string;
+  variable1: string;
+  variable2: string;
+  variable3: string;
 };
 
 @injectable()
@@ -35,13 +35,13 @@ export class TemplateCreator {
     variable3,
   }: Params): Promise<void> {
     const template = Template.create(
-      id,
-      name,
-      shortDescription,
-      preview,
-      variable1,
-      variable2,
-      variable3
+      new TemplateId(id),
+      new TemplateName(name),
+      new TemplateShortDescription(shortDescription),
+      new TemplatePreview(preview),
+      new TemplateVariable(variable1),
+      new TemplateVariable(variable2),
+      new TemplateVariable(variable3)
     );
     await this.repository.save(template);
   }

@@ -36,9 +36,11 @@ export class PrismaTemplateRepository implements TemplateRepository {
       },
     });
   }
-  public async search(id: TemplateId): Promise<Nullable<Template>> {
+
+  public async findById(id: TemplateId): Promise<Template> {
     throw new Error('Method not implemented.');
   }
+
   public async searchAll(): Promise<Array<Template>> {
     throw new Error('Method not implemented.');
   }
