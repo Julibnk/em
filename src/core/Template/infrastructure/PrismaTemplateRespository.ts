@@ -38,6 +38,7 @@ export class PrismaTemplateRepository implements TemplateRepository {
   }
 
   public async findById(id: TemplateId): Promise<Template> {
+    // this.client.template.
     throw new Error('Method not implemented.');
   }
 
