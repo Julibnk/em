@@ -1,4 +1,4 @@
-import { CategoryId } from './CategoryId';
+import { CategoryId } from './value-object/CategoryId';
 import { Category } from './Category';
 
 export interface CategoryRepository {

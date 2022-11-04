@@ -1,8 +1,8 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { TemplateId } from '../../Template/domain/TemplateId';
-import { CategoryId } from './CategoryId';
-import { CategoryName } from './CategoryName';
-import { CategoryShortDescription } from './CategoryShortDescription';
+import { CategoryId } from './value-object/CategoryId';
+import { CategoryName } from './value-object/CategoryName';
+import { CategoryShortDescription } from './value-object/CategoryShortDescription';
 import { Primitives } from '../../Shared/domain/common/Primitives';
 
 export class Category extends AggregateRoot {

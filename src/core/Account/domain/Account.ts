@@ -1,12 +1,12 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
-import { AccountId } from './AccountId';
-import { CompanyName } from './CompanyName';
-import { Vat } from './Vat';
-import { Street } from './Street';
-import { AddressNumber } from './AddressNumber';
-import { PostalCode } from './PostalCode';
-import { Region } from './Region';
-import { Country } from './Country';
+import { AccountId } from './value-object/AccountId';
+import { CompanyName } from './value-object/CompanyName';
+import { Vat } from './value-object/Vat';
+import { Street } from './value-object/Street';
+import { AddressNumber } from './value-object/AddressNumber';
+import { PostalCode } from './value-object/PostalCode';
+import { Region } from './value-object/Region';
+import { Country } from './value-object/Country';
 import { PhoneNumber } from '../../Shared/domain/common/PhoneNumber';
 import { Primitives } from '../../Shared/domain/common/Primitives';
 
