@@ -1,12 +1,15 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
-import { TemplateId } from './TemplateId';
-import { TemplateName } from './TemplateName';
-import { TemplateStatus, TemplateStatuses } from './TemplateStatus';
-import { TemplateShortDescription } from './TemplateShortDescription';
-import { TemplatePreview } from './TemplatePreview';
-import { TemplateVariable } from './TemplateVariable';
+import { TemplateId } from './value-object/TemplateId';
+import { TemplateName } from './value-object/TemplateName';
+import {
+  TemplateStatus,
+  TemplateStatuses,
+} from './value-object/TemplateStatus';
+import { TemplateShortDescription } from './value-object/TemplateShortDescription';
+import { TemplatePreview } from './value-object/TemplatePreview';
+import { TemplateVariable } from './value-object/TemplateVariable';
 import { InvalidArgumentError } from '../../Shared/domain/value-object/InvalidArgumentError';
-import { Primitives } from '../../Shared/domain/common/Primitives';
+import { Primitives } from '../../Shared/domain/Primitives';
 
 export class Template extends AggregateRoot {
   constructor(

@@ -7,8 +7,9 @@ import { AddressNumber } from './value-object/AddressNumber';
 import { PostalCode } from './value-object/PostalCode';
 import { Region } from './value-object/Region';
 import { Country } from './value-object/Country';
-import { PhoneNumber } from '../../Shared/domain/common/PhoneNumber';
-import { Primitives } from '../../Shared/domain/common/Primitives';
+// import { PhoneNumber } from '../../Shared/domain/common/PhoneNumber';
+import { PhoneId } from '../../Shared/domain/Phone/PhoneId';
+import { Primitives } from '../../Shared/domain/Primitives';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -19,9 +20,9 @@ export class Account extends AggregateRoot {
     readonly addressNumber: AddressNumber,
     readonly postalCode: PostalCode,
     readonly region: Region,
-    readonly country: Country,
-    readonly phoneNumber: PhoneNumber
-  ) {
+    readonly country: Country
+  ) // readonly phoneId: PhoneId
+  {
     super();
   }
 
@@ -34,8 +35,8 @@ export class Account extends AggregateRoot {
       new AddressNumber(plainData.addressNumber),
       new PostalCode(plainData.postalCode),
       new Region(plainData.region),
-      new Country(plainData.country),
-      new PhoneNumber(plainData.phoneNumber)
+      new Country(plainData.country)
+      // new PhoneId(plainData.phoneNumber)
     );
   }
 
@@ -49,7 +50,7 @@ export class Account extends AggregateRoot {
       postalCode: this.postalCode.value,
       region: this.region.value,
       country: this.country.value,
-      phoneNumber: this.phoneNumber.value,
+      // phoneNumber: this.phoneNumber.value,
     };
   }
 }

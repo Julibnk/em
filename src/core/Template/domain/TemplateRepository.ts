@@ -1,4 +1,4 @@
-import { TemplateId } from './TemplateId';
+import { TemplateId } from './value-object/TemplateId';
 import { Template } from './Template';
 import { Nullable } from '../../Shared/domain/Nullable';
 

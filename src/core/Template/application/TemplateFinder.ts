@@ -1,5 +1,5 @@
 import { Template } from '../domain/Template';
-import { TemplateId } from '../domain/TemplateId';
+import { TemplateId } from '../domain/value-object/TemplateId';
 import { TemplateRepository } from '../domain/TemplateRepository';
 
 export class TemplateFinder {

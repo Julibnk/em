@@ -1,5 +1,5 @@
 import { Template } from '../domain/Template';
-import { TemplateId } from '../domain/TemplateId';
+import { TemplateId } from '../domain/value-object/TemplateId';
 
 import { injectable } from 'inversify';
 import { Nullable } from '../../Shared/domain/Nullable';

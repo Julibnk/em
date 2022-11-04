@@ -2,11 +2,11 @@ import { TemplateRepository } from '../domain/TemplateRepository';
 import { Template } from '../domain/Template';
 import { inject, injectable } from 'inversify';
 import { namespaces } from '../../Shared/dependency-injection/namespaces';
-import { TemplateId } from '../domain/TemplateId';
-import { TemplateName } from '../domain/TemplateName';
-import { TemplateShortDescription } from '../domain/TemplateShortDescription';
-import { TemplateVariable } from '../domain/TemplateVariable';
-import { TemplatePreview } from '../domain/TemplatePreview';
+import { TemplateId } from '../domain/value-object/TemplateId';
+import { TemplateName } from '../domain/value-object/TemplateName';
+import { TemplateShortDescription } from '../domain/value-object/TemplateShortDescription';
+import { TemplateVariable } from '../domain/value-object/TemplateVariable';
+import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 
 type Params = {
   id: string;
