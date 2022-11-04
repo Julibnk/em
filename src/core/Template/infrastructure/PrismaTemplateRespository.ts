@@ -6,19 +6,21 @@ import { Nullable } from '../../Shared/domain/Nullable';
 import { PrismaClient } from '@prisma/client';
 import { PrismaClientSingleton } from '../../Shared/infrastructure/PrismaClient';
 import { TemplateRepository } from '../domain/TemplateRepository';
+import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
 
 @injectable()
-export class PrismaTemplateRepository implements TemplateRepository {
-  private client: PrismaClient;
-
+export class PrismaTemplateRepository
+  extends PrismaRepository
+  implements TemplateRepository
+{
   constructor() {
-    this.client = PrismaClientSingleton.instance;
+    super();
   }
 
   public async save(template: Template): Promise<void> {
     const templatePrimitives = template.toPrimitives();
 
-    this.client.template.upsert({
+    await this.client.template.upsert({
       where: {
         metaAccountId_id: {
           metaAccountId: templatePrimitives.id,

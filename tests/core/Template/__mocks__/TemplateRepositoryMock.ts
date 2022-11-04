@@ -4,6 +4,9 @@ import { TemplateId } from '../../../../src/core/Template/domain/TemplateId';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
 
 export class TemplateRepositoryMock implements TemplateRepository {
+  findById(id: TemplateId): Promise<Template> {
+    throw new Error('Method not implemented.');
+  }
   save(template: Template): Promise<void> {
     throw new Error('Method not implemented.');
   }

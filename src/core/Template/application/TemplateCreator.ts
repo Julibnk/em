@@ -1,7 +1,7 @@
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { Template } from '../domain/Template';
 import { inject, injectable } from 'inversify';
-import { DI_NAMESPACES } from '../../Shared/dependency-injection/namespaces';
+import { namespaces } from '../../Shared/dependency-injection/namespaces';
 import { TemplateId } from '../domain/TemplateId';
 import { TemplateName } from '../domain/TemplateName';
 import { TemplateShortDescription } from '../domain/TemplateShortDescription';
@@ -21,7 +21,7 @@ type Params = {
 @injectable()
 export class TemplateCreator {
   constructor(
-    @inject(DI_NAMESPACES.TEMPLATE_REPOSITORY)
+    @inject(namespaces.TEMPLATE_REPOSITORY)
     private repository: TemplateRepository
   ) {}
 
