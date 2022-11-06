@@ -12,7 +12,7 @@ export class PrismaClientSingleton {
       this.client = global.client || new PrismaClient();
     }
 
-    // In development the client is saved in glonal variable to prevent multiple instances beacuse of hot reloading
+    // In development the client is saved in glonal variable to prevent multiple instances because of hot reloading
     if (process.env.NODE_ENV === 'development') {
       global.client = this.client;
     }

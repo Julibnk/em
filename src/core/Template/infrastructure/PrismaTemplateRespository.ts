@@ -1,16 +1,17 @@
 import { Template } from '../domain/Template';
 import { TemplateId } from '../domain/value-object/TemplateId';
 
+import { Template as PrismaTemplate } from '@prisma/client';
+
 import { injectable } from 'inversify';
-import { Nullable } from '../../Shared/domain/Nullable';
-import { PrismaClient } from '@prisma/client';
-import { PrismaClientSingleton } from '../../Shared/infrastructure/PrismaClient';
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
+import { AccountId } from '../../Account/domain/value-object/AccountId';
+import { TemplateNotFoundError } from './TemplateNotFoundError';
 
 @injectable()
 export class PrismaTemplateRepository
-  extends PrismaRepository
+  extends PrismaRepository<PrismaTemplate>
   implements TemplateRepository
 {
   constructor() {
@@ -18,33 +19,58 @@ export class PrismaTemplateRepository
   }
 
   public async save(template: Template): Promise<void> {
-    const templatePrimitives = template.toPrimitives();
-
     await this.client.template.upsert({
       where: {
-        metaAccountId_id: {
-          metaAccountId: templatePrimitives.id,
-          id: templatePrimitives.id,
+        accountId_id: {
+          accountId: template.accountId.value,
+          id: template.id.value,
         },
       },
-      update: {},
+      update: {
+        status: template.status.value,
+        name: template.name.value,
+      },
       create: {
-        metaAccountId: templatePrimitives.id,
-        id: templatePrimitives.id,
-        status: templatePrimitives.status,
-        createUsername: 'PEPE',
-        updateUsername: 'PEPE',
-        name: templatePrimitives.name,
+        accountId: template.accountId.value,
+        id: template.id.value,
+        status: template.status.value,
+        name: template.name.value,
       },
     });
   }
 
-  public async findById(id: TemplateId): Promise<Template> {
-    // this.client.template.
-    throw new Error('Method not implemented.');
+  async findById(accountId: AccountId, id: TemplateId): Promise<Template> {
+    const prismaTemplate = await this.client.template.findUnique({
+      where: {
+        accountId_id: {
+          accountId: accountId.value,
+          id: id.value,
+        },
+      },
+    });
+
+    if (!prismaTemplate) {
+      throw new TemplateNotFoundError(accountId, id);
+    }
+
+    return this.mapPrismaEntityToDomainEntity(prismaTemplate);
   }
 
   public async searchAll(): Promise<Array<Template>> {
     throw new Error('Method not implemented.');
+  }
+
+  mapPrismaEntityToDomainEntity(prismaEntity: PrismaTemplate): Template {
+    return Template.fromPrimitives({
+      accountId: prismaEntity.accountId,
+      id: prismaEntity.id,
+      name: prismaEntity.name,
+      preview: prismaEntity.preview || '',
+      status: prismaEntity.status,
+      shortDescription: prismaEntity.shortDescription || '',
+      variable1: prismaEntity.variable1 || '',
+      variable2: prismaEntity.variable2 || '',
+      variable3: prismaEntity.variable3 || '',
+    });
   }
 }

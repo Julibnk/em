@@ -12,6 +12,11 @@ import { InvalidArgumentError } from '../../Shared/domain/value-object/InvalidAr
 import { Primitives } from '../../Shared/domain/Primitives';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 
+// Override primitives type to avoid Enum type checking
+export type TemplatePrimitives = Omit<Primitives<Template>, 'status'> & {
+  status: string;
+};
+
 export class Template extends AggregateRoot {
   constructor(
     readonly accountId: AccountId,
@@ -28,7 +33,7 @@ export class Template extends AggregateRoot {
     this.ensureVariableConsistence();
   }
 
-  static fromPrimitives(plainData: Primitives<Template>): Template {
+  static fromPrimitives(plainData: TemplatePrimitives): Template {
     return new Template(
       new AccountId(plainData.accountId),
       new TemplateId(plainData.id),
@@ -42,7 +47,6 @@ export class Template extends AggregateRoot {
     );
   }
 
-  // New template is created with status NOT_SENT
   static create(
     accountId: AccountId,
     id: TemplateId,
@@ -66,7 +70,7 @@ export class Template extends AggregateRoot {
     );
   }
 
-  toPrimitives(): Primitives<Template> {
+  toPrimitives(): TemplatePrimitives {
     return {
       accountId: this.accountId.value,
       id: this.id.value,

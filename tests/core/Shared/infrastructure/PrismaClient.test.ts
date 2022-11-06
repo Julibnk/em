@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { PrismaClientSingleton } from '../../../src/core/Shared/infrastructure/PrismaClient';
+import { PrismaClientSingleton } from '../../../../src/core/Shared/infrastructure/PrismaClient';
 
 describe('PrismaClient', () => {
   const client = PrismaClientSingleton.instance;
