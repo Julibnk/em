@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
 declare global {
-  var client: PrismaClient; // eslint-disable-line no-var
+  var globalPrismaClient: PrismaClient; // eslint-disable-line no-var
 }
 
 export class PrismaClientSingleton {
@@ -9,12 +9,12 @@ export class PrismaClientSingleton {
 
   static get instance(): PrismaClient {
     if (!this.client) {
-      this.client = global.client || new PrismaClient();
+      this.client = global.globalPrismaClient || new PrismaClient();
     }
 
     // In development the client is saved in glonal variable to prevent multiple instances because of hot reloading
     if (process.env.NODE_ENV === 'development') {
-      global.client = this.client;
+      global.globalPrismaClient = this.client;
     }
 
     return this.client;

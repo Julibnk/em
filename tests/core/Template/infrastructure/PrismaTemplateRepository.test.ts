@@ -1,3 +1,7 @@
-describe('Primsa template repository', () => {
-  describe('findById', () => {});
+describe('Prisma template repository', () => {
+  describe('findById', () => {
+    it('dummy test', () => {
+      expect(true).toBe(true);
+    });
+  });
 });
