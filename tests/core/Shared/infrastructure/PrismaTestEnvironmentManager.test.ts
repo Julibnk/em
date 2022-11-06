@@ -1,14 +1,19 @@
-import { PrismaClientSingleton } from '../../../../src/core/Shared/infrastructure/PrismaClient';
 import {
+  container,
+  DIRepository,
+} from '../../../../src/core/Shared/dependency-injection';
+import {
+  TestEnvironmentManager,
   InvalidTestEnvironmentError,
-  PrismaTestEnvironmentManager,
-} from './PrismaTestEnvironmentManager';
+} from '../domain/TestEnvironmentManager';
 
-const client = PrismaClientSingleton.instance;
-
-describe('PrismaTestEnvironmentManager', () => {
+describe('TestEnvironmentManager', () => {
   it('Should not throw InvalidTestEnvironmentError if NODE_ENV is test', () => {
-    expect(() => new PrismaTestEnvironmentManager(client)).not.toThrowError(
+    const enviromentManager = container.get<TestEnvironmentManager>(
+      DIRepository.environmentManager
+    );
+
+    expect(() => enviromentManager.start()).not.toThrowError(
       InvalidTestEnvironmentError
     );
   });

@@ -25,7 +25,9 @@ export class Account extends AggregateRoot {
     super();
   }
 
-  static fromPrimitives(plainData: Primitives<Account>): Account {
+  static fromPrimitives(
+    plainData: Omit<Primitives<Account>, 'region' | 'country'>
+  ): Account {
     return new Account(
       new AccountId(plainData.id),
       new CompanyName(plainData.companyName),
@@ -33,8 +35,8 @@ export class Account extends AggregateRoot {
       new Street(plainData.street),
       new AddressNumber(plainData.addressNumber),
       new PostalCode(plainData.postalCode),
-      new Region(plainData.region),
-      new Country(plainData.country),
+      new Region(),
+      new Country(),
       new Disabled(plainData.disabled)
     );
   }

@@ -53,18 +53,14 @@ export class PrismaAccountRepository
   }
 
   mapPrismaEntityToDomainEntity(prismaEntity: PrismaAccount): Account {
-    Account.fromPrimitives({
+    return Account.fromPrimitives({
       id: prismaEntity.id,
       companyName: prismaEntity.companyName,
       vat: prismaEntity.vat,
       street: prismaEntity.street,
       addressNumber: prismaEntity.addressNumber,
       postalCode: prismaEntity.postalCode,
-      region: prismaEntity.region,
-      country: prismaEntity.country,
       disabled: prismaEntity.disabled,
     });
-
-    throw new Error('Method not implemented.');
   }
 }

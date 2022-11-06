@@ -3,12 +3,11 @@ import httpStatus from 'http-status';
 import { Controller } from '../Controller';
 import { TemplateCreator } from '../../../core/Template/application/TemplateCreator';
 import { inject, injectable } from 'inversify';
-import { DIApplication } from '../../../core/Shared/dependency-injection';
 
 @injectable()
 export class TemplatePutController implements Controller {
   constructor(
-    @inject(DIApplication.templateCreator)
+    @inject(TemplateCreator)
     private templateCreator: TemplateCreator
   ) {}
 
