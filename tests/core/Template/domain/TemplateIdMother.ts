@@ -1,5 +1,5 @@
 import { UuidMother } from '../../Shared/domain/UuidMother';
-import { TemplateId } from '../../../../src/core/Template/domain/TemplateId';
+import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 
 export class TemplateIdMother {
   static create(value: string): TemplateId {

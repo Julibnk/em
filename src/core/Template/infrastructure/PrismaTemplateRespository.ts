@@ -11,7 +11,7 @@ import { TemplateNotFoundError } from './TemplateNotFoundError';
 
 @injectable()
 export class PrismaTemplateRepository
-  extends PrismaRepository<PrismaTemplate>
+  extends PrismaRepository<Template>
   implements TemplateRepository
 {
   constructor() {
@@ -60,7 +60,7 @@ export class PrismaTemplateRepository
     throw new Error('Method not implemented.');
   }
 
-  mapPrismaEntityToDomainEntity(prismaEntity: PrismaTemplate): Template {
+  mapPrismaEntityToDomainEntity(prismaEntity: PrismaTemplate) {
     return Template.fromPrimitives({
       accountId: prismaEntity.accountId,
       id: prismaEntity.id,

@@ -1,4 +1,4 @@
-import { TemplatePreview } from '../../../../src/core/Template/domain/TemplatePreview';
+import { TemplatePreview } from '../../../../src/core/Template/domain/value-object/TemplatePreview';
 import { WordMother } from '../../Shared/domain/WordMother';
 
 export class TemplatePreviewMother {

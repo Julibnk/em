@@ -3,17 +3,18 @@ import httpStatus from 'http-status';
 import { Controller } from '../Controller';
 import { TemplateCreator } from '../../../core/Template/application/TemplateCreator';
 import { inject, injectable } from 'inversify';
-import { namespaces } from '../../../core/Shared/dependency-injection';
+import { DIApplication } from '../../../core/Shared/dependency-injection';
 
 @injectable()
 export class TemplatePutController implements Controller {
   constructor(
-    @inject(namespaces.TEMPLATE_CREATOR)
+    @inject(DIApplication.templateCreator)
     private templateCreator: TemplateCreator
   ) {}
 
   async run(req: Request, res: Response) {
     const useCaseParams = {
+      accountId: req.params.accountId,
       id: req.params.id,
       name: req.body.name,
       shortDescription: req.body.shortDescription,

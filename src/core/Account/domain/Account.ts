@@ -13,6 +13,7 @@ import { UserId } from '../../User/domain/value-object/UserId';
 import { ContactId } from '../../Contact/domain/value-object/ContactId';
 import { TemplateId } from '../../Template/domain/value-object/TemplateId';
 import { CategoryId } from '../../Category/domain/value-object/CategoryId';
+import { DisabledValueObject } from '../../Shared/domain/value-object/DisabledValueObject';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -23,7 +24,8 @@ export class Account extends AggregateRoot {
     readonly addressNumber: AddressNumber,
     readonly postalCode: PostalCode,
     readonly region: Region,
-    readonly country: Country, // readonly phoneId: PhoneId
+    readonly country: Country,
+    readonly disabled: DisabledValueObject,
     readonly userIds: Array<UserId>,
     readonly accountPhoneIds: Array<PhoneId>,
     readonly contactIds: Array<ContactId>,
@@ -43,6 +45,7 @@ export class Account extends AggregateRoot {
       new PostalCode(plainData.postalCode),
       new Region(plainData.region),
       new Country(plainData.country),
+      new DisabledValueObject(plainData.disabled),
       plainData.userIds.map((userId) => new UserId(userId)),
       plainData.accountPhoneIds.map((phoneId) => new PhoneId(phoneId)),
       plainData.contactIds.map((contactId) => new ContactId(contactId)),
@@ -61,6 +64,7 @@ export class Account extends AggregateRoot {
       postalCode: this.postalCode.value,
       region: this.region.value,
       country: this.country.value,
+      disabled: this.disabled.value,
       userIds: this.userIds.map((userId) => userId.value),
       accountPhoneIds: this.accountPhoneIds.map((phoneId) => phoneId.value),
       contactIds: this.contactIds.map((contactId) => contactId.value),

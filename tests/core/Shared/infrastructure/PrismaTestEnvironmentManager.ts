@@ -1,6 +1,11 @@
 import { TestEnvironmentManager } from '../domain/TestEnvironmentManager';
 import { PrismaClient } from '@prisma/client';
 
+type Models = keyof Omit<
+  PrismaClient,
+  'disconnect' | 'connect' | 'executeRaw' | 'queryRaw' | 'transaction' | 'on'
+>;
+
 export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
   constructor(private _client: PrismaClient) {
     this.ensureIsTestEnvironment();
@@ -11,20 +16,20 @@ export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
   }
 
   private async dropDatabase(): Promise<void> {
-    // const allProperties = Reflect.ownKeys(Object.getPrototypeOf(client));
-    // const modelNames = allProperties.filter(
-    //   (x) =>
-    //     x != 'constructor' &&
-    //     x != 'on' &&
-    //     x != 'connect' &&
-    //     x != 'runDisconnect' &&
-    //     x != 'disconnect'
-    // );
-    // for (const modelName of modelNames) {
-    //   // eslint-disable-next-line
-    //   // @ts-ignore
-    //   await client[modelName].deleteMany();
-    // }
+    const allProperties = Reflect.ownKeys(Object.getPrototypeOf(this._client));
+    const modelNames = allProperties.filter(
+      (x) =>
+        x != 'constructor' &&
+        x != 'on' &&
+        x != 'connect' &&
+        x != 'runDisconnect' &&
+        x != 'disconnect'
+    );
+    for (const modelName of modelNames) {
+      // eslint-disable-next-line
+      // @ts-ignore
+      await this._client[modelName].deleteMany(); // eslint-disable-line
+    }
   }
 
   ensureIsTestEnvironment(): void {

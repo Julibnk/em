@@ -1,7 +1,7 @@
 import {
   TemplateStatuses,
   TemplateStatus,
-} from '../../../../src/core/Template/domain/TemplateStatus';
+} from '../../../../src/core/Template/domain/value-object/TemplateStatus';
 import { EnumMother } from '../../Shared/domain/EnumMother';
 
 export class TemplateStatusMother {

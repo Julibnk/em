@@ -37,8 +37,8 @@ model Account {
   companyName   String
   vat           String
   street        String
-  addressNumber Int
-  postalCode    Int
+  addressNumber String
+  postalCode    String
   region        String  @db.VarChar(2)
   country       String  @db.VarChar(2)
   disabled      Boolean @default(false)

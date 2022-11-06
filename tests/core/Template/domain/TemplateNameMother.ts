@@ -1,4 +1,4 @@
-import { TemplateName } from '../../../../src/core/Template/domain/TemplateName';
+import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 import { WordMother } from '../../Shared/domain/WordMother';
 
 export class TemplateNameMother {

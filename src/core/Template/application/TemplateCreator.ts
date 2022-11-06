@@ -1,14 +1,16 @@
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { Template } from '../domain/Template';
 import { inject, injectable } from 'inversify';
-import { namespaces } from '../../Shared/dependency-injection/namespaces';
+import { DIRepository } from '../../Shared/dependency-injection';
 import { TemplateId } from '../domain/value-object/TemplateId';
 import { TemplateName } from '../domain/value-object/TemplateName';
 import { TemplateShortDescription } from '../domain/value-object/TemplateShortDescription';
 import { TemplateVariable } from '../domain/value-object/TemplateVariable';
 import { TemplatePreview } from '../domain/value-object/TemplatePreview';
+import { AccountId } from '../../Account/domain/value-object/AccountId';
 
 type Params = {
+  accountId: string;
   id: string;
   name: string;
   shortDescription: string;
@@ -21,11 +23,12 @@ type Params = {
 @injectable()
 export class TemplateCreator {
   constructor(
-    @inject(namespaces.TEMPLATE_REPOSITORY)
+    @inject(DIRepository.template)
     private repository: TemplateRepository
   ) {}
 
   async run({
+    accountId,
     id,
     name,
     shortDescription,
@@ -35,6 +38,7 @@ export class TemplateCreator {
     variable3,
   }: Params): Promise<void> {
     const template = Template.create(
+      new AccountId(accountId),
       new TemplateId(id),
       new TemplateName(name),
       new TemplateShortDescription(shortDescription),

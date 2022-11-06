@@ -1,6 +1,9 @@
 import { Router, Request, Response } from 'express';
 import { Controller } from '../controllers/Controller';
-import { container, namespaces } from '../../core/Shared/dependency-injection';
+import {
+  container,
+  DIController,
+} from '../../core/Shared/dependency-injection';
 
 import { body, param } from 'express-validator';
 import { validateReqSchema } from '.';
@@ -17,7 +20,7 @@ const putSchema = [
 
 export const register = (router: Router) => {
   const templatePutController = container.get<Controller>(
-    namespaces.TEMPLATE_PUT_CONTROLLER
+    DIController.templatePut
   );
 
   router.put(

@@ -1,5 +1,5 @@
 import { WordMother } from '../../Shared/domain/WordMother';
-import { TemplateShortDescription } from '../../../../src/core/Template/domain/TemplateShortDescription';
+import { TemplateShortDescription } from '../../../../src/core/Template/domain/value-object/TemplateShortDescription';
 
 export class TemplateShortDescriptionMother {
   static create(value: string): TemplateShortDescription {
