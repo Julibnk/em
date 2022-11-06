@@ -7,9 +7,12 @@ import { AddressNumber } from './value-object/AddressNumber';
 import { PostalCode } from './value-object/PostalCode';
 import { Region } from './value-object/Region';
 import { Country } from './value-object/Country';
-// import { PhoneNumber } from '../../Shared/domain/common/PhoneNumber';
-import { PhoneId } from '../../Shared/domain/Phone/PhoneId';
+import { PhoneId } from '../../Shared/domain/Phone/value-object/PhoneId';
 import { Primitives } from '../../Shared/domain/Primitives';
+import { UserId } from '../../User/domain/value-object/UserId';
+import { ContactId } from '../../Contact/domain/value-object/ContactId';
+import { TemplateId } from '../../Template/domain/value-object/TemplateId';
+import { CategoryId } from '../../Category/domain/value-object/CategoryId';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -20,9 +23,13 @@ export class Account extends AggregateRoot {
     readonly addressNumber: AddressNumber,
     readonly postalCode: PostalCode,
     readonly region: Region,
-    readonly country: Country
-  ) // readonly phoneId: PhoneId
-  {
+    readonly country: Country, // readonly phoneId: PhoneId
+    readonly userIds: Array<UserId>,
+    readonly accountPhoneIds: Array<PhoneId>,
+    readonly contactIds: Array<ContactId>,
+    readonly templateIds: Array<TemplateId>,
+    readonly categoryIds: Array<CategoryId>
+  ) {
     super();
   }
 
@@ -35,8 +42,12 @@ export class Account extends AggregateRoot {
       new AddressNumber(plainData.addressNumber),
       new PostalCode(plainData.postalCode),
       new Region(plainData.region),
-      new Country(plainData.country)
-      // new PhoneId(plainData.phoneNumber)
+      new Country(plainData.country),
+      plainData.userIds.map((userId) => new UserId(userId)),
+      plainData.accountPhoneIds.map((phoneId) => new PhoneId(phoneId)),
+      plainData.contactIds.map((contactId) => new ContactId(contactId)),
+      plainData.templateIds.map((templateId) => new TemplateId(templateId)),
+      plainData.categoryIds.map((categoryId) => new CategoryId(categoryId))
     );
   }
 
@@ -50,7 +61,11 @@ export class Account extends AggregateRoot {
       postalCode: this.postalCode.value,
       region: this.region.value,
       country: this.country.value,
-      // phoneNumber: this.phoneNumber.value,
+      userIds: this.userIds.map((userId) => userId.value),
+      accountPhoneIds: this.accountPhoneIds.map((phoneId) => phoneId.value),
+      contactIds: this.contactIds.map((contactId) => contactId.value),
+      templateIds: this.templateIds.map((templateId) => templateId.value),
+      categoryIds: this.categoryIds.map((categoryId) => categoryId.value),
     };
   }
 }

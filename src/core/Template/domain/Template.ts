@@ -10,9 +10,11 @@ import { TemplatePreview } from './value-object/TemplatePreview';
 import { TemplateVariable } from './value-object/TemplateVariable';
 import { InvalidArgumentError } from '../../Shared/domain/value-object/InvalidArgumentError';
 import { Primitives } from '../../Shared/domain/Primitives';
+import { AccountId } from '../../Account/domain/value-object/AccountId';
 
 export class Template extends AggregateRoot {
   constructor(
+    readonly accountId: AccountId,
     readonly id: TemplateId,
     readonly name: TemplateName,
     readonly status: TemplateStatus,
@@ -28,6 +30,7 @@ export class Template extends AggregateRoot {
 
   static fromPrimitives(plainData: Primitives<Template>): Template {
     return new Template(
+      new AccountId(plainData.accountId),
       new TemplateId(plainData.id),
       new TemplateName(plainData.name),
       TemplateStatus.fromValue(plainData.status),
@@ -41,6 +44,7 @@ export class Template extends AggregateRoot {
 
   // New template is created with status NOT_SENT
   static create(
+    accountId: AccountId,
     id: TemplateId,
     name: TemplateName,
     shortDescription: TemplateShortDescription,
@@ -50,6 +54,7 @@ export class Template extends AggregateRoot {
     variable3: TemplateVariable
   ): Template {
     return new Template(
+      accountId,
       id,
       name,
       TemplateStatus.fromValue(TemplateStatuses.NOT_SENT),
@@ -63,6 +68,7 @@ export class Template extends AggregateRoot {
 
   toPrimitives(): Primitives<Template> {
     return {
+      accountId: this.accountId.value,
       id: this.id.value,
       name: this.name.value,
       status: this.status.value,
