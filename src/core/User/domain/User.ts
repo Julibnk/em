@@ -4,7 +4,7 @@ import { UserEmail } from './value-object/UserEmail';
 import { UserId } from './value-object/UserId';
 import { UserName } from './value-object/UserName';
 import { UserRole } from './value-object/UserRole';
-import { DisabledValueObject } from '../../Shared/domain/value-object/DisabledValueObject';
+import { Disabled } from '../../Shared/domain/value-object/Disabled';
 
 export class User extends AggregateRoot {
   constructor(
@@ -12,7 +12,7 @@ export class User extends AggregateRoot {
     readonly id: UserId,
     readonly name: UserName,
     readonly email: UserEmail,
-    readonly disabled: DisabledValueObject,
+    readonly disabled: Disabled,
     readonly role: UserRole
   ) {
     super();

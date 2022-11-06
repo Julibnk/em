@@ -2,13 +2,13 @@ import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { Phone } from '../../Shared/domain/Phone/Phone';
 import { Primitives } from '../../Shared/domain/Primitives';
-import { DisabledValueObject } from '../../Shared/domain/value-object/DisabledValueObject';
+import { Disabled } from '../../Shared/domain/value-object/Disabled';
 
 export class AccountPhone extends AggregateRoot {
   constructor(
     readonly phone: Phone,
     readonly accountId: AccountId,
-    readonly disabled: DisabledValueObject
+    readonly disabled: Disabled
   ) {
     super();
   }
@@ -21,7 +21,7 @@ export class AccountPhone extends AggregateRoot {
         prefix: plainData.phone.prefix,
       }),
       new AccountId(plainData.accountId),
-      new DisabledValueObject(plainData.disabled)
+      new Disabled(plainData.disabled)
     );
   }
 
