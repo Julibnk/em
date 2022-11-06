@@ -2,7 +2,7 @@ import { AccountRepository } from '../domain/AccountRepository';
 import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
 import { Account } from '../domain/Account';
 import { AccountId } from '../domain/value-object/AccountId';
-import { AccountNotFoundError } from './AccountNotFoundError';
+import { AccountNotFoundError } from '../domain/exceptions/AccountNotFoundError';
 
 import { Account as PrismaAccount } from '@prisma/client';
 
@@ -63,11 +63,6 @@ export class PrismaAccountRepository
       region: prismaEntity.region,
       country: prismaEntity.country,
       disabled: prismaEntity.disabled,
-      userIds: [],
-      accountPhoneIds: [],
-      contactIds: [],
-      templateIds: [],
-      categoryIds: [],
     });
 
     throw new Error('Method not implemented.');

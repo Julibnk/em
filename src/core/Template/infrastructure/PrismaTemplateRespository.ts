@@ -7,7 +7,7 @@ import { injectable } from 'inversify';
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { TemplateNotFoundError } from './TemplateNotFoundError';
+import { TemplateNotFoundError } from '../domain/exceptions/TemplateNotFoundError';
 
 @injectable()
 export class PrismaTemplateRepository

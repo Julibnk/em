@@ -1,5 +1,5 @@
-import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { TemplateId } from '../domain/value-object/TemplateId';
+import { AccountId } from '../../../Account/domain/value-object/AccountId';
+import { TemplateId } from '../value-object/TemplateId';
 
 export class TemplateNotFoundError extends Error {
   constructor(accountId: AccountId, id: TemplateId) {
