@@ -29,12 +29,22 @@ export class PrismaTemplateRepository
       update: {
         status: template.status.value,
         name: template.name.value,
+        shortDescription: template.shortDescription.value,
+        preview: template.preview.value,
+        variable1: template.variable1.value,
+        variable2: template.variable2.value,
+        variable3: template.variable3.value,
       },
       create: {
         accountId: template.accountId.value,
         id: template.id.value,
         status: template.status.value,
         name: template.name.value,
+        shortDescription: template.shortDescription.value,
+        preview: template.preview.value,
+        variable1: template.variable1.value,
+        variable2: template.variable2.value,
+        variable3: template.variable3.value,
       },
     });
   }
@@ -60,9 +70,6 @@ export class PrismaTemplateRepository
     const prismaTemplates = await this.client.template.findMany({
       where: { accountId: accountId.value },
     });
-
-    console.log(accountId.value);
-    console.log(prismaTemplates);
 
     return prismaTemplates.map((prismaTemplate) =>
       this.mapPrismaEntityToDomainEntity(prismaTemplate)

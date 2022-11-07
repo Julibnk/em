@@ -1,4 +1,3 @@
-import { AccountId } from '../../../../src/core/Account/domain/value-object/AccountId';
 import {
   container,
   DIRepository,
@@ -8,6 +7,7 @@ import { TemplateRepository } from '../../../../src/core/Template/domain/Templat
 import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
+import { AccountMother } from '../../Account/domain/AccountMother';
 
 const enviromentManager = container.get<TestEnvironmentManager>(
   DIRepository.environmentManager
@@ -15,17 +15,27 @@ const enviromentManager = container.get<TestEnvironmentManager>(
 
 const repository = container.get<TemplateRepository>(DIRepository.template);
 
-let accountId: AccountId;
+const account = AccountMother.random();
+const otherAccount = AccountMother.random();
 
 describe('Template repository', () => {
   beforeAll(async () => {
-    await enviromentManager.start();
-    accountId = await enviromentManager.createAccount();
+    await enviromentManager.createAccount(account);
+  });
+
+  beforeEach(async () => {
+    await enviromentManager.truncate();
+  });
+
+  afterAll(async () => {
+    await enviromentManager.truncate();
+    await enviromentManager.deleteAccount(account);
+    await enviromentManager.deleteAccount(otherAccount);
   });
 
   describe('save', () => {
     it('Should save a template', async () => {
-      const template = TemplateMother.random(accountId);
+      const template = TemplateMother.random(account.id);
       await repository.save(template);
     });
   });
@@ -33,44 +43,44 @@ describe('Template repository', () => {
   describe('searchAll', () => {
     it('Should return all templates', async () => {
       const templates = [
-        TemplateMother.random(accountId),
-        TemplateMother.random(accountId),
-        TemplateMother.random(accountId),
+        TemplateMother.random(account.id),
+        TemplateMother.random(account.id),
+        TemplateMother.random(account.id),
       ];
 
       for (const template of templates) {
         await repository.save(template);
       }
 
-      const templatesExpected = await repository.searchAll(accountId);
-      expect(templatesExpected).not.toEqual(templates);
+      const templatesExpected = await repository.searchAll(account.id);
+      // expect(templatesExpected).toIncludeSameMembers(templates);
     });
 
     it('Should´t return templates from other account ', async () => {
-      const otherAccountId = await enviromentManager.createAccount();
+      await enviromentManager.createAccount(otherAccount);
       const otherAccountTemplates = [
-        TemplateMother.random(otherAccountId),
-        TemplateMother.random(otherAccountId),
-        TemplateMother.random(otherAccountId),
+        TemplateMother.random(otherAccount.id),
+        TemplateMother.random(otherAccount.id),
+        TemplateMother.random(otherAccount.id),
       ];
 
       for (const template of otherAccountTemplates) {
         await repository.save(template);
       }
 
-      const thisAccountTemplates = await repository.searchAll(accountId);
-      expect(thisAccountTemplates.length).toBe(1);
+      const thisAccountTemplates = await repository.searchAll(account.id);
+      expect(thisAccountTemplates.length).toBe(0);
     });
   });
 
   describe('findById', () => {
     it('Should find template by its ID', async () => {
-      const template = TemplateMother.random(accountId);
+      const template = TemplateMother.random(account.id);
 
       await repository.save(template);
 
       const templateExpected = await repository.findById(
-        accountId,
+        account.id,
         template.id
       );
 
@@ -81,9 +91,9 @@ describe('Template repository', () => {
       expect.assertions(1);
 
       try {
-        await repository.findById(accountId, TemplateId.random());
+        await repository.findById(account.id, TemplateId.random());
       } catch (error) {
-        expect(error).not.toBeInstanceOf(TemplateNotFoundError);
+        expect(error).toBeInstanceOf(TemplateNotFoundError);
       }
     });
   });

@@ -1,10 +1,11 @@
 import { injectable } from 'inversify';
-import { AccountId } from '../../../../src/core/Account/domain/value-object/AccountId';
+import { Account } from '../../../../src/core/Account/domain/Account';
 
 @injectable()
 export abstract class TestEnvironmentManager {
-  abstract start(): Promise<void>;
-  abstract createAccount(): Promise<AccountId>;
+  abstract truncate(): Promise<void>;
+  abstract createAccount(account: Account): Promise<void>;
+  abstract deleteAccount(account: Account): Promise<void>;
 }
 
 export class InvalidTestEnvironmentError extends Error {

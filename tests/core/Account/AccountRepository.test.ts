@@ -8,23 +8,25 @@ import {
 import { TestEnvironmentManager } from '../Shared/domain/TestEnvironmentManager';
 import { AccountMother } from './domain/AccountMother';
 
-describe('AccountRepository', () => {
-  const environmentManager = container.get<TestEnvironmentManager>(
-    DIRepository.environmentManager
-  );
-  const accountRepository = container.get<AccountRepository>(
-    DIRepository.account
-  );
+const environmentManager = container.get<TestEnvironmentManager>(
+  DIRepository.environmentManager
+);
+const accountRepository = container.get<AccountRepository>(
+  DIRepository.account
+);
 
-  beforeEach(async () => {
-    await environmentManager.start();
-  });
+describe('AccountRepository', () => {
+  // beforeEach(async () => {
+  //   await environmentManager.start();
+  // });
 
   describe('save', () => {
     it('Should save an account', async () => {
       const account = AccountMother.random();
 
       await accountRepository.save(account);
+
+      await environmentManager.deleteAccount(account);
     });
   });
 
@@ -37,6 +39,8 @@ describe('AccountRepository', () => {
       const accountFound = await accountRepository.findById(account.id);
 
       expect(accountFound).toEqual(account);
+
+      await environmentManager.deleteAccount(account);
     });
 
     it('Should throw error when inexistent account', async () => {

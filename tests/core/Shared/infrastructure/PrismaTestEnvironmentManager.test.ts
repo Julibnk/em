@@ -13,7 +13,7 @@ describe('TestEnvironmentManager', () => {
       DIRepository.environmentManager
     );
 
-    expect(() => enviromentManager.start()).not.toThrowError(
+    expect(() => enviromentManager.truncate()).not.toThrowError(
       InvalidTestEnvironmentError
     );
   });
