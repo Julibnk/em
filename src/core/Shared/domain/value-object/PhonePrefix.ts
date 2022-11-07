@@ -1,4 +1,4 @@
-import { StringValueObject } from '../../value-object/StringValueObject';
+import { StringValueObject } from './StringValueObject';
 
 export class PhonePrefix extends StringValueObject {
   constructor(value?: string) {
