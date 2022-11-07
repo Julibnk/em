@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 declare global {
   var globalPrismaClient: PrismaClient; // eslint-disable-line no-var
@@ -18,5 +18,16 @@ export class PrismaClientSingleton {
     }
 
     return this.client;
+  }
+
+  static getPrismaModelNames(): string[] {
+    const modelNames = Prisma.dmmf.datamodel.models.map((model) =>
+      this._toCamelCase(model.name)
+    );
+    return modelNames;
+  }
+
+  private static _toCamelCase(str: string): string {
+    return str.charAt(0).toLowerCase() + str.slice(1);
   }
 }

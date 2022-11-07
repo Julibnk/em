@@ -5,7 +5,9 @@ import { AccountId } from '../domain/value-object/AccountId';
 import { AccountNotFoundError } from '../domain/exceptions/AccountNotFoundError';
 
 import { Account as PrismaAccount } from '@prisma/client';
+import { injectable } from 'inversify';
 
+@injectable()
 export class PrismaAccountRepository
   extends PrismaRepository<Account>
   implements AccountRepository

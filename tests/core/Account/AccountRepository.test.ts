@@ -16,11 +16,9 @@ describe('AccountRepository', () => {
     DIRepository.account
   );
 
-  beforeEach(async () => {
+  beforeEach(() => {
     environmentManager.start();
   });
-
-  // await environmentManager.start();}
 
   describe('save', () => {
     it('Should save an account', async () => {
@@ -41,12 +39,15 @@ describe('AccountRepository', () => {
       expect(accountFound).toEqual(account);
     });
 
-    it('Should throw error when inexistent account', () => {
-      const accountId = AccountId.random();
+    it('Should throw error when inexistent account', async () => {
+      expect.assertions(1);
 
-      expect(() => accountRepository.findById(accountId)).rejects.toThrowError(
-        AccountNotFoundError
-      );
+      try {
+        const accountId = AccountId.random();
+        await accountRepository.findById(accountId);
+      } catch (error) {
+        expect(error).toBeInstanceOf(AccountNotFoundError);
+      }
     });
   });
 });

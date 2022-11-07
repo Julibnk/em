@@ -2,9 +2,11 @@ import {
   InvalidTestEnvironmentError,
   TestEnvironmentManager,
 } from '../domain/TestEnvironmentManager';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { injectable } from 'inversify';
 import { PrismaClientSingleton } from '../../../../src/core/Shared/infrastructure/PrismaClient';
+import { AccountIdMother } from '../../Account/domain/AccountIdMother';
+import { AccountId } from '../../../../src/core/Account/domain/value-object/AccountId';
 
 @injectable()
 export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
@@ -19,20 +21,23 @@ export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
     await this.dropDatabase();
   }
 
+  async createAccount(): Promise<AccountId> {
+    const accountId = AccountIdMother.random();
+
+    // Por rendimiento se ejecuta el insert directamente en la base de datos
+    await this._client
+      .$executeRaw`INSERT INTO account (id) VALUES (${accountId.value})`;
+
+    return accountId;
+  }
+
   private async dropDatabase(): Promise<void> {
-    const allProperties = Reflect.ownKeys(Object.getPrototypeOf(this._client));
-    const modelNames = allProperties.filter(
-      (x) =>
-        x != 'constructor' &&
-        x != 'on' &&
-        x != 'connect' &&
-        x != 'runDisconnect' &&
-        x != 'disconnect'
-    );
+    const modelNames = PrismaClientSingleton.getPrismaModelNames();
+
     for (const modelName of modelNames) {
       // eslint-disable-next-line
       // @ts-ignore
-      await this._client[modelName].deleteMany(); // eslint-disable-line
+      await this._client[modelName].deleteMany({}); // eslint-disable-line
     }
   }
 
