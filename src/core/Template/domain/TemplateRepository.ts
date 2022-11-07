@@ -4,6 +4,6 @@ import { AccountId } from '../../Account/domain/value-object/AccountId';
 
 export interface TemplateRepository {
   save(template: Template): Promise<void>;
-  searchAll(): Promise<Array<Template>>;
+  searchAll(accountId: AccountId): Promise<Array<Template>>;
   findById(accountId: AccountId, id: TemplateId): Promise<Template>;
 }

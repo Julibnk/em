@@ -16,8 +16,8 @@ describe('AccountRepository', () => {
     DIRepository.account
   );
 
-  beforeEach(() => {
-    environmentManager.start();
+  beforeEach(async () => {
+    await environmentManager.start();
   });
 
   describe('save', () => {

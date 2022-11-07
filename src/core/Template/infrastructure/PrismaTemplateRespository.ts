@@ -56,8 +56,17 @@ export class PrismaTemplateRepository
     return this.mapPrismaEntityToDomainEntity(prismaTemplate);
   }
 
-  public async searchAll(): Promise<Array<Template>> {
-    throw new Error('Method not implemented.');
+  async searchAll(accountId: AccountId): Promise<Array<Template>> {
+    const prismaTemplates = await this.client.template.findMany({
+      where: { accountId: accountId.value },
+    });
+
+    console.log(accountId.value);
+    console.log(prismaTemplates);
+
+    return prismaTemplates.map((prismaTemplate) =>
+      this.mapPrismaEntityToDomainEntity(prismaTemplate)
+    );
   }
 
   mapPrismaEntityToDomainEntity(prismaEntity: PrismaTemplate) {
