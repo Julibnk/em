@@ -1,14 +1,14 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
-import { AccountId } from './AccountId';
-import { CompanyName } from './CompanyName';
-import { Vat } from './Vat';
-import { Street } from './Street';
-import { AddressNumber } from './AddressNumber';
-import { PostalCode } from './PostalCode';
-import { Region } from './Region';
-import { Country } from './Country';
-import { PhoneNumber } from '../../Shared/domain/common/PhoneNumber';
-import { Primitives } from '../../Shared/domain/common/Primitives';
+import { AccountId } from './value-object/AccountId';
+import { CompanyName } from './value-object/CompanyName';
+import { Vat } from './value-object/Vat';
+import { Street } from './value-object/Street';
+import { AddressNumber } from './value-object/AddressNumber';
+import { PostalCode } from './value-object/PostalCode';
+import { Region } from './value-object/Region';
+import { Country } from './value-object/Country';
+import { Primitives } from '../../Shared/domain/Primitives';
+import { Disabled } from '../../Shared/domain/value-object/Disabled';
 
 export class Account extends AggregateRoot {
   constructor(
@@ -20,12 +20,14 @@ export class Account extends AggregateRoot {
     readonly postalCode: PostalCode,
     readonly region: Region,
     readonly country: Country,
-    readonly phoneNumber: PhoneNumber
+    readonly disabled: Disabled
   ) {
     super();
   }
 
-  static fromPrimitives(plainData: Primitives<Account>): Account {
+  static fromPrimitives(
+    plainData: Omit<Primitives<Account>, 'region' | 'country'>
+  ): Account {
     return new Account(
       new AccountId(plainData.id),
       new CompanyName(plainData.companyName),
@@ -33,9 +35,9 @@ export class Account extends AggregateRoot {
       new Street(plainData.street),
       new AddressNumber(plainData.addressNumber),
       new PostalCode(plainData.postalCode),
-      new Region(plainData.region),
-      new Country(plainData.country),
-      new PhoneNumber(plainData.phoneNumber)
+      new Region(),
+      new Country(),
+      new Disabled(plainData.disabled)
     );
   }
 
@@ -49,7 +51,7 @@ export class Account extends AggregateRoot {
       postalCode: this.postalCode.value,
       region: this.region.value,
       country: this.country.value,
-      phoneNumber: this.phoneNumber.value,
+      disabled: this.disabled.value,
     };
   }
 }

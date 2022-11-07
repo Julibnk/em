@@ -1,9 +1,9 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
-import { TemplateId } from '../../Template/domain/TemplateId';
-import { CategoryId } from './CategoryId';
-import { CategoryName } from './CategoryName';
-import { CategoryShortDescription } from './CategoryShortDescription';
-import { Primitives } from '../../Shared/domain/common/Primitives';
+import { TemplateId } from '../../Template/domain/value-object/TemplateId';
+import { CategoryId } from './value-object/CategoryId';
+import { CategoryName } from './value-object/CategoryName';
+import { CategoryShortDescription } from './value-object/CategoryShortDescription';
+import { Primitives } from '../../Shared/domain/Primitives';
 
 export class Category extends AggregateRoot {
   constructor(

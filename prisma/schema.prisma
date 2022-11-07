@@ -8,9 +8,8 @@ generator client {
 }
 
 enum Role {
-  GOD
   ACCOUNT_ADMIN
-  ACCOUNT_USER
+  USER
 }
 
 enum DictionaryKey {
@@ -34,25 +33,24 @@ model Account {
   // PK
   id String @id @db.Uuid
 
-  companyName    String
-  vat            String
-  street         String
-  addressNumber  Int
-  postalCode     Int
-  region         String   @db.VarChar(2)
-  country        String   @db.VarChar(2)
-  phoneNumber    String?
-  createdAt      DateTime @default(now())
-  createUsername String
-  updatedAt      DateTime @default(now())
-  updateUsername String
-  disabled       Boolean  @default(false)
+  // Main fields
+  companyName   String
+  vat           String
+  street        String
+  addressNumber String
+  postalCode    String
+  region        String  @db.VarChar(2)
+  country       String  @db.VarChar(2)
+  disabled      Boolean @default(false)
 
   // Relations
-  MetaAccount MetaAccount?
-  User        User[]
-  Contact     Contact[]
-  Category    Category[]
+  MetaAccount  MetaAccount?
+  User         User[]
+  Contact      Contact[]
+  Category     Category[]
+  Template     Template[]
+  Message      Message[]
+  AccountPhone AccountPhone[]
 }
 
 model User {
@@ -60,13 +58,14 @@ model User {
   accountId String @db.Uuid
   id        String @db.Uuid
 
-  username       String   @unique
-  mail           String?
-  role           Role
-  createdAt      DateTime @default(now())
-  createUsername String
-  updatedAt      DateTime @default(now())
-  updateUsername String
+  // Main fields
+  username String  @unique
+  mail     String?
+  role     Role
+
+  // Generic fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   //Relation
   Account Account @relation(fields: [accountId], references: [id])
@@ -76,21 +75,20 @@ model User {
 
 model Contact {
   // PK
-  accountId        String   @db.Uuid
-  id               String   @db.Uuid
-  name             String
-  prefix           String
-  phoneNumber      String
-  destinationPhone String
-  createdAt        DateTime @default(now())
-  createUsername   String
-  updatedAt        DateTime @default(now())
-  updateUsername   String
+  accountId String @db.Uuid
+  id        String @db.Uuid
+
+  // Main fields
+  name        String
+  prefix      String
+  phoneNumber String
+
+  // Generic fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   // Relations
-  Account Account @relation(fields: [accountId], references: [id])
-
-  // Microservice relations
+  Account Account   @relation(fields: [accountId], references: [id])
   Message Message[]
 
   @@id([accountId, id])
@@ -98,133 +96,104 @@ model Contact {
 
 model Category {
   // PK
-  accountId        String   @db.Uuid
-  id               String   @db.Uuid
+  accountId String @db.Uuid
+  id        String @db.Uuid
+
+  // Main fields
   name             String
   shortDescription String?
-  createdAt        DateTime @default(now())
-  createUsername   String
-  updatedAt        DateTime @default(now())
-  updateUsername   String
-  deleted          Boolean  @default(false)
+  disabled         Boolean @default(false)
+
+  // Generic fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   //Relations
-  Account Account @relation(fields: [accountId], references: [id])
-
-  //Microservice Relation
+  Account  Account    @relation(fields: [accountId], references: [id])
   Template Template[]
   Message  Message[]
 
   @@id([accountId, id])
 }
 
-// ********//
-//  META   //
-// ********//
-model MetaAccount {
-  // PK
-  id             String   @id @db.Uuid
-  createdAt      DateTime @default(now())
-  createUsername String
-  updatedAt      DateTime @default(now())
-  updateUsername String
-
-  // Relation
-  accountId String @unique @db.Uuid
-
-  Account  Account    @relation(fields: [accountId], references: [id])
-  Phone    Phone[]
-  Template Template[]
-  Message  Message[]
-}
-
 model Template {
   // PK
-  metaAccountId    String         @db.Uuid
-  id               String         @db.Uuid
+  accountId String @db.Uuid
+  id        String @db.Uuid
+
+  // Main fields
   name             String
   status           TemplateStatus
   shortDescription String?
   preview          String?
-  hasVariable1     Boolean?
-  hasVariable2     Boolean?
-  hasVariable3     Boolean?
   variable1        String?
   variable2        String?
   variable3        String?
-  createdAt        DateTime       @default(now())
-  createUsername   String
-  updatedAt        DateTime       @default(now())
-  updateUsername   String
-  deleted          Boolean        @default(false)
+  disabled         Boolean        @default(false)
+  categoryId       String?        @db.Uuid
+
+  // Generic fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   // Relation
-  MetaAccount MetaAccount @relation(fields: [metaAccountId], references: [id])
-  Message     Message[]
-
-  // Microservice relation
-  accountId  String? @db.Uuid
-  categoryId String? @db.Uuid
-
+  Account  Account   @relation(fields: [accountId], references: [id])
+  Message  Message[]
   Category Category? @relation(fields: [accountId, categoryId], references: [accountId, id])
 
-  @@id([metaAccountId, id])
+  @@id([accountId, id])
 }
 
 model Message {
   // PK
-  metaAccountId     String        @db.Uuid
-  id                String        @db.Uuid
-  status            MessageStatus
-  sentDate          DateTime
-  scheduled         Boolean
-  destinationPrefix String
-  destinationPhone  String
-  scheduleDate      DateTime?
-  variable1         String?
-  variable2         String?
-  variable3         String?
-  createdAt         DateTime      @default(now())
-  createUsername    String
-  updatedAt         DateTime      @default(now())
-  updateUsername    String
+  accountId String @db.Uuid
+  id        String @db.Uuid
 
-  // Relations
-  templateId String @db.Uuid
-  phoneId    String @db.Uuid
+  // Main fields
+  status         MessageStatus
+  sentDate       DateTime
+  scheduled      Boolean
+  scheduleDate   DateTime?
+  variable1      String?
+  variable2      String?
+  variable3      String?
+  templateId     String        @db.Uuid
+  accountPhoneId String        @db.Uuid
+  contactId      String        @db.Uuid
+  categoryId     String?       @db.Uuid
 
-  MetaAccount MetaAccount @relation(fields: [metaAccountId], references: [id])
-  Template    Template    @relation(fields: [metaAccountId, templateId], references: [metaAccountId, id])
-  Phone       Phone       @relation(fields: [metaAccountId, phoneId], references: [metaAccountId, id])
+  // Generic fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
-  //  Microservice relation
-  accountId  String? @db.Uuid
-  contactId  String? @db.Uuid
-  categoryId String? @db.Uuid
+  Account      Account      @relation(fields: [accountId], references: [id])
+  Template     Template     @relation(fields: [accountId, templateId], references: [accountId, id])
+  AccountPhone AccountPhone @relation(fields: [accountId, accountPhoneId], references: [accountId, id])
+  Contact      Contact      @relation(fields: [accountId, contactId], references: [accountId, id])
+  Category     Category?    @relation(fields: [accountId, categoryId], references: [accountId, id])
 
-  Contact  Contact?  @relation(fields: [accountId, contactId], references: [accountId, id])
-  Category Category? @relation(fields: [accountId, categoryId], references: [accountId, id])
-
-  @@id([metaAccountId, id])
+  @@id([accountId, id])
 }
 
-model Phone {
+model AccountPhone {
   // PK
-  metaAccountId  String   @db.Uuid
-  id             String   @db.Uuid
-  prefix         String
-  phoneNumber    String
-  createdAt      DateTime @default(now())
-  createUsername String
-  updatedAt      DateTime @default(now())
-  updateUsername String
-  deleted        Boolean  @default(false)
+  accountId String @db.Uuid
+  id        String @db.Uuid
+
+  // Main fields
+  prefix      String
+  phoneNumber String
+  disabled    Boolean @default(false)
+
+  // Generic fields
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   //Relations
-  MetaAccount MetaAccount @relation(fields: [metaAccountId], references: [id])
-  Message     Message[]
+  Account Account   @relation(fields: [accountId], references: [id])
+  Message Message[]
 
-  @@id([metaAccountId, id])
+  @@id([accountId, id])
 }
 
 // ************//
@@ -255,4 +224,16 @@ model DictionaryText {
   Dictionary Dictionary @relation(fields: [key, value], references: [key, value])
 
   @@unique([key, language, value])
+}
+
+model MetaAccount {
+  // PK
+  id        String   @id @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+
+  // Relation
+  accountId String @unique @db.Uuid
+
+  Account Account @relation(fields: [accountId], references: [id])
 }

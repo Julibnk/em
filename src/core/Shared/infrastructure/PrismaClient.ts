@@ -1,22 +1,33 @@
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 
 declare global {
-  var client: PrismaClient; // eslint-disable-line no-var
+  var globalPrismaClient: PrismaClient; // eslint-disable-line no-var
 }
 
 export class PrismaClientSingleton {
   private static client: PrismaClient;
 
   static get instance(): PrismaClient {
-    if (!PrismaClientSingleton.client) {
-      PrismaClientSingleton.client = global.client || new PrismaClient();
+    if (!this.client) {
+      this.client = global.globalPrismaClient || new PrismaClient();
     }
 
-    // In development the client is saved in glonal variable to prevent multiple instances beacuse of hot reloading
+    // In development the client is saved in glonal variable to prevent multiple instances because of hot reloading
     if (process.env.NODE_ENV === 'development') {
-      global.client = PrismaClientSingleton.client;
+      global.globalPrismaClient = this.client;
     }
 
-    return PrismaClientSingleton.client;
+    return this.client;
+  }
+
+  static getPrismaModelNames(): string[] {
+    const modelNames = Prisma.dmmf.datamodel.models.map((model) =>
+      this._toCamelCase(model.name)
+    );
+    return modelNames;
+  }
+
+  private static _toCamelCase(str: string): string {
+    return str.charAt(0).toLowerCase() + str.slice(1);
   }
 }

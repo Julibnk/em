@@ -1,10 +1,9 @@
-import { TemplateId } from './TemplateId';
+import { TemplateId } from './value-object/TemplateId';
 import { Template } from './Template';
-import { Nullable } from '../../Shared/domain/Nullable';
+import { AccountId } from '../../Account/domain/value-object/AccountId';
 
 export interface TemplateRepository {
   save(template: Template): Promise<void>;
-  // search(template: Partial<TemplateId>): Promise<Nullable<Template>>;
-  searchAll(): Promise<Array<Template>>;
-  findById(id: TemplateId): Promise<Template>;
+  searchAll(accountId: AccountId): Promise<Array<Template>>;
+  findById(accountId: AccountId, id: TemplateId): Promise<Template>;
 }
