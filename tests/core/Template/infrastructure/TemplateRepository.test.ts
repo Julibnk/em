@@ -8,6 +8,7 @@ import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
 import { AccountMother } from '../../Account/domain/AccountMother';
+import { Template } from '../../../../src/core/Template/domain/Template';
 
 const enviromentManager = container.get<TestEnvironmentManager>(
   DIRepository.environmentManager
@@ -21,6 +22,7 @@ const otherAccount = AccountMother.random();
 describe('Template repository', () => {
   beforeAll(async () => {
     await enviromentManager.createAccount(account);
+    await enviromentManager.createAccount(otherAccount);
   });
 
   beforeEach(async () => {
@@ -53,11 +55,12 @@ describe('Template repository', () => {
       }
 
       const templatesExpected = await repository.searchAll(account.id);
-      // expect(templatesExpected).toIncludeSameMembers(templates);
+      expect(templatesExpected.sort((a, b) => Template.sortById(a, b))).toEqual(
+        templates.sort((a, b) => Template.sortById(a, b))
+      );
     });
 
     it('Should´t return templates from other account ', async () => {
-      await enviromentManager.createAccount(otherAccount);
       const otherAccountTemplates = [
         TemplateMother.random(otherAccount.id),
         TemplateMother.random(otherAccount.id),
