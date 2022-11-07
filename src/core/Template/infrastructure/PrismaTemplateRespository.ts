@@ -8,6 +8,8 @@ import { TemplateRepository } from '../domain/TemplateRepository';
 import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { TemplateNotFoundError } from '../domain/exceptions/TemplateNotFoundError';
+import { Nullable } from '../../Shared/domain/Nullable';
+import { TemplateName } from '../domain/value-object/TemplateName';
 
 @injectable()
 export class PrismaTemplateRepository
@@ -18,7 +20,7 @@ export class PrismaTemplateRepository
     super();
   }
 
-  public async save(template: Template): Promise<void> {
+  async save(template: Template): Promise<void> {
     await this.client.template.upsert({
       where: {
         accountId_id: {
@@ -74,6 +76,21 @@ export class PrismaTemplateRepository
     return prismaTemplates.map((prismaTemplate) =>
       this.mapPrismaEntityToDomainEntity(prismaTemplate)
     );
+  }
+
+  async searchByName(
+    accountId: AccountId,
+    name: TemplateName
+  ): Promise<Nullable<Template>> {
+    const prismaTemplate = await this.client.template.findFirst({
+      where: { accountId: accountId.value, name: name.value },
+    });
+
+    if (!prismaTemplate) {
+      return null;
+    }
+
+    return this.mapPrismaEntityToDomainEntity(prismaTemplate);
   }
 
   mapPrismaEntityToDomainEntity(prismaEntity: PrismaTemplate) {

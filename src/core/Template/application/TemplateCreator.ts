@@ -8,6 +8,7 @@ import { TemplateShortDescription } from '../domain/value-object/TemplateShortDe
 import { TemplateVariable } from '../domain/value-object/TemplateVariable';
 import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
+import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
 
 type Params = {
   accountId: string;
@@ -47,6 +48,19 @@ export class TemplateCreator {
       new TemplateVariable(variable2),
       new TemplateVariable(variable3)
     );
+
+    const templateWithSameName = await this.repository.searchByName(
+      template.accountId,
+      template.name
+    );
+
+    if (templateWithSameName !== null) {
+      throw new TemplateWithSameNameAlreadyExistsError(
+        template.accountId,
+        template.name
+      );
+    }
+
     await this.repository.save(template);
   }
 }

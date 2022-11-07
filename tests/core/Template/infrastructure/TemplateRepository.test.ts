@@ -9,6 +9,8 @@ import { TemplateId } from '../../../../src/core/Template/domain/value-object/Te
 import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
 import { AccountMother } from '../../Account/domain/AccountMother';
 import { Template } from '../../../../src/core/Template/domain/Template';
+import { TemplateNameMother } from '../domain/TemplateNameMother';
+import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 
 const enviromentManager = container.get<TestEnvironmentManager>(
   DIRepository.environmentManager
@@ -73,6 +75,30 @@ describe('Template repository', () => {
 
       const thisAccountTemplates = await repository.searchAll(account.id);
       expect(thisAccountTemplates.length).toBe(0);
+    });
+  });
+
+  describe('searchByName', () => {
+    it('Should find template by its name', async () => {
+      const template = TemplateMother.random(account.id);
+
+      await repository.save(template);
+
+      const templateExpected = await repository.searchByName(
+        account.id,
+        template.name
+      );
+
+      expect(templateExpected).toEqual(template);
+    });
+
+    it('Should return null if template doesn´t exist', async () => {
+      const nullTemplate = await repository.searchByName(
+        AccountIdMother.random(),
+        TemplateNameMother.random()
+      );
+
+      expect(nullTemplate).toBeNull();
     });
   });
 

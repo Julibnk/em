@@ -1,4 +1,4 @@
-describe('SearchAllTemplates usecase', () => {
+describe('SearchAllTemplates useCase', () => {
   it('should return all templates', async () => {
     // const templates = [TemplateMother.random(), TemplateMother.random()];
     // const repository = container.resolve<TemplateRepository>(
