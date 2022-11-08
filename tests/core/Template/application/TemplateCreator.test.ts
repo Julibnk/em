@@ -30,8 +30,6 @@ describe('CreateTemplate useCase', () => {
   });
 
   it('Should throw an exception if template with same name exists', async () => {
-    expect.assertions(1);
-
     const template = TemplateMother.forCreation();
     repository.setMockSearchByName(template);
 

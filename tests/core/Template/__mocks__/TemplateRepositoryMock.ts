@@ -2,17 +2,13 @@ import { AccountId } from '../../../../src/core/Account/domain/value-object/Acco
 import { Nullable } from '../../../../src/core/Shared/domain/Nullable';
 import { Template } from '../../../../src/core/Template/domain/Template';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
-import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 
 export class TemplateRepositoryMock implements TemplateRepository {
-  public _mockSearchByName = jest.fn();
-
+  private _mockSearchByName = jest.fn();
   private _mockFindById = jest.fn();
-
   private _mockSave = jest.fn();
-
-  private _mockSearchAll = jest.fn<Array<Template>, [AccountId]>();
+  private _mockSearchAll = jest.fn();
 
   private templates: Array<Template> = [];
   private template: Nullable<Template> = null;
@@ -33,7 +29,7 @@ export class TemplateRepositoryMock implements TemplateRepository {
     return this.template;
   }
 
-  async findById(id: TemplateId): Promise<Template> {
+  async findById(): Promise<Template> {
     throw new Error('Method not implemented.');
   }
 
@@ -41,11 +37,16 @@ export class TemplateRepositoryMock implements TemplateRepository {
     this._mockSave(template);
   }
 
-  async searchAll(): Promise<Template[]> {
+  async searchAll(accountId: AccountId): Promise<Template[]> {
+    this._mockSearchAll(accountId);
     return this.templates;
   }
 
   assertSaveHasBeenCalledWith(template: Template): void {
     expect(this._mockSave).toHaveBeenCalledWith(template);
+  }
+
+  assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
+    expect(this._mockSearchAll).toHaveBeenCalledWith(accountId);
   }
 }
