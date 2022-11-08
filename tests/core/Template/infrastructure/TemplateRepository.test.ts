@@ -33,8 +33,6 @@ describe('Template repository', () => {
 
   afterAll(async () => {
     await enviromentManager.truncate();
-    await enviromentManager.deleteAccount(account);
-    await enviromentManager.deleteAccount(otherAccount);
   });
 
   describe('save', () => {

@@ -6,7 +6,10 @@ import { TemplateShortDescriptionMother } from './TemplateShortDescriptionMother
 import { TemplatePreviewMother } from './TemplatePreviewMother';
 import { TemplateVariableMother } from './TemplateVariableMother';
 import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
-import { TemplateStatus } from '../../../../src/core/Template/domain/value-object/TemplateStatus';
+import {
+  TemplateStatus,
+  TemplateStatuses,
+} from '../../../../src/core/Template/domain/value-object/TemplateStatus';
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 import { TemplateShortDescription } from '../../../../src/core/Template/domain/value-object/TemplateShortDescription';
 import { TemplatePreview } from '../../../../src/core/Template/domain/value-object/TemplatePreview';
@@ -45,6 +48,20 @@ export class TemplateMother {
       TemplateIdMother.random(),
       TemplateNameMother.random(),
       TemplateStatusMother.random(),
+      TemplateShortDescriptionMother.random(),
+      TemplatePreviewMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random()
+    );
+  }
+
+  static forCreation(accountId?: AccountId): Template {
+    return this.create(
+      accountId || AccountIdMother.random(),
+      TemplateIdMother.random(),
+      TemplateNameMother.random(),
+      TemplateStatus.fromValue(TemplateStatuses.NOT_SENT),
       TemplateShortDescriptionMother.random(),
       TemplatePreviewMother.random(),
       TemplateVariableMother.random(),

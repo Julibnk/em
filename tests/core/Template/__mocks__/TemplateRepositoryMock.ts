@@ -6,28 +6,31 @@ import { TemplateId } from '../../../../src/core/Template/domain/value-object/Te
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 
 export class TemplateRepositoryMock implements TemplateRepository {
-  private _mockSearchByName = jest.fn();
-  private mockFindById = jest.fn();
-  private _mockSave = jest.fn();
-  private _mockSearchAll = jest.fn();
+  public _mockSearchByName = jest.fn();
 
-  setMockSearchByName(template: Nullable<Template>): void {
-    this._mockSearchByName.mockReturnValue(template);
+  private _mockFindById = jest.fn();
+
+  private _mockSave = jest.fn();
+
+  private _mockSearchAll = jest.fn<Array<Template>, [AccountId]>();
+
+  private templates: Array<Template> = [];
+  private template: Nullable<Template> = null;
+
+  setMockSearchByName(template: Template): void {
+    this.template = template;
   }
 
   setMockSearchAll(templates: Array<Template>): void {
-    this._mockSearchAll.mockReturnValue(templates);
-  }
-
-  setMockFindById(template: Template): void {
-    this.mockFindById.mockReturnValue(template);
+    this.templates = templates;
   }
 
   async searchByName(
     accountId: AccountId,
     name: TemplateName
   ): Promise<Nullable<Template>> {
-    return this._mockSearchByName(accountId, name);
+    this._mockSearchByName(accountId, name);
+    return this.template;
   }
 
   async findById(id: TemplateId): Promise<Template> {
@@ -35,11 +38,11 @@ export class TemplateRepositoryMock implements TemplateRepository {
   }
 
   async save(template: Template): Promise<void> {
-    return this._mockSave(template);
+    this._mockSave(template);
   }
 
   async searchAll(): Promise<Template[]> {
-    return this._mockSearchAll();
+    return this.templates;
   }
 
   assertSaveHasBeenCalledWith(template: Template): void {
