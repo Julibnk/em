@@ -10,6 +10,11 @@ import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
 
+// Este caso de uso se encarga de crear plantillas,
+// - En caso de que la plantilla ya exista se actualiza
+// - En caso de que la plantilla no exista se crea
+// - En caso de que exista una plantilla con el mismo nombre se lanza una excepción
+
 type Params = {
   accountId: string;
   id: string;
@@ -70,7 +75,7 @@ export class CreateTemplateUseCase {
         template.name
       );
 
-      if (templateWithSameName !== null) {
+      if (templateWithSameName) {
         throw new TemplateWithSameNameAlreadyExistsError(
           template.accountId,
           template.name

@@ -2,11 +2,14 @@ import { CreateTemplateUseCase } from '../../../../src/core/Template/application
 import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
 import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Template/domain/exceptions/TemplateWithSameNameAlreadyExistsError';
+import { TemplateShortDescriptionMother } from '../domain/TemplateShortDescriptionMother';
+import { TemplateVariableMother } from '../domain/TemplateVariableMother';
+import { TemplatePreviewMother } from '../domain/TemplatePreviewMother';
 
 let repository: TemplateRepositoryMock;
 let createTemplateUseCase: CreateTemplateUseCase;
 
-describe('CreateTemplate useCase', () => {
+describe('CreateTemplate use case', () => {
   beforeEach(() => {
     repository = new TemplateRepositoryMock();
     createTemplateUseCase = new CreateTemplateUseCase(repository);
@@ -49,5 +52,34 @@ describe('CreateTemplate useCase', () => {
     } catch (error) {
       expect(error).toBeInstanceOf(TemplateWithSameNameAlreadyExistsError);
     }
+  });
+
+  it('Should update template if already exists', async () => {
+    const template = TemplateMother.forCreation();
+    repository.setMockFindById(template);
+
+    //  Se crea una copia de la plantilla original para comprobar que han cambiado los campos
+    const originalTemplate = TemplateMother.makeCopy(template);
+
+    template.change(
+      TemplateShortDescriptionMother.random(),
+      TemplatePreviewMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random()
+    );
+
+    await createTemplateUseCase.run({
+      accountId: template.accountId.value,
+      id: template.id.value,
+      name: template.name.value,
+      shortDescription: template.shortDescription.value,
+      preview: template.preview.value,
+      variable1: template.variable1.value,
+      variable2: template.variable2.value,
+      variable3: template.variable3.value,
+    });
+
+    repository.assertSaveHasBeenCalledWith(originalTemplate);
   });
 });

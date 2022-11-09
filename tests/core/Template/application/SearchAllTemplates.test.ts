@@ -6,7 +6,7 @@ import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 let repository: TemplateRepositoryMock;
 let searchAllTemplatesUseCase: SearchAllTemplates;
 
-describe('SearchAllTemplates useCase', () => {
+describe('SearchAllTemplates use case', () => {
   beforeEach(() => {
     repository = new TemplateRepositoryMock();
     searchAllTemplatesUseCase = new SearchAllTemplates(repository);

@@ -56,6 +56,20 @@ export class TemplateMother {
     );
   }
 
+  static makeCopy(template: Template): Template {
+    return this.create(
+      template.accountId,
+      template.id,
+      template.name,
+      template.status,
+      template.shortDescription,
+      template.preview,
+      template.variable1,
+      template.variable2,
+      template.variable3
+    );
+  }
+
   static forCreation(accountId?: AccountId): Template {
     return this.create(
       accountId || AccountIdMother.random(),

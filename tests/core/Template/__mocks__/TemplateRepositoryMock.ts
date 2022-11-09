@@ -1,7 +1,9 @@
 import { AccountId } from '../../../../src/core/Account/domain/value-object/AccountId';
 import { Nullable } from '../../../../src/core/Shared/domain/Nullable';
+import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
 import { Template } from '../../../../src/core/Template/domain/Template';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
+import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 
 export class TemplateRepositoryMock implements TemplateRepository {
@@ -21,6 +23,10 @@ export class TemplateRepositoryMock implements TemplateRepository {
     this.templates = templates;
   }
 
+  setMockFindById(template: Template): void {
+    this.template = template;
+  }
+
   async searchByName(
     accountId: AccountId,
     name: TemplateName
@@ -29,8 +35,14 @@ export class TemplateRepositoryMock implements TemplateRepository {
     return this.template;
   }
 
-  async findById(): Promise<Template> {
-    throw new Error('Method not implemented.');
+  async findById(accountId: AccountId, id: TemplateId): Promise<Template> {
+    this._mockFindById(accountId, id);
+
+    if (!this.template) {
+      throw new TemplateNotFoundError(accountId, id);
+    }
+
+    return this.template;
   }
 
   async save(template: Template): Promise<void> {
