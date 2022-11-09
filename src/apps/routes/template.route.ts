@@ -8,7 +8,7 @@ import {
 import { body, param } from 'express-validator';
 import { validateReqSchema } from '.';
 
-const putSchema = [
+const putPostSchema = [
   param('id').exists().isString(),
   body('name').exists().isString(),
   body('shortDescription').exists().isString(),
@@ -22,20 +22,28 @@ export const register = (router: Router) => {
   const templatePutController = container.get<Controller>(
     DIController.templatePut
   );
+  const templatePostController = container.get<Controller>(
+    DIController.templatePost
+  );
+  const templateSeachAllController = container.get<Controller>(
+    DIController.searchAllTemplates
+  );
 
   router.put(
     '/template/:id',
-    putSchema,
+    putPostSchema,
     validateReqSchema,
     (req: Request, res: Response) => templatePutController.run(req, res)
   );
 
-  router.get(
-    '/template',
-    (req: Request, res: Response) => {
-      console.log('get');
-      res.send();
-    }
-    // templatePutController.run(req, res)
+  router.post(
+    '/template/:id',
+    putPostSchema,
+    validateReqSchema,
+    (req: Request, res: Response) => templatePostController.run(req, res)
+  );
+
+  router.get('/template/searchAll', (req: Request, res: Response) =>
+    templateSeachAllController.run(req, res)
   );
 };

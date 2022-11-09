@@ -4,7 +4,7 @@
   "description": "EM - Backend",
   "main": "index.js",
   "scripts": {
-    "start": "npm run start:test",
+    "start": "npm run start:development",
     "start:development": "env-cmd -f .env.development nodemon start.ts",
     "start:test": "env-cmd -f .env.test nodemon start.ts",
     "start:production": "env-cmd -f .env nodemon start.ts",

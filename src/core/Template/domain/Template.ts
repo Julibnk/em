@@ -22,15 +22,34 @@ export class Template extends AggregateRoot {
     readonly accountId: AccountId,
     readonly id: TemplateId,
     readonly name: TemplateName,
-    readonly status: TemplateStatus,
-    readonly shortDescription: TemplateShortDescription,
-    readonly preview: TemplatePreview,
-    readonly variable1: TemplateVariable,
-    readonly variable2: TemplateVariable,
-    readonly variable3: TemplateVariable
+    private _status: TemplateStatus,
+    private _shortDescription: TemplateShortDescription,
+    private _preview: TemplatePreview,
+    private _variable1: TemplateVariable,
+    private _variable2: TemplateVariable,
+    private _variable3: TemplateVariable
   ) {
     super();
     this.ensureVariableConsistence();
+  }
+
+  public get status(): TemplateStatus {
+    return this._status;
+  }
+  public get shortDescription(): TemplateShortDescription {
+    return this._shortDescription;
+  }
+  public get preview(): TemplatePreview {
+    return this._preview;
+  }
+  public get variable1(): TemplateVariable {
+    return this._variable1;
+  }
+  public get variable2(): TemplateVariable {
+    return this._variable2;
+  }
+  public get variable3(): TemplateVariable {
+    return this._variable3;
   }
 
   static fromPrimitives(plainData: TemplatePrimitives): Template {
@@ -68,6 +87,24 @@ export class Template extends AggregateRoot {
       variable2,
       variable3
     );
+  }
+
+  update(
+    shortDescription: TemplateShortDescription,
+    status: TemplateStatus,
+    preview: TemplatePreview,
+    variable1: TemplateVariable,
+    variable2: TemplateVariable,
+    variable3: TemplateVariable
+  ): void {
+    this._shortDescription = shortDescription;
+    this._status = status;
+    this._preview = preview;
+    this._variable1 = variable1;
+    this._variable2 = variable2;
+    this._variable3 = variable3;
+
+    this.ensureVariableConsistence();
   }
 
   toPrimitives(): TemplatePrimitives {
