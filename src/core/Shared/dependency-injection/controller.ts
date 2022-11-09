@@ -5,7 +5,6 @@ import { TemplatePutController } from '../../../apps/controllers/Template/Templa
 
 export const enum DIController {
   templatePut = 'app.template.putController',
-  templatePost = 'app.template.postController',
   searchAllTemplates = 'app.template.searchAllController',
 }
 

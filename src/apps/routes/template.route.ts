@@ -22,9 +22,7 @@ export const register = (router: Router) => {
   const templatePutController = container.get<Controller>(
     DIController.templatePut
   );
-  const templatePostController = container.get<Controller>(
-    DIController.templatePost
-  );
+
   const templateSeachAllController = container.get<Controller>(
     DIController.searchAllTemplates
   );
@@ -34,13 +32,6 @@ export const register = (router: Router) => {
     putPostSchema,
     validateReqSchema,
     (req: Request, res: Response) => templatePutController.run(req, res)
-  );
-
-  router.post(
-    '/template/:id',
-    putPostSchema,
-    validateReqSchema,
-    (req: Request, res: Response) => templatePostController.run(req, res)
   );
 
   router.get('/template/searchAll', (req: Request, res: Response) =>
