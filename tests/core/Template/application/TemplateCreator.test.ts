@@ -1,15 +1,15 @@
-import { TemplateCreator } from '../../../../src/core/Template/application/TemplateCreator';
+import { CreateTemplateUseCase } from '../../../../src/core/Template/application/CreateTemplate';
 import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
 import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Template/domain/exceptions/TemplateWithSameNameAlreadyExistsError';
 
 let repository: TemplateRepositoryMock;
-let templateCreatorUseCase: TemplateCreator;
+let createTemplateUseCase: CreateTemplateUseCase;
 
 describe('CreateTemplate useCase', () => {
   beforeEach(() => {
     repository = new TemplateRepositoryMock();
-    templateCreatorUseCase = new TemplateCreator(repository);
+    createTemplateUseCase = new CreateTemplateUseCase(repository);
   });
 
   it('Should create a template', async () => {
@@ -25,7 +25,7 @@ describe('CreateTemplate useCase', () => {
       variable2: template.variable2.value,
       variable3: template.variable3.value,
     };
-    await templateCreatorUseCase.run(useCaseParams);
+    await createTemplateUseCase.run(useCaseParams);
     repository.assertSaveHasBeenCalledWith(template);
   });
 
@@ -45,7 +45,7 @@ describe('CreateTemplate useCase', () => {
     };
 
     try {
-      await templateCreatorUseCase.run(useCaseParams);
+      await createTemplateUseCase.run(useCaseParams);
     } catch (error) {
       expect(error).toBeInstanceOf(TemplateWithSameNameAlreadyExistsError);
     }

@@ -1,8 +1,8 @@
 import { ContainerModule } from 'inversify';
 import { SearchAllTemplates } from '../../Template/application/SearchAllTemplates';
-import { TemplateCreator } from '../../Template/application/TemplateCreator';
+import { CreateTemplateUseCase } from '../../Template/application/CreateTemplate';
 
 export const applicationContainerModule = new ContainerModule((bind) => {
   bind<SearchAllTemplates>(SearchAllTemplates).toSelf();
-  bind<TemplateCreator>(TemplateCreator).toSelf();
+  bind<CreateTemplateUseCase>(CreateTemplateUseCase).toSelf();
 });

@@ -89,22 +89,24 @@ export class Template extends AggregateRoot {
     );
   }
 
-  update(
+  change(
     shortDescription: TemplateShortDescription,
-    status: TemplateStatus,
     preview: TemplatePreview,
     variable1: TemplateVariable,
     variable2: TemplateVariable,
     variable3: TemplateVariable
   ): void {
     this._shortDescription = shortDescription;
-    this._status = status;
     this._preview = preview;
     this._variable1 = variable1;
     this._variable2 = variable2;
     this._variable3 = variable3;
 
     this.ensureVariableConsistence();
+  }
+
+  changeStatus(status: TemplateStatus): void {
+    this._status = status;
   }
 
   toPrimitives(): TemplatePrimitives {

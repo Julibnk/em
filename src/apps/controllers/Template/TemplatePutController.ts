@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../Controller';
-import { TemplateCreator } from '../../../core/Template/application/TemplateCreator';
+import { CreateTemplateUseCase } from '../../../core/Template/application/CreateTemplate';
 import { inject, injectable } from 'inversify';
 
 @injectable()
 export class TemplatePutController implements Controller {
   constructor(
-    @inject(TemplateCreator)
-    private templateCreator: TemplateCreator
+    @inject(CreateTemplateUseCase)
+    private createTemplateUseCase: CreateTemplateUseCase
   ) {}
 
   async run(req: Request, res: Response) {
@@ -24,7 +24,7 @@ export class TemplatePutController implements Controller {
     };
 
     try {
-      await this.templateCreator.run(useCaseParams);
+      await this.createTemplateUseCase.run(useCaseParams);
       res.status(httpStatus.OK).send();
     } catch (e) {
       if (e instanceof Error) {
