@@ -34,7 +34,7 @@ describe('CreateTemplate use case', () => {
 
   it('Should throw an exception if template with same name exists', async () => {
     const template = TemplateMother.forCreation();
-    repository.setMockSearchByName(template);
+    repository.returnSearchByName(template);
 
     const useCaseParams = {
       accountId: template.accountId.value,
@@ -56,7 +56,7 @@ describe('CreateTemplate use case', () => {
 
   it('Should update template if already exists', async () => {
     const template = TemplateMother.forCreation();
-    repository.setMockFindById(template);
+    repository.returnFindById(template);
 
     //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
     const originalTemplate = TemplateMother.makeCopy(template);

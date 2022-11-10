@@ -15,15 +15,15 @@ export class TemplateRepositoryMock implements TemplateRepository {
   private templates: Array<Template> = [];
   private template: Nullable<Template> = null;
 
-  setMockSearchByName(template: Template): void {
+  returnSearchByName(template: Template): void {
     this.template = template;
   }
 
-  setMockSearchAll(templates: Array<Template>): void {
+  returnSearchAll(templates: Array<Template>): void {
     this.templates = templates;
   }
 
-  setMockFindById(template: Template): void {
+  returnFindById(template: Template): void {
     this.template = template;
   }
 

@@ -20,7 +20,7 @@ describe('SearchAllTemplates use case', () => {
       TemplateMother.random(accountId),
     ];
 
-    repository.setMockSearchAll(templates);
+    repository.returnSearchAll(templates);
 
     const expected = await searchAllTemplatesUseCase.run(accountId.value);
 
