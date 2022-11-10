@@ -5,7 +5,7 @@ import {
   container,
   DIRepository,
 } from '../../../src/core/Shared/dependency-injection';
-import { TestEnvironmentManager } from '../Shared/domain/TestEnvironmentManager';
+import { TestEnvironmentManager } from '../Shared/infrastructure/TestEnvironmentManager';
 import { AccountMother } from './domain/AccountMother';
 
 const environmentManager = container.get<TestEnvironmentManager>(
@@ -16,10 +16,6 @@ const accountRepository = container.get<AccountRepository>(
 );
 
 describe('AccountRepository', () => {
-  // beforeEach(async () => {
-  //   await environmentManager.start();
-  // });
-
   describe('save', () => {
     it('Should save an account', async () => {
       const account = AccountMother.random();
@@ -44,8 +40,6 @@ describe('AccountRepository', () => {
     });
 
     it('Should throw error when inexistent account', async () => {
-      expect.assertions(1);
-
       try {
         const accountId = AccountId.random();
         await accountRepository.findById(accountId);

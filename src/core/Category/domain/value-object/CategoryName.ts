@@ -3,7 +3,7 @@ import { StringValueObject } from '../../../Shared/domain/value-object/StringVal
 
 export class CategoryName extends StringValueObject {
   constructor(value: string) {
-    super(value);
+    super(value.toUpperCase());
     this.ensureLengthIsLessThan20Characters(value);
   }
 

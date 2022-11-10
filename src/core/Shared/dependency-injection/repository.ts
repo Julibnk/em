@@ -4,7 +4,7 @@ import { PrismaAccountRepository } from '../../Account/infrastructure/PrismaAcco
 import { TemplateRepository } from '../../Template/domain/TemplateRepository';
 import { PrismaTemplateRepository } from '../../Template/infrastructure/PrismaTemplateRespository';
 import { PrismaTestEnvironmentManager } from '../../../../tests/core/Shared/infrastructure/PrismaTestEnvironmentManager';
-import { TestEnvironmentManager } from '../../../../tests/core/Shared/domain/TestEnvironmentManager';
+import { TestEnvironmentManager } from '../../../../tests/core/Shared/infrastructure/TestEnvironmentManager';
 import { CategoryRepository } from '../../Category/domain/CategoryRepository';
 import { PrismaCategoryRepository } from '../../Category/infrastructure/PrismaCategoryRepository';
 

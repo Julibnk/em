@@ -58,7 +58,7 @@ describe('CreateTemplate use case', () => {
     const template = TemplateMother.forCreation();
     repository.setMockFindById(template);
 
-    //  Se crea una copia de la plantilla original para comprobar que han cambiado los campos
+    //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
     const originalTemplate = TemplateMother.makeCopy(template);
 
     template.change(
@@ -80,6 +80,7 @@ describe('CreateTemplate use case', () => {
       variable3: template.variable3.value,
     });
 
-    repository.assertSaveHasBeenCalledWith(originalTemplate);
+    repository.assertSaveHasBeenCalledWith(template);
+    repository.assertSaveHasNotBeenCalledWith(originalTemplate);
   });
 });

@@ -2,7 +2,7 @@ import {
   container,
   DIRepository,
 } from '../../../../src/core/Shared/dependency-injection';
-import { TestEnvironmentManager } from '../../Shared/domain/TestEnvironmentManager';
+import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
 import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
@@ -11,24 +11,20 @@ import { AccountMother } from '../../Account/domain/AccountMother';
 import { Template } from '../../../../src/core/Template/domain/Template';
 import { TemplateNameMother } from '../domain/TemplateNameMother';
 import { AccountIdMother } from '../../Account/domain/AccountIdMother';
+import { Account } from '../../../../src/core/Account/domain/Account';
+
+let account: Account;
 
 const enviromentManager = container.get<TestEnvironmentManager>(
   DIRepository.environmentManager
 );
-
 const repository = container.get<TemplateRepository>(DIRepository.template);
 
-const account = AccountMother.random();
-const otherAccount = AccountMother.random();
-
 describe('Template repository', () => {
-  beforeAll(async () => {
-    await enviromentManager.createAccount(account);
-    await enviromentManager.createAccount(otherAccount);
-  });
-
   beforeEach(async () => {
     await enviromentManager.truncate();
+    account = AccountMother.random();
+    await enviromentManager.createAccount(account);
   });
 
   afterAll(async () => {
@@ -61,6 +57,9 @@ describe('Template repository', () => {
     });
 
     it('Should´t return templates from other account ', async () => {
+      const otherAccount = AccountMother.random();
+      await enviromentManager.createAccount(otherAccount);
+
       const otherAccountTemplates = [
         TemplateMother.random(otherAccount.id),
         TemplateMother.random(otherAccount.id),

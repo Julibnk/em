@@ -58,6 +58,10 @@ export class TemplateRepositoryMock implements TemplateRepository {
     expect(this._mockSave).toHaveBeenCalledWith(template);
   }
 
+  assertSaveHasNotBeenCalledWith(template: Template): void {
+    expect(this._mockSave).not.toHaveBeenCalledWith(template);
+  }
+
   assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
     expect(this._mockSearchAll).toHaveBeenCalledWith(accountId);
   }

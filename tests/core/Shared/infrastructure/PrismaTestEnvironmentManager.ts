@@ -1,7 +1,7 @@
 import {
   InvalidTestEnvironmentError,
   TestEnvironmentManager,
-} from '../domain/TestEnvironmentManager';
+} from './TestEnvironmentManager';
 import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 import { PrismaClientSingleton } from '../../../../src/core/Shared/infrastructure/PrismaClient';
@@ -48,6 +48,7 @@ export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
       '"Dictionary"',
       '"DictionaryText"',
       '"MetaAccount"',
+      '"Account"',
     ];
 
     for (const table of tables) {
