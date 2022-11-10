@@ -100,9 +100,9 @@ model Category {
   id        String @db.Uuid
 
   // Main fields
-  name             String
-  shortDescription String?
-  disabled         Boolean @default(false)
+  name        String
+  description String?
+  disabled    Boolean @default(false)
 
   // Generic fields
   createdAt DateTime @default(now())

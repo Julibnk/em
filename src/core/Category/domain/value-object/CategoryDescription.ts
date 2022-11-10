@@ -1,7 +1,7 @@
 import { InvalidArgumentError } from '../../../Shared/domain/value-object/InvalidArgumentError';
 import { StringValueObject } from '../../../Shared/domain/value-object/StringValueObject';
 
-export class CategoryShortDescription extends StringValueObject {
+export class CategoryDescription extends StringValueObject {
   constructor(value: string) {
     super(value);
     this.ensureLengthIsLessThan40Characters(value);

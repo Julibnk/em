@@ -36,14 +36,14 @@ export class PrismaCategoryRepository
       },
       update: {
         name: category.name.value,
-        shortDescription: category.shortDescription.value,
+        shortDescription: category.description.value,
         Template: { connect: templateConnection },
       },
       create: {
         accountId: category.accountId.value,
         id: category.id.value,
         name: category.name.value,
-        shortDescription: category.shortDescription.value,
+        shortDescription: category.description.value,
         Template: { connect: templateConnection },
       },
     };
@@ -97,7 +97,7 @@ export class PrismaCategoryRepository
       accountId: prismaEntity.accountId,
       id: prismaEntity.id,
       name: prismaEntity.name,
-      shortDescription: prismaEntity.shortDescription || '',
+      description: prismaEntity.description || '',
       templateIds: prismaEntity.Template.map((template) => template.id),
     });
   }

@@ -2,7 +2,7 @@ import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { TemplateId } from '../../Template/domain/value-object/TemplateId';
 import { CategoryId } from './value-object/CategoryId';
 import { CategoryName } from './value-object/CategoryName';
-import { CategoryShortDescription } from './value-object/CategoryShortDescription';
+import { CategoryDescription } from './value-object/CategoryDescription';
 import { Primitives } from '../../Shared/domain/Primitives';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 
@@ -11,7 +11,7 @@ export class Category extends AggregateRoot {
     readonly accountId: AccountId,
     readonly id: CategoryId,
     private _name: CategoryName,
-    private _shortDescription: CategoryShortDescription,
+    private _description: CategoryDescription,
     private _templateIds: Array<TemplateId>
   ) {
     super();
@@ -26,17 +26,17 @@ export class Category extends AggregateRoot {
     return this._name;
   }
 
-  public get shortDescription(): CategoryShortDescription {
-    return this._shortDescription;
+  public get description(): CategoryDescription {
+    return this._description;
   }
 
   public get templateIds(): Array<TemplateId> {
     return this._templateIds;
   }
 
-  change(name: CategoryName, shortDescription: CategoryShortDescription): void {
+  change(name: CategoryName, description: CategoryDescription): void {
     this._name = name;
-    this._shortDescription = shortDescription;
+    this._description = description;
   }
 
   assignTemplate(templateId: TemplateId): void {
@@ -55,7 +55,7 @@ export class Category extends AggregateRoot {
       accountId: this.accountId.value,
       id: this.id.value,
       name: this.name.value,
-      shortDescription: this.shortDescription.value,
+      description: this.description.value,
       templateIds: this.templateIds.map((templateId) => templateId.value),
     };
   }
@@ -64,10 +64,10 @@ export class Category extends AggregateRoot {
     accountId: AccountId,
     id: CategoryId,
     name: CategoryName,
-    shortDescription: CategoryShortDescription,
+    description: CategoryDescription,
     templateIds: Array<TemplateId>
   ): Category {
-    return new Category(accountId, id, name, shortDescription, templateIds);
+    return new Category(accountId, id, name, description, templateIds);
   }
 
   static fromPrimitives(plainData: Primitives<Category>): Category {
@@ -75,7 +75,7 @@ export class Category extends AggregateRoot {
       new AccountId(plainData.accountId),
       new CategoryId(plainData.id),
       new CategoryName(plainData.name),
-      new CategoryShortDescription(plainData.shortDescription),
+      new CategoryDescription(plainData.description),
       plainData.templateIds.map((templateId) => new TemplateId(templateId))
     );
   }
