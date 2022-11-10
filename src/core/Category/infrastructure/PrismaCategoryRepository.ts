@@ -8,6 +8,7 @@ import {
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { CategoryNotFoundError } from '../domain/exceptions/CategoryNotFoundError';
 import { CategoryId } from '../domain/value-object/CategoryId';
+import { CategoryPersistenceError } from '../domain/exceptions/CategoryPersistenceError';
 
 type PrismaCategoryWithTemplate = PrismaCategory & {
   Template: Array<{ id: PrismaTemplate['id'] }>;
@@ -47,8 +48,11 @@ export class PrismaCategoryRepository
         Template: { connect: templateConnection },
       },
     };
-
-    await this.client.category.upsert(query);
+    try {
+      await this.client.category.upsert(query);
+    } catch (error) {
+      throw new CategoryPersistenceError(category);
+    }
   }
 
   async findById(accountId: AccountId, id: CategoryId): Promise<Category> {

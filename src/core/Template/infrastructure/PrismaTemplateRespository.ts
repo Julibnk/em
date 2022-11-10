@@ -20,51 +20,53 @@ export class PrismaTemplateRepository
   }
 
   async save(template: Template): Promise<void> {
-    try {
-      await this.client.template.upsert({
-        where: {
-          accountId_id: {
-            accountId: template.accountId.value,
-            id: template.id.value,
-          },
-        },
-        update: {
-          status: template.status.value,
-          name: template.name.value,
-          shortDescription: template.shortDescription.value,
-          preview: template.preview.value,
-          variable1: template.variable1.value,
-          variable2: template.variable2.value,
-          variable3: template.variable3.value,
-        },
-        create: {
+    const query = {
+      where: {
+        accountId_id: {
           accountId: template.accountId.value,
           id: template.id.value,
-          status: template.status.value,
-          name: template.name.value,
-          shortDescription: template.shortDescription.value,
-          preview: template.preview.value,
-          variable1: template.variable1.value,
-          variable2: template.variable2.value,
-          variable3: template.variable3.value,
         },
-      });
+      },
+      update: {
+        status: template.status.value,
+        name: template.name.value,
+        shortDescription: template.shortDescription.value,
+        preview: template.preview.value,
+        variable1: template.variable1.value,
+        variable2: template.variable2.value,
+        variable3: template.variable3.value,
+      },
+      create: {
+        accountId: template.accountId.value,
+        id: template.id.value,
+        status: template.status.value,
+        name: template.name.value,
+        shortDescription: template.shortDescription.value,
+        preview: template.preview.value,
+        variable1: template.variable1.value,
+        variable2: template.variable2.value,
+        variable3: template.variable3.value,
+      },
+    };
+
+    try {
+      await this.client.template.upsert(query);
     } catch (error) {
-      console.log(error);
       throw new TemplatePersistenceError(template);
-      console.log(error);
     }
   }
 
   async findById(accountId: AccountId, id: TemplateId): Promise<Template> {
-    const prismaTemplate = await this.client.template.findUnique({
+    const query = {
       where: {
         accountId_id: {
           accountId: accountId.value,
           id: id.value,
         },
       },
-    });
+    };
+
+    const prismaTemplate = await this.client.template.findUnique(query);
 
     if (!prismaTemplate) {
       throw new TemplateNotFoundError(accountId, id);
@@ -74,9 +76,11 @@ export class PrismaTemplateRepository
   }
 
   async searchAll(accountId: AccountId): Promise<Array<Template>> {
-    const prismaTemplates = await this.client.template.findMany({
+    const query = {
       where: { accountId: accountId.value },
-    });
+    };
+
+    const prismaTemplates = await this.client.template.findMany(query);
 
     return prismaTemplates.map((prismaTemplate) =>
       this.mapPrismaEntityToDomainEntity(prismaTemplate)
@@ -87,9 +91,11 @@ export class PrismaTemplateRepository
     accountId: AccountId,
     name: TemplateName
   ): Promise<Nullable<Template>> {
-    const prismaTemplate = await this.client.template.findFirst({
+    const query = {
       where: { accountId: accountId.value, name: name.value },
-    });
+    };
+
+    const prismaTemplate = await this.client.template.findFirst(query);
 
     if (!prismaTemplate) {
       return null;

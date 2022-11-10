@@ -6,15 +6,18 @@ import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironm
 import { CategoryRepository } from '../../../../src/core/Category/domain/CategoryRepository';
 import { CategoryMother } from '../domain/CategoryMother';
 import { Account } from '../../../../src/core/Account/domain/Account';
-// import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
+import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
 import { CategoryNotFoundError } from '../../../../src/core/Category/domain/exceptions/CategoryNotFoundError';
 import { CategoryIdMother } from '../domain/CategoryIdMother';
-// import { TemplateMother } from '../../Template/domain/TemplateMother';
+import { AccountIdMother } from '../../Account/domain/AccountIdMother';
+import { CategoryPersistenceError } from '../../../../src/core/Category/domain/exceptions/CategoryPersistenceError';
+import { TemplateIdMother } from '../../Template/domain/TemplateIdMother';
+import { TemplateMother } from '../../Template/domain/TemplateMother';
 
 const repository = container.get<CategoryRepository>(DIRepository.category);
-// const templateRepository = container.get<TemplateRepository>(
-//   DIRepository.template
-// );
+const templateRepository = container.get<TemplateRepository>(
+  DIRepository.template
+);
 const enviroment = container.get<TestEnvironmentManager>(
   DIRepository.environmentManager
 );
@@ -36,11 +39,38 @@ describe.only('CategoryRepository', () => {
       const category = CategoryMother.random(account.id);
       await repository.save(category);
     });
+
+    it('Can´t save a category with inexistent account', async () => {
+      const category = CategoryMother.random(AccountIdMother.random());
+      expect(async () => await repository.save(category)).rejects.toThrow(
+        CategoryPersistenceError
+      );
+    });
+
+    it('Can´t save a category with inexistent template', async () => {
+      const category = CategoryMother.random(account.id, [
+        TemplateIdMother.random(),
+      ]);
+      expect(async () => await repository.save(category)).rejects.toThrow(
+        CategoryPersistenceError
+      );
+    });
+
+    it('Should save relation with templates succesfully', async () => {
+      const template = TemplateMother.random(account.id);
+      await templateRepository.save(template);
+
+      const category = CategoryMother.random(account.id, [template.id]);
+      await repository.save(category);
+    });
   });
 
   describe('findById', () => {
     it('Should find category by id', async () => {
-      const category = CategoryMother.random(account.id);
+      const template = TemplateMother.random(account.id);
+      await templateRepository.save(template);
+
+      const category = CategoryMother.random(account.id, [template.id]);
       await repository.save(category);
       const expected = await repository.findById(account.id, category.id);
       expect(category).toEqual(expected);
@@ -101,14 +131,6 @@ describe.only('CategoryRepository', () => {
       );
       expect(categoriesExpected.length).toEqual(0);
       expect(otherAccountCategories.length).toEqual(3);
-    });
-  });
-
-  describe('Template relationship', () => {
-    // it('SHould save template relation' ,() => {})
-    it('A ver k pasa', () => {
-      // category
-      // const templateRepository = TemplateMother.random(account.id);
     });
   });
 });
