@@ -16,13 +16,19 @@ const accountRepository = container.get<AccountRepository>(
 );
 
 describe('AccountRepository', () => {
+  beforeEach(async () => {
+    await environmentManager.truncate();
+  });
+
+  afterAll(async () => {
+    await environmentManager.truncate();
+  });
+
   describe('save', () => {
     it('Should save an account', async () => {
       const account = AccountMother.random();
 
       await accountRepository.save(account);
-
-      await environmentManager.deleteAccount(account);
     });
   });
 
@@ -35,8 +41,6 @@ describe('AccountRepository', () => {
       const accountFound = await accountRepository.findById(account.id);
 
       expect(accountFound).toEqual(account);
-
-      await environmentManager.deleteAccount(account);
     });
 
     it('Should throw error when inexistent account', async () => {

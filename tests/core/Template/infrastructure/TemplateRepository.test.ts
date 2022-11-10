@@ -5,13 +5,13 @@ import {
 import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
 import { TemplateMother } from '../domain/TemplateMother';
-import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
-import { AccountMother } from '../../Account/domain/AccountMother';
 import { Template } from '../../../../src/core/Template/domain/Template';
 import { TemplateNameMother } from '../domain/TemplateNameMother';
 import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 import { Account } from '../../../../src/core/Account/domain/Account';
+import { TemplateIdMother } from '../domain/TemplateIdMother';
+import { TemplatePersistenceError } from '../../../../src/core/Template/domain/exceptions/TemplatePersistenceError';
 
 let account: Account;
 
@@ -23,8 +23,7 @@ const repository = container.get<TemplateRepository>(DIRepository.template);
 describe('Template repository', () => {
   beforeEach(async () => {
     await enviromentManager.truncate();
-    account = AccountMother.random();
-    await enviromentManager.createAccount(account);
+    account = await enviromentManager.createAccount();
   });
 
   afterAll(async () => {
@@ -35,6 +34,13 @@ describe('Template repository', () => {
     it('Should save a template', async () => {
       const template = TemplateMother.random(account.id);
       await repository.save(template);
+    });
+
+    it('Can´t save a template with inexistent account', async () => {
+      const template = TemplateMother.random(AccountIdMother.random());
+      expect(async () => await repository.save(template)).rejects.toThrow(
+        TemplatePersistenceError
+      );
     });
   });
 
@@ -57,8 +63,7 @@ describe('Template repository', () => {
     });
 
     it('Should´t return templates from other account ', async () => {
-      const otherAccount = AccountMother.random();
-      await enviromentManager.createAccount(otherAccount);
+      const otherAccount = await enviromentManager.createAccount();
 
       const otherAccountTemplates = [
         TemplateMother.random(otherAccount.id),
@@ -114,13 +119,9 @@ describe('Template repository', () => {
     });
 
     it('Should throw error when template does not exist', async () => {
-      expect.assertions(1);
-
-      try {
-        await repository.findById(account.id, TemplateId.random());
-      } catch (error) {
-        expect(error).toBeInstanceOf(TemplateNotFoundError);
-      }
+      expect(async () => {
+        await repository.findById(account.id, TemplateIdMother.random());
+      }).rejects.toThrow(TemplateNotFoundError);
     });
   });
 });

@@ -8,13 +8,14 @@ import { PrismaClientSingleton } from '../../../../src/core/Shared/infrastructur
 import { Account } from '../../../../src/core/Account/domain/Account';
 import { AccountRepository } from '../../../../src/core/Account/domain/AccountRepository';
 import { DIRepository } from '../../../../src/core/Shared/dependency-injection';
+import { AccountMother } from '../../Account/domain/AccountMother';
 
 @injectable()
 export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
   private _client: PrismaClient;
 
   constructor(
-    @inject(DIRepository.account) private _accountRepository: AccountRepository
+    @inject(DIRepository.account) private accountRepository: AccountRepository
   ) {
     this._client = PrismaClientSingleton.instance;
   }
@@ -24,16 +25,10 @@ export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
     await this.truncateDatabase();
   }
 
-  async createAccount(account: Account): Promise<void> {
-    await this._accountRepository.save(account);
-  }
-
-  async deleteAccount(account: Account): Promise<void> {
-    await this._client.account.delete({
-      where: {
-        id: account.id.value,
-      },
-    });
+  async createAccount(): Promise<Account> {
+    const account = AccountMother.random();
+    await this.accountRepository.save(account);
+    return account;
   }
 
   private async truncateDatabase(): Promise<void> {

@@ -8,8 +8,6 @@ import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 import { CategoryIdMother } from './CategoryIdMother';
 import { CategoryNameMother } from './CategoryNameMother';
 import { CategoryDescriptionMother } from './CategoryDescriptionMother';
-import { Repeater } from '../../Shared/domain/Repeater';
-import { TemplateIdMother } from '../../Template/domain/TemplateIdMother';
 
 export class CategoryMother {
   static create(
@@ -31,8 +29,7 @@ export class CategoryMother {
       CategoryIdMother.random(),
       CategoryNameMother.random(),
       CategoryDescriptionMother.random(),
-      templateIds ||
-        Repeater.random(TemplateIdMother.random.bind(TemplateIdMother))
+      templateIds || []
     );
   }
 }

@@ -36,14 +36,14 @@ export class PrismaCategoryRepository
       },
       update: {
         name: category.name.value,
-        shortDescription: category.description.value,
+        description: category.description.value,
         Template: { connect: templateConnection },
       },
       create: {
         accountId: category.accountId.value,
         id: category.id.value,
         name: category.name.value,
-        shortDescription: category.description.value,
+        description: category.description.value,
         Template: { connect: templateConnection },
       },
     };

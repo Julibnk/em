@@ -1,8 +1,6 @@
 import { Template } from '../domain/Template';
 import { TemplateId } from '../domain/value-object/TemplateId';
-
 import { Template as PrismaTemplate } from '@prisma/client';
-
 import { injectable } from 'inversify';
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
@@ -10,6 +8,7 @@ import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { TemplateNotFoundError } from '../domain/exceptions/TemplateNotFoundError';
 import { Nullable } from '../../Shared/domain/Nullable';
 import { TemplateName } from '../domain/value-object/TemplateName';
+import { TemplatePersistenceError } from '../domain/exceptions/TemplatePersistenceError';
 
 @injectable()
 export class PrismaTemplateRepository
@@ -21,34 +20,40 @@ export class PrismaTemplateRepository
   }
 
   async save(template: Template): Promise<void> {
-    await this.client.template.upsert({
-      where: {
-        accountId_id: {
+    try {
+      await this.client.template.upsert({
+        where: {
+          accountId_id: {
+            accountId: template.accountId.value,
+            id: template.id.value,
+          },
+        },
+        update: {
+          status: template.status.value,
+          name: template.name.value,
+          shortDescription: template.shortDescription.value,
+          preview: template.preview.value,
+          variable1: template.variable1.value,
+          variable2: template.variable2.value,
+          variable3: template.variable3.value,
+        },
+        create: {
           accountId: template.accountId.value,
           id: template.id.value,
+          status: template.status.value,
+          name: template.name.value,
+          shortDescription: template.shortDescription.value,
+          preview: template.preview.value,
+          variable1: template.variable1.value,
+          variable2: template.variable2.value,
+          variable3: template.variable3.value,
         },
-      },
-      update: {
-        status: template.status.value,
-        name: template.name.value,
-        shortDescription: template.shortDescription.value,
-        preview: template.preview.value,
-        variable1: template.variable1.value,
-        variable2: template.variable2.value,
-        variable3: template.variable3.value,
-      },
-      create: {
-        accountId: template.accountId.value,
-        id: template.id.value,
-        status: template.status.value,
-        name: template.name.value,
-        shortDescription: template.shortDescription.value,
-        preview: template.preview.value,
-        variable1: template.variable1.value,
-        variable2: template.variable2.value,
-        variable3: template.variable3.value,
-      },
-    });
+      });
+    } catch (error) {
+      console.log(error);
+      throw new TemplatePersistenceError(template);
+      console.log(error);
+    }
   }
 
   async findById(accountId: AccountId, id: TemplateId): Promise<Template> {
