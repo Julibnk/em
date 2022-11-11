@@ -15,16 +15,18 @@ describe('SearchAllTemplates use case', () => {
   it('Should return all templates', async () => {
     const accountId = AccountIdMother.random();
     const templates = [
-      TemplateMother.random(accountId),
-      TemplateMother.random(accountId),
-      TemplateMother.random(accountId),
+      TemplateMother.withAccount(accountId),
+      TemplateMother.withAccount(accountId),
+      TemplateMother.withAccount(accountId),
     ];
 
     repository.returnSearchAll(templates);
 
-    const expected = await searchAllTemplatesUseCase.run(accountId.value);
+    const expectedTemplates = await searchAllTemplatesUseCase.run(
+      accountId.value
+    );
 
-    repository.assertSearchAllHasBeenCalledWith(accountId);
-    expect(expected).toEqual(templates);
+    expect(repository.mockSearchAll).toHaveBeenCalledWith(accountId);
+    expect(expectedTemplates).toEqual(templates);
   });
 });

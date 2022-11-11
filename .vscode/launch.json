@@ -13,7 +13,7 @@
       "env": {
         "NODE_ENV": "development",
         "ACCOUNT_ID": "5c045a0e-eca2-476c-8c0e-56b9cfc2a45e",
-        "DATABASE_URL": "postgres://postgres:postgres@localhost:5433/em_persistance"
+        "DATABASE_URL": "postgres://postgres:postgres@localhost:5432/em_persistance"
       },
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",

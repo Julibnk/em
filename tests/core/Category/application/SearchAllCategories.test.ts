@@ -10,9 +10,9 @@ describe('SearchAllCategories use case', () => {
   it('Should return all categories', async () => {
     const accountId = AccountIdMother.random();
     const categories = [
-      CategoryMother.random(accountId),
-      CategoryMother.random(accountId),
-      CategoryMother.random(accountId),
+      CategoryMother.withAccount(accountId),
+      CategoryMother.withAccount(accountId),
+      CategoryMother.withAccount(accountId),
     ];
 
     repository.returnSearchAll(categories);

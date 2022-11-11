@@ -6,10 +6,7 @@ import { TemplateShortDescriptionMother } from './TemplateShortDescriptionMother
 import { TemplatePreviewMother } from './TemplatePreviewMother';
 import { TemplateVariableMother } from './TemplateVariableMother';
 import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
-import {
-  TemplateStatus,
-  TemplateStatuses,
-} from '../../../../src/core/Template/domain/value-object/TemplateStatus';
+import { TemplateStatus } from '../../../../src/core/Template/domain/value-object/TemplateStatus';
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 import { TemplateShortDescription } from '../../../../src/core/Template/domain/value-object/TemplateShortDescription';
 import { TemplatePreview } from '../../../../src/core/Template/domain/value-object/TemplatePreview';
@@ -42,9 +39,9 @@ export class TemplateMother {
     );
   }
 
-  static random(accountId?: AccountId): Template {
+  static random(): Template {
     return this.create(
-      accountId || AccountIdMother.random(),
+      AccountIdMother.random(),
       TemplateIdMother.random(),
       TemplateNameMother.random(),
       TemplateStatusMother.random(),
@@ -70,12 +67,37 @@ export class TemplateMother {
     );
   }
 
-  static forCreation(accountId?: AccountId): Template {
-    return this.create(
+  static initialState(accountId?: AccountId): Template {
+    return Template.create(
       accountId || AccountIdMother.random(),
       TemplateIdMother.random(),
       TemplateNameMother.random(),
-      TemplateStatus.fromValue(TemplateStatuses.NOT_SENT),
+      TemplateShortDescriptionMother.random(),
+      TemplatePreviewMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random()
+    );
+  }
+
+  static withName(name: TemplateName): Template {
+    return Template.create(
+      AccountIdMother.random(),
+      TemplateIdMother.random(),
+      name,
+      TemplateShortDescriptionMother.random(),
+      TemplatePreviewMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random(),
+      TemplateVariableMother.random()
+    );
+  }
+
+  static withAccount(accountId: AccountId): Template {
+    return Template.create(
+      accountId,
+      TemplateIdMother.random(),
+      TemplateNameMother.random(),
       TemplateShortDescriptionMother.random(),
       TemplatePreviewMother.random(),
       TemplateVariableMother.random(),

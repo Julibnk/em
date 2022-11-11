@@ -9,6 +9,7 @@ import { TemplateVariable } from '../domain/value-object/TemplateVariable';
 import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
+import { TemplateNotFoundError } from '../domain/exceptions/TemplateNotFoundError';
 
 export type Params = {
   accountId: string;
@@ -53,25 +54,29 @@ export class SaveTemplateUseCase {
         variable3
       );
     } catch (error) {
-      const templateWithSameName = await this.repository.searchByName(
-        accountId,
-        name
-      );
+      if (error instanceof TemplateNotFoundError) {
+        const templateWithSameName = await this.repository.searchByName(
+          accountId,
+          name
+        );
 
-      if (templateWithSameName) {
-        throw new TemplateWithSameNameAlreadyExistsError(accountId, name);
+        if (templateWithSameName) {
+          throw new TemplateWithSameNameAlreadyExistsError(accountId, name);
+        }
+
+        template = Template.create(
+          accountId,
+          id,
+          name,
+          shortDescription,
+          preview,
+          variable1,
+          variable2,
+          variable3
+        );
+      } else {
+        throw error;
       }
-
-      template = Template.create(
-        accountId,
-        id,
-        name,
-        shortDescription,
-        preview,
-        variable1,
-        variable2,
-        variable3
-      );
     }
 
     this.repository.save(template);

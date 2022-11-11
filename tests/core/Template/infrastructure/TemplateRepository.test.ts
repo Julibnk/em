@@ -30,26 +30,26 @@ describe('Template repository', () => {
     await enviromentManager.truncate();
   });
 
-  describe('save', () => {
+  describe('#save', () => {
     it('Should save a template', async () => {
-      const template = TemplateMother.random(account.id);
+      const template = TemplateMother.withAccount(account.id);
       await repository.save(template);
     });
 
     it('Can´t save a template with inexistent account', async () => {
-      const template = TemplateMother.random(AccountIdMother.random());
+      const template = TemplateMother.withAccount(AccountIdMother.random());
       expect(async () => await repository.save(template)).rejects.toThrow(
         TemplatePersistenceError
       );
     });
   });
 
-  describe('searchAll', () => {
+  describe('#searchAll', () => {
     it('Should return all templates', async () => {
       const templates = [
-        TemplateMother.random(account.id),
-        TemplateMother.random(account.id),
-        TemplateMother.random(account.id),
+        TemplateMother.withAccount(account.id),
+        TemplateMother.withAccount(account.id),
+        TemplateMother.withAccount(account.id),
       ];
 
       for (const template of templates) {
@@ -66,9 +66,9 @@ describe('Template repository', () => {
       const otherAccount = await enviromentManager.createAccount();
 
       const otherAccountTemplates = [
-        TemplateMother.random(otherAccount.id),
-        TemplateMother.random(otherAccount.id),
-        TemplateMother.random(otherAccount.id),
+        TemplateMother.withAccount(otherAccount.id),
+        TemplateMother.withAccount(otherAccount.id),
+        TemplateMother.withAccount(otherAccount.id),
       ];
 
       for (const template of otherAccountTemplates) {
@@ -80,9 +80,9 @@ describe('Template repository', () => {
     });
   });
 
-  describe('searchByName', () => {
+  describe('#searchByName', () => {
     it('Should find template by its name', async () => {
-      const template = TemplateMother.random(account.id);
+      const template = TemplateMother.withAccount(account.id);
 
       await repository.save(template);
 
@@ -104,9 +104,9 @@ describe('Template repository', () => {
     });
   });
 
-  describe('findById', () => {
+  describe('#findById', () => {
     it('Should find template by its ID', async () => {
-      const template = TemplateMother.random(account.id);
+      const template = TemplateMother.withAccount(account.id);
 
       await repository.save(template);
 

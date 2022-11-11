@@ -7,24 +7,25 @@ import { TemplateId } from '../../../../src/core/Template/domain/value-object/Te
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 
 export class TemplateRepositoryMock implements TemplateRepository {
-  private mockSearchByName = jest.fn();
-  private mockFindById = jest.fn();
-  private mockSave = jest.fn();
-  private mockSearchAll = jest.fn();
+  mockSearchByName = jest.fn();
+  mockFindById = jest.fn();
+  mockSave = jest.fn();
+  mockSearchAll = jest.fn();
 
-  private templates: Array<Template> = [];
-  private template: Nullable<Template> = null;
+  private allTemplates: Array<Template> = [];
+  private templateByName: Nullable<Template> = null;
+  private templateById?: Template;
 
   returnSearchByName(template: Template): void {
-    this.template = template;
+    this.templateByName = template;
   }
 
   returnSearchAll(templates: Array<Template>): void {
-    this.templates = templates;
+    this.allTemplates = templates;
   }
 
   returnFindById(template: Template): void {
-    this.template = template;
+    this.templateById = template;
   }
 
   async searchByName(
@@ -32,17 +33,17 @@ export class TemplateRepositoryMock implements TemplateRepository {
     name: TemplateName
   ): Promise<Nullable<Template>> {
     this.mockSearchByName(accountId, name);
-    return this.template;
+    return this.templateByName;
   }
 
   async findById(accountId: AccountId, id: TemplateId): Promise<Template> {
     this.mockFindById(accountId, id);
 
-    if (!this.template) {
+    if (!this.templateById) {
       throw new TemplateNotFoundError(accountId, id);
     }
 
-    return this.template;
+    return this.templateById;
   }
 
   async save(template: Template): Promise<void> {
@@ -51,18 +52,6 @@ export class TemplateRepositoryMock implements TemplateRepository {
 
   async searchAll(accountId: AccountId): Promise<Template[]> {
     this.mockSearchAll(accountId);
-    return this.templates;
-  }
-
-  assertSaveHasBeenCalledWith(template: Template): void {
-    expect(this.mockSave).toHaveBeenCalledWith(template);
-  }
-
-  assertSaveHasNotBeenCalledWith(template: Template): void {
-    expect(this.mockSave).not.toHaveBeenCalledWith(template);
-  }
-
-  assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
-    expect(this.mockSearchAll).toHaveBeenCalledWith(accountId);
+    return this.allTemplates;
   }
 }

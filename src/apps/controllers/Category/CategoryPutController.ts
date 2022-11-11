@@ -36,9 +36,9 @@ export class CategoryPutController implements Controller {
       if (err instanceof DomainError) {
         this.logger.error(err);
         res.status(httpStatus.BAD_REQUEST).json(err.message);
+      } else {
+        throw err;
       }
-
-      throw err;
     }
   }
 }
