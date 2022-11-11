@@ -32,4 +32,14 @@ export class CategoryMother {
       templateIds || []
     );
   }
+
+  static makeCopy(category: Category): Category {
+    return this.create(
+      category.accountId,
+      category.id,
+      category.name,
+      category.description,
+      category.templateIds
+    );
+  }
 }

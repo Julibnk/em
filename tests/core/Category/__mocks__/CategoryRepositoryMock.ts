@@ -54,6 +54,14 @@ export class CategoryRepositoryMock implements CategoryRepository {
     return this.category;
   }
 
+  assertSaveHasBeenCalledWith(category: Category): void {
+    expect(this.mockSave).toHaveBeenCalledWith(category);
+  }
+
+  assertSaveHasNotBeenCalledWith(category: Category): void {
+    expect(this.mockSave).not.toHaveBeenCalledWith(category);
+  }
+
   assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
     expect(this.mockSearchAll).toHaveBeenCalledWith(accountId);
   }

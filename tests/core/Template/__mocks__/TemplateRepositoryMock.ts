@@ -7,10 +7,10 @@ import { TemplateId } from '../../../../src/core/Template/domain/value-object/Te
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 
 export class TemplateRepositoryMock implements TemplateRepository {
-  private _mockSearchByName = jest.fn();
-  private _mockFindById = jest.fn();
-  private _mockSave = jest.fn();
-  private _mockSearchAll = jest.fn();
+  private mockSearchByName = jest.fn();
+  private mockFindById = jest.fn();
+  private mockSave = jest.fn();
+  private mockSearchAll = jest.fn();
 
   private templates: Array<Template> = [];
   private template: Nullable<Template> = null;
@@ -31,12 +31,12 @@ export class TemplateRepositoryMock implements TemplateRepository {
     accountId: AccountId,
     name: TemplateName
   ): Promise<Nullable<Template>> {
-    this._mockSearchByName(accountId, name);
+    this.mockSearchByName(accountId, name);
     return this.template;
   }
 
   async findById(accountId: AccountId, id: TemplateId): Promise<Template> {
-    this._mockFindById(accountId, id);
+    this.mockFindById(accountId, id);
 
     if (!this.template) {
       throw new TemplateNotFoundError(accountId, id);
@@ -46,23 +46,23 @@ export class TemplateRepositoryMock implements TemplateRepository {
   }
 
   async save(template: Template): Promise<void> {
-    this._mockSave(template);
+    this.mockSave(template);
   }
 
   async searchAll(accountId: AccountId): Promise<Template[]> {
-    this._mockSearchAll(accountId);
+    this.mockSearchAll(accountId);
     return this.templates;
   }
 
   assertSaveHasBeenCalledWith(template: Template): void {
-    expect(this._mockSave).toHaveBeenCalledWith(template);
+    expect(this.mockSave).toHaveBeenCalledWith(template);
   }
 
   assertSaveHasNotBeenCalledWith(template: Template): void {
-    expect(this._mockSave).not.toHaveBeenCalledWith(template);
+    expect(this.mockSave).not.toHaveBeenCalledWith(template);
   }
 
   assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
-    expect(this._mockSearchAll).toHaveBeenCalledWith(accountId);
+    expect(this.mockSearchAll).toHaveBeenCalledWith(accountId);
   }
 }
