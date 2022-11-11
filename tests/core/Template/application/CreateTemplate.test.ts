@@ -1,4 +1,4 @@
-import { CreateTemplateUseCase } from '../../../../src/core/Template/application/CreateTemplate';
+import { SaveTemplateUseCase } from '../../../../src/core/Template/application/SaveTemplate';
 import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
 import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Template/domain/exceptions/TemplateWithSameNameAlreadyExistsError';
@@ -7,12 +7,12 @@ import { TemplateVariableMother } from '../domain/TemplateVariableMother';
 import { TemplatePreviewMother } from '../domain/TemplatePreviewMother';
 
 let repository: TemplateRepositoryMock;
-let createTemplateUseCase: CreateTemplateUseCase;
+let saveTemplateUseCase: SaveTemplateUseCase;
 
-describe('CreateTemplate use case', () => {
+describe('SaveTemplate use case', () => {
   beforeEach(() => {
     repository = new TemplateRepositoryMock();
-    createTemplateUseCase = new CreateTemplateUseCase(repository);
+    saveTemplateUseCase = new SaveTemplateUseCase(repository);
   });
 
   it('Should create a template', async () => {
@@ -28,7 +28,7 @@ describe('CreateTemplate use case', () => {
       variable2: template.variable2.value,
       variable3: template.variable3.value,
     };
-    await createTemplateUseCase.run(useCaseParams);
+    await saveTemplateUseCase.run(useCaseParams);
     repository.assertSaveHasBeenCalledWith(template);
   });
 
@@ -48,7 +48,7 @@ describe('CreateTemplate use case', () => {
     };
 
     try {
-      await createTemplateUseCase.run(useCaseParams);
+      await saveTemplateUseCase.run(useCaseParams);
     } catch (error) {
       expect(error).toBeInstanceOf(TemplateWithSameNameAlreadyExistsError);
     }
@@ -69,7 +69,7 @@ describe('CreateTemplate use case', () => {
       TemplateVariableMother.random()
     );
 
-    await createTemplateUseCase.run({
+    await saveTemplateUseCase.run({
       accountId: template.accountId.value,
       id: template.id.value,
       name: template.name.value,

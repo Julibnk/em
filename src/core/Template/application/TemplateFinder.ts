@@ -3,7 +3,7 @@ import { TemplateId } from '../domain/value-object/TemplateId';
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 
-export class TemplateFinder {
+export class FindTemplateUseCase {
   constructor(private readonly repository: TemplateRepository) {}
 
   run(accountId: string, id: string): Promise<Template> {

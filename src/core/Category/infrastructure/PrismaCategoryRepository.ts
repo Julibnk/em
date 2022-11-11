@@ -9,6 +9,8 @@ import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { CategoryNotFoundError } from '../domain/exceptions/CategoryNotFoundError';
 import { CategoryId } from '../domain/value-object/CategoryId';
 import { CategoryPersistenceError } from '../domain/exceptions/CategoryPersistenceError';
+import { Nullable } from '../../Shared/domain/Nullable';
+import { CategoryName } from '../domain/value-object/CategoryName';
 
 type PrismaCategoryWithTemplate = PrismaCategory & {
   Template: Array<{ id: PrismaTemplate['id'] }>;
@@ -79,9 +81,7 @@ export class PrismaCategoryRepository
 
   async searchAll(accountId: AccountId): Promise<Array<Category>> {
     const query = {
-      where: {
-        accountId: accountId.value,
-      },
+      where: { accountId: accountId.value },
       include: {
         Template: { select: { id: true } },
       },
@@ -92,6 +92,26 @@ export class PrismaCategoryRepository
     return categories.map((category) =>
       this.mapPrismaEntityToDomainEntity(category)
     );
+  }
+
+  async searchByName(
+    accountId: AccountId,
+    name: CategoryName
+  ): Promise<Nullable<Category>> {
+    const query = {
+      where: { accountId: accountId.value, name: name.value },
+      include: {
+        Template: { select: { id: true } },
+      },
+    };
+
+    const prismaCategory = await this.client.category.findFirst(query);
+
+    if (!prismaCategory) {
+      return null;
+    }
+
+    return this.mapPrismaEntityToDomainEntity(prismaCategory);
   }
 
   mapPrismaEntityToDomainEntity(

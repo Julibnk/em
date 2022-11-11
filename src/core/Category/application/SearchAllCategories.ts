@@ -11,7 +11,7 @@ export class SearchAllCategoriesUseCase {
     private repository: CategoryRepository
   ) {}
 
-  async run(accountId: AccountId): Promise<Array<Category>> {
-    return await this.repository.searchAll(accountId);
+  run(accountId: string): Promise<Array<Category>> {
+    return this.repository.searchAll(new AccountId(accountId));
   }
 }

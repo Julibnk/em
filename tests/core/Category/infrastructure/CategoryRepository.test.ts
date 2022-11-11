@@ -13,6 +13,7 @@ import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 import { CategoryPersistenceError } from '../../../../src/core/Category/domain/exceptions/CategoryPersistenceError';
 import { TemplateIdMother } from '../../Template/domain/TemplateIdMother';
 import { TemplateMother } from '../../Template/domain/TemplateMother';
+import { CategoryNameMother } from '../domain/CategoryNameMother';
 
 const repository = container.get<CategoryRepository>(DIRepository.category);
 const templateRepository = container.get<TemplateRepository>(
@@ -131,6 +132,30 @@ describe.only('CategoryRepository', () => {
       );
       expect(categoriesExpected.length).toEqual(0);
       expect(otherAccountCategories.length).toEqual(3);
+    });
+  });
+
+  describe('searchByName', () => {
+    it('Should find category by its name', async () => {
+      const category = CategoryMother.random(account.id);
+
+      await repository.save(category);
+
+      const categoryExpected = await repository.searchByName(
+        account.id,
+        category.name
+      );
+
+      expect(categoryExpected).toEqual(category);
+    });
+
+    it('Should return null if category doesn´t exist', async () => {
+      const nullCategory = await repository.searchByName(
+        AccountIdMother.random(),
+        CategoryNameMother.random()
+      );
+
+      expect(nullCategory).toBeNull();
     });
   });
 });

@@ -4,9 +4,11 @@ import { CategoryRepository } from '../../../../src/core/Category/domain/Categor
 import { CategoryId } from '../../../../src/core/Category/domain/value-object/CategoryId';
 import { Nullable } from '../../../../src/core/Shared/domain/Nullable';
 import { CategoryNotFoundError } from '../../../../src/core/Category/domain/exceptions/CategoryNotFoundError';
+import { CategoryName } from '../../../../src/core/Category/domain/value-object/CategoryName';
 
 export class CategoryRepositoryMock implements CategoryRepository {
   private mockSearchAll = jest.fn();
+  private mockSearchByName = jest.fn();
   private mockSave = jest.fn();
   private mockFindById = jest.fn();
 
@@ -18,6 +20,10 @@ export class CategoryRepositoryMock implements CategoryRepository {
   }
 
   returnFindById(category: Category): void {
+    this.category = category;
+  }
+
+  returnSearchByName(category: Category): void {
     this.category = category;
   }
 
@@ -38,5 +44,17 @@ export class CategoryRepositoryMock implements CategoryRepository {
       throw new CategoryNotFoundError(accountId, id);
     }
     return this.category;
+  }
+
+  async searchByName(
+    accountId: AccountId,
+    name: CategoryName
+  ): Promise<Nullable<Category>> {
+    this.mockSearchByName(accountId, name);
+    return this.category;
+  }
+
+  assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
+    expect(this.mockSearchAll).toHaveBeenCalledWith(accountId);
   }
 }

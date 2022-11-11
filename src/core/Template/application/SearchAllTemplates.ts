@@ -5,7 +5,7 @@ import { Template } from '../domain/Template';
 import { TemplateRepository } from '../domain/TemplateRepository';
 
 @injectable()
-export class SearchAllTemplates {
+export class SearchAllTemplatesUseCase {
   constructor(
     @inject(DIRepository.template)
     private readonly repository: TemplateRepository

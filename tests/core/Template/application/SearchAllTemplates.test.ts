@@ -1,15 +1,15 @@
-import { SearchAllTemplates } from '../../../../src/core/Template/application/SearchAllTemplates';
+import { SearchAllTemplatesUseCase } from '../../../../src/core/Template/application/SearchAllTemplates';
 import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
 import { TemplateMother } from '../domain/TemplateMother';
 import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 
 let repository: TemplateRepositoryMock;
-let searchAllTemplatesUseCase: SearchAllTemplates;
+let searchAllTemplatesUseCase: SearchAllTemplatesUseCase;
 
 describe('SearchAllTemplates use case', () => {
   beforeEach(() => {
     repository = new TemplateRepositoryMock();
-    searchAllTemplatesUseCase = new SearchAllTemplates(repository);
+    searchAllTemplatesUseCase = new SearchAllTemplatesUseCase(repository);
   });
 
   it('Should return all templates', async () => {

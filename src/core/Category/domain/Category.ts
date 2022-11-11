@@ -19,9 +19,9 @@ export class Category extends AggregateRoot {
   }
 
   private ensureUniqueTemplateId(): void {
-    // new Set().add()
-    // this._templateIds = new Map(this._templateIds.map((item) => [item.value, item])).values();
+    this._templateIds = [...new Set(this._templateIds)];
   }
+
   public get name(): CategoryName {
     return this._name;
   }
@@ -34,20 +34,15 @@ export class Category extends AggregateRoot {
     return this._templateIds;
   }
 
-  change(name: CategoryName, description: CategoryDescription): void {
+  change(
+    name: CategoryName,
+    description: CategoryDescription,
+    templateIds: Array<TemplateId>
+  ): void {
     this._name = name;
     this._description = description;
-  }
-
-  assignTemplate(templateId: TemplateId): void {
-    this._templateIds.push(templateId);
+    this._templateIds = templateIds;
     this.ensureUniqueTemplateId();
-  }
-
-  removeTemplate(templateId: TemplateId): void {
-    this._templateIds = this._templateIds.filter(
-      (id) => id.value !== templateId.value
-    );
   }
 
   toPrimitives(): Primitives<Category> {
