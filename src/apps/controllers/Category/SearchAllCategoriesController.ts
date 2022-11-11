@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { Controller } from '../Controller';
 import { SearchAllCategoriesUseCase } from '../../../core/Category/application/SearchAllCategories';
 import { SearchAllTemplatesUseCase } from '../../../core/Template/application/SearchAllTemplates';
@@ -22,6 +22,7 @@ type ControllerResponse = Array<{
   }>;
 }>;
 
+@injectable()
 export class SearchAllCategoriesController implements Controller {
   constructor(
     @inject(SearchAllCategoriesUseCase)

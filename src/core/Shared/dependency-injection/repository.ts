@@ -7,6 +7,8 @@ import { PrismaTestEnvironmentManager } from '../../../../tests/core/Shared/infr
 import { TestEnvironmentManager } from '../../../../tests/core/Shared/infrastructure/TestEnvironmentManager';
 import { CategoryRepository } from '../../Category/domain/CategoryRepository';
 import { PrismaCategoryRepository } from '../../Category/infrastructure/PrismaCategoryRepository';
+import WinstonLogger from '../infrastructure/WinstonLogger';
+import Logger from '../domain/Logger';
 
 export const enum DIRepository {
   account = 'core.account.repository',
@@ -18,6 +20,7 @@ export const enum DIRepository {
   user = 'core.user.repository',
 
   environmentManager = 'core.enviromentManager',
+  logger = 'core.logger',
 }
 
 export const repositoryContainerModule = new ContainerModule((bind) => {
@@ -28,4 +31,6 @@ export const repositoryContainerModule = new ContainerModule((bind) => {
   bind<TestEnvironmentManager>(DIRepository.environmentManager).to(
     PrismaTestEnvironmentManager
   );
+
+  bind<Logger>(DIRepository.logger).to(WinstonLogger);
 });

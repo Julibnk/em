@@ -10,7 +10,7 @@ import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
 
-type Params = {
+export type Params = {
   accountId: string;
   id: string;
   name: string;

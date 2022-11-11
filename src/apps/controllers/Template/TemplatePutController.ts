@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../Controller';
-import { SaveTemplateUseCase } from '../../../core/Template/application/SaveTemplate';
+import {
+  SaveTemplateUseCase,
+  Params,
+} from '../../../core/Template/application/SaveTemplate';
 import { inject, injectable } from 'inversify';
 
 @injectable()
@@ -12,7 +15,7 @@ export class TemplatePutController implements Controller {
   ) {}
 
   async run(req: Request, res: Response) {
-    const useCaseParams = {
+    const useCaseParams: Params = {
       accountId: process.env.ACCOUNT_ID || '',
       id: req.params.id,
       name: req.body.name,

@@ -11,7 +11,7 @@ import { CategoryName } from '../domain/value-object/CategoryName';
 import { CategoryDescription } from '../domain/value-object/CategoryDescription';
 import { CategoryWithSameNameAlreadyExistsError } from '../domain/exceptions/CategoryWithSameNameAlreadyExistsError';
 
-type Params = {
+export type Params = {
   accountId: string;
   id: string;
   name: string;

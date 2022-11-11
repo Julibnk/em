@@ -24,14 +24,17 @@ export class Server {
     this.express.use(helmet.frameguard({ action: 'deny' }));
     this.express.use(compress());
     const router = Router();
+    // if (process.env.NODE_ENV === 'development') {
     router.use(errorHandler());
+    // }
     this.express.use(router);
 
     registerRoutes(router);
 
     router.use((err: Error, req: Request, res: Response) => {
-      console.log(err);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR);
+      // console.log(err);<
+      // console.log('Mierror');
+      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
     });
   }
 
