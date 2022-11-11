@@ -8,9 +8,9 @@ import {
 import { TemplateShortDescription } from './value-object/TemplateShortDescription';
 import { TemplatePreview } from './value-object/TemplatePreview';
 import { TemplateVariable } from './value-object/TemplateVariable';
-import { InvalidArgumentError } from '../../Shared/domain/value-object/InvalidArgumentError';
 import { Primitives } from '../../Shared/domain/Primitives';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
+import { InconsistentTemplateVariableError } from './exceptions/InconsistentTemplateVariableError';
 
 // Override primitives type to avoid Enum type checking
 export type TemplatePrimitives = Omit<Primitives<Template>, 'status'> & {
@@ -124,20 +124,20 @@ export class Template extends AggregateRoot {
   }
 
   private ensureVariableConsistence() {
-    this.ensureVariable3Consistence();
     this.ensureVariable2Consistence();
+    this.ensureVariable3Consistence();
+  }
+
+  private ensureVariable2Consistence() {
+    if (this.variable2.value) {
+      if (!this.variable1.value) throw new InconsistentTemplateVariableError();
+    }
   }
 
   private ensureVariable3Consistence() {
     if (this.variable3.value) {
       if (!this.variable2.value || !this.variable1.value)
-        throw InvalidArgumentError;
-    }
-  }
-
-  private ensureVariable2Consistence() {
-    if (this.variable2.value) {
-      if (!this.variable1.value) throw InvalidArgumentError;
+        throw new InconsistentTemplateVariableError();
     }
   }
 }

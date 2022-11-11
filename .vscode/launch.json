@@ -10,7 +10,11 @@
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/dist/start.js",
-      "env": { "NODE_ENV": "development" },
+      "env": {
+        "NODE_ENV": "development",
+        "ACCOUNT_ID": "5c045a0e-eca2-476c-8c0e-56b9cfc2a45e",
+        "DATABASE_URL": "postgres://postgres:postgres@localhost:5433/em_persistance"
+      },
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
         "!**/node_modules/**"

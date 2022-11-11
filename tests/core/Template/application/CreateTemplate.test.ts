@@ -5,6 +5,7 @@ import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Tem
 import { TemplateShortDescriptionMother } from '../domain/TemplateShortDescriptionMother';
 import { TemplateVariableMother } from '../domain/TemplateVariableMother';
 import { TemplatePreviewMother } from '../domain/TemplatePreviewMother';
+import { InconsistentTemplateVariableError } from '../../../../src/core/Template/domain/exceptions/InconsistentTemplateVariableError';
 
 let repository: TemplateRepositoryMock;
 let saveTemplateUseCase: SaveTemplateUseCase;
@@ -82,5 +83,34 @@ describe('SaveTemplate use case', () => {
 
     repository.assertSaveHasBeenCalledWith(template);
     repository.assertSaveHasNotBeenCalledWith(originalTemplate);
+  });
+
+  it('Should throw an exception if variables are inconsistent', async () => {
+    const template = TemplateMother.forCreation();
+
+    const useCaseParams = {
+      accountId: template.accountId.value,
+      id: template.id.value,
+      name: template.name.value,
+      shortDescription: template.shortDescription.value,
+      preview: template.preview.value,
+      variable1: '',
+      variable2: template.variable2.value,
+      variable3: template.variable3.value,
+    };
+
+    try {
+      await saveTemplateUseCase.run(useCaseParams);
+    } catch (error) {
+      expect(error).toBeInstanceOf(InconsistentTemplateVariableError);
+    }
+
+    useCaseParams.variable2 = '';
+
+    try {
+      await saveTemplateUseCase.run(useCaseParams);
+    } catch (error) {
+      expect(error).toBeInstanceOf(InconsistentTemplateVariableError);
+    }
   });
 });

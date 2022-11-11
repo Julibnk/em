@@ -3,7 +3,8 @@ import { StringValueObject } from '../../../Shared/domain/value-object/StringVal
 
 export class CategoryName extends StringValueObject {
   constructor(value: string) {
-    super(value.toUpperCase());
+    const parsedValue = value.toUpperCase().replaceAll(' ', '_');
+    super(parsedValue);
     this.ensureLengthIsLessThan20Characters(value);
   }
 
