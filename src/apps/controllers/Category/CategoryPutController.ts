@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+// import { Request, Response } from 'express';
 import { inject } from 'inversify';
 import { SaveCategoryUseCase } from '../../../core/Category/application/SaveCategory';
 
@@ -10,10 +10,10 @@ export class CategoryPutController implements Controller {
     private saveCategoryUseCase: SaveCategoryUseCase
   ) {}
 
-  async run(_: Request, _: Response): void {
-    con;
+  run(): Promise<void> {
+    // con;
 
-    this.saveCategoryUseCase.run();
+    // this.saveCategoryUseCase.run();
     throw new Error('Method not implemented.');
   }
 }
