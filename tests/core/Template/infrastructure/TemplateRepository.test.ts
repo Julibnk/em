@@ -1,6 +1,6 @@
 import {
   container,
-  DIRepository,
+  DIDomain,
 } from '../../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
@@ -16,9 +16,9 @@ import { TemplatePersistenceError } from '../../../../src/core/Template/domain/e
 let account: Account;
 
 const enviromentManager = container.get<TestEnvironmentManager>(
-  DIRepository.environmentManager
+  DIDomain.environmentManager
 );
-const repository = container.get<TemplateRepository>(DIRepository.template);
+const repository = container.get<TemplateRepository>(DIDomain.template);
 
 describe('Template repository', () => {
   beforeEach(async () => {

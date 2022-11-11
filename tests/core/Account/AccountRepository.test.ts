@@ -3,17 +3,15 @@ import { AccountNotFoundError } from '../../../src/core/Account/domain/exception
 import { AccountId } from '../../../src/core/Account/domain/value-object/AccountId';
 import {
   container,
-  DIRepository,
+  DIDomain,
 } from '../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../Shared/infrastructure/TestEnvironmentManager';
 import { AccountMother } from './domain/AccountMother';
 
 const environmentManager = container.get<TestEnvironmentManager>(
-  DIRepository.environmentManager
+  DIDomain.environmentManager
 );
-const accountRepository = container.get<AccountRepository>(
-  DIRepository.account
-);
+const accountRepository = container.get<AccountRepository>(DIDomain.account);
 
 describe('AccountRepository', () => {
   beforeEach(async () => {

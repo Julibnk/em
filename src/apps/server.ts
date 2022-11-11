@@ -8,7 +8,7 @@ import * as http from 'http';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
 import Logger from '../core/Shared/domain/Logger';
-import { container, DIRepository } from '../core/Shared/dependency-injection';
+import { container, DIDomain } from '../core/Shared/dependency-injection';
 
 export class Server {
   private express: express.Express;
@@ -19,7 +19,7 @@ export class Server {
   constructor(port: string) {
     this.port = port;
     this.express = express();
-    this.logger = container.get<Logger>(DIRepository.logger);
+    this.logger = container.get<Logger>(DIDomain.logger);
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(helmet.xssFilter());
@@ -29,15 +29,23 @@ export class Server {
     this.express.use(compress());
     const router = Router();
     // if (process.env.NODE_ENV === 'development') {
-    router.use(errorHandler());
+    router.use(
+      errorHandler({
+        log: (err: Error): void => {
+          console.error(err);
+          this.logger.error(err);
+          // res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+        },
+      })
+    );
     // }
     this.express.use(router);
 
     registerRoutes(router);
 
     router.use((err: Error, req: Request, res: Response) => {
-      // console.log(err);<
-      // console.log('Mierror');
+      console.log(err);
+      this.logger.error(err);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
     });
   }

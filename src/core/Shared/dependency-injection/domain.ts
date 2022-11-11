@@ -10,7 +10,7 @@ import { PrismaCategoryRepository } from '../../Category/infrastructure/PrismaCa
 import WinstonLogger from '../infrastructure/WinstonLogger';
 import Logger from '../domain/Logger';
 
-export const enum DIRepository {
+export const enum DIDomain {
   account = 'core.account.repository',
   accountPhone = 'core.accountPhone.repository',
   category = 'core.category.repository',
@@ -24,13 +24,13 @@ export const enum DIRepository {
 }
 
 export const repositoryContainerModule = new ContainerModule((bind) => {
-  bind<AccountRepository>(DIRepository.account).to(PrismaAccountRepository);
-  bind<TemplateRepository>(DIRepository.template).to(PrismaTemplateRepository);
-  bind<CategoryRepository>(DIRepository.category).to(PrismaCategoryRepository);
+  bind<AccountRepository>(DIDomain.account).to(PrismaAccountRepository);
+  bind<TemplateRepository>(DIDomain.template).to(PrismaTemplateRepository);
+  bind<CategoryRepository>(DIDomain.category).to(PrismaCategoryRepository);
 
-  bind<TestEnvironmentManager>(DIRepository.environmentManager).to(
+  bind<TestEnvironmentManager>(DIDomain.environmentManager).to(
     PrismaTestEnvironmentManager
   );
 
-  bind<Logger>(DIRepository.logger).to(WinstonLogger);
+  bind<Logger>(DIDomain.logger).to(WinstonLogger);
 });

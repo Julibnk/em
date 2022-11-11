@@ -5,6 +5,7 @@ import { SearchAllCategoriesUseCase } from '../../../core/Category/application/S
 import { SearchAllTemplatesUseCase } from '../../../core/Template/application/SearchAllTemplates';
 import { Category } from '../../../core/Category/domain/Category';
 import { Template } from '../../../core/Template/domain/Template';
+import httpStatus from 'http-status';
 
 type ControllerResponse = Array<{
   id: string;
@@ -32,11 +33,15 @@ export class SearchAllCategoriesController implements Controller {
   ) {}
 
   async run(req: Request, res: Response): Promise<void> {
-    const accountId = (req.params.accountId = process.env.ACCOUNT_ID || '');
-    const categories = await this.searchAllCategoriesUseCase.run(accountId);
-    const templates = await this.searchAllTemplatesUseCase.run(accountId);
-    const response = this.mapResponse(categories, templates);
-    res.json(response);
+    try {
+      const accountId = (req.params.accountId = process.env.ACCOUNT_ID || '');
+      const categories = await this.searchAllCategoriesUseCase.run(accountId);
+      const templates = await this.searchAllTemplatesUseCase.run(accountId);
+      const response = this.mapResponse(categories, templates);
+      res.json(response);
+    } catch (e) {
+      res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   private mapResponse(

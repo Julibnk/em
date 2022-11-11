@@ -6,6 +6,7 @@ import {
   Params,
 } from '../../../core/Template/application/SaveTemplate';
 import { inject, injectable } from 'inversify';
+import { TemplatePersistenceError } from '../../../core/Template/domain/exceptions/TemplatePersistenceError';
 
 @injectable()
 export class TemplatePutController implements Controller {
@@ -28,12 +29,12 @@ export class TemplatePutController implements Controller {
 
     try {
       await this.saveTemplateUseCase.run(useCaseParams);
-      res.status(httpStatus.OK).send();
+      res.sendStatus(httpStatus.CREATED);
     } catch (e) {
-      if (e instanceof Error) {
-        res.status(httpStatus.BAD_REQUEST).json(e.message);
+      if (e instanceof TemplatePersistenceError) {
+        res.sendStatus(httpStatus.BAD_REQUEST).json(e.message);
       }
-      res.status(httpStatus.INTERNAL_SERVER_ERROR);
+      res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }

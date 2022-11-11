@@ -7,7 +7,7 @@ import { inject, injectable } from 'inversify';
 import { PrismaClientSingleton } from '../../../../src/core/Shared/infrastructure/PrismaClient';
 import { Account } from '../../../../src/core/Account/domain/Account';
 import { AccountRepository } from '../../../../src/core/Account/domain/AccountRepository';
-import { DIRepository } from '../../../../src/core/Shared/dependency-injection';
+import { DIDomain } from '../../../../src/core/Shared/dependency-injection';
 import { AccountMother } from '../../Account/domain/AccountMother';
 
 @injectable()
@@ -15,7 +15,7 @@ export class PrismaTestEnvironmentManager implements TestEnvironmentManager {
   private _client: PrismaClient;
 
   constructor(
-    @inject(DIRepository.account) private accountRepository: AccountRepository
+    @inject(DIDomain.account) private accountRepository: AccountRepository
   ) {
     this._client = PrismaClientSingleton.instance;
   }
