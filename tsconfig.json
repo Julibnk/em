@@ -3,7 +3,7 @@
   "compilerOptions": {
     "types": ["node", "reflect-metadata", "jest"],
     "noImplicitAny": true,
-    "outDir": "./build",
+    "outDir": "./dist",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "sourceMap": true

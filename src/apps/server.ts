@@ -7,15 +7,19 @@ import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
+import Logger from '../core/Shared/domain/Logger';
+import { container, DIRepository } from '../core/Shared/dependency-injection';
 
 export class Server {
   private express: express.Express;
   private port: string;
   private httpServer?: http.Server;
+  private logger: Logger;
 
   constructor(port: string) {
     this.port = port;
     this.express = express();
+    this.logger = container.get<Logger>(DIRepository.logger);
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(helmet.xssFilter());
