@@ -4,8 +4,7 @@ import { Account } from '../../../../src/core/Account/domain/Account';
 @injectable()
 export abstract class TestEnvironmentManager {
   abstract truncate(): Promise<void>;
-  abstract createAccount(account: Account): Promise<void>;
-  abstract deleteAccount(account: Account): Promise<void>;
+  abstract createAccount(): Promise<Account>;
 }
 
 export class InvalidTestEnvironmentError extends Error {

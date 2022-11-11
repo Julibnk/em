@@ -1,19 +1,19 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import { Controller } from '../Controller';
-import { TemplateCreator } from '../../../core/Template/application/TemplateCreator';
+import { SaveTemplateUseCase } from '../../../core/Template/application/SaveTemplate';
 import { inject, injectable } from 'inversify';
 
 @injectable()
 export class TemplatePutController implements Controller {
   constructor(
-    @inject(TemplateCreator)
-    private templateCreator: TemplateCreator
+    @inject(SaveTemplateUseCase)
+    private saveTemplateUseCase: SaveTemplateUseCase
   ) {}
 
   async run(req: Request, res: Response) {
     const useCaseParams = {
-      accountId: req.params.accountId,
+      accountId: process.env.ACCOUNT_ID || '',
       id: req.params.id,
       name: req.body.name,
       shortDescription: req.body.shortDescription,
@@ -23,7 +23,14 @@ export class TemplatePutController implements Controller {
       variable3: req.body.variable3,
     };
 
-    await this.templateCreator.run(useCaseParams);
-    res.status(httpStatus.CREATED).send();
+    try {
+      await this.saveTemplateUseCase.run(useCaseParams);
+      res.status(httpStatus.OK).send();
+    } catch (e) {
+      if (e instanceof Error) {
+        res.status(httpStatus.BAD_REQUEST).json(e.message);
+      }
+      res.status(httpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

@@ -2,43 +2,45 @@ import {
   container,
   DIRepository,
 } from '../../../../src/core/Shared/dependency-injection';
-import { TestEnvironmentManager } from '../../Shared/domain/TestEnvironmentManager';
+import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
 import { TemplateMother } from '../domain/TemplateMother';
-import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
-import { AccountMother } from '../../Account/domain/AccountMother';
 import { Template } from '../../../../src/core/Template/domain/Template';
+import { TemplateNameMother } from '../domain/TemplateNameMother';
+import { AccountIdMother } from '../../Account/domain/AccountIdMother';
+import { Account } from '../../../../src/core/Account/domain/Account';
+import { TemplateIdMother } from '../domain/TemplateIdMother';
+import { TemplatePersistenceError } from '../../../../src/core/Template/domain/exceptions/TemplatePersistenceError';
+
+let account: Account;
 
 const enviromentManager = container.get<TestEnvironmentManager>(
   DIRepository.environmentManager
 );
-
 const repository = container.get<TemplateRepository>(DIRepository.template);
 
-const account = AccountMother.random();
-const otherAccount = AccountMother.random();
-
 describe('Template repository', () => {
-  beforeAll(async () => {
-    await enviromentManager.createAccount(account);
-    await enviromentManager.createAccount(otherAccount);
-  });
-
   beforeEach(async () => {
     await enviromentManager.truncate();
+    account = await enviromentManager.createAccount();
   });
 
   afterAll(async () => {
     await enviromentManager.truncate();
-    await enviromentManager.deleteAccount(account);
-    await enviromentManager.deleteAccount(otherAccount);
   });
 
   describe('save', () => {
     it('Should save a template', async () => {
       const template = TemplateMother.random(account.id);
       await repository.save(template);
+    });
+
+    it('Can´t save a template with inexistent account', async () => {
+      const template = TemplateMother.random(AccountIdMother.random());
+      expect(async () => await repository.save(template)).rejects.toThrow(
+        TemplatePersistenceError
+      );
     });
   });
 
@@ -61,6 +63,8 @@ describe('Template repository', () => {
     });
 
     it('Should´t return templates from other account ', async () => {
+      const otherAccount = await enviromentManager.createAccount();
+
       const otherAccountTemplates = [
         TemplateMother.random(otherAccount.id),
         TemplateMother.random(otherAccount.id),
@@ -73,6 +77,30 @@ describe('Template repository', () => {
 
       const thisAccountTemplates = await repository.searchAll(account.id);
       expect(thisAccountTemplates.length).toBe(0);
+    });
+  });
+
+  describe('searchByName', () => {
+    it('Should find template by its name', async () => {
+      const template = TemplateMother.random(account.id);
+
+      await repository.save(template);
+
+      const templateExpected = await repository.searchByName(
+        account.id,
+        template.name
+      );
+
+      expect(templateExpected).toEqual(template);
+    });
+
+    it('Should return null if template doesn´t exist', async () => {
+      const nullTemplate = await repository.searchByName(
+        AccountIdMother.random(),
+        TemplateNameMother.random()
+      );
+
+      expect(nullTemplate).toBeNull();
     });
   });
 
@@ -91,13 +119,9 @@ describe('Template repository', () => {
     });
 
     it('Should throw error when template does not exist', async () => {
-      expect.assertions(1);
-
-      try {
-        await repository.findById(account.id, TemplateId.random());
-      } catch (error) {
-        expect(error).toBeInstanceOf(TemplateNotFoundError);
-      }
+      expect(async () => {
+        await repository.findById(account.id, TemplateIdMother.random());
+      }).rejects.toThrow(TemplateNotFoundError);
     });
   });
 });

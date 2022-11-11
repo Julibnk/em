@@ -1,8 +1,13 @@
 import { ContainerModule } from 'inversify';
-import { SearchAllTemplates } from '../../Template/application/SearchAllTemplates';
-import { TemplateCreator } from '../../Template/application/TemplateCreator';
+import { SearchAllTemplatesUseCase } from '../../Template/application/SearchAllTemplates';
+import { SaveTemplateUseCase } from '../../Template/application/SaveTemplate';
+import { SearchAllCategoriesUseCase } from '../../Category/application/SearchAllCategories';
+import { SaveCategoryUseCase } from '../../Category/application/SaveCategory';
 
 export const applicationContainerModule = new ContainerModule((bind) => {
-  bind<SearchAllTemplates>(SearchAllTemplates).toSelf();
-  bind<TemplateCreator>(TemplateCreator).toSelf();
+  bind<SearchAllTemplatesUseCase>(SearchAllTemplatesUseCase).toSelf();
+  bind<SaveTemplateUseCase>(SaveTemplateUseCase).toSelf();
+
+  bind<SearchAllCategoriesUseCase>(SearchAllCategoriesUseCase).toSelf();
+  bind<SaveCategoryUseCase>(SaveCategoryUseCase).toSelf();
 });
