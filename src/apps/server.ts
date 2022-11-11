@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import compress from 'compression';
-import errorHandler from 'errorhandler';
-import express, { Request, Response } from 'express';
+// import errorHandler from 'errorhandler';
+import express, { Request, Response, NextFunction } from 'express';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
@@ -28,26 +28,24 @@ export class Server {
     this.express.use(helmet.frameguard({ action: 'deny' }));
     this.express.use(compress());
     const router = Router();
-    // if (process.env.NODE_ENV === 'development') {
-    router.use(
-      errorHandler({
-        log: (err: Error): void => {
-          console.error(err);
-          this.logger.error(err);
-          // res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
-        },
-      })
-    );
-    // }
+    // router.use(errorHandler());
+
     this.express.use(router);
 
     registerRoutes(router);
 
-    router.use((err: Error, req: Request, res: Response) => {
-      console.log(err);
-      this.logger.error(err);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+    router.get('/error', async () => {
+      throw new Error('Test error');
     });
+
+    //El middleware necesita 4 parametros para detectar el callback de error
+    router.use(
+      // eslint-disable-next-line
+      (err: Error, req: Request, res: Response, next: NextFunction) => {
+        this.logger.error(err);
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+      }
+    );
   }
 
   async listen(): Promise<void> {

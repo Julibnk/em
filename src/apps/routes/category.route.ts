@@ -28,7 +28,7 @@ export const register = (router: Router) => {
     '/category/:id',
     putPostSchema,
     validateReqSchema,
-    (req: Request, res: Response) => categoryPutController.run(req, res)
+    async (req: Request, res: Response) => categoryPutController.run(req, res)
   );
 
   router.get('/category/searchAll', (req: Request, res: Response) =>

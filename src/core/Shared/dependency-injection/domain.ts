@@ -23,7 +23,7 @@ export const enum DIDomain {
   logger = 'core.logger',
 }
 
-export const repositoryContainerModule = new ContainerModule((bind) => {
+export const domainContainerModule = new ContainerModule((bind) => {
   bind<AccountRepository>(DIDomain.account).to(PrismaAccountRepository);
   bind<TemplateRepository>(DIDomain.template).to(PrismaTemplateRepository);
   bind<CategoryRepository>(DIDomain.category).to(PrismaCategoryRepository);

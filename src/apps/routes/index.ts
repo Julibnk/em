@@ -4,8 +4,11 @@ import httpStatus from 'http-status';
 import { ValidationError, validationResult } from 'express-validator';
 
 export function registerRoutes(router: Router) {
-  const routes = glob.sync(__dirname.replace(/\\/g, '/') + '/**/*.route.*');
-  routes.map((route) => !route.includes('.map') && register(route, router));
+  const pathsWithRoutes = glob.sync(
+    __dirname.replace(/\\/g, '/') + '/**/*.route.*'
+  );
+  const routes = pathsWithRoutes.filter((route) => !route.endsWith('.map'));
+  routes.map((route) => register(route, router));
 }
 
 function register(routePath: string, app: Router) {
