@@ -7,30 +7,31 @@ import { CategoryNotFoundError } from '../../../../src/core/Category/domain/exce
 import { CategoryName } from '../../../../src/core/Category/domain/value-object/CategoryName';
 
 export class CategoryRepositoryMock implements CategoryRepository {
-  private mockSearchAll = jest.fn();
-  private mockSearchByName = jest.fn();
-  private mockSave = jest.fn();
-  private mockFindById = jest.fn();
+  mockSearchAll = jest.fn();
+  mockSearchByName = jest.fn();
+  mockSave = jest.fn();
+  mockFindById = jest.fn();
 
-  private category: Nullable<Category> = null;
-  private categories: Array<Category> = [];
+  private categoryByName: Nullable<Category> = null;
+  private allCategories: Array<Category> = [];
+  private catgoryById?: Category;
 
   returnSearchAll(categories: Array<Category>): void {
-    this.categories = categories;
+    this.allCategories = categories;
   }
 
   returnFindById(category: Category): void {
-    this.category = category;
+    this.catgoryById = category;
   }
 
   returnSearchByName(category: Category): void {
-    this.category = category;
+    this.categoryByName = category;
   }
 
   async searchAll(accountId: AccountId): Promise<Array<Category>> {
     this.mockSearchAll(accountId);
 
-    return this.categories;
+    return this.allCategories;
   }
 
   async save(category: Category): Promise<void> {
@@ -40,10 +41,10 @@ export class CategoryRepositoryMock implements CategoryRepository {
   async findById(accountId: AccountId, id: CategoryId): Promise<Category> {
     this.mockFindById(accountId, id);
 
-    if (!this.category) {
+    if (!this.catgoryById) {
       throw new CategoryNotFoundError(accountId, id);
     }
-    return this.category;
+    return this.catgoryById;
   }
 
   async searchByName(
@@ -51,18 +52,18 @@ export class CategoryRepositoryMock implements CategoryRepository {
     name: CategoryName
   ): Promise<Nullable<Category>> {
     this.mockSearchByName(accountId, name);
-    return this.category;
+    return this.categoryByName;
   }
 
-  assertSaveHasBeenCalledWith(category: Category): void {
-    expect(this.mockSave).toHaveBeenCalledWith(category);
-  }
+  // assertSaveHasBeenCalledWith(category: Category): void {
+  //   expect(this.mockSave).toHaveBeenCalledWith(category);
+  // }
 
-  assertSaveHasNotBeenCalledWith(category: Category): void {
-    expect(this.mockSave).not.toHaveBeenCalledWith(category);
-  }
+  // assertSaveHasNotBeenCalledWith(category: Category): void {
+  //   expect(this.mockSave).not.toHaveBeenCalledWith(category);
+  // }
 
-  assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
-    expect(this.mockSearchAll).toHaveBeenCalledWith(accountId);
-  }
+  // assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
+  //   expect(this.mockSearchAll).toHaveBeenCalledWith(accountId);
+  // }
 }

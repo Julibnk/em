@@ -10,6 +10,7 @@ import { CategoryId } from '../domain/value-object/CategoryId';
 import { CategoryName } from '../domain/value-object/CategoryName';
 import { CategoryDescription } from '../domain/value-object/CategoryDescription';
 import { CategoryWithSameNameAlreadyExistsError } from '../domain/exceptions/CategoryWithSameNameAlreadyExistsError';
+import { CategoryNotFoundError } from '../domain/exceptions/CategoryNotFoundError';
 
 export type Params = {
   accountId: string;
@@ -41,17 +42,27 @@ export class SaveCategoryUseCase {
       category = await this.repository.findById(accountId, id);
 
       category.change(name, description, templateIds);
-    } catch (e) {
-      const categoryWithSameName = await this.repository.searchByName(
-        accountId,
-        name
-      );
+    } catch (err) {
+      if (err instanceof CategoryNotFoundError) {
+        const categoryWithSameName = await this.repository.searchByName(
+          accountId,
+          name
+        );
 
-      if (categoryWithSameName) {
-        throw new CategoryWithSameNameAlreadyExistsError(accountId, name);
+        if (categoryWithSameName) {
+          throw new CategoryWithSameNameAlreadyExistsError(accountId, name);
+        }
+
+        category = Category.create(
+          accountId,
+          id,
+          name,
+          description,
+          templateIds
+        );
+      } else {
+        throw err;
       }
-
-      category = Category.create(accountId, id, name, description, templateIds);
     }
 
     await this.repository.save(category);

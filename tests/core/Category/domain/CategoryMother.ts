@@ -41,6 +41,16 @@ export class CategoryMother {
     );
   }
 
+  static withName(name: CategoryName): Category {
+    return this.create(
+      AccountIdMother.random(),
+      CategoryIdMother.random(),
+      name,
+      CategoryDescriptionMother.random(),
+      TemplateIdMother.randomArray()
+    );
+  }
+
   // Si se necesita una category con account probablemente se esté tesetando integracion con DB
   // por lo que NO se crean las templateIds random
   static withAccount(accountId: AccountId): Category {

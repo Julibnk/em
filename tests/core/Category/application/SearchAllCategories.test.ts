@@ -21,7 +21,7 @@ describe('SearchAllCategories use case', () => {
       accountId.value
     );
 
-    repository.assertSearchAllHasBeenCalledWith(accountId);
+    expect(repository.mockSearchAll).toHaveBeenCalledWith(accountId);
     expect(expexctedCategories).toEqual(categories);
   });
 });
