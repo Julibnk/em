@@ -21,8 +21,6 @@ describe('SaveCategory use case', () => {
     category = CategoryMother.random();
   });
 
-  //TODO Refactorizar como en Template
-
   describe('#New category', () => {
     it('Should create a category', async () => {
       const useCaseParams = fillUseCaseParams(category);
