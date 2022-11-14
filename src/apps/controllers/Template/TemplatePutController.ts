@@ -36,7 +36,7 @@ export class TemplatePutController implements Controller {
     } catch (err) {
       if (err instanceof DomainError) {
         this.logger.error(err);
-        res.status(httpStatus.BAD_REQUEST).json(err.message);
+        res.status(httpStatus.BAD_REQUEST).json({ message: err.message });
       } else {
         throw err;
       }

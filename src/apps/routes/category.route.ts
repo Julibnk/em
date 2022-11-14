@@ -14,16 +14,20 @@ const putPostSchema = [
   body('description').optional().isString(),
   body('templates').optional().isArray(),
 ];
+const getSchema = [param('id').exists().isString()];
+
+const categoryPutController = container.get<Controller>(
+  DIController.categoryPut
+);
+
+const searchAllCategoriesController = container.get<Controller>(
+  DIController.searchAllCategories
+);
+const categoryGetController = container.get<Controller>(
+  DIController.categoryGet
+);
 
 export const register = (router: Router) => {
-  const categoryPutController = container.get<Controller>(
-    DIController.categoryPut
-  );
-
-  const searchAllCategoriesController = container.get<Controller>(
-    DIController.searchAllCategories
-  );
-
   router.put(
     '/category/:id',
     putPostSchema,
@@ -31,7 +35,14 @@ export const register = (router: Router) => {
     async (req: Request, res: Response) => categoryPutController.run(req, res)
   );
 
-  router.get('/category/searchAll', (req: Request, res: Response) =>
+  router.get('/category', (req: Request, res: Response) =>
     searchAllCategoriesController.run(req, res)
+  );
+
+  router.get(
+    '/category/:id',
+    getSchema,
+    validateReqSchema,
+    (req: Request, res: Response) => categoryGetController.run(req, res)
   );
 };

@@ -18,6 +18,8 @@ const putPostSchema = [
   body('variable3').optional().isString(),
 ];
 
+const getSchema = [param('id').exists().isString()];
+
 export const register = (router: Router) => {
   const templatePutController = container.get<Controller>(
     DIController.templatePut
@@ -25,6 +27,9 @@ export const register = (router: Router) => {
 
   const templateSeachAllController = container.get<Controller>(
     DIController.searchAllTemplates
+  );
+  const templateGetController = container.get<Controller>(
+    DIController.templateGet
   );
 
   router.put(
@@ -34,7 +39,14 @@ export const register = (router: Router) => {
     (req: Request, res: Response) => templatePutController.run(req, res)
   );
 
-  router.get('/template/searchAll', (req: Request, res: Response) =>
+  router.get('/template', (req: Request, res: Response) =>
     templateSeachAllController.run(req, res)
+  );
+
+  router.get(
+    '/template/:id',
+    getSchema,
+    validateReqSchema,
+    (req: Request, res: Response) => templateGetController.run(req, res)
   );
 };

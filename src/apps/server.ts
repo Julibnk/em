@@ -42,7 +42,9 @@ export class Server {
         this.logger.error(err);
 
         if (err instanceof DomainError) {
-          res.status(httpStatus.INTERNAL_SERVER_ERROR).json(err.message);
+          res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({ message: err.message });
         }
 
         res.status(httpStatus.INTERNAL_SERVER_ERROR).send();

@@ -1,7 +1,3 @@
-// import { FindCategoryUseCase } from '../../../../src/core/Category/application/FindCategory';
-// import { Category } from '../../../../src/core/Category/domain/Category';
-// import { CategoryMother } from '../domain/CategoryMother';
-// import { CategoryRepositoryMock } from '../__mocks__/CategoryRepositoryMock';
 import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
 import { FindTemplateUseCase } from '../../../../src/core/Template/application/FindTemplate';
 import { Template } from '../../../../src/core/Template/domain/Template';
