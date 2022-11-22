@@ -87,7 +87,7 @@ describe('Template repository', () => {
       await repository.save(template);
 
       const templateExpected = await repository.searchByName(
-        account.id,
+        template.accountId,
         template.name
       );
 
@@ -111,7 +111,7 @@ describe('Template repository', () => {
       await repository.save(template);
 
       const templateExpected = await repository.findById(
-        account.id,
+        template.accountId,
         template.id
       );
 

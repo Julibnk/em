@@ -29,4 +29,14 @@ export class ContactMother {
       PhoneMother.random()
     );
   }
+
+  static withAccount(accountId: AccountId): Contact {
+    return this.create(
+      accountId,
+      ContactIdMother.random(),
+      ContactNameMother.random(),
+      ContactLastNameMother.random(),
+      PhoneMother.random()
+    );
+  }
 }

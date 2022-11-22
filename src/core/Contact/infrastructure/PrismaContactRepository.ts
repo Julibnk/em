@@ -48,7 +48,7 @@ export class PrismaContactRepository
       },
       update: {
         name: contact.name.value,
-        surname: contact.surname.value,
+        lastName: contact.lastName.value,
         prefix: contact.phone.prefix.value,
         number: contact.phone.number.value,
       },
@@ -56,7 +56,7 @@ export class PrismaContactRepository
         accountId: contact.accountId.value,
         id: contact.id.value,
         name: contact.name.value,
-        surname: contact.surname.value,
+        lastName: contact.lastName.value,
         prefix: contact.phone.prefix.value,
         number: contact.phone.number.value,
       },
@@ -95,7 +95,7 @@ export class PrismaContactRepository
       accountId: prismaEntity.accountId,
       id: prismaEntity.id,
       name: prismaEntity.name,
-      surname: prismaEntity.surname || '',
+      lastName: prismaEntity.lastName || '',
       prefix: prismaEntity.prefix,
       number: prismaEntity.number,
     });
