@@ -1,7 +1,4 @@
-import {
-  SaveTemplateUseCase,
-  Params,
-} from '../../../../src/core/Template/application/SaveTemplate';
+import { SaveTemplateUseCase } from '../../../../src/core/Template/application/SaveTemplate';
 import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
 import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Template/domain/exceptions/TemplateWithSameNameAlreadyExistsError';
@@ -40,7 +37,7 @@ describe('SaveTemplate use case', () => {
         TemplateVariableMother.random()
       );
 
-      const useCaseParams = fillUseCaseParams(template);
+      const useCaseParams = { ...template.toPrimitives() };
 
       await saveTemplateUseCase.run(useCaseParams);
       expect(repository.mockSave).toHaveBeenCalledWith(template);
@@ -50,22 +47,18 @@ describe('SaveTemplate use case', () => {
     it('Should throw an exception if variables are inconsistent', async () => {
       expect.assertions(2);
 
-      const useCaseParams = fillUseCaseParams(template);
+      const useCaseParams = { ...template.toPrimitives() };
       useCaseParams.variable1 = '';
 
-      try {
-        await saveTemplateUseCase.run(useCaseParams);
-      } catch (error) {
-        expect(error).toBeInstanceOf(InconsistentTemplateVariableError);
-      }
+      expect(
+        async () => await saveTemplateUseCase.run(useCaseParams)
+      ).rejects.toThrow(InconsistentTemplateVariableError);
 
       useCaseParams.variable2 = '';
 
-      try {
-        await saveTemplateUseCase.run(useCaseParams);
-      } catch (error) {
-        expect(error).toBeInstanceOf(InconsistentTemplateVariableError);
-      }
+      expect(
+        async () => await saveTemplateUseCase.run(useCaseParams)
+      ).rejects.toThrow(InconsistentTemplateVariableError);
     });
   });
 
@@ -75,7 +68,7 @@ describe('SaveTemplate use case', () => {
     });
 
     it('Should create a template', async () => {
-      const useCaseParams = fillUseCaseParams(template);
+      const useCaseParams = { ...template.toPrimitives() };
 
       await saveTemplateUseCase.run(useCaseParams);
       expect(repository.mockSave).toHaveBeenCalledWith(template);
@@ -88,47 +81,29 @@ describe('SaveTemplate use case', () => {
 
       expect.assertions(1);
 
-      const useCaseParams = fillUseCaseParams(template);
-      try {
-        await saveTemplateUseCase.run(useCaseParams);
-      } catch (error) {
-        expect(error).toBeInstanceOf(TemplateWithSameNameAlreadyExistsError);
-      }
+      const useCaseParams = { ...template.toPrimitives() };
+
+      expect(
+        async () => await saveTemplateUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateWithSameNameAlreadyExistsError);
     });
 
     it('Should throw an exception if variables are inconsistent', async () => {
       expect.assertions(2);
 
-      const useCaseParams = fillUseCaseParams(template);
+      const useCaseParams = { ...template.toPrimitives() };
 
       useCaseParams.variable1 = '';
 
-      try {
-        await saveTemplateUseCase.run(useCaseParams);
-      } catch (error) {
-        expect(error).toBeInstanceOf(InconsistentTemplateVariableError);
-      }
+      expect(
+        async () => await saveTemplateUseCase.run(useCaseParams)
+      ).rejects.toThrow(InconsistentTemplateVariableError);
 
       useCaseParams.variable2 = '';
 
-      try {
-        await saveTemplateUseCase.run(useCaseParams);
-      } catch (error) {
-        expect(error).toBeInstanceOf(InconsistentTemplateVariableError);
-      }
+      expect(
+        async () => await saveTemplateUseCase.run(useCaseParams)
+      ).rejects.toThrow(InconsistentTemplateVariableError);
     });
   });
 });
-
-const fillUseCaseParams = (template: Template): Params => {
-  return {
-    accountId: template.accountId.value,
-    id: template.id.value,
-    name: template.name.value,
-    shortDescription: template.shortDescription.value,
-    preview: template.preview.value,
-    variable1: template.variable1.value,
-    variable2: template.variable2.value,
-    variable3: template.variable3.value,
-  };
-};
