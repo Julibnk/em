@@ -6,7 +6,6 @@ import { injectable } from 'inversify';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { ContactId } from '../domain/value-object/ContactId';
 import { Contact as PrismaContact } from '@prisma/client';
-import { ContactNotFoundError } from '../domain/exceptions/ContactNotFoundError';
 import { ContactPersistenceError } from '../domain/exceptions/ContactPersistenceError';
 import { Nullable } from '../../Shared/domain/Nullable';
 
@@ -19,7 +18,10 @@ export class PrismaContactRepository
     super();
   }
 
-  async findById(accountId: AccountId, id: ContactId): Promise<Contact> {
+  async findById(
+    accountId: AccountId,
+    id: ContactId
+  ): Promise<Nullable<Contact>> {
     const query = {
       where: {
         accountId_id: {
@@ -32,10 +34,22 @@ export class PrismaContactRepository
     const prismaContact = await this.client.contact.findUnique(query);
 
     if (!prismaContact) {
-      throw new ContactNotFoundError(id);
+      return null;
     }
 
     return this.mapPrismaEntityToDomainEntity(prismaContact);
+  }
+
+  async searchAll(accountId: AccountId): Promise<Array<Contact>> {
+    const query = {
+      where: { accountId: accountId.value },
+    };
+
+    const prismaContacts = await this.client.contact.findMany(query);
+
+    return prismaContacts.map((prismaContact) =>
+      this.mapPrismaEntityToDomainEntity(prismaContact)
+    );
   }
 
   async save(contact: Contact): Promise<void> {
@@ -69,7 +83,7 @@ export class PrismaContactRepository
     }
   }
 
-  async searchByPhone(
+  async findByPhone(
     accountId: AccountId,
     phone: Phone
   ): Promise<Nullable<Contact>> {

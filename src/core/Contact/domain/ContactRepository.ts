@@ -6,6 +6,7 @@ import { ContactId } from './value-object/ContactId';
 
 export interface ContactRepository {
   save(contact: Contact): Promise<void>;
-  findById(accountId: AccountId, id: ContactId): Promise<Contact>;
-  searchByPhone(accountId: AccountId, phone: Phone): Promise<Nullable<Contact>>;
+  searchAll(accountId: AccountId): Promise<Array<Contact>>;
+  findById(accountId: AccountId, id: ContactId): Promise<Nullable<Contact>>;
+  findByPhone(accountId: AccountId, phone: Phone): Promise<Nullable<Contact>>;
 }
