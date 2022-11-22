@@ -1,7 +1,4 @@
-import {
-  SaveCategoryUseCase,
-  Params,
-} from '../../../../src/core/Category/application/SaveCategory';
+import { SaveCategoryUseCase } from '../../../../src/core/Category/application/SaveCategory';
 import { CategoryRepositoryMock } from '../__mocks__/CategoryRepositoryMock';
 import { CategoryMother } from '../domain/CategoryMother';
 import { CategoryWithSameNameAlreadyExistsError } from '../../../../src/core/Category/domain/exceptions/CategoryWithSameNameAlreadyExistsError';
@@ -23,7 +20,7 @@ describe('SaveCategory use case', () => {
 
   describe('#New category', () => {
     it('Should create a category', async () => {
-      const useCaseParams = fillUseCaseParams(category);
+      const useCaseParams = { ...category.toPrimitives() };
 
       await saveCategoryUseCase.run(useCaseParams);
       expect(repository.mockSave).toHaveBeenCalledWith(category);
@@ -34,13 +31,11 @@ describe('SaveCategory use case', () => {
       const categoryWithSameName = CategoryMother.withName(category.name);
       repository.returnFindByName(categoryWithSameName);
 
-      const useCaseParams = fillUseCaseParams(category);
+      const useCaseParams = { ...category.toPrimitives() };
 
-      try {
-        await saveCategoryUseCase.run(useCaseParams);
-      } catch (error) {
-        expect(error).toBeInstanceOf(CategoryWithSameNameAlreadyExistsError);
-      }
+      expect(
+        async () => await saveCategoryUseCase.run(useCaseParams)
+      ).rejects.toThrow(CategoryWithSameNameAlreadyExistsError);
     });
   });
 
@@ -57,7 +52,7 @@ describe('SaveCategory use case', () => {
         [TemplateIdMother.random(), TemplateIdMother.random()]
       );
 
-      const useCaseParams = fillUseCaseParams(category);
+      const useCaseParams = { ...category.toPrimitives() };
 
       await saveCategoryUseCase.run(useCaseParams);
 
@@ -66,13 +61,3 @@ describe('SaveCategory use case', () => {
     });
   });
 });
-
-const fillUseCaseParams = (category: Category): Params => {
-  return {
-    accountId: category.accountId.value,
-    id: category.id.value,
-    name: category.name.value,
-    description: category.description.value,
-    templateIds: category.templateIds.map((id) => id.value),
-  };
-};
