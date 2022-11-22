@@ -40,7 +40,7 @@ export class TemplateRepositoryMock implements TemplateRepository {
     this.mockFindById(accountId, id);
 
     if (!this.templateById) {
-      throw new TemplateNotFoundError(accountId, id);
+      throw new TemplateNotFoundError(id);
     }
 
     return this.templateById;

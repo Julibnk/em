@@ -69,7 +69,7 @@ export class PrismaTemplateRepository
     const prismaTemplate = await this.client.template.findUnique(query);
 
     if (!prismaTemplate) {
-      throw new TemplateNotFoundError(accountId, id);
+      throw new TemplateNotFoundError(id);
     }
 
     return this.mapPrismaEntityToDomainEntity(prismaTemplate);

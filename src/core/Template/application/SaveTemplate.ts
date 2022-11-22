@@ -61,7 +61,7 @@ export class SaveTemplateUseCase {
         );
 
         if (templateWithSameName) {
-          throw new TemplateWithSameNameAlreadyExistsError(accountId, name);
+          throw new TemplateWithSameNameAlreadyExistsError(name);
         }
 
         template = Template.create(

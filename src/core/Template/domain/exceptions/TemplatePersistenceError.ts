@@ -3,8 +3,6 @@ import { DomainError } from '../../../Shared/domain/DomainError';
 
 export class TemplatePersistenceError extends DomainError {
   constructor(template: Template) {
-    super(
-      `Template ${template.id} for account ${template.accountId} could not be saved`
-    );
+    super(`Template ${template.name} could not be saved`);
   }
 }
