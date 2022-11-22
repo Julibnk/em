@@ -1,17 +1,16 @@
 import { inject, injectable } from 'inversify';
 import { DIDomain } from '../../Shared/dependency-injection';
 import { ContactRepository } from '../domain/ContactRepository';
-// import { Phone } from '../../Shared/domain/value-object/Phone';
-// import { PhonePrefix } from '../../Shared/domain/value-object/PhonePrefix';
-// import { PhoneNumber } from '../../Shared/domain/value-object/PhoneNumber';
-// import { AccountId } from '../../Account/domain/value-object/AccountId';
-// import { ContactId } from '../domain/value-object/ContactId';
-// import { PhonePrefix } from '../../Shared/domain/Phone/PhonePrefix';
-// import { PhoneNumber } from '../../Shared/domain/Phone/PhoneNumber';
-// import { Phone } from '../../Shared/domain/Phone/Phone';
-// import { ContactLastName } from '../domain/value-object/ContactLastName';
-// import { ContactName } from '../domain/value-object/ContactName';
-// import { ContactNotFoundError } from '../domain/exceptions/ContactNotFoundError';
+import { AccountId } from '../../Account/domain/value-object/AccountId';
+import { ContactId } from '../domain/value-object/ContactId';
+import { PhonePrefix } from '../../Shared/domain/Phone/PhonePrefix';
+import { PhoneNumber } from '../../Shared/domain/Phone/PhoneNumber';
+import { Phone } from '../../Shared/domain/Phone/Phone';
+import { ContactLastName } from '../domain/value-object/ContactLastName';
+import { ContactName } from '../domain/value-object/ContactName';
+import { ContactNotFoundError } from '../domain/exceptions/ContactNotFoundError';
+import { Contact } from '../domain/Contact';
+import { InconsistentContactError } from '../domain/exceptions/InconsistentContactError';
 
 export type Params = {
   accountId: string;
@@ -29,43 +28,26 @@ export class SaveContactUseCase {
   ) {}
 
   async run(params: Params) {
-    // const accountId = new AccountId(params.accountId);
-    // const id = new ContactId(params.id);
-    // const name = new ContactName(params.name);
-    // const lastName = new ContactLastName(params.lastName);
-    // const phone = new Phone(
-    //   new PhonePrefix(params.prefix),
-    //   new PhoneNumber(params.number)
-    // );
-    // try {
-    //   const contact = await this.repository.findByPhone(accountId, phone);
-    //   contact.change(name, lastName);
-    // } catch (error) {
-    //   if (error instanceof ContactNotFoundError) {
-    //     const templateWithSameName = await this.repository.searchByName(
-    //       accountId,
-    //       name
-    //     );
-    //     if (templateWithSameName) {
-    //       throw new TemplateWithSameNameAlreadyExistsError(name);
-    //     }
-    //     template = Template.create(
-    //       accountId,
-    //       id,
-    //       name,
-    //       shortDescription,
-    //       preview,
-    //       variable1,
-    //       variable2,
-    //       variable3
-    //     );
-    //   } else {
-    //     throw error;
-    //   }
-    // }
-    // this.repository.save(template);
-    // if (contact) {
-    //   throw new Error('Contact already exists');
-    // }
+    const accountId = new AccountId(params.accountId);
+    const id = new ContactId(params.id);
+    const name = new ContactName(params.name);
+    const lastName = new ContactLastName(params.lastName);
+    const phone = new Phone(
+      new PhonePrefix(params.prefix),
+      new PhoneNumber(params.number)
+    );
+
+    let contact = await this.repository.findByPhone(accountId, phone);
+
+    if (contact) {
+      if (contact.id.value !== id.value) {
+        throw new InconsistentContactError(contact);
+      }
+
+      contact.change(name, lastName);
+    } else {
+      contact = Contact.create(accountId, id, name, lastName, phone);
+    }
+    this.repository.save(contact);
   }
 }
