@@ -11,7 +11,7 @@ export type Params = {
   accountId: string;
   id: string;
   name: string;
-  surname: string;
+  lastName: string;
   prefix?: string;
   number: string;
 };

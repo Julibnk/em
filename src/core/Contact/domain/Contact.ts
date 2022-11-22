@@ -3,7 +3,7 @@ import { Primitives } from '../../Shared/domain/Primitives';
 import { Phone } from '../../Shared/domain/Phone/Phone';
 import { ContactId } from './value-object/ContactId';
 import { ContactName } from './value-object/ContactName';
-import { ContactSurname } from './value-object/ContactSurname';
+import { ContactLastName } from './value-object/ContactLastName';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 
 type PhonePrimitives = Primitives<Phone>;
@@ -14,7 +14,7 @@ export class Contact extends AggregateRoot {
     readonly accountId: AccountId,
     readonly id: ContactId,
     private _name: ContactName,
-    private _surname: ContactSurname,
+    private _lastName: ContactLastName,
     readonly phone: Phone
   ) {
     super();
@@ -23,13 +23,13 @@ export class Contact extends AggregateRoot {
   public get name(): ContactName {
     return this._name;
   }
-  public get surname(): ContactSurname {
-    return this._surname;
+  public get lastName(): ContactLastName {
+    return this._lastName;
   }
 
-  change(name: ContactName, surname: ContactSurname): void {
+  change(name: ContactName, surname: ContactLastName): void {
     this._name = name;
-    this._surname = surname;
+    this._lastName = surname;
   }
 
   static fromPrimitives(plainData: ContactPrimitives): Contact {
@@ -37,7 +37,7 @@ export class Contact extends AggregateRoot {
       new AccountId(plainData.accountId),
       new ContactId(plainData.id),
       new ContactName(plainData.name),
-      new ContactSurname(plainData.surname),
+      new ContactLastName(plainData.lastName),
       Phone.fromPrimitives(plainData.prefix, plainData.number)
     );
   }
@@ -46,10 +46,10 @@ export class Contact extends AggregateRoot {
     accountId: AccountId,
     id: ContactId,
     name: ContactName,
-    surname: ContactSurname,
+    lastName: ContactLastName,
     phone: Phone
   ): Contact {
-    return new Contact(accountId, id, name, surname, phone);
+    return new Contact(accountId, id, name, lastName, phone);
   }
 
   toPrimitives(): ContactPrimitives {
@@ -57,7 +57,7 @@ export class Contact extends AggregateRoot {
       accountId: this.accountId.value,
       id: this.id.value,
       name: this.name.value,
-      surname: this.surname.value,
+      lastName: this.lastName.value,
       prefix: this.phone.prefix.value,
       number: this.phone.number.value,
     };
