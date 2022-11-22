@@ -7,7 +7,7 @@ import { CategoryName } from '../../../../src/core/Category/domain/value-object/
 
 export class CategoryRepositoryMock implements CategoryRepository {
   mockSearchAll = jest.fn();
-  mockSearchByName = jest.fn();
+  mockFindByName = jest.fn();
   mockSave = jest.fn();
   mockFindById = jest.fn();
 
@@ -50,7 +50,7 @@ export class CategoryRepositoryMock implements CategoryRepository {
     accountId: AccountId,
     name: CategoryName
   ): Promise<Nullable<Category>> {
-    this.mockSearchByName(accountId, name);
+    this.mockFindByName(accountId, name);
     return this.categoryByName;
   }
 }
