@@ -50,7 +50,7 @@ export class SaveCategoryUseCase {
         );
 
         if (categoryWithSameName) {
-          throw new CategoryWithSameNameAlreadyExistsError(accountId, name);
+          throw new CategoryWithSameNameAlreadyExistsError(name);
         }
 
         category = Category.create(

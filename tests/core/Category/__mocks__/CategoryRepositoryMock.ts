@@ -42,7 +42,7 @@ export class CategoryRepositoryMock implements CategoryRepository {
     this.mockFindById(accountId, id);
 
     if (!this.catgoryById) {
-      throw new CategoryNotFoundError(accountId, id);
+      throw new CategoryNotFoundError(id);
     }
     return this.catgoryById;
   }
@@ -54,16 +54,4 @@ export class CategoryRepositoryMock implements CategoryRepository {
     this.mockSearchByName(accountId, name);
     return this.categoryByName;
   }
-
-  // assertSaveHasBeenCalledWith(category: Category): void {
-  //   expect(this.mockSave).toHaveBeenCalledWith(category);
-  // }
-
-  // assertSaveHasNotBeenCalledWith(category: Category): void {
-  //   expect(this.mockSave).not.toHaveBeenCalledWith(category);
-  // }
-
-  // assertSearchAllHasBeenCalledWith(accountId: AccountId): void {
-  //   expect(this.mockSearchAll).toHaveBeenCalledWith(accountId);
-  // }
 }

@@ -73,7 +73,7 @@ export class PrismaCategoryRepository
     const category = await this.client.category.findUnique(query);
 
     if (!category) {
-      throw new CategoryNotFoundError(accountId, id);
+      throw new CategoryNotFoundError(id);
     }
 
     return this.mapPrismaEntityToDomainEntity(category);

@@ -3,8 +3,6 @@ import { Category } from '../Category';
 
 export class CategoryPersistenceError extends DomainError {
   constructor(category: Category) {
-    super(
-      `Category ${category.id} for account ${category.accountId} could not be saved`
-    );
+    super(`Category ${category.name}  could not be saved`);
   }
 }
