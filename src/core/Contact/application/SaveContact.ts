@@ -8,7 +8,6 @@ import { PhoneNumber } from '../../Shared/domain/Phone/PhoneNumber';
 import { Phone } from '../../Shared/domain/Phone/Phone';
 import { ContactLastName } from '../domain/value-object/ContactLastName';
 import { ContactName } from '../domain/value-object/ContactName';
-import { ContactNotFoundError } from '../domain/exceptions/ContactNotFoundError';
 import { Contact } from '../domain/Contact';
 import { InconsistentContactError } from '../domain/exceptions/InconsistentContactError';
 
