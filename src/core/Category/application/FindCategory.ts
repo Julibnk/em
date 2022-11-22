@@ -5,7 +5,6 @@ import { Category } from '../domain/Category';
 import { CategoryRepository } from '../domain/CategoryRepository';
 import { CategoryNotFoundError } from '../domain/exceptions/CategoryNotFoundError';
 import { CategoryId } from '../domain/value-object/CategoryId';
-import { TemplateNotFoundError } from '../../Template/domain/exceptions/TemplateNotFoundError';
 
 @injectable()
 export class FindCategoryUseCase {
