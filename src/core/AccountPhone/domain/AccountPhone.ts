@@ -1,40 +1,36 @@
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
-// import { Phone } from '../../Shared/domain/Phone/Phone';
 import { Primitives } from '../../Shared/domain/Primitives';
-import { Disabled } from '../../Shared/domain/value-object/Disabled';
-import { PhoneNumber } from '../../Shared/domain/value-object/PhoneNumber';
-import { PhonePrefix } from '../../Shared/domain/value-object/PhonePrefix';
+import { Phone } from '../../Shared/domain/value-object/Phone';
 import { PhoneId } from './value-object/PhoneId';
+
+type PhonePrimitives = Primitives<Phone>;
+type AccountPhonePrimitives = Omit<Primitives<AccountPhone>, 'phone'> &
+  PhonePrimitives;
 
 export class AccountPhone extends AggregateRoot {
   constructor(
     readonly accountId: AccountId,
     readonly id: PhoneId,
-    readonly number: PhoneNumber,
-    readonly prefix: PhonePrefix,
-    readonly disabled: Disabled
+    readonly phone: Phone
   ) {
     super();
   }
 
-  static fromPrimitives(plainData: Primitives<AccountPhone>): AccountPhone {
+  static fromPrimitives(plainData: AccountPhonePrimitives): AccountPhone {
     return new AccountPhone(
       new AccountId(plainData.accountId),
       new PhoneId(plainData.id),
-      new PhoneNumber(plainData.number),
-      new PhonePrefix(plainData.prefix),
-      new Disabled(plainData.disabled)
+      Phone.fromPrimitives(plainData.prefix, plainData.number)
     );
   }
 
-  toPrimitives(): Primitives<AccountPhone> {
+  toPrimitives(): Primitives<AccountPhonePrimitives> {
     return {
       accountId: this.accountId.value,
       id: this.id.value,
-      number: this.number.value,
-      prefix: this.prefix.value,
-      disabled: this.disabled.value,
+      prefix: this.phone.prefix.value,
+      number: this.phone.number.value,
     };
   }
 }
