@@ -84,7 +84,7 @@ describe('SaveTemplate use case', () => {
     it('Should throw an exception if template with same name exists', async () => {
       //Given a template with same name already exists
       const templateWithSameName = TemplateMother.withName(template.name);
-      repository.returnSearchByName(templateWithSameName);
+      repository.returnFindByName(templateWithSameName);
 
       expect.assertions(1);
 

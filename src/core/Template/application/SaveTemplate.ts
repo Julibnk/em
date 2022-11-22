@@ -55,7 +55,7 @@ export class SaveTemplateUseCase {
       );
     } catch (error) {
       if (error instanceof TemplateNotFoundError) {
-        const templateWithSameName = await this.repository.searchByName(
+        const templateWithSameName = await this.repository.findByName(
           accountId,
           name
         );

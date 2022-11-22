@@ -86,7 +86,7 @@ describe('Template repository', () => {
 
       await repository.save(template);
 
-      const templateExpected = await repository.searchByName(
+      const templateExpected = await repository.findByName(
         template.accountId,
         template.name
       );
@@ -95,7 +95,7 @@ describe('Template repository', () => {
     });
 
     it('Should return null if template doesn´t exist', async () => {
-      const nullTemplate = await repository.searchByName(
+      const nullTemplate = await repository.findByName(
         AccountIdMother.random(),
         TemplateNameMother.random()
       );

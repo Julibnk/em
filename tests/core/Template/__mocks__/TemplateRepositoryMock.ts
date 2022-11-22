@@ -7,7 +7,7 @@ import { TemplateId } from '../../../../src/core/Template/domain/value-object/Te
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
 
 export class TemplateRepositoryMock implements TemplateRepository {
-  mockSearchByName = jest.fn();
+  mockFindByName = jest.fn();
   mockFindById = jest.fn();
   mockSave = jest.fn();
   mockSearchAll = jest.fn();
@@ -16,7 +16,7 @@ export class TemplateRepositoryMock implements TemplateRepository {
   private templateByName: Nullable<Template> = null;
   private templateById?: Template;
 
-  returnSearchByName(template: Template): void {
+  returnFindByName(template: Template): void {
     this.templateByName = template;
   }
 
@@ -28,11 +28,11 @@ export class TemplateRepositoryMock implements TemplateRepository {
     this.templateById = template;
   }
 
-  async searchByName(
+  async findByName(
     accountId: AccountId,
     name: TemplateName
   ): Promise<Nullable<Template>> {
-    this.mockSearchByName(accountId, name);
+    this.mockFindByName(accountId, name);
     return this.templateByName;
   }
 

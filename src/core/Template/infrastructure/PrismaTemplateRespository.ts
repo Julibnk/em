@@ -87,7 +87,7 @@ export class PrismaTemplateRepository
     );
   }
 
-  async searchByName(
+  async findByName(
     accountId: AccountId,
     name: TemplateName
   ): Promise<Nullable<Template>> {

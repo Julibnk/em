@@ -9,7 +9,7 @@ export interface TemplateRepository {
 
   searchAll(accountId: AccountId): Promise<Array<Template>>;
 
-  searchByName(
+  findByName(
     accountId: AccountId,
     name: TemplateName
   ): Promise<Nullable<Template>>;
