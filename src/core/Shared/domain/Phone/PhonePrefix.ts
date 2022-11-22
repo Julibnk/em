@@ -1,4 +1,4 @@
-import { StringValueObject } from './StringValueObject';
+import { StringValueObject } from '../value-object/StringValueObject';
 
 const DEFAULT_PREFIX = '+34';
 export class PhonePrefix extends StringValueObject {

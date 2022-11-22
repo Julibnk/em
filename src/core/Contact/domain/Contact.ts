@@ -1,6 +1,6 @@
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { Primitives } from '../../Shared/domain/Primitives';
-import { Phone } from '../../Shared/domain/value-object/Phone';
+import { Phone } from '../../Shared/domain/Phone/Phone';
 import { ContactId } from './value-object/ContactId';
 import { ContactName } from './value-object/ContactName';
 import { ContactSurname } from './value-object/ContactSurname';
@@ -13,11 +13,23 @@ export class Contact extends AggregateRoot {
   constructor(
     readonly accountId: AccountId,
     readonly id: ContactId,
-    readonly name: ContactName,
-    readonly surname: ContactSurname,
+    private _name: ContactName,
+    private _surname: ContactSurname,
     readonly phone: Phone
   ) {
     super();
+  }
+
+  public get name(): ContactName {
+    return this._name;
+  }
+  public get surname(): ContactSurname {
+    return this._surname;
+  }
+
+  change(name: ContactName, surname: ContactSurname): void {
+    this._name = name;
+    this._surname = surname;
   }
 
   static fromPrimitives(plainData: ContactPrimitives): Contact {
@@ -28,6 +40,16 @@ export class Contact extends AggregateRoot {
       new ContactSurname(plainData.surname),
       Phone.fromPrimitives(plainData.prefix, plainData.number)
     );
+  }
+
+  static create(
+    accountId: AccountId,
+    id: ContactId,
+    name: ContactName,
+    surname: ContactSurname,
+    phone: Phone
+  ): Contact {
+    return new Contact(accountId, id, name, surname, phone);
   }
 
   toPrimitives(): ContactPrimitives {

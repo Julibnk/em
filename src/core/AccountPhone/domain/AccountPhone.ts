@@ -1,7 +1,7 @@
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { Primitives } from '../../Shared/domain/Primitives';
-import { Phone } from '../../Shared/domain/value-object/Phone';
+import { Phone } from '../../Shared/domain/Phone/Phone';
 import { PhoneId } from './value-object/PhoneId';
 
 type PhonePrimitives = Primitives<Phone>;

@@ -23,7 +23,7 @@ const enviroment = container.get<TestEnvironmentManager>(
 
 let account: Account;
 
-describe.only('CategoryRepository', () => {
+describe('CategoryRepository', () => {
   beforeEach(async () => {
     await enviroment.truncate();
     account = await enviroment.createAccount();

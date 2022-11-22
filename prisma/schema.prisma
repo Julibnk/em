@@ -79,9 +79,10 @@ model Contact {
   id        String @db.Uuid
 
   // Main fields
-  name        String
-  prefix      String
-  phoneNumber String
+  name    String
+  surname String?
+  prefix  String
+  number  String
 
   // Generic fields
   createdAt DateTime @default(now())
