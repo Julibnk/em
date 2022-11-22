@@ -41,13 +41,10 @@ describe('AccountRepository', () => {
       expect(accountFound).toEqual(account);
     });
 
-    it('Should throw error when inexistent account', async () => {
-      try {
-        const accountId = AccountId.random();
-        await accountRepository.findById(accountId);
-      } catch (error) {
-        expect(error).toBeInstanceOf(AccountNotFoundError);
-      }
+    it('Should return null when inexistent account', async () => {
+      const accountId = AccountId.random();
+      const expectedAccount = await accountRepository.findById(accountId);
+      expect(expectedAccount).toBeNull();
     });
   });
 });

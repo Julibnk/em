@@ -2,10 +2,10 @@ import { AccountRepository } from '../domain/AccountRepository';
 import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
 import { Account } from '../domain/Account';
 import { AccountId } from '../domain/value-object/AccountId';
-import { AccountNotFoundError } from '../domain/exceptions/AccountNotFoundError';
 
 import { Account as PrismaAccount } from '@prisma/client';
 import { injectable } from 'inversify';
+import { Nullable } from '../../Shared/domain/Nullable';
 
 @injectable()
 export class PrismaAccountRepository
@@ -40,7 +40,7 @@ export class PrismaAccountRepository
     });
   }
 
-  async findById(id: AccountId): Promise<Account> {
+  async findById(id: AccountId): Promise<Nullable<Account>> {
     const prismaAccount = await this.client.account.findUnique({
       where: {
         id: id.value,
@@ -48,7 +48,7 @@ export class PrismaAccountRepository
     });
 
     if (!prismaAccount) {
-      throw new AccountNotFoundError(id);
+      return null;
     }
 
     return this.mapPrismaEntityToDomainEntity(prismaAccount);
