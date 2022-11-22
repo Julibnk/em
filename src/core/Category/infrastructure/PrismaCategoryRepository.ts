@@ -6,7 +6,6 @@ import {
   Template as PrismaTemplate,
 } from '@prisma/client';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { CategoryNotFoundError } from '../domain/exceptions/CategoryNotFoundError';
 import { CategoryId } from '../domain/value-object/CategoryId';
 import { CategoryPersistenceError } from '../domain/exceptions/CategoryPersistenceError';
 import { Nullable } from '../../Shared/domain/Nullable';
@@ -57,7 +56,10 @@ export class PrismaCategoryRepository
     }
   }
 
-  async findById(accountId: AccountId, id: CategoryId): Promise<Category> {
+  async findById(
+    accountId: AccountId,
+    id: CategoryId
+  ): Promise<Nullable<Category>> {
     const query = {
       where: {
         accountId_id: {
@@ -73,7 +75,7 @@ export class PrismaCategoryRepository
     const category = await this.client.category.findUnique(query);
 
     if (!category) {
-      throw new CategoryNotFoundError(id);
+      return null;
     }
 
     return this.mapPrismaEntityToDomainEntity(category);
@@ -94,7 +96,7 @@ export class PrismaCategoryRepository
     );
   }
 
-  async searchByName(
+  async findByName(
     accountId: AccountId,
     name: CategoryName
   ): Promise<Nullable<Category>> {

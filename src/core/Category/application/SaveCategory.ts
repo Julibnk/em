@@ -1,16 +1,13 @@
 import { inject, injectable } from 'inversify';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-// import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { DIDomain } from '../../Shared/dependency-injection';
 import { TemplateId } from '../../Template/domain/value-object/TemplateId';
 import { Category } from '../domain/Category';
-// import { Category } from '../domain/Category';
 import { CategoryRepository } from '../domain/CategoryRepository';
 import { CategoryId } from '../domain/value-object/CategoryId';
 import { CategoryName } from '../domain/value-object/CategoryName';
 import { CategoryDescription } from '../domain/value-object/CategoryDescription';
 import { CategoryWithSameNameAlreadyExistsError } from '../domain/exceptions/CategoryWithSameNameAlreadyExistsError';
-import { CategoryNotFoundError } from '../domain/exceptions/CategoryNotFoundError';
 
 export type Params = {
   accountId: string;
@@ -28,8 +25,6 @@ export class SaveCategoryUseCase {
   ) {}
 
   async run(params: Params): Promise<void> {
-    let category: Category;
-
     const accountId = new AccountId(params.accountId);
     const id = new CategoryId(params.id);
     const name = new CategoryName(params.name);
@@ -38,31 +33,21 @@ export class SaveCategoryUseCase {
       (templateId) => new TemplateId(templateId)
     );
 
-    try {
-      category = await this.repository.findById(accountId, id);
+    let category = await this.repository.findById(accountId, id);
 
+    if (category) {
       category.change(name, description, templateIds);
-    } catch (err) {
-      if (err instanceof CategoryNotFoundError) {
-        const categoryWithSameName = await this.repository.searchByName(
-          accountId,
-          name
-        );
+    } else {
+      const categoryWithSameName = await this.repository.findByName(
+        accountId,
+        name
+      );
 
-        if (categoryWithSameName) {
-          throw new CategoryWithSameNameAlreadyExistsError(name);
-        }
-
-        category = Category.create(
-          accountId,
-          id,
-          name,
-          description,
-          templateIds
-        );
-      } else {
-        throw err;
+      if (categoryWithSameName) {
+        throw new CategoryWithSameNameAlreadyExistsError(name);
       }
+
+      category = Category.create(accountId, id, name, description, templateIds);
     }
 
     await this.repository.save(category);

@@ -4,14 +4,14 @@ import { ContactRepository } from '../domain/ContactRepository';
 // import { Phone } from '../../Shared/domain/value-object/Phone';
 // import { PhonePrefix } from '../../Shared/domain/value-object/PhonePrefix';
 // import { PhoneNumber } from '../../Shared/domain/value-object/PhoneNumber';
-import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { ContactId } from '../domain/value-object/ContactId';
-import { PhonePrefix } from '../../Shared/domain/Phone/PhonePrefix';
-import { PhoneNumber } from '../../Shared/domain/Phone/PhoneNumber';
-import { Phone } from '../../Shared/domain/Phone/Phone';
-import { ContactLastName } from '../domain/value-object/ContactLastName';
-import { ContactName } from '../domain/value-object/ContactName';
-import { ContactNotFoundError } from '../domain/exceptions/ContactNotFoundError';
+// import { AccountId } from '../../Account/domain/value-object/AccountId';
+// import { ContactId } from '../domain/value-object/ContactId';
+// import { PhonePrefix } from '../../Shared/domain/Phone/PhonePrefix';
+// import { PhoneNumber } from '../../Shared/domain/Phone/PhoneNumber';
+// import { Phone } from '../../Shared/domain/Phone/Phone';
+// import { ContactLastName } from '../domain/value-object/ContactLastName';
+// import { ContactName } from '../domain/value-object/ContactName';
+// import { ContactNotFoundError } from '../domain/exceptions/ContactNotFoundError';
 
 export type Params = {
   accountId: string;

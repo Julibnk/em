@@ -32,7 +32,7 @@ describe('SaveCategory use case', () => {
     it('Should throw an exception if category with same name exists', async () => {
       expect.assertions(1);
       const categoryWithSameName = CategoryMother.withName(category.name);
-      repository.returnSearchByName(categoryWithSameName);
+      repository.returnFindByName(categoryWithSameName);
 
       const useCaseParams = fillUseCaseParams(category);
 
@@ -46,7 +46,6 @@ describe('SaveCategory use case', () => {
 
   describe('#Update category', () => {
     it('Should update category if already exists', async () => {
-      // const category = CategoryMother.random();
       repository.returnFindById(category);
 
       //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas

@@ -1,5 +1,4 @@
 import { AccountRepository } from '../../../src/core/Account/domain/AccountRepository';
-import { AccountNotFoundError } from '../../../src/core/Account/domain/exceptions/AccountNotFoundError';
 import { AccountId } from '../../../src/core/Account/domain/value-object/AccountId';
 import {
   container,
