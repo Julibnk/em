@@ -5,7 +5,6 @@ import { injectable } from 'inversify';
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { PrismaRepository } from '../../Shared/infrastructure/PrismaRepository';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { TemplateNotFoundError } from '../domain/exceptions/TemplateNotFoundError';
 import { Nullable } from '../../Shared/domain/Nullable';
 import { TemplateName } from '../domain/value-object/TemplateName';
 import { TemplatePersistenceError } from '../domain/exceptions/TemplatePersistenceError';
@@ -56,7 +55,10 @@ export class PrismaTemplateRepository
     }
   }
 
-  async findById(accountId: AccountId, id: TemplateId): Promise<Template> {
+  async findById(
+    accountId: AccountId,
+    id: TemplateId
+  ): Promise<Nullable<Template>> {
     const query = {
       where: {
         accountId_id: {
@@ -69,7 +71,7 @@ export class PrismaTemplateRepository
     const prismaTemplate = await this.client.template.findUnique(query);
 
     if (!prismaTemplate) {
-      throw new TemplateNotFoundError(id);
+      return null;
     }
 
     return this.mapPrismaEntityToDomainEntity(prismaTemplate);

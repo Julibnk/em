@@ -14,5 +14,5 @@ export interface TemplateRepository {
     name: TemplateName
   ): Promise<Nullable<Template>>;
 
-  findById(accountId: AccountId, id: TemplateId): Promise<Template>;
+  findById(accountId: AccountId, id: TemplateId): Promise<Nullable<Template>>;
 }

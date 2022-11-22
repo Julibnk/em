@@ -5,7 +5,6 @@ import {
 import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
 import { TemplateMother } from '../domain/TemplateMother';
-import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
 import { Template } from '../../../../src/core/Template/domain/Template';
 import { TemplateNameMother } from '../domain/TemplateNameMother';
 import { AccountIdMother } from '../../Account/domain/AccountIdMother';
@@ -80,7 +79,7 @@ describe('Template repository', () => {
     });
   });
 
-  describe('#searchByName', () => {
+  describe('#findByName', () => {
     it('Should find template by its name', async () => {
       const template = TemplateMother.withAccount(account.id);
 
@@ -118,10 +117,12 @@ describe('Template repository', () => {
       expect(templateExpected).toEqual(template);
     });
 
-    it('Should throw error when template does not exist', async () => {
-      expect(async () => {
-        await repository.findById(account.id, TemplateIdMother.random());
-      }).rejects.toThrow(TemplateNotFoundError);
+    it('Should return null when template does not exist', async () => {
+      const expected = await repository.findById(
+        account.id,
+        TemplateIdMother.random()
+      );
+      expect(expected).toBeNull();
     });
   });
 });

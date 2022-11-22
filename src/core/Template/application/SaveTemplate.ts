@@ -9,7 +9,6 @@ import { TemplateVariable } from '../domain/value-object/TemplateVariable';
 import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
-import { TemplateNotFoundError } from '../domain/exceptions/TemplateNotFoundError';
 
 export type Params = {
   accountId: string;
@@ -30,8 +29,6 @@ export class SaveTemplateUseCase {
   ) {}
 
   async run(params: Params): Promise<void> {
-    let template: Template;
-
     const accountId = new AccountId(params.accountId);
     const id = new TemplateId(params.id);
     const name = new TemplateName(params.name);
@@ -43,9 +40,9 @@ export class SaveTemplateUseCase {
     const variable2 = new TemplateVariable(params.variable2);
     const variable3 = new TemplateVariable(params.variable3);
 
-    try {
-      template = await this.repository.findById(accountId, id);
+    let template = await this.repository.findById(accountId, id);
 
+    if (template) {
       template.change(
         shortDescription,
         preview,
@@ -53,30 +50,26 @@ export class SaveTemplateUseCase {
         variable2,
         variable3
       );
-    } catch (error) {
-      if (error instanceof TemplateNotFoundError) {
-        const templateWithSameName = await this.repository.findByName(
-          accountId,
-          name
-        );
+    } else {
+      const templateWithSameName = await this.repository.findByName(
+        accountId,
+        name
+      );
 
-        if (templateWithSameName) {
-          throw new TemplateWithSameNameAlreadyExistsError(name);
-        }
-
-        template = Template.create(
-          accountId,
-          id,
-          name,
-          shortDescription,
-          preview,
-          variable1,
-          variable2,
-          variable3
-        );
-      } else {
-        throw error;
+      if (templateWithSameName) {
+        throw new TemplateWithSameNameAlreadyExistsError(name);
       }
+
+      template = Template.create(
+        accountId,
+        id,
+        name,
+        shortDescription,
+        preview,
+        variable1,
+        variable2,
+        variable3
+      );
     }
 
     this.repository.save(template);
