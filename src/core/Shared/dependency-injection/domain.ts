@@ -11,6 +11,8 @@ import WinstonLogger from '../infrastructure/WinstonLogger';
 import Logger from '../domain/Logger';
 import { PrismaContactRepository } from '../../Contact/infrastructure/PrismaContactRepository';
 import { ContactRepository } from '../../Contact/domain/ContactRepository';
+import { AccountPhoneRepository } from '../../AccountPhone/domain/AccountPhoneRepository';
+import { PrismaAccountPhoneRepository } from '../../AccountPhone/infrastructure/PrismaAccontPhoneRepository';
 
 export const enum DiRepository {
   account = 'core.account.repository',
@@ -32,6 +34,9 @@ export const domainContainerModule = new ContainerModule((bind) => {
   bind<TemplateRepository>(DiRepository.template).to(PrismaTemplateRepository);
   bind<CategoryRepository>(DiRepository.category).to(PrismaCategoryRepository);
   bind<ContactRepository>(DiRepository.contact).to(PrismaContactRepository);
+  bind<AccountPhoneRepository>(DiRepository.accountPhone).to(
+    PrismaAccountPhoneRepository
+  );
 
   bind<TestEnvironmentManager>(DiDomain.environmentManager).to(
     PrismaTestEnvironmentManager

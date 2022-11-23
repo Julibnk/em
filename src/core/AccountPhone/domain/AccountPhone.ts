@@ -2,7 +2,7 @@ import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
 import { Primitives } from '../../Shared/domain/Primitives';
 import { Phone } from '../../Shared/domain/Phone/Phone';
-import { PhoneId } from './value-object/PhoneId';
+import { AccountPhoneId } from './value-object/AccountPhoneId';
 
 type PhonePrimitives = Primitives<Phone>;
 type AccountPhonePrimitives = Omit<Primitives<AccountPhone>, 'phone'> &
@@ -11,16 +11,24 @@ type AccountPhonePrimitives = Omit<Primitives<AccountPhone>, 'phone'> &
 export class AccountPhone extends AggregateRoot {
   constructor(
     readonly accountId: AccountId,
-    readonly id: PhoneId,
+    readonly id: AccountPhoneId,
     readonly phone: Phone
   ) {
     super();
   }
 
+  static create(
+    accountId: AccountId,
+    id: AccountPhoneId,
+    phone: Phone
+  ): AccountPhone {
+    return new AccountPhone(accountId, id, phone);
+  }
+
   static fromPrimitives(plainData: AccountPhonePrimitives): AccountPhone {
     return new AccountPhone(
       new AccountId(plainData.accountId),
-      new PhoneId(plainData.id),
+      new AccountPhoneId(plainData.id),
       Phone.fromPrimitives(plainData.prefix, plainData.number)
     );
   }

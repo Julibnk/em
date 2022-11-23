@@ -182,9 +182,9 @@ model AccountPhone {
   id        String @db.Uuid
 
   // Main fields
-  prefix      String
-  phoneNumber String
-  disabled    Boolean @default(false)
+  prefix   String
+  number   String
+  disabled Boolean @default(false)
 
   // Generic fields
   createdAt DateTime @default(now())
