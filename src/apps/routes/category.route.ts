@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Controller } from '../controllers/Controller';
 import {
   container,
-  DIController,
+  DiController,
 } from '../../core/Shared/dependency-injection';
 
 import { body, param } from 'express-validator';
@@ -17,14 +17,14 @@ const putPostSchema = [
 const getSchema = [param('id').exists().isString()];
 
 const categoryPutController = container.get<Controller>(
-  DIController.categoryPut
+  DiController.categoryPut
 );
 
 const searchAllCategoriesController = container.get<Controller>(
-  DIController.searchAllCategories
+  DiController.searchAllCategories
 );
 const categoryGetController = container.get<Controller>(
-  DIController.categoryGet
+  DiController.categoryGet
 );
 
 export const register = (router: Router) => {

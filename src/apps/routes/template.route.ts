@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { Controller } from '../controllers/Controller';
 import {
   container,
-  DIController,
+  DiController,
 } from '../../core/Shared/dependency-injection';
 
 import { body, param } from 'express-validator';
@@ -22,14 +22,14 @@ const getSchema = [param('id').exists().isString()];
 
 export const register = (router: Router) => {
   const templatePutController = container.get<Controller>(
-    DIController.templatePut
+    DiController.templatePut
   );
 
   const templateSeachAllController = container.get<Controller>(
-    DIController.searchAllTemplates
+    DiController.searchAllTemplates
   );
   const templateGetController = container.get<Controller>(
-    DIController.templateGet
+    DiController.templateGet
   );
 
   router.put(

@@ -1,7 +1,8 @@
 import { ContactRepository } from '../../../../src/core/Contact/domain/ContactRepository';
 import {
   container,
-  DIDomain,
+  DiDomain,
+  DiRepository,
 } from '../../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { ContactMother } from '../domain/ContactMother';
@@ -15,9 +16,9 @@ import { Contact } from '../../../../src/core/Contact/domain/Contact';
 let account: Account;
 
 const enviromentManager = container.get<TestEnvironmentManager>(
-  DIDomain.environmentManager
+  DiDomain.environmentManager
 );
-const repository = container.get<ContactRepository>(DIDomain.contact);
+const repository = container.get<ContactRepository>(DiRepository.contact);
 
 describe('ContactRepository', () => {
   beforeEach(async () => {

@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { DIDomain } from '../../Shared/dependency-injection';
+import { DiRepository } from '../../Shared/dependency-injection';
 import { TemplateId } from '../../Template/domain/value-object/TemplateId';
 import { Category } from '../domain/Category';
 import { CategoryRepository } from '../domain/CategoryRepository';
@@ -20,7 +20,7 @@ export type Params = {
 @injectable()
 export class SaveCategoryUseCase {
   constructor(
-    @inject(DIDomain.category)
+    @inject(DiRepository.category)
     private repository: CategoryRepository
   ) {}
 

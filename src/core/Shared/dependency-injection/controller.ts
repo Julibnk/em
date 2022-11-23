@@ -7,7 +7,7 @@ import { SearchAllCategoriesController } from '../../../apps/controllers/Categor
 import { CategoryGetController } from '../../../apps/controllers/Category/CategoryGetController';
 import { TemplateGetController } from '../../../apps/controllers/Template/TemplateGetController';
 
-export const enum DIController {
+export const enum DiController {
   templatePut = 'app.template.putController',
   templateGet = 'app.template.getController',
   searchAllTemplates = 'app.template.searchAllController',
@@ -18,15 +18,15 @@ export const enum DIController {
 }
 
 export const controllerContainerModule = new ContainerModule((bind) => {
-  bind<Controller>(DIController.templatePut).to(TemplatePutController);
-  bind<Controller>(DIController.templateGet).to(TemplateGetController);
-  bind<Controller>(DIController.searchAllTemplates).to(
+  bind<Controller>(DiController.templatePut).to(TemplatePutController);
+  bind<Controller>(DiController.templateGet).to(TemplateGetController);
+  bind<Controller>(DiController.searchAllTemplates).to(
     SearchAllTemplatesController
   );
 
-  bind<Controller>(DIController.categoryPut).to(CategoryPutController);
-  bind<Controller>(DIController.categoryGet).to(CategoryGetController);
-  bind<Controller>(DIController.searchAllCategories).to(
+  bind<Controller>(DiController.categoryPut).to(CategoryPutController);
+  bind<Controller>(DiController.categoryGet).to(CategoryGetController);
+  bind<Controller>(DiController.searchAllCategories).to(
     SearchAllCategoriesController
   );
 });

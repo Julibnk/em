@@ -2,8 +2,8 @@ import 'reflect-metadata';
 
 import { Container } from 'inversify';
 
-import { DIDomain, domainContainerModule } from './domain';
-import { DIController, controllerContainerModule } from './controller';
+import { DiDomain, DiRepository, domainContainerModule } from './domain';
+import { DiController, controllerContainerModule } from './controller';
 import { applicationContainerModule } from './application';
 
 const container = new Container();
@@ -14,4 +14,4 @@ container.load(
   applicationContainerModule
 );
 
-export { container, DIDomain, DIController };
+export { container, DiDomain, DiRepository, DiController };

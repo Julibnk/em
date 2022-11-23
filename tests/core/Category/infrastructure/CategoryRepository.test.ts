@@ -1,6 +1,7 @@
 import {
   container,
-  DIDomain,
+  DiDomain,
+  DiRepository,
 } from '../../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { CategoryRepository } from '../../../../src/core/Category/domain/CategoryRepository';
@@ -14,10 +15,12 @@ import { TemplateIdMother } from '../../Template/domain/TemplateIdMother';
 import { TemplateMother } from '../../Template/domain/TemplateMother';
 import { CategoryNameMother } from '../domain/CategoryNameMother';
 
-const repository = container.get<CategoryRepository>(DIDomain.category);
-const templateRepository = container.get<TemplateRepository>(DIDomain.template);
+const repository = container.get<CategoryRepository>(DiRepository.category);
+const templateRepository = container.get<TemplateRepository>(
+  DiRepository.template
+);
 const enviroment = container.get<TestEnvironmentManager>(
-  DIDomain.environmentManager
+  DiDomain.environmentManager
 );
 
 let account: Account;

@@ -1,7 +1,7 @@
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { Template } from '../domain/Template';
 import { inject, injectable } from 'inversify';
-import { DIDomain } from '../../Shared/dependency-injection';
+import { DiRepository } from '../../Shared/dependency-injection';
 import { TemplateId } from '../domain/value-object/TemplateId';
 import { TemplateName } from '../domain/value-object/TemplateName';
 import { TemplateShortDescription } from '../domain/value-object/TemplateShortDescription';
@@ -24,7 +24,7 @@ export type Params = {
 @injectable()
 export class SaveTemplateUseCase {
   constructor(
-    @inject(DIDomain.template)
+    @inject(DiRepository.template)
     private repository: TemplateRepository
   ) {}
 

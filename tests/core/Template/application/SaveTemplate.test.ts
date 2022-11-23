@@ -18,7 +18,7 @@ describe('SaveTemplate use case', () => {
     saveTemplateUseCase = new SaveTemplateUseCase(repository);
   });
 
-  describe('#Existant template', () => {
+  describe('#Update template', () => {
     beforeEach(() => {
       // Given a template already exists
       template = TemplateMother.random();
@@ -62,7 +62,7 @@ describe('SaveTemplate use case', () => {
     });
   });
 
-  describe('#Create new template', () => {
+  describe('#Create template', () => {
     beforeEach(() => {
       template = TemplateMother.initialState();
     });

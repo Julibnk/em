@@ -39,4 +39,14 @@ export class ContactMother {
       PhoneMother.random()
     );
   }
+
+  static makeCopy(contact: Contact): Contact {
+    return this.create(
+      contact.accountId,
+      contact.id,
+      contact.name,
+      contact.lastName,
+      contact.phone
+    );
+  }
 }

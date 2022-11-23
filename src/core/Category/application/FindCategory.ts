@@ -1,6 +1,6 @@
 import { inject, injectable } from 'inversify';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { DIDomain } from '../../Shared/dependency-injection';
+import { DiRepository } from '../../Shared/dependency-injection';
 import { Category } from '../domain/Category';
 import { CategoryRepository } from '../domain/CategoryRepository';
 import { CategoryNotFoundError } from '../domain/exceptions/CategoryNotFoundError';
@@ -9,7 +9,8 @@ import { CategoryId } from '../domain/value-object/CategoryId';
 @injectable()
 export class FindCategoryUseCase {
   constructor(
-    @inject(DIDomain.category) private readonly repository: CategoryRepository
+    @inject(DiRepository.category)
+    private readonly repository: CategoryRepository
   ) {}
 
   async run(accountId: string, id: string): Promise<Category> {

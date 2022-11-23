@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { DIDomain } from '../../Shared/dependency-injection';
+import { DiRepository } from '../../Shared/dependency-injection';
 import { ContactRepository } from '../domain/ContactRepository';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { ContactId } from '../domain/value-object/ContactId';
@@ -23,7 +23,7 @@ export type Params = {
 @injectable()
 export class SaveContactUseCase {
   constructor(
-    @inject(DIDomain.contact) private repository: ContactRepository
+    @inject(DiRepository.contact) private repository: ContactRepository
   ) {}
 
   async run(params: Params) {

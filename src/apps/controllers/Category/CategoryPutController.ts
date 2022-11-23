@@ -7,7 +7,7 @@ import {
   Params as UseCaseParams,
 } from '../../../core/Category/application/SaveCategory';
 import { Controller } from '../Controller';
-import { DIDomain } from '../../../core/Shared/dependency-injection';
+import { DiDomain } from '../../../core/Shared/dependency-injection';
 import Logger from '../../../core/Shared/domain/Logger';
 import { DomainError } from '../../../core/Shared/domain/DomainError';
 
@@ -16,7 +16,7 @@ export class CategoryPutController implements Controller {
   constructor(
     @inject(SaveCategoryUseCase)
     private saveCategoryUseCase: SaveCategoryUseCase,
-    @inject(DIDomain.logger) private logger: Logger
+    @inject(DiDomain.logger) private logger: Logger
   ) {}
 
   async run(req: Request, res: Response) {

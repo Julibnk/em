@@ -12,7 +12,7 @@ import Logger from '../domain/Logger';
 import { PrismaContactRepository } from '../../Contact/infrastructure/PrismaContactRepository';
 import { ContactRepository } from '../../Contact/domain/ContactRepository';
 
-export const enum DIDomain {
+export const enum DiRepository {
   account = 'core.account.repository',
   accountPhone = 'core.accountPhone.repository',
   category = 'core.category.repository',
@@ -20,20 +20,22 @@ export const enum DIDomain {
   template = 'core.template.repository',
   message = 'core.message.repository',
   user = 'core.user.repository',
+}
 
+export const enum DiDomain {
   environmentManager = 'core.enviromentManager',
   logger = 'core.logger',
 }
 
 export const domainContainerModule = new ContainerModule((bind) => {
-  bind<AccountRepository>(DIDomain.account).to(PrismaAccountRepository);
-  bind<TemplateRepository>(DIDomain.template).to(PrismaTemplateRepository);
-  bind<CategoryRepository>(DIDomain.category).to(PrismaCategoryRepository);
-  bind<ContactRepository>(DIDomain.contact).to(PrismaContactRepository);
+  bind<AccountRepository>(DiRepository.account).to(PrismaAccountRepository);
+  bind<TemplateRepository>(DiRepository.template).to(PrismaTemplateRepository);
+  bind<CategoryRepository>(DiRepository.category).to(PrismaCategoryRepository);
+  bind<ContactRepository>(DiRepository.contact).to(PrismaContactRepository);
 
-  bind<TestEnvironmentManager>(DIDomain.environmentManager).to(
+  bind<TestEnvironmentManager>(DiDomain.environmentManager).to(
     PrismaTestEnvironmentManager
   );
 
-  bind<Logger>(DIDomain.logger).to(WinstonLogger);
+  bind<Logger>(DiDomain.logger).to(WinstonLogger);
 });

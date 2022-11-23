@@ -7,7 +7,7 @@ import {
 } from '../../../core/Template/application/SaveTemplate';
 import { inject, injectable } from 'inversify';
 import { DomainError } from '../../../core/Shared/domain/DomainError';
-import { DIDomain } from '../../../core/Shared/dependency-injection';
+import { DiDomain } from '../../../core/Shared/dependency-injection';
 import Logger from '../../../core/Shared/domain/Logger';
 
 @injectable()
@@ -15,7 +15,7 @@ export class TemplatePutController implements Controller {
   constructor(
     @inject(SaveTemplateUseCase)
     private saveTemplateUseCase: SaveTemplateUseCase,
-    @inject(DIDomain.logger) private logger: Logger
+    @inject(DiDomain.logger) private logger: Logger
   ) {}
 
   async run(req: Request, res: Response): Promise<void> {

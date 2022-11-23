@@ -8,7 +8,7 @@ import * as http from 'http';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
 import Logger from '../core/Shared/domain/Logger';
-import { container, DIDomain } from '../core/Shared/dependency-injection';
+import { container, DiDomain } from '../core/Shared/dependency-injection';
 import { DomainError } from '../core/Shared/domain/DomainError';
 
 export class Server {
@@ -20,7 +20,7 @@ export class Server {
   constructor(port: string) {
     this.port = port;
     this.express = express();
-    this.logger = container.get<Logger>(DIDomain.logger);
+    this.logger = container.get<Logger>(DiDomain.logger);
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(helmet.xssFilter());

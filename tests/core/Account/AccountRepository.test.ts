@@ -2,15 +2,18 @@ import { AccountRepository } from '../../../src/core/Account/domain/AccountRepos
 import { AccountId } from '../../../src/core/Account/domain/value-object/AccountId';
 import {
   container,
-  DIDomain,
+  DiDomain,
+  DiRepository,
 } from '../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../Shared/infrastructure/TestEnvironmentManager';
 import { AccountMother } from './domain/AccountMother';
 
 const environmentManager = container.get<TestEnvironmentManager>(
-  DIDomain.environmentManager
+  DiDomain.environmentManager
 );
-const accountRepository = container.get<AccountRepository>(DIDomain.account);
+const accountRepository = container.get<AccountRepository>(
+  DiRepository.account
+);
 
 describe('AccountRepository', () => {
   beforeEach(async () => {
