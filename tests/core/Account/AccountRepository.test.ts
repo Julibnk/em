@@ -24,7 +24,7 @@ describe('AccountRepository', () => {
     await environmentManager.truncate();
   });
 
-  describe('save', () => {
+  describe('=> save', () => {
     it('Should save an account', async () => {
       const account = AccountMother.random();
 
@@ -32,7 +32,7 @@ describe('AccountRepository', () => {
     });
   });
 
-  describe('findById', () => {
+  describe('=> findById', () => {
     it('Should find existent account', async () => {
       const account = AccountMother.random();
 

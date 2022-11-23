@@ -30,7 +30,7 @@ describe('Template repository', () => {
     await enviromentManager.truncate();
   });
 
-  describe('#save', () => {
+  describe('=> save', () => {
     it('Should save a template', async () => {
       const template = TemplateMother.withAccount(account.id);
       await repository.save(template);
@@ -44,7 +44,7 @@ describe('Template repository', () => {
     });
   });
 
-  describe('#searchAll', () => {
+  describe('=> searchAll', () => {
     it('Should return all templates', async () => {
       const templates = [
         TemplateMother.withAccount(account.id),
@@ -80,7 +80,7 @@ describe('Template repository', () => {
     });
   });
 
-  describe('#findByName', () => {
+  describe('=> findByName', () => {
     it('Should find template by its name', async () => {
       const template = TemplateMother.withAccount(account.id);
 
@@ -104,7 +104,7 @@ describe('Template repository', () => {
     });
   });
 
-  describe('#findById', () => {
+  describe('=> findById', () => {
     it('Should find template by its ID', async () => {
       const template = TemplateMother.withAccount(account.id);
 

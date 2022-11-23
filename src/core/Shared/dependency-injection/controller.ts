@@ -6,6 +6,8 @@ import { CategoryPutController } from '../../../apps/controllers/Category/Catego
 import { SearchAllCategoriesController } from '../../../apps/controllers/Category/SearchAllCategoriesController';
 import { CategoryGetController } from '../../../apps/controllers/Category/CategoryGetController';
 import { TemplateGetController } from '../../../apps/controllers/Template/TemplateGetController';
+import { ContactPutController } from '../../../apps/controllers/Contact/ContactPutController';
+import { SearchAllContactsController } from '../../../apps/controllers/Contact/SearchAllContactsController';
 
 export const enum DiController {
   templatePut = 'app.template.putController',
@@ -37,9 +39,9 @@ export const categoryControllerModule = new ContainerModule((bind) => {
   );
 });
 export const contactControllerModule = new ContainerModule((bind) => {
-  bind<Controller>(DiController.categoryPut).to(CategoryPutController);
+  bind<Controller>(DiController.contactPut).to(ContactPutController);
   // bind<Controller>(DiController.categoryGet).to(CategoryGetController);
-  bind<Controller>(DiController.searchAllCategories).to(
-    SearchAllCategoriesController
+  bind<Controller>(DiController.searchAllContacts).to(
+    SearchAllContactsController
   );
 });

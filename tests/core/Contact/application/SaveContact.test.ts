@@ -4,8 +4,7 @@ import { ContactMother } from '../domain/ContactMother';
 import { Contact } from '../../../../src/core/Contact/domain/Contact';
 import { ContactLastNameMother } from '../domain/ContactLastNameMother';
 import { ContactNameMother } from '../domain/ContactNameMother';
-import { ContactIdMother } from '../domain/ContactIdMother';
-import { InconsistentContactError } from '../../../../src/core/Contact/domain/exceptions/InconsistentContactError';
+import { SamePhoneContactExistsError } from '../../../../src/core/Contact/domain/exceptions/SamePhoneContactExistsError';
 
 let repository: ContactRepositoryMock;
 let saveContactUseCase: SaveContactUseCase;
@@ -18,7 +17,7 @@ describe('SaveContact use case', () => {
     contact = ContactMother.random();
   });
 
-  describe('#Create contact', () => {
+  describe('=> Create contact', () => {
     it('should create new contact if doesnt exists', async () => {
       const useCaseParams = { ...contact.toPrimitives() };
       await saveContactUseCase.run(useCaseParams);
@@ -26,32 +25,29 @@ describe('SaveContact use case', () => {
     });
   });
 
-  describe('#Update contact', () => {
-    beforeEach(() => {
-      repository.returnFindByPhone(contact);
-    });
-
+  describe('=> Update contact', () => {
     it('should update contact if already exists', async () => {
       const originalContact = ContactMother.makeCopy(contact);
+      repository.returnFindById(originalContact);
+
       contact.change(
         ContactNameMother.random(),
         ContactLastNameMother.random()
       );
 
       const useCaseParams = { ...contact.toPrimitives() };
-
       await saveContactUseCase.run(useCaseParams);
+
       expect(repository.mockSave).toHaveBeenCalledWith(contact);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalContact);
     });
 
-    it('should throw exception for contact with same phone but different id', async () => {
+    it('should throw exception If same phone contact exists', async () => {
+      repository.returnFindByPhone(contact);
       const useCaseParams = { ...contact.toPrimitives() };
-      useCaseParams.id = ContactIdMother.random().value;
-
       expect(
         async () => await saveContactUseCase.run(useCaseParams)
-      ).rejects.toThrow(InconsistentContactError);
+      ).rejects.toThrow(SamePhoneContactExistsError);
     });
   });
 });

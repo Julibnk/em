@@ -9,7 +9,7 @@ import { Phone } from '../../Shared/domain/Phone/Phone';
 import { ContactLastName } from '../domain/value-object/ContactLastName';
 import { ContactName } from '../domain/value-object/ContactName';
 import { Contact } from '../domain/Contact';
-import { InconsistentContactError } from '../domain/exceptions/InconsistentContactError';
+import { SamePhoneContactExistsError } from '../domain/exceptions/SamePhoneContactExistsError';
 
 export type Params = {
   accountId: string;
@@ -36,15 +36,20 @@ export class SaveContactUseCase {
       new PhoneNumber(params.number)
     );
 
-    let contact = await this.repository.findByPhone(accountId, phone);
+    let contact = await this.repository.findById(accountId, id);
 
     if (contact) {
-      if (contact.id.value !== id.value) {
-        throw new InconsistentContactError(contact);
+      // contact.change(name, lastName);
+    } else {
+      const samePhoneContact = await this.repository.findByPhone(
+        accountId,
+        phone
+      );
+
+      if (samePhoneContact) {
+        throw new SamePhoneContactExistsError(phone);
       }
 
-      contact.change(name, lastName);
-    } else {
       contact = Contact.create(accountId, id, name, lastName, phone);
     }
     this.repository.save(contact);

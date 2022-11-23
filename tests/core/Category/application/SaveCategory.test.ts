@@ -18,7 +18,7 @@ describe('SaveCategory use case', () => {
     category = CategoryMother.random();
   });
 
-  describe('#New category', () => {
+  describe('=> New category', () => {
     it('Should create a category', async () => {
       const useCaseParams = { ...category.toPrimitives() };
 
@@ -39,12 +39,12 @@ describe('SaveCategory use case', () => {
     });
   });
 
-  describe('#Update category', () => {
+  describe('=> Update category', () => {
     it('Should update category if already exists', async () => {
-      repository.returnFindById(category);
-
       //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
       const originalCategory = CategoryMother.makeCopy(category);
+
+      repository.returnFindById(originalCategory);
 
       category.change(
         CategoryNameMother.random(),

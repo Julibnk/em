@@ -18,16 +18,16 @@ describe('SaveTemplate use case', () => {
     saveTemplateUseCase = new SaveTemplateUseCase(repository);
   });
 
-  describe('#Update template', () => {
+  describe('=> Update template', () => {
     beforeEach(() => {
       // Given a template already exists
       template = TemplateMother.random();
-      repository.returnFindById(template);
     });
 
     it('Should update template if already exists', async () => {
       //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
       const originalTemplate = TemplateMother.makeCopy(template);
+      repository.returnFindById(originalTemplate);
       // template.change(newDes, newPrev, newVar1, newVar2, newVar3);
       template.change(
         TemplateShortDescriptionMother.random(),
@@ -45,7 +45,7 @@ describe('SaveTemplate use case', () => {
     });
 
     it('Should throw an exception if variables are inconsistent', async () => {
-      expect.assertions(2);
+      repository.returnFindById(template);
 
       const useCaseParams = { ...template.toPrimitives() };
       useCaseParams.variable1 = '';
@@ -62,7 +62,7 @@ describe('SaveTemplate use case', () => {
     });
   });
 
-  describe('#Create template', () => {
+  describe('=> Create template', () => {
     beforeEach(() => {
       template = TemplateMother.initialState();
     });
@@ -89,8 +89,6 @@ describe('SaveTemplate use case', () => {
     });
 
     it('Should throw an exception if variables are inconsistent', async () => {
-      expect.assertions(2);
-
       const useCaseParams = { ...template.toPrimitives() };
 
       useCaseParams.variable1 = '';

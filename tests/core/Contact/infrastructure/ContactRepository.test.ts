@@ -30,7 +30,7 @@ describe('ContactRepository', () => {
     await enviromentManager.truncate();
   });
 
-  describe('#save', () => {
+  describe('=> save', () => {
     it('Should save a contact', async () => {
       const contact = ContactMother.withAccount(account.id);
       await repository.save(contact);
@@ -44,7 +44,7 @@ describe('ContactRepository', () => {
     });
   });
 
-  describe('#searchAll', () => {
+  describe('=> searchAll', () => {
     it('Should return all contacts', async () => {
       const contacts = [
         ContactMother.withAccount(account.id),
@@ -80,7 +80,7 @@ describe('ContactRepository', () => {
     });
   });
 
-  describe('#findById', () => {
+  describe('=> findById', () => {
     it('Should find contact by its ID', async () => {
       const contact = ContactMother.withAccount(account.id);
 
@@ -103,7 +103,7 @@ describe('ContactRepository', () => {
     });
   });
 
-  describe('#findByPone', () => {
+  describe('=> findByPone', () => {
     it('Should find contact by its phone', async () => {
       const contact = ContactMother.withAccount(account.id);
 
