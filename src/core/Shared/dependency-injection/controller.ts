@@ -15,17 +15,30 @@ export const enum DiController {
   categoryPut = 'app.category.putController',
   categoryGet = 'app.category.getController',
   searchAllCategories = 'app.category.searchAllController',
+
+  contactPut = 'app.contact.putController',
+  // categoryGet = 'app.category.getController',
+  searchAllContacts = 'app.contact.searchAllController',
 }
 
-export const controllerContainerModule = new ContainerModule((bind) => {
+export const templateControllerModule = new ContainerModule((bind) => {
   bind<Controller>(DiController.templatePut).to(TemplatePutController);
   bind<Controller>(DiController.templateGet).to(TemplateGetController);
   bind<Controller>(DiController.searchAllTemplates).to(
     SearchAllTemplatesController
   );
+});
 
+export const categoryControllerModule = new ContainerModule((bind) => {
   bind<Controller>(DiController.categoryPut).to(CategoryPutController);
   bind<Controller>(DiController.categoryGet).to(CategoryGetController);
+  bind<Controller>(DiController.searchAllCategories).to(
+    SearchAllCategoriesController
+  );
+});
+export const contactControllerModule = new ContainerModule((bind) => {
+  bind<Controller>(DiController.categoryPut).to(CategoryPutController);
+  // bind<Controller>(DiController.categoryGet).to(CategoryGetController);
   bind<Controller>(DiController.searchAllCategories).to(
     SearchAllCategoriesController
   );
