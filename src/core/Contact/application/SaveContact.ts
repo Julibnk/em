@@ -39,7 +39,7 @@ export class SaveContactUseCase {
     let contact = await this.repository.findById(accountId, id);
 
     if (contact) {
-      // contact.change(name, lastName);
+      contact.change(name, lastName);
     } else {
       const samePhoneContact = await this.repository.findByPhone(
         accountId,

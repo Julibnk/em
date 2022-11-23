@@ -26,10 +26,12 @@ describe('SaveTemplate use case', () => {
 
     it('Should update template if already exists', async () => {
       //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
+      repository.returnFindById(template);
+
       const originalTemplate = TemplateMother.makeCopy(template);
-      repository.returnFindById(originalTemplate);
+      const changedTemplate = TemplateMother.makeCopy(template);
       // template.change(newDes, newPrev, newVar1, newVar2, newVar3);
-      template.change(
+      changedTemplate.change(
         TemplateShortDescriptionMother.random(),
         TemplatePreviewMother.random(),
         TemplateVariableMother.random(),
@@ -37,10 +39,10 @@ describe('SaveTemplate use case', () => {
         TemplateVariableMother.random()
       );
 
-      const useCaseParams = { ...template.toPrimitives() };
+      const useCaseParams = { ...changedTemplate.toPrimitives() };
 
       await saveTemplateUseCase.run(useCaseParams);
-      expect(repository.mockSave).toHaveBeenCalledWith(template);
+      expect(repository.mockSave).toHaveBeenCalledWith(changedTemplate);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalTemplate);
     });
 

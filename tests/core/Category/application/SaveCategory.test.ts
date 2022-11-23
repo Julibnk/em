@@ -42,21 +42,22 @@ describe('SaveCategory use case', () => {
   describe('=> Update category', () => {
     it('Should update category if already exists', async () => {
       //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
+      repository.returnFindById(category);
+
       const originalCategory = CategoryMother.makeCopy(category);
+      const changedCategory = CategoryMother.makeCopy(category);
 
-      repository.returnFindById(originalCategory);
-
-      category.change(
+      changedCategory.change(
         CategoryNameMother.random(),
         CategoryDescriptionMother.random(),
         [TemplateIdMother.random(), TemplateIdMother.random()]
       );
 
-      const useCaseParams = { ...category.toPrimitives() };
+      const useCaseParams = { ...changedCategory.toPrimitives() };
 
       await saveCategoryUseCase.run(useCaseParams);
 
-      expect(repository.mockSave).toHaveBeenCalledWith(category);
+      expect(repository.mockSave).toHaveBeenCalledWith(changedCategory);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalCategory);
     });
   });

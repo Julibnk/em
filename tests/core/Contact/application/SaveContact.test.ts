@@ -27,18 +27,21 @@ describe('SaveContact use case', () => {
 
   describe('=> Update contact', () => {
     it('should update contact if already exists', async () => {
-      const originalContact = ContactMother.makeCopy(contact);
-      repository.returnFindById(originalContact);
+      repository.returnFindById(contact);
 
-      contact.change(
+      // Se copian para evitar problemas por referencia
+      const originalContact = ContactMother.makeCopy(contact);
+      const changedContact = ContactMother.makeCopy(contact);
+
+      changedContact.change(
         ContactNameMother.random(),
         ContactLastNameMother.random()
       );
 
-      const useCaseParams = { ...contact.toPrimitives() };
+      const useCaseParams = { ...changedContact.toPrimitives() };
       await saveContactUseCase.run(useCaseParams);
 
-      expect(repository.mockSave).toHaveBeenCalledWith(contact);
+      expect(repository.mockSave).toHaveBeenCalledWith(changedContact);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalContact);
     });
 

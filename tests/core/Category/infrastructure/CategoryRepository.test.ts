@@ -35,7 +35,7 @@ describe('CategoryRepository', () => {
     await enviroment.truncate();
   });
 
-  describe('#save', () => {
+  describe('=> save', () => {
     it('Should save category', async () => {
       const category = CategoryMother.withAccount(account.id);
       await repository.save(category);
@@ -68,7 +68,7 @@ describe('CategoryRepository', () => {
     });
   });
 
-  describe('#findById', () => {
+  describe('=> findById', () => {
     it('Should find category by id with related templates', async () => {
       const template = TemplateMother.withAccount(account.id);
       await templateRepository.save(template);
@@ -109,7 +109,7 @@ describe('CategoryRepository', () => {
     });
   });
 
-  describe('#searchAll', () => {
+  describe('=> searchAll', () => {
     it('Should return all categories', async () => {
       const categories = [
         CategoryMother.withAccount(account.id),
@@ -147,7 +147,7 @@ describe('CategoryRepository', () => {
     });
   });
 
-  describe('#findByName', () => {
+  describe('=> findByName', () => {
     it('Should find category by its name', async () => {
       const category = CategoryMother.withAccount(account.id);
 
