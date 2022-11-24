@@ -43,8 +43,10 @@ model Account {
   country       String  @db.VarChar(2)
   disabled      Boolean @default(false)
 
+  metaAccountId String @unique @db.Uuid
+
   // Relations
-  MetaAccount  MetaAccount?
+  MetaAccount  MetaAccount    @relation(fields: [metaAccountId], references: [id])
   User         User[]
   Contact      Contact[]
   Category     Category[]
@@ -233,8 +235,9 @@ model MetaAccount {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  // Relation
-  accountId String @unique @db.Uuid
+  // // Relation
+  // accountId String  @db.Uuid
 
-  Account Account @relation(fields: [accountId], references: [id])
+  Account Account?
+  // Account Account @relation(fields: [accountId], references: [id])
 }

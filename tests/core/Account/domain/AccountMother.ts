@@ -14,6 +14,8 @@ import { VatMother } from './VatMother';
 import { StreetMother } from './StreetMother';
 import { PostalCodeMother } from './PostalCodeMother';
 import { AddressNumberMother } from './AddressNumberMother';
+import { MetaAccount } from '../../../../src/core/Account/domain/MetaAccount/MetaAccount';
+import { MetaAccountMother } from './MetaAccount/MetaAccountMother';
 
 export class AccountMother {
   static create(
@@ -25,7 +27,8 @@ export class AccountMother {
     postalCode: PostalCode,
     region: Region,
     country: Country,
-    disabled: Disabled
+    disabled: Disabled,
+    metaAccount: MetaAccount
   ): Account {
     return new Account(
       id,
@@ -36,7 +39,8 @@ export class AccountMother {
       postalCode,
       region,
       country,
-      disabled
+      disabled,
+      metaAccount
     );
   }
   static random(): Account {
@@ -49,7 +53,8 @@ export class AccountMother {
       PostalCodeMother.random(),
       new Region(),
       new Country(),
-      new Disabled()
+      new Disabled(),
+      MetaAccountMother.random()
     );
   }
 }

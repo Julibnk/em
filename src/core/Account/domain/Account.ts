@@ -9,6 +9,11 @@ import { Region } from './value-object/Region';
 import { Country } from './value-object/Country';
 import { Primitives } from '../../Shared/domain/Primitives';
 import { Disabled } from '../../Shared/domain/value-object/Disabled';
+import { MetaAccount, MetaAccountPrimitives } from './MetaAccount/MetaAccount';
+
+export type AccountPrimitives = Primitives<Account> & {
+  metaAccount: MetaAccountPrimitives;
+};
 
 export class Account extends AggregateRoot {
   constructor(
@@ -20,13 +25,14 @@ export class Account extends AggregateRoot {
     readonly postalCode: PostalCode,
     readonly region: Region,
     readonly country: Country,
-    readonly disabled: Disabled
+    readonly disabled: Disabled,
+    readonly metaAccount: MetaAccount
   ) {
     super();
   }
 
   static fromPrimitives(
-    plainData: Omit<Primitives<Account>, 'region' | 'country'>
+    plainData: Omit<AccountPrimitives, 'region' | 'country'>
   ): Account {
     return new Account(
       new AccountId(plainData.id),
@@ -37,11 +43,12 @@ export class Account extends AggregateRoot {
       new PostalCode(plainData.postalCode),
       new Region(),
       new Country(),
-      new Disabled(plainData.disabled)
+      new Disabled(plainData.disabled),
+      MetaAccount.fromPrimitives(plainData.metaAccount)
     );
   }
 
-  toPrimitives(): Primitives<Account> {
+  toPrimitives(): AccountPrimitives {
     return {
       id: this.id.value,
       companyName: this.companyName.value,
@@ -52,6 +59,7 @@ export class Account extends AggregateRoot {
       region: this.region.value,
       country: this.country.value,
       disabled: this.disabled.value,
+      metaAccount: this.metaAccount.toPrimitives(),
     };
   }
 }

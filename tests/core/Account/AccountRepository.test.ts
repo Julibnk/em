@@ -30,6 +30,10 @@ describe('AccountRepository', () => {
 
       await accountRepository.save(account);
     });
+
+    it.todo(
+      'Should throw an error if try to be related to another MetaAccount'
+    );
   });
 
   describe('=> findById', () => {
