@@ -1,4 +1,4 @@
-import { StringValueObject } from '../../../Shared/domain/value-object/StringValueObject';
+import { StringValueObject } from '../value-object/StringValueObject';
 
 export const DEFAULT_COUNTRY = 'ES';
 export class Country extends StringValueObject {

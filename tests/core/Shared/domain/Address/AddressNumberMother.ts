@@ -1,5 +1,5 @@
-import { AddressNumber } from '../../../../src/core/Account/domain/value-object/AddressNumber';
-import { WordMother } from '../../Shared/domain/WordMother';
+import { AddressNumber } from '../../../../../src/core/Shared/domain/Address/AddressNumber';
+import { WordMother } from '../WordMother';
 
 export class AddressNumberMother {
   static create(value: string): AddressNumber {

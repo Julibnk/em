@@ -12,9 +12,17 @@ export class AccountPhone extends AggregateRoot {
   constructor(
     readonly accountId: AccountId,
     readonly id: AccountPhoneId,
-    readonly phone: Phone
+    private _phone: Phone
   ) {
     super();
+  }
+
+  get phone(): Phone {
+    return this._phone;
+  }
+
+  change(phone: Phone) {
+    this._phone = phone;
   }
 
   static create(
@@ -37,8 +45,8 @@ export class AccountPhone extends AggregateRoot {
     return {
       accountId: this.accountId.value,
       id: this.id.value,
-      prefix: this.phone.prefix.value,
-      number: this.phone.number.value,
+      prefix: this._phone.prefix.value,
+      number: this._phone.number.value,
     };
   }
 }
