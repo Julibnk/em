@@ -32,6 +32,18 @@ export class AccountMother {
       metaAccount
     );
   }
+
+  static makeCopy(account: Account): Account {
+    return new Account(
+      account.id,
+      account.companyName,
+      account.vat,
+      account.disabled,
+      account.address,
+      account.metaAccount
+    );
+  }
+
   static random(): Account {
     return this.create(
       AccountIdMother.random(),

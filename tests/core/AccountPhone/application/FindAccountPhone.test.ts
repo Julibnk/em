@@ -8,7 +8,7 @@ let repository: AccountPhoneRepositoryMock;
 let findAccountPhoneUseCase: FindAccountPhoneUseCase;
 let accountPhone: AccountPhone;
 
-describe('FindTemplate use case', () => {
+describe('FindAccountPhone use case', () => {
   beforeEach(() => {
     repository = new AccountPhoneRepositoryMock();
     findAccountPhoneUseCase = new FindAccountPhoneUseCase(repository);

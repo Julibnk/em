@@ -8,7 +8,6 @@ import { Nullable } from '../../Shared/domain/Nullable';
 import { AccountPhoneRepository } from '../domain/AccountPhoneRepository';
 import { AccountPhonePersistenceError } from '../domain/exceptions/AccountPhonePersistenceError';
 import { Phone } from '../../Shared/domain/Phone/Phone';
-import { AccountPhoneMother } from '../../../../tests/core/AccountPhone/domain/AccountPhoneMother';
 
 @injectable()
 export class PrismaAccountPhoneRepository

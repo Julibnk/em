@@ -1,109 +1,57 @@
-// import { SaveTemplateUseCase } from '../../../../src/core/Template/application/SaveTemplate';
-// import { TemplateMother } from '../domain/TemplateMother';
-// import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
-// import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Template/domain/exceptions/TemplateWithSameNameAlreadyExistsError';
-// import { TemplateShortDescriptionMother } from '../domain/TemplateShortDescriptionMother';
-// import { TemplateVariableMother } from '../domain/TemplateVariableMother';
-// import { TemplatePreviewMother } from '../domain/TemplatePreviewMother';
-// import { InconsistentTemplateVariableError } from '../../../../src/core/Template/domain/exceptions/InconsistentTemplateVariableError';
-// import { Template } from '../../../../src/core/Template/domain/Template';
+import { AccountRepositoryMock } from '../__mocks__/AccountRepositoryMock';
+import { SaveAccountUseCase } from '../../../../src/core/Account/application/SaveAccount';
+import { Account } from '../../../../src/core/Account/domain/Account';
+import { AccountMother } from '../domain/AccountMother';
+import { CompanyNameMother } from '../domain/CompanyNameMother';
+import { AddressMother } from '../../Shared/domain/Address/AddressMother';
+import { MetaAccountMother } from '../domain/MetaAccount/MetaAccountMother';
 
-// let repository: TemplateRepositoryMock;
-// let saveTemplateUseCase: SaveTemplateUseCase;
-// let template: Template;
+let repository: AccountRepositoryMock;
+let saveAccountUseCase: SaveAccountUseCase;
+let account: Account;
 
-// describe('SaveTemplate use case', () => {
-//   beforeEach(() => {
-//     repository = new TemplateRepositoryMock();
-//     saveTemplateUseCase = new SaveTemplateUseCase(repository);
-//   });
+describe('SaveAccount use case', () => {
+  beforeEach(() => {
+    repository = new AccountRepositoryMock();
+    saveAccountUseCase = new SaveAccountUseCase(repository);
+  });
 
-//   describe('=> Update template', () => {
-//     beforeEach(() => {
-//       // Given a template already exists
-//       template = TemplateMother.random();
-//     });
+  describe('=> Update account', () => {
+    beforeEach(() => {
+      account = AccountMother.random();
+    });
 
-//     it('Should update template if already exists', async () => {
-//       //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
-//       repository.returnFindById(template);
+    it('Should update account if already exists', async () => {
+      //  Se crea una copia de la cuenta original para romper la referencia y comprobar que ambas versiones son distintas
+      repository.returnFindById(account);
 
-//       const originalTemplate = TemplateMother.makeCopy(template);
-//       const changedTemplate = TemplateMother.makeCopy(template);
-//       // template.change(newDes, newPrev, newVar1, newVar2, newVar3);
-//       changedTemplate.change(
-//         TemplateShortDescriptionMother.random(),
-//         TemplatePreviewMother.random(),
-//         TemplateVariableMother.random(),
-//         TemplateVariableMother.random(),
-//         TemplateVariableMother.random()
-//       );
+      const originalAccount = AccountMother.makeCopy(account);
+      const changedAccount = AccountMother.makeCopy(account);
+      // template.change(newDes, newPrev, newVar1, newVar2, newVar3);
+      changedAccount.change(
+        CompanyNameMother.random(),
+        AddressMother.random(),
+        MetaAccountMother.random()
+      );
 
-//       const useCaseParams = { ...changedTemplate.toPrimitives() };
+      const useCaseParams = { ...changedAccount.toPrimitives() };
 
-//       await saveTemplateUseCase.run(useCaseParams);
-//       expect(repository.mockSave).toHaveBeenCalledWith(changedTemplate);
-//       expect(repository.mockSave).not.toHaveBeenCalledWith(originalTemplate);
-//     });
+      await saveAccountUseCase.run(useCaseParams);
+      expect(repository.mockSave).toHaveBeenCalledWith(changedAccount);
+      expect(repository.mockSave).not.toHaveBeenCalledWith(originalAccount);
+    });
+  });
 
-//     it('Should throw an exception if variables are inconsistent', async () => {
-//       repository.returnFindById(template);
+  describe('=> Create account', () => {
+    beforeEach(() => {
+      account = AccountMother.random();
+    });
 
-//       const useCaseParams = { ...template.toPrimitives() };
-//       useCaseParams.variable1 = '';
+    it('Should create a template', async () => {
+      const useCaseParams = { ...account.toPrimitives() };
 
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
-
-//       useCaseParams.variable2 = '';
-
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
-//     });
-//   });
-
-//   describe('=> Create template', () => {
-//     beforeEach(() => {
-//       template = TemplateMother.initialState();
-//     });
-
-//     it('Should create a template', async () => {
-//       const useCaseParams = { ...template.toPrimitives() };
-
-//       await saveTemplateUseCase.run(useCaseParams);
-//       expect(repository.mockSave).toHaveBeenCalledWith(template);
-//     });
-
-//     it('Should throw an exception if template with same name exists', async () => {
-//       //Given a template with same name already exists
-//       const templateWithSameName = TemplateMother.withName(template.name);
-//       repository.returnFindByName(templateWithSameName);
-
-//       expect.assertions(1);
-
-//       const useCaseParams = { ...template.toPrimitives() };
-
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(TemplateWithSameNameAlreadyExistsError);
-//     });
-
-//     it('Should throw an exception if variables are inconsistent', async () => {
-//       const useCaseParams = { ...template.toPrimitives() };
-
-//       useCaseParams.variable1 = '';
-
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
-
-//       useCaseParams.variable2 = '';
-
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
-//     });
-//   });
-// });
+      await saveAccountUseCase.run(useCaseParams);
+      expect(repository.mockSave).toHaveBeenCalledWith(account);
+    });
+  });
+});
