@@ -35,20 +35,27 @@ export class Account extends AggregateRoot {
     return this._metaAccount;
   }
 
-  change(companyName: CompanyName, address: Address) {
+  change(companyName: CompanyName, address: Address, metaAccount: MetaAccount) {
     this._companyName = companyName;
     this._address = address;
+    this._metaAccount = metaAccount;
   }
 
   static create(
     id: AccountId,
     companyName: CompanyName,
     vat: Vat,
-    disabled: Disabled,
     address: Address,
     metaAccount: MetaAccount
   ): Account {
-    return new Account(id, companyName, vat, disabled, address, metaAccount);
+    return new Account(
+      id,
+      companyName,
+      vat,
+      new Disabled(),
+      address,
+      metaAccount
+    );
   }
 
   static fromPrimitives(plainData: AccountPrimitives): Account {

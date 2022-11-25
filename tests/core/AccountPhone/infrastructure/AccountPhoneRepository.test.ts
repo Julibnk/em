@@ -105,4 +105,9 @@ describe('AccountPhoneRepository', () => {
       expect(expected).toBeNull();
     });
   });
+
+  describe('=> findByPhone', () => {
+    it.todo('Should find AccountPhone by its phone');
+    it.todo('Should return null if phone is not');
+  });
 });

@@ -7,6 +7,7 @@ import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { Nullable } from '../../Shared/domain/Nullable';
 import { AccountPhoneRepository } from '../domain/AccountPhoneRepository';
 import { AccountPhonePersistenceError } from '../domain/exceptions/AccountPhonePersistenceError';
+import { Phone } from '../../Shared/domain/Phone/Phone';
 
 @injectable()
 export class PrismaAccountPhoneRepository
@@ -32,9 +33,26 @@ export class PrismaAccountPhoneRepository
 
     const prismaAccountPhone = await this.client.accountPhone.findUnique(query);
 
-    if (!prismaAccountPhone) {
-      return null;
-    }
+    if (!prismaAccountPhone) return null;
+
+    return this.mapPrismaEntityToDomainEntity(prismaAccountPhone);
+  }
+
+  async findByPhone(
+    accountId: AccountId,
+    phone: Phone
+  ): Promise<Nullable<AccountPhone>> {
+    const query = {
+      where: {
+        accountId: accountId.value,
+        prefix: phone.prefix.value,
+        number: phone.number.value,
+      },
+    };
+
+    const prismaAccountPhone = await this.client.accountPhone.findFirst(query);
+
+    if (!prismaAccountPhone) return null;
 
     return this.mapPrismaEntityToDomainEntity(prismaAccountPhone);
   }

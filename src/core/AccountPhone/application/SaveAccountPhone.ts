@@ -1,77 +1,60 @@
-import { TemplateRepository } from '../domain/TemplateRepository';
-import { Template } from '../domain/Template';
+// import { TemplateRepository } from '../domain/TemplateRepository';
+// import { Template } from '../domain/Template';
+// import { inject, injectable } from 'inversify';
+// import { DiRepository } from '../../Shared/dependency-injection';
+import { AccountPhoneRepository } from '../domain/AccountPhoneRepository';
+// import { TemplateId } from '../domain/value-object/TemplateId';
+// import { TemplateName } from '../domain/value-object/TemplateName';
+// import { TemplateShortDescription } from '../domain/value-object/TemplateShortDescription';
+// import { TemplateVariable } from '../domain/value-object/TemplateVariable';
+// import { TemplatePreview } from '../domain/value-object/TemplatePreview';
+// import { AccountId } from '../../Account/domain/value-object/AccountId';
+import { AccountPhoneId } from '../domain/value-object/AccountPhoneId';
+// import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
+
 import { inject, injectable } from 'inversify';
 import { DiRepository } from '../../Shared/dependency-injection';
-import { TemplateId } from '../domain/value-object/TemplateId';
-import { TemplateName } from '../domain/value-object/TemplateName';
-import { TemplateShortDescription } from '../domain/value-object/TemplateShortDescription';
-import { TemplateVariable } from '../domain/value-object/TemplateVariable';
-import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
+import { Phone } from '../../Shared/domain/Phone/Phone';
+import { AccountPhone } from '../domain/AccountPhone';
+import { AccountPhoneAlreadyExistsError } from '../domain/exceptions/AccountPhoneAlreadyExistsError';
 
 export type Params = {
   accountId: string;
   id: string;
-  name: string;
-  shortDescription: string;
-  preview: string;
-  variable1: string;
-  variable2: string;
-  variable3: string;
+  prefix: string;
+  number: string;
 };
 
 @injectable()
-export class SaveTemplateUseCase {
+export class SaveAccountPhoneUseCase {
   constructor(
-    @inject(DiRepository.template)
-    private repository: TemplateRepository
+    @inject(DiRepository.accountPhone)
+    private repository: AccountPhoneRepository
   ) {}
 
   async run(params: Params): Promise<void> {
     const accountId = new AccountId(params.accountId);
-    const id = new TemplateId(params.id);
-    const name = new TemplateName(params.name);
-    const shortDescription = new TemplateShortDescription(
-      params.shortDescription
-    );
-    const preview = new TemplatePreview(params.preview);
-    const variable1 = new TemplateVariable(params.variable1);
-    const variable2 = new TemplateVariable(params.variable2);
-    const variable3 = new TemplateVariable(params.variable3);
+    const id = new AccountPhoneId(params.id);
+    const phone = Phone.fromPrimitives(params.prefix, params.number);
 
-    let template = await this.repository.findById(accountId, id);
+    let accountPhone = await this.repository.findById(accountId, id);
 
-    if (template) {
-      template.change(
-        shortDescription,
-        preview,
-        variable1,
-        variable2,
-        variable3
-      );
+    if (accountPhone) {
+      accountPhone.change(phone);
     } else {
-      const templateWithSameName = await this.repository.findByName(
+      const sameAccountPhone = await this.repository.findByPhone(
         accountId,
-        name
+        phone
       );
 
-      if (templateWithSameName) {
-        throw new TemplateWithSameNameAlreadyExistsError(name);
+      if (sameAccountPhone) {
+        throw new AccountPhoneAlreadyExistsError(sameAccountPhone.phone);
       }
 
-      template = Template.create(
-        accountId,
-        id,
-        name,
-        shortDescription,
-        preview,
-        variable1,
-        variable2,
-        variable3
-      );
+      accountPhone = AccountPhone.create(accountId, id, phone);
     }
 
-    this.repository.save(template);
+    this.repository.save(accountPhone);
   }
 }

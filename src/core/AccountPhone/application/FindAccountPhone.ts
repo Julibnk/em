@@ -1,27 +1,27 @@
-import { Template } from '../domain/Template';
-import { TemplateId } from '../domain/value-object/TemplateId';
-import { TemplateRepository } from '../domain/TemplateRepository';
-import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { inject, injectable } from 'inversify';
 import { DiRepository } from '../../Shared/dependency-injection';
-import { TemplateNotFoundError } from '../domain/exceptions/TemplateNotFoundError';
+import { AccountPhoneRepository } from '../domain/AccountPhoneRepository';
+import { AccountPhone } from '../domain/AccountPhone';
+import { AccountPhoneNotFoundError } from '../domain/exceptions/AccountPhoneNotFoundError';
+import { AccountPhoneId } from '../domain/value-object/AccountPhoneId';
+import { AccountId } from '../../Account/domain/value-object/AccountId';
 @injectable()
-export class FindTemplateUseCase {
+export class FindAccountPhoneUseCase {
   constructor(
-    @inject(DiRepository.template)
-    private readonly repository: TemplateRepository
+    @inject(DiRepository.accountPhone)
+    private readonly repository: AccountPhoneRepository
   ) {}
 
-  async run(accountId: string, id: string): Promise<Template> {
-    const template = await this.repository.findById(
+  async run(accountId: string, id: string): Promise<AccountPhone> {
+    const accountPhone = await this.repository.findById(
       new AccountId(accountId),
-      new TemplateId(id)
+      new AccountPhoneId(id)
     );
 
-    if (!template) {
-      throw new TemplateNotFoundError(new TemplateId(id));
+    if (!accountPhone) {
+      throw new AccountPhoneNotFoundError(new AccountPhoneId(id));
     }
 
-    return template;
+    return accountPhone;
   }
 }
