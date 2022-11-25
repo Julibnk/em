@@ -43,6 +43,20 @@ export class AccountMother {
       metaAccount
     );
   }
+  static withMetaAccount(metaAccount: MetaAccount): Account {
+    return this.create(
+      AccountIdMother.random(),
+      CompanyNameMother.random(),
+      VatMother.random(),
+      StreetMother.random(),
+      AddressNumberMother.random(),
+      PostalCodeMother.random(),
+      new Region(),
+      new Country(),
+      new Disabled(),
+      metaAccount
+    );
+  }
   static random(): Account {
     return this.create(
       AccountIdMother.random(),

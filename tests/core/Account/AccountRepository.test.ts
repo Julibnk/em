@@ -7,6 +7,7 @@ import {
 } from '../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../Shared/infrastructure/TestEnvironmentManager';
 import { AccountMother } from './domain/AccountMother';
+import { AccountPersistenceError } from '../../../src/core/Account/domain/exceptions/AccountPersistenceError';
 
 const environmentManager = container.get<TestEnvironmentManager>(
   DiDomain.environmentManager
@@ -31,9 +32,17 @@ describe('AccountRepository', () => {
       await accountRepository.save(account);
     });
 
-    it.todo(
-      'Should throw an error if try to be related to another MetaAccount'
-    );
+    it('Should throw an error if try to be related to another MetaAccount', async () => {
+      const account = AccountMother.random();
+      await accountRepository.save(account);
+
+      const accountWithSameMetaAccount = AccountMother.withMetaAccount(
+        account.metaAccount
+      );
+      expect(
+        async () => await accountRepository.save(accountWithSameMetaAccount)
+      ).rejects.toThrow(AccountPersistenceError);
+    });
   });
 
   describe('=> findById', () => {

@@ -19,9 +19,10 @@ export class PrismaAccountRepository
   implements AccountRepository
 {
   async save(account: Account): Promise<void> {
-    await this.client.account.upsert({
+    const query = {
       where: {
         id: account.id.value,
+        // metaAccountId: account.metaAccount.id.value,
       },
       update: {
         vat: account.vat.value,
@@ -49,7 +50,13 @@ export class PrismaAccountRepository
           create: { id: account.metaAccount.id.value },
         },
       },
-    });
+    };
+
+    try {
+      await this.client.account.upsert(query);
+    } catch (error) {
+      // throw new AccountPersistenceError(account);
+    }
   }
 
   async findById(id: AccountId): Promise<Nullable<Account>> {

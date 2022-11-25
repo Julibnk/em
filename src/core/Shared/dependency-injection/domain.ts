@@ -37,10 +37,11 @@ export const domainContainerModule = new ContainerModule((bind) => {
   bind<AccountPhoneRepository>(DiRepository.accountPhone).to(
     PrismaAccountPhoneRepository
   );
+  bind<Logger>(DiDomain.logger).to(WinstonLogger);
+});
 
+export const testManagerModule = new ContainerModule((bind) => {
   bind<TestEnvironmentManager>(DiDomain.environmentManager).to(
     PrismaTestEnvironmentManager
   );
-
-  bind<Logger>(DiDomain.logger).to(WinstonLogger);
 });
