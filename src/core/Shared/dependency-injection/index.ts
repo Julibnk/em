@@ -8,11 +8,14 @@ import {
   domainContainerModule,
   testManagerModule,
 } from './domain';
+
 import {
   DiController,
   categoryControllerModule,
   contactControllerModule,
   templateControllerModule,
+  accountControllerModule,
+  accountPhoneControllerModule,
 } from './controller';
 
 import {
@@ -35,7 +38,9 @@ container.load(
   contactUseCasesModule,
   templateUseCasesModule,
   accountUseCasesModule,
-  accountPhoneUseCasesModule
+  accountPhoneUseCasesModule,
+  accountControllerModule,
+  accountPhoneControllerModule
 );
 
 export { container, DiDomain, DiRepository, DiController };

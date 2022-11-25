@@ -8,6 +8,10 @@ import { CategoryGetController } from '../../../apps/controllers/Category/Catego
 import { TemplateGetController } from '../../../apps/controllers/Template/TemplateGetController';
 import { ContactPutController } from '../../../apps/controllers/Contact/ContactPutController';
 import { SearchAllContactsController } from '../../../apps/controllers/Contact/SearchAllContactsController';
+import { AccountPutController } from '../../../apps/controllers/Account/AccountPutController';
+import { AccountGetController } from '../../../apps/controllers/Account/AccountGetController';
+import { AccountPhoneGetController } from '../../../apps/controllers/AccountPhone/AccountPhoneGetController';
+import { AccountPhonePutController } from '../../../apps/controllers/AccountPhone/AccountPhonePutController';
 
 export const enum DiController {
   templatePut = 'app.template.putController',
@@ -19,8 +23,13 @@ export const enum DiController {
   searchAllCategories = 'app.category.searchAllController',
 
   contactPut = 'app.contact.putController',
-  // categoryGet = 'app.category.getController',
   searchAllContacts = 'app.contact.searchAllController',
+
+  accountPhonePut = 'app.accountPhone.putController',
+  accountPhoneGet = 'app.accountPhone.getController',
+
+  accountPut = 'app.account.putController',
+  accountGet = 'app.account.getController',
 }
 
 export const templateControllerModule = new ContainerModule((bind) => {
@@ -38,10 +47,20 @@ export const categoryControllerModule = new ContainerModule((bind) => {
     SearchAllCategoriesController
   );
 });
+
 export const contactControllerModule = new ContainerModule((bind) => {
   bind<Controller>(DiController.contactPut).to(ContactPutController);
-  // bind<Controller>(DiController.categoryGet).to(CategoryGetController);
   bind<Controller>(DiController.searchAllContacts).to(
     SearchAllContactsController
   );
+});
+
+export const accountControllerModule = new ContainerModule((bind) => {
+  bind<Controller>(DiController.accountPut).to(AccountPutController);
+  bind<Controller>(DiController.accountGet).to(AccountGetController);
+});
+
+export const accountPhoneControllerModule = new ContainerModule((bind) => {
+  bind<Controller>(DiController.accountPhoneGet).to(AccountPhoneGetController);
+  bind<Controller>(DiController.accountPhonePut).to(AccountPhonePutController);
 });
