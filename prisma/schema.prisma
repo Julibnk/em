@@ -114,7 +114,6 @@ model Category {
   //Relations
   Account  Account    @relation(fields: [accountId], references: [id])
   Template Template[]
-  Message  Message[]
 
   @@id([accountId, id])
 }
@@ -155,15 +154,13 @@ model Message {
   // Main fields
   status         MessageStatus
   sentDate       DateTime
-  scheduled      Boolean
   scheduleDate   DateTime?
-  variable1      String?
-  variable2      String?
-  variable3      String?
+  parameter1     String?
+  parameter2     String?
+  parameter3     String?
   templateId     String        @db.Uuid
   accountPhoneId String        @db.Uuid
   contactId      String        @db.Uuid
-  categoryId     String?       @db.Uuid
 
   // Generic fields
   createdAt DateTime @default(now())
@@ -173,7 +170,6 @@ model Message {
   Template     Template     @relation(fields: [accountId, templateId], references: [accountId, id])
   AccountPhone AccountPhone @relation(fields: [accountId, accountPhoneId], references: [accountId, id])
   Contact      Contact      @relation(fields: [accountId, contactId], references: [accountId, id])
-  Category     Category?    @relation(fields: [accountId, categoryId], references: [accountId, id])
 
   @@id([accountId, id])
 }
