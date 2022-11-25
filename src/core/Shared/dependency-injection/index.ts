@@ -16,6 +16,8 @@ import {
 } from './controller';
 
 import {
+  accountPhoneUseCasesModule,
+  accountUseCasesModule,
   categoryUseCasesModule,
   contactUseCasesModule,
   templateUseCasesModule,
@@ -31,7 +33,9 @@ container.load(
   templateControllerModule,
   categoryUseCasesModule,
   contactUseCasesModule,
-  templateUseCasesModule
+  templateUseCasesModule,
+  accountUseCasesModule,
+  accountPhoneUseCasesModule
 );
 
 export { container, DiDomain, DiRepository, DiController };
