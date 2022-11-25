@@ -41,7 +41,7 @@ export class AccountPhone extends AggregateRoot {
     );
   }
 
-  toPrimitives(): Primitives<AccountPhonePrimitives> {
+  toPrimitives(): AccountPhonePrimitives {
     return {
       accountId: this.accountId.value,
       id: this.id.value,

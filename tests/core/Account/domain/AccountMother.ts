@@ -34,7 +34,7 @@ export class AccountMother {
   }
 
   static makeCopy(account: Account): Account {
-    return new Account(
+    return this.create(
       account.id,
       account.companyName,
       account.vat,

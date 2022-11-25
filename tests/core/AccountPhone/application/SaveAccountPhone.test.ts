@@ -1,109 +1,61 @@
-// import { SaveTemplateUseCase } from '../../../../src/core/Template/application/SaveTemplate';
-// import { TemplateMother } from '../domain/TemplateMother';
-// import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
-// import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Template/domain/exceptions/TemplateWithSameNameAlreadyExistsError';
-// import { TemplateShortDescriptionMother } from '../domain/TemplateShortDescriptionMother';
-// import { TemplateVariableMother } from '../domain/TemplateVariableMother';
-// import { TemplatePreviewMother } from '../domain/TemplatePreviewMother';
-// import { InconsistentTemplateVariableError } from '../../../../src/core/Template/domain/exceptions/InconsistentTemplateVariableError';
-// import { Template } from '../../../../src/core/Template/domain/Template';
+import { AccountPhoneRepositoryMock } from '../__mocks__/AccountPhoneRepositoryMock';
+import { SaveAccountPhoneUseCase } from '../../../../src/core/AccountPhone/application/SaveAccountPhone';
+import { AccountPhone } from '../../../../src/core/AccountPhone/domain/AccountPhone';
+import { AccountPhoneMother } from '../domain/AccountPhoneMother';
+import { PhoneMother } from '../../Shared/domain/Phone/PhoneMother';
+import { AccountPhoneAlreadyExistsError } from '../../../../src/core/AccountPhone/domain/exceptions/AccountPhoneAlreadyExistsError';
 
-// let repository: TemplateRepositoryMock;
-// let saveTemplateUseCase: SaveTemplateUseCase;
-// let template: Template;
+let repository: AccountPhoneRepositoryMock;
+let saveAccountPhoneUseCase: SaveAccountPhoneUseCase;
+let accountPhone: AccountPhone;
 
-// describe('SaveTemplate use case', () => {
-//   beforeEach(() => {
-//     repository = new TemplateRepositoryMock();
-//     saveTemplateUseCase = new SaveTemplateUseCase(repository);
-//   });
+describe('SaveAccountPhone use case', () => {
+  beforeEach(() => {
+    repository = new AccountPhoneRepositoryMock();
+    saveAccountPhoneUseCase = new SaveAccountPhoneUseCase(repository);
+  });
 
-//   describe('=> Update template', () => {
-//     beforeEach(() => {
-//       // Given a template already exists
-//       template = TemplateMother.random();
-//     });
+  describe('=> Update account phone', () => {
+    beforeEach(() => {
+      accountPhone = AccountPhoneMother.random();
+    });
 
-//     it('Should update template if already exists', async () => {
-//       //  Se crea una copia de la plantilla original para romper la referencia y comprobar que ambas versiones son distintas
-//       repository.returnFindById(template);
+    it('Should update account phone if already exists', async () => {
+      repository.returnFindById(accountPhone);
 
-//       const originalTemplate = TemplateMother.makeCopy(template);
-//       const changedTemplate = TemplateMother.makeCopy(template);
-//       // template.change(newDes, newPrev, newVar1, newVar2, newVar3);
-//       changedTemplate.change(
-//         TemplateShortDescriptionMother.random(),
-//         TemplatePreviewMother.random(),
-//         TemplateVariableMother.random(),
-//         TemplateVariableMother.random(),
-//         TemplateVariableMother.random()
-//       );
+      const originalPhone = AccountPhoneMother.makeCopy(accountPhone);
+      const changedPhone = AccountPhoneMother.makeCopy(accountPhone);
 
-//       const useCaseParams = { ...changedTemplate.toPrimitives() };
+      changedPhone.change(PhoneMother.random());
 
-//       await saveTemplateUseCase.run(useCaseParams);
-//       expect(repository.mockSave).toHaveBeenCalledWith(changedTemplate);
-//       expect(repository.mockSave).not.toHaveBeenCalledWith(originalTemplate);
-//     });
+      const useCaseParams = { ...changedPhone.toPrimitives() };
 
-//     it('Should throw an exception if variables are inconsistent', async () => {
-//       repository.returnFindById(template);
+      await saveAccountPhoneUseCase.run(useCaseParams);
+      expect(repository.mockSave).toHaveBeenCalledWith(changedPhone);
+      expect(repository.mockSave).not.toHaveBeenCalledWith(originalPhone);
+    });
+  });
 
-//       const useCaseParams = { ...template.toPrimitives() };
-//       useCaseParams.variable1 = '';
+  describe('=> Create account phone', () => {
+    beforeEach(() => {
+      accountPhone = AccountPhoneMother.random();
+    });
 
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
+    it('Should create an account phone', async () => {
+      const useCaseParams = { ...accountPhone.toPrimitives() };
 
-//       useCaseParams.variable2 = '';
+      await saveAccountPhoneUseCase.run(useCaseParams);
+      expect(repository.mockSave).toHaveBeenCalledWith(accountPhone);
+    });
 
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
-//     });
-//   });
+    it('Should throw an exception if same phone already exists', async () => {
+      repository.returnFindByPhone(accountPhone);
 
-//   describe('=> Create template', () => {
-//     beforeEach(() => {
-//       template = TemplateMother.initialState();
-//     });
+      const useCaseParams = { ...accountPhone.toPrimitives() };
 
-//     it('Should create a template', async () => {
-//       const useCaseParams = { ...template.toPrimitives() };
-
-//       await saveTemplateUseCase.run(useCaseParams);
-//       expect(repository.mockSave).toHaveBeenCalledWith(template);
-//     });
-
-//     it('Should throw an exception if template with same name exists', async () => {
-//       //Given a template with same name already exists
-//       const templateWithSameName = TemplateMother.withName(template.name);
-//       repository.returnFindByName(templateWithSameName);
-
-//       expect.assertions(1);
-
-//       const useCaseParams = { ...template.toPrimitives() };
-
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(TemplateWithSameNameAlreadyExistsError);
-//     });
-
-//     it('Should throw an exception if variables are inconsistent', async () => {
-//       const useCaseParams = { ...template.toPrimitives() };
-
-//       useCaseParams.variable1 = '';
-
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
-
-//       useCaseParams.variable2 = '';
-
-//       expect(
-//         async () => await saveTemplateUseCase.run(useCaseParams)
-//       ).rejects.toThrow(InconsistentTemplateVariableError);
-//     });
-//   });
-// });
+      expect(
+        async () => await saveAccountPhoneUseCase.run(useCaseParams)
+      ).rejects.toThrow(AccountPhoneAlreadyExistsError);
+    });
+  });
+});

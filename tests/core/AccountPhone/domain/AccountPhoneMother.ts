@@ -23,6 +23,14 @@ export class AccountPhoneMother {
     );
   }
 
+  static makeCopy(accuntPhone: AccountPhone): AccountPhone {
+    return this.create(
+      accuntPhone.accountId,
+      accuntPhone.id,
+      accuntPhone.phone
+    );
+  }
+
   static random(): AccountPhone {
     return this.create(
       AccountIdMother.random(),
