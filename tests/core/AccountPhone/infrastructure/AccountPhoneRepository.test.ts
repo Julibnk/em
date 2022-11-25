@@ -107,7 +107,27 @@ describe('AccountPhoneRepository', () => {
   });
 
   describe('=> findByPhone', () => {
-    it.todo('Should find AccountPhone by its phone');
-    it.todo('Should return null if phone is not');
+    it('Should find AccountPhone by its phone', async () => {
+      const accountPhone = AccountPhoneMother.withAccount(account.id);
+
+      await repository.save(accountPhone);
+
+      const accountPhoneExpected = await repository.findByPhone(
+        accountPhone.accountId,
+        accountPhone.phone
+      );
+
+      expect(accountPhoneExpected).toEqual(accountPhone);
+    });
+    it('Should return null if phone is not found', async () => {
+      const accountPhone = AccountPhoneMother.withAccount(account.id);
+
+      const expected = await repository.findByPhone(
+        accountPhone.accountId,
+        accountPhone.phone
+      );
+
+      expect(expected).toBeNull();
+    });
   });
 });
