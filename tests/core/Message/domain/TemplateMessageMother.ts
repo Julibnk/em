@@ -17,14 +17,15 @@ import { TemplateIdMother } from '../../Template/domain/TemplateIdMother';
 import { AccountPhoneIdMother } from '../../AccountPhone/domain/AccountPhoneIdMother';
 import { ContactIdMother } from '../../Contact/domain/ContactIdMother';
 import { TemplateMessageStatusMother } from './TemplateMessageStatusMother';
+import { Nullable } from '../../../../src/core/Shared/domain/Nullable';
 
 export class TemplateMessageMother {
   static create(
     accountId: AccountId,
     id: TemplateMessageId,
     status: TemplateMessageStatus,
-    sentDate: MessageSentDate,
-    scheduleDate: TemplateMessageScheduleDate,
+    sentDate: Nullable<MessageSentDate>,
+    scheduleDate: Nullable<TemplateMessageScheduleDate>,
     parameter1: TemplateMessageParameter,
     parameter2: TemplateMessageParameter,
     parameter3: TemplateMessageParameter,
@@ -47,7 +48,7 @@ export class TemplateMessageMother {
     );
   }
 
-  static random(): TemplateMessageMother {
+  static random(): TemplateMessage {
     return this.create(
       AccountIdMother.random(),
       TemplateMessageIdMother.random(),

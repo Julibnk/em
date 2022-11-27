@@ -125,8 +125,6 @@ describe('CategoryRepository', () => {
     });
 
     it('Shouln´t get categories from other account', async () => {
-      expect.assertions(2);
-
       const otherAccount = await enviroment.createAccount();
       const categories = [
         CategoryMother.withAccount(otherAccount.id),

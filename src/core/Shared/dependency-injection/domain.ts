@@ -13,6 +13,8 @@ import { PrismaContactRepository } from '../../Contact/infrastructure/PrismaCont
 import { ContactRepository } from '../../Contact/domain/ContactRepository';
 import { AccountPhoneRepository } from '../../AccountPhone/domain/AccountPhoneRepository';
 import { PrismaAccountPhoneRepository } from '../../AccountPhone/infrastructure/PrismaAccontPhoneRepository';
+import { TemplateMessageRepository } from '../../TemplateMessage/domain/TemplateMessageRespository';
+import { PrismaTemplateMessageRepository } from '../../TemplateMessage/infrastructure/PrismaTemplateMessageRespository';
 
 export const enum DiRepository {
   account = 'core.account.repository',
@@ -20,7 +22,7 @@ export const enum DiRepository {
   category = 'core.category.repository',
   contact = 'core.contact.repository',
   template = 'core.template.repository',
-  message = 'core.message.repository',
+  templateMessage = 'core.templateMessage.repository',
   user = 'core.user.repository',
 }
 
@@ -36,6 +38,9 @@ export const domainContainerModule = new ContainerModule((bind) => {
   bind<ContactRepository>(DiRepository.contact).to(PrismaContactRepository);
   bind<AccountPhoneRepository>(DiRepository.accountPhone).to(
     PrismaAccountPhoneRepository
+  );
+  bind<TemplateMessageRepository>(DiRepository.templateMessage).to(
+    PrismaTemplateMessageRepository
   );
   bind<Logger>(DiDomain.logger).to(WinstonLogger);
 });

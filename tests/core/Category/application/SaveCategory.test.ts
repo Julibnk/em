@@ -27,7 +27,6 @@ describe('SaveCategory use case', () => {
     });
 
     it('Should throw an exception if category with same name exists', async () => {
-      expect.assertions(1);
       const categoryWithSameName = CategoryMother.withName(category.name);
       repository.returnFindByName(categoryWithSameName);
 

@@ -30,7 +30,7 @@ describe('SaveTemplate use case', () => {
 
       const originalTemplate = TemplateMother.makeCopy(template);
       const changedTemplate = TemplateMother.makeCopy(template);
-      // template.change(newDes, newPrev, newVar1, newVar2, newVar3);
+
       changedTemplate.change(
         TemplateShortDescriptionMother.random(),
         TemplatePreviewMother.random(),
@@ -78,10 +78,8 @@ describe('SaveTemplate use case', () => {
 
     it('Should throw an exception if template with same name exists', async () => {
       //Given a template with same name already exists
-      const templateWithSameName = TemplateMother.withName(template.name);
-      repository.returnFindByName(templateWithSameName);
-
-      expect.assertions(1);
+      // const templateWithSameName = TemplateMother.withName(template.name);
+      repository.returnFindByName(template);
 
       const useCaseParams = { ...template.toPrimitives() };
 

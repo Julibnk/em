@@ -68,23 +68,10 @@ export class TemplateMother {
   }
 
   static initialState(accountId?: AccountId): Template {
-    return this.create(
+    return Template.create(
       accountId || AccountIdMother.random(),
       TemplateIdMother.random(),
       TemplateNameMother.random(),
-      TemplateShortDescriptionMother.random(),
-      TemplatePreviewMother.random(),
-      TemplateVariableMother.random(),
-      TemplateVariableMother.random(),
-      TemplateVariableMother.random()
-    );
-  }
-
-  static withName(name: TemplateName): Template {
-    return Template.create(
-      AccountIdMother.random(),
-      TemplateIdMother.random(),
-      name,
       TemplateShortDescriptionMother.random(),
       TemplatePreviewMother.random(),
       TemplateVariableMother.random(),

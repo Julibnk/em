@@ -153,7 +153,7 @@ model Message {
 
   // Main fields
   status         MessageStatus
-  sentDate       DateTime
+  sentDate       DateTime?
   scheduleDate   DateTime?
   parameter1     String?
   parameter2     String?
