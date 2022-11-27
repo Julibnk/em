@@ -68,7 +68,7 @@ export class TemplateMother {
   }
 
   static initialState(accountId?: AccountId): Template {
-    return Template.create(
+    return this.create(
       accountId || AccountIdMother.random(),
       TemplateIdMother.random(),
       TemplateNameMother.random(),
