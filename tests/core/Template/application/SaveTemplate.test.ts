@@ -44,6 +44,16 @@ describe('SaveTemplate use case', () => {
       await saveTemplateUseCase.run(useCaseParams);
       expect(repository.mockSave).toHaveBeenCalledWith(changedTemplate);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalTemplate);
+
+      template.change = jest.fn();
+      await saveTemplateUseCase.run(useCaseParams);
+      expect(template.change).toHaveBeenCalledWith(
+        changedTemplate.shortDescription,
+        changedTemplate.preview,
+        changedTemplate.variable1,
+        changedTemplate.variable2,
+        changedTemplate.variable3
+      );
     });
 
     it('Should throw an exception if variables are inconsistent', async () => {

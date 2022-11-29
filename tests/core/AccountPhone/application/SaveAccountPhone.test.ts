@@ -33,6 +33,10 @@ describe('SaveAccountPhone use case', () => {
       await saveAccountPhoneUseCase.run(useCaseParams);
       expect(repository.mockSave).toHaveBeenCalledWith(changedPhone);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalPhone);
+
+      accountPhone.change = jest.fn();
+      await saveAccountPhoneUseCase.run(useCaseParams);
+      expect(accountPhone.change).toHaveBeenCalledWith(changedPhone.phone);
     });
   });
 

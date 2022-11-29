@@ -39,6 +39,14 @@ describe('SaveAccount use case', () => {
       await saveAccountUseCase.run(useCaseParams);
       expect(repository.mockSave).toHaveBeenCalledWith(changedAccount);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalAccount);
+
+      account.change = jest.fn();
+      await saveAccountUseCase.run(useCaseParams);
+      expect(account.change).toHaveBeenCalledWith(
+        changedAccount.companyName,
+        changedAccount.address,
+        changedAccount.metaAccount
+      );
     });
   });
 

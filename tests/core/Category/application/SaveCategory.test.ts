@@ -58,6 +58,14 @@ describe('SaveCategory use case', () => {
 
       expect(repository.mockSave).toHaveBeenCalledWith(changedCategory);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalCategory);
+
+      category.change = jest.fn();
+      await saveCategoryUseCase.run(useCaseParams);
+      expect(category.change).toHaveBeenCalledWith(
+        changedCategory.name,
+        changedCategory.description,
+        changedCategory.templateIds
+      );
     });
   });
 });

@@ -43,6 +43,13 @@ describe('SaveContact use case', () => {
 
       expect(repository.mockSave).toHaveBeenCalledWith(changedContact);
       expect(repository.mockSave).not.toHaveBeenCalledWith(originalContact);
+
+      contact.change = jest.fn();
+      await saveContactUseCase.run(useCaseParams);
+      expect(contact.change).toHaveBeenCalledWith(
+        changedContact.name,
+        changedContact.lastName
+      );
     });
 
     it('should throw exception If same phone contact exists', async () => {
