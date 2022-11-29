@@ -46,8 +46,8 @@ export class TemplateMessageMother {
       parameter1,
       parameter2,
       parameter3,
-      sentDate,
-      scheduleDate
+      scheduleDate,
+      sentDate
     );
   }
 
@@ -130,6 +130,23 @@ export class TemplateMessageMother {
       MessageSentDateMother.random()
     );
   }
+
+  static inError(): TemplateMessage {
+    return this.create(
+      AccountIdMother.random(),
+      TemplateMessageIdMother.random(),
+      TemplateMessageStatus.fromValue(TemplateMessageStatuses.ERROR),
+      TemplateIdMother.random(),
+      AccountPhoneIdMother.random(),
+      ContactIdMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      null,
+      null
+    );
+  }
+
   static scheduled(): TemplateMessage {
     return this.create(
       AccountIdMother.random(),

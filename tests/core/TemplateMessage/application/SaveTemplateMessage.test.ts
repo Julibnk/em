@@ -12,6 +12,7 @@ import { TemplateMessageParameterMother } from '../domain/TemplateMessageParamet
 import { TemplateMessageScheduleDateMother } from '../domain/TemplateMessageScheduleDateMother';
 import { TemplateMessageParameterInconsistentError } from '../../../../src/core/TemplateMessage/domain/exceptions/TemplateMessageParameterInconsistentError';
 import { TemplateMessageScheduleError } from '../../../../src/core/TemplateMessage/domain/exceptions/TemplateMessageScheduleError';
+import { TemplateMessageStatusError } from '../../../../src/core/TemplateMessage/domain/exceptions/TemplateMessageStatusError';
 
 let repository: TemplateMessageRepositoryMock;
 let saveTemplateMessageUseCase: SaveTemplateMessageUseCase;
@@ -22,52 +23,87 @@ describe('SaveTemplateMessage use case', () => {
     saveTemplateMessageUseCase = new SaveTemplateMessageUseCase(repository);
   });
 
-  //   describe('=> New template message', () => {
-  //     it('Should create a template message', async () => {
-  //       const message = TemplateMessageMother.scheduled();
+  describe('=> New template message', () => {
+    it('Should create a template message', async () => {
+      const message = TemplateMessageMother.scheduled();
 
-  //       const useCaseParams = { ...message.toPrimitives() };
+      const useCaseParams = { ...message.toPrimitives() };
 
-  //       await saveTemplateMessageUseCase.run(useCaseParams);
-  //       expect(repository.mockSave).toHaveBeenCalledWith(message);
-  //     });
+      await saveTemplateMessageUseCase.run(useCaseParams);
+      expect(repository.mockSave).toHaveBeenCalledWith(message);
+    });
 
-  //     it('Should throw exception if parameters are inconsistent', async () => {
-  //       const message = TemplateMessageMother.draft();
+    it('Should throw exception if parameters are inconsistent', async () => {
+      const message = TemplateMessageMother.draft();
 
-  //       const useCaseParams = { ...message.toPrimitives() };
+      const useCaseParams = { ...message.toPrimitives() };
 
-  //       useCaseParams.parameter2 = '';
+      useCaseParams.parameter2 = '';
 
-  //       expect(
-  //         async () => await saveTemplateMessageUseCase.run(useCaseParams)
-  //       ).rejects.toThrow(TemplateMessageParameterInconsistentError);
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageParameterInconsistentError);
 
-  //       // Para no duplicar codigo, valido en el mismo test la modificacion
-  //       repository.returnFindById(message);
+      // Para no duplicar codigo, valido en el mismo test la modificacion
+      repository.returnFindById(message);
 
-  //       expect(
-  //         async () => await saveTemplateMessageUseCase.run(useCaseParams)
-  //       ).rejects.toThrow(TemplateMessageParameterInconsistentError);
-  //     });
-  //     it('Should throw exception if shcedule data is inconsistent', async () => {
-  //       const message = TemplateMessageMother.scheduled();
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageParameterInconsistentError);
+    });
 
-  //       const useCaseParams = { ...message.toPrimitives() };
-  //       useCaseParams.scheduleDate = null;
+    it('Should throw exception if status is sent', async () => {
+      const message = TemplateMessageMother.sent();
 
-  //       expect(
-  //         async () => await saveTemplateMessageUseCase.run(useCaseParams)
-  //       ).rejects.toThrow(TemplateMessageScheduleError);
+      const useCaseParams = { ...message.toPrimitives() };
 
-  //       // Para no duplicar codigo, valido en el mismo test la modificacion
-  //       repository.returnFindById(message);
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageStatusError);
 
-  //       expect(
-  //         async () => await saveTemplateMessageUseCase.run(useCaseParams)
-  //       ).rejects.toThrow(TemplateMessageScheduleError);
-  //     });
-  //   });
+      //   // Para no duplicar codigo, valido en el mismo test la modificacion
+      repository.returnFindById(message);
+
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageStatusError);
+    });
+
+    it('Should throw exception if status is error', async () => {
+      const message = TemplateMessageMother.inError();
+
+      const useCaseParams = { ...message.toPrimitives() };
+
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageStatusError);
+
+      //   // Para no duplicar codigo, valido en el mismo test la modificacion
+      repository.returnFindById(message);
+
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageStatusError);
+    });
+
+    it('Should throw exception if shcedule data is inconsistent', async () => {
+      const message = TemplateMessageMother.scheduled();
+
+      const useCaseParams = { ...message.toPrimitives() };
+      useCaseParams.scheduleDate = null;
+
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageScheduleError);
+
+      //   // Para no duplicar codigo, valido en el mismo test la modificacion
+      repository.returnFindById(message);
+
+      expect(
+        async () => await saveTemplateMessageUseCase.run(useCaseParams)
+      ).rejects.toThrow(TemplateMessageScheduleError);
+    });
+  });
 
   describe('=> Update template message', () => {
     it('Should update template message if already exists', async () => {

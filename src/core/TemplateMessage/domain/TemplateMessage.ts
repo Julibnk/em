@@ -164,13 +164,13 @@ export class TemplateMessage extends AggregateRoot {
   }
 
   private ensureParameterConsistency() {
-    if (this._parameter3) {
-      if (!this._parameter2 || !this._parameter1)
+    if (this._parameter3.value) {
+      if (!this._parameter2.value || !this._parameter1.value)
         throw new TemplateMessageParameterInconsistentError(this.id);
     }
 
-    if (this._parameter2) {
-      if (!this._parameter1)
+    if (this._parameter2.value) {
+      if (!this._parameter1.value)
         throw new TemplateMessageParameterInconsistentError(this.id);
     }
   }
