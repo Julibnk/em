@@ -16,6 +16,7 @@ import {
   templateControllerModule,
   accountControllerModule,
   accountPhoneControllerModule,
+  templateMessageControllerModule,
 } from './controller';
 
 import {
@@ -29,20 +30,27 @@ import {
 
 const container = new Container();
 
+// domain
+container.load(testManagerModule, domainContainerModule);
+
+// Use cases
 container.load(
-  testManagerModule,
-  domainContainerModule,
-  categoryControllerModule,
-  contactControllerModule,
-  templateControllerModule,
+  accountUseCasesModule,
+  accountPhoneUseCasesModule,
   categoryUseCasesModule,
   contactUseCasesModule,
   templateUseCasesModule,
-  accountUseCasesModule,
-  accountPhoneUseCasesModule,
+  templateMessageUseCasesModule
+);
+
+// Controllers
+container.load(
+  categoryControllerModule,
+  contactControllerModule,
+  templateControllerModule,
   accountControllerModule,
   accountPhoneControllerModule,
-  templateMessageUseCasesModule
+  templateMessageControllerModule
 );
 
 export { container, DiDomain, DiRepository, DiController };

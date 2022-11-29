@@ -28,7 +28,7 @@ export type Params = {
 @injectable()
 export class SaveTemplateMessageUseCase {
   constructor(
-    @inject(DiRepository.category)
+    @inject(DiRepository.templateMessage)
     private repository: TemplateMessageRepository
   ) {}
 
