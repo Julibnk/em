@@ -53,6 +53,8 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
+    "@mantine/form": "^5.8.4",
+    "@mantine/hooks": "^5.8.4",
     "@prisma/client": "^4.4.0",
     "@types/uuid": "^8.3.4",
     "ajv": "^8.11.0",
@@ -68,8 +70,9 @@
     "helmet": "^5.1.0",
     "http-status": "^1.5.2",
     "i": "^0.3.7",
+    "install": "^0.13.0",
     "inversify": "^6.0.1",
-    "npm": "^8.19.2",
+    "npm": "^8.19.3",
     "reflect-metadata": "^0.1.13",
     "uuid": "^8.3.2",
     "winston": "^3.8.2"

@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import './App.css';
+
+import { MantineProvider, MantineProviderProps } from '@mantine/core';
+import { theme } from './config';
+
+import Modals from './views/Modals';
+import AppRouter from './AppRouter';
+import useInitApp from './hooks/useInitApp';
+
+const providerProps: MantineProviderProps = {
+  children: <></>,
+  classNames: {
+    Button: { label: 'button_label' },
+    TextInput: { label: 'input_label' },
+    MultiSelect: { label: 'input_label' },
+    Select: { label: 'input_label' },
+    Textarea: { label: 'input_label' },
+  },
+  defaultProps: {
+    // Button: { size: 'sm' },
+    // TextInput: { size: 'sm' },
+  },
+  theme,
+  withCSSVariables: true,
+  withGlobalStyles: true,
+  withNormalizeCSS: true,
+};
 
 function App() {
-  const [count, setCount] = useState(0)
+  useInitApp();
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <MantineProvider {...providerProps}>
+      {/* // {fullPageLoading && <FullPageLoader />} */}
+
+      <AppRouter />
+      <Modals />
+    </MantineProvider>
+  );
 }
 
-export default App
+export default App;
