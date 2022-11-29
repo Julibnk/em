@@ -7,7 +7,10 @@ import { TemplateId } from '../../../../src/core/Template/domain/value-object/Te
 import { ContactId } from '../../../../src/core/Contact/domain/value-object/ContactId';
 import { AccountPhoneId } from '../../../../src/core/AccountPhone/domain/value-object/AccountPhoneId';
 import { TemplateMessage } from '../../../../src/core/TemplateMessage/domain/TemplateMessage';
-import { TemplateMessageStatus } from '../../../../src/core/TemplateMessage/domain/value-object/TemplateMessageStatus';
+import {
+  TemplateMessageStatus,
+  TemplateMessageStatuses,
+} from '../../../../src/core/TemplateMessage/domain/value-object/TemplateMessageStatus';
 import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 import { TemplateMessageIdMother } from './TemplateMessageIdMother';
 import { MessageSentDateMother } from './MessageSentDateMother';
@@ -24,27 +27,27 @@ export class TemplateMessageMother {
     accountId: AccountId,
     id: TemplateMessageId,
     status: TemplateMessageStatus,
-    sentDate: Nullable<MessageSentDate>,
-    scheduleDate: Nullable<TemplateMessageScheduleDate>,
+    templateId: TemplateId,
+    accountPhoneId: AccountPhoneId,
+    contactId: ContactId,
     parameter1: TemplateMessageParameter,
     parameter2: TemplateMessageParameter,
     parameter3: TemplateMessageParameter,
-    templateId: TemplateId,
-    accountPhoneId: AccountPhoneId,
-    contactId: ContactId
+    scheduleDate: Nullable<TemplateMessageScheduleDate>,
+    sentDate: Nullable<MessageSentDate>
   ): TemplateMessage {
     return new TemplateMessage(
       accountId,
       id,
       status,
-      sentDate,
-      scheduleDate,
+      templateId,
+      accountPhoneId,
+      contactId,
       parameter1,
       parameter2,
       parameter3,
-      templateId,
-      accountPhoneId,
-      contactId
+      sentDate,
+      scheduleDate
     );
   }
 
@@ -53,14 +56,14 @@ export class TemplateMessageMother {
       AccountIdMother.random(),
       TemplateMessageIdMother.random(),
       TemplateMessageStatusMother.random(),
-      MessageSentDateMother.random(),
-      TemplateMessageScheduleDateMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
       TemplateIdMother.random(),
       AccountPhoneIdMother.random(),
-      ContactIdMother.random()
+      ContactIdMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      MessageSentDateMother.random(),
+      TemplateMessageScheduleDateMother.random()
     );
   }
 
@@ -69,47 +72,77 @@ export class TemplateMessageMother {
       templateMessage.accountId,
       templateMessage.id,
       templateMessage.status,
-      templateMessage.sentDate,
-      templateMessage.scheduleDate,
+      templateMessage.templateId,
+      templateMessage.accountPhoneId,
+      templateMessage.contactId,
       templateMessage.parameter1,
       templateMessage.parameter2,
       templateMessage.parameter3,
-      templateMessage.templateId,
-      templateMessage.accountPhoneId,
-      templateMessage.contactId
+      templateMessage.sentDate,
+      templateMessage.scheduleDate
     );
   }
 
-  static withStatus(
-    templateMessageStatus: TemplateMessageStatus
-  ): TemplateMessage {
+  static draft(): TemplateMessage {
     return this.create(
       AccountIdMother.random(),
       TemplateMessageIdMother.random(),
-      templateMessageStatus,
-      MessageSentDateMother.random(),
-      TemplateMessageScheduleDateMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
+      TemplateMessageStatus.fromValue(TemplateMessageStatuses.DRAFT),
       TemplateIdMother.random(),
       AccountPhoneIdMother.random(),
-      ContactIdMother.random()
+      ContactIdMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      null,
+      null
     );
   }
-  static withAccount(accountId: AccountId): TemplateMessage {
+
+  static pending(): TemplateMessage {
     return this.create(
-      accountId,
+      AccountIdMother.random(),
       TemplateMessageIdMother.random(),
-      TemplateMessageStatusMother.random(),
-      MessageSentDateMother.random(),
-      TemplateMessageScheduleDateMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
+      TemplateMessageStatus.fromValue(TemplateMessageStatuses.PENDING),
       TemplateIdMother.random(),
       AccountPhoneIdMother.random(),
-      ContactIdMother.random()
+      ContactIdMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      null,
+      null
+    );
+  }
+
+  static sent(): TemplateMessage {
+    return this.create(
+      AccountIdMother.random(),
+      TemplateMessageIdMother.random(),
+      TemplateMessageStatus.fromValue(TemplateMessageStatuses.SENT),
+      TemplateIdMother.random(),
+      AccountPhoneIdMother.random(),
+      ContactIdMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      null,
+      MessageSentDateMother.random()
+    );
+  }
+  static scheduled(): TemplateMessage {
+    return this.create(
+      AccountIdMother.random(),
+      TemplateMessageIdMother.random(),
+      TemplateMessageStatus.fromValue(TemplateMessageStatuses.SCHEDULED),
+      TemplateIdMother.random(),
+      AccountPhoneIdMother.random(),
+      ContactIdMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageScheduleDateMother.random(),
+      null
     );
   }
 
@@ -123,14 +156,14 @@ export class TemplateMessageMother {
       accountId,
       TemplateMessageIdMother.random(),
       TemplateMessageStatusMother.random(),
-      MessageSentDateMother.random(),
-      TemplateMessageScheduleDateMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
-      TemplateMessageParameterMother.random(),
       templateId,
       accountPhoneId,
-      contactId
+      contactId,
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      TemplateMessageParameterMother.random(),
+      MessageSentDateMother.random(),
+      TemplateMessageScheduleDateMother.random()
     );
   }
 }

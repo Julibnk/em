@@ -23,6 +23,7 @@ import {
   accountUseCasesModule,
   categoryUseCasesModule,
   contactUseCasesModule,
+  templateMessageUseCasesModule,
   templateUseCasesModule,
 } from './application';
 
@@ -40,7 +41,8 @@ container.load(
   accountUseCasesModule,
   accountPhoneUseCasesModule,
   accountControllerModule,
-  accountPhoneControllerModule
+  accountPhoneControllerModule,
+  templateMessageUseCasesModule
 );
 
 export { container, DiDomain, DiRepository, DiController };

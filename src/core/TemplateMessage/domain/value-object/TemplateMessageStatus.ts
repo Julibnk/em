@@ -4,6 +4,7 @@ import { InvalidArgumentError } from '../../../Shared/domain/value-object/Invali
 export enum TemplateMessageStatuses {
   DRAFT = 'DRAFT',
   SENT = 'SENT',
+  PENDING = 'PENDING',
   SCHEDULED = 'SCHEDULED',
   ERROR = 'ERROR',
 }
@@ -19,6 +20,8 @@ export class TemplateMessageStatus extends EnumValueObject<TemplateMessageStatus
         return new TemplateMessageStatus(TemplateMessageStatuses.DRAFT);
       case TemplateMessageStatuses.SENT:
         return new TemplateMessageStatus(TemplateMessageStatuses.SENT);
+      case TemplateMessageStatuses.PENDING:
+        return new TemplateMessageStatus(TemplateMessageStatuses.PENDING);
       case TemplateMessageStatuses.SCHEDULED:
         return new TemplateMessageStatus(TemplateMessageStatuses.SCHEDULED);
       case TemplateMessageStatuses.ERROR:

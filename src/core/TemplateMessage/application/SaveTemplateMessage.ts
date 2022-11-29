@@ -19,9 +19,9 @@ export type Params = {
   templateId: string;
   accountPhoneId: string;
   contactId: string;
-  parameter1: Nullable<string>;
-  parameter2: Nullable<string>;
-  parameter3: Nullable<string>;
+  parameter1: string;
+  parameter2: string;
+  parameter3: string;
   scheduleDate: Nullable<Date>;
 };
 
@@ -39,15 +39,9 @@ export class SaveTemplateMessageUseCase {
     const templateId = new TemplateId(params.templateId);
     const accountPhoneId = new AccountPhoneId(params.accountPhoneId);
     const contactId = new ContactId(params.contactId);
-    const parameter1 = params.parameter1
-      ? new TemplateMessageParameter(params.parameter1)
-      : null;
-    const parameter2 = params.parameter2
-      ? new TemplateMessageParameter(params.parameter2)
-      : null;
-    const parameter3 = params.parameter3
-      ? new TemplateMessageParameter(params.parameter3)
-      : null;
+    const parameter1 = new TemplateMessageParameter(params.parameter1);
+    const parameter2 = new TemplateMessageParameter(params.parameter2);
+    const parameter3 = new TemplateMessageParameter(params.parameter3);
     const scheduleDate = params.scheduleDate
       ? new TemplateMessageScheduleDate(params.scheduleDate)
       : null;

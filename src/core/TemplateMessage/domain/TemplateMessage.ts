@@ -15,21 +15,13 @@ import { Primitives } from '../../Shared/domain/Primitives';
 import { TemplateMessageParameterInconsistentError } from './exceptions/TemplateMessageParameterInconsistentError';
 import { TemplateMessageScheduleError } from './exceptions/TemplateMessageScheduleError';
 import { Nullable } from '../../Shared/domain/Nullable';
-import { ScheduleDateRequiredError } from './exceptions/ScheduleDateRequiredError';
+import { TemplateMessageStatusError } from './exceptions/TemplateMessageStatusError';
 
 export type TemplateMessagePrimitives = Omit<
   Primitives<TemplateMessage>,
-  | 'status'
-  | 'parameter1'
-  | 'parameter2'
-  | 'parameter3'
-  | 'sentDate'
-  | 'scheduleDate'
+  'status' | 'sentDate' | 'scheduleDate'
 > & {
   status: string;
-  parameter1: Nullable<string>;
-  parameter2: Nullable<string>;
-  parameter3: Nullable<string>;
   sentDate: Nullable<Date>;
   scheduleDate: Nullable<Date>;
 };
@@ -42,11 +34,11 @@ export class TemplateMessage extends AggregateRoot {
     private _templateId: TemplateId,
     private _accountPhoneId: AccountPhoneId,
     private _contactId: ContactId,
-    private _parameter1: Nullable<TemplateMessageParameter>,
-    private _parameter2: Nullable<TemplateMessageParameter>,
-    private _parameter3: Nullable<TemplateMessageParameter>,
-    private _sentDate: Nullable<MessageSentDate>,
-    private _scheduleDate: Nullable<TemplateMessageScheduleDate>
+    private _parameter1: TemplateMessageParameter,
+    private _parameter2: TemplateMessageParameter,
+    private _parameter3: TemplateMessageParameter,
+    private _scheduleDate: Nullable<TemplateMessageScheduleDate>,
+    private _sentDate: Nullable<MessageSentDate>
   ) {
     super();
     this.ensureConsistency();
@@ -62,18 +54,12 @@ export class TemplateMessage extends AggregateRoot {
       new TemplateId(primitives.templateId),
       new AccountPhoneId(primitives.accountPhoneId),
       new ContactId(primitives.contactId),
-      primitives.parameter1
-        ? new TemplateMessageParameter(primitives.parameter1)
-        : null,
-      primitives.parameter2
-        ? new TemplateMessageParameter(primitives.parameter2)
-        : null,
-      primitives.parameter3
-        ? new TemplateMessageParameter(primitives.parameter3)
-        : null,
-      primitives.sentDate && new MessageSentDate(primitives.sentDate),
+      new TemplateMessageParameter(primitives.parameter1),
+      new TemplateMessageParameter(primitives.parameter2),
+      new TemplateMessageParameter(primitives.parameter3),
       primitives.scheduleDate &&
-        new TemplateMessageScheduleDate(primitives.scheduleDate)
+        new TemplateMessageScheduleDate(primitives.scheduleDate),
+      primitives.sentDate && new MessageSentDate(primitives.sentDate)
     );
   }
 
@@ -84,32 +70,32 @@ export class TemplateMessage extends AggregateRoot {
     templateId: TemplateId,
     accountPhoneId: AccountPhoneId,
     contactId: ContactId,
-    parameter1: Nullable<TemplateMessageParameter>,
-    parameter2: Nullable<TemplateMessageParameter>,
-    parameter3: Nullable<TemplateMessageParameter>,
+    parameter1: TemplateMessageParameter,
+    parameter2: TemplateMessageParameter,
+    parameter3: TemplateMessageParameter,
     scheduleDate: Nullable<TemplateMessageScheduleDate>
   ): TemplateMessage {
+    if (
+      status.value !== TemplateMessageStatuses.SCHEDULED &&
+      status.value !== TemplateMessageStatuses.DRAFT &&
+      status.value !== TemplateMessageStatuses.PENDING
+    ) {
+      throw new TemplateMessageStatusError(id, status);
+    }
+
     const templateMessage = new TemplateMessage(
       accountId,
       id,
-      TemplateMessageStatus.fromValue(TemplateMessageStatuses.DRAFT),
+      status,
       templateId,
       accountPhoneId,
       contactId,
       parameter1,
       parameter2,
       parameter3,
-      null,
+      scheduleDate,
       null
     );
-
-    if (status.value === TemplateMessageStatuses.SCHEDULED) {
-      templateMessage.schedule(scheduleDate);
-    }
-
-    if (status.value === TemplateMessageStatuses.SENT) {
-      templateMessage.send();
-    }
 
     return templateMessage;
   }
@@ -119,12 +105,18 @@ export class TemplateMessage extends AggregateRoot {
     templateId: TemplateId,
     accountPhoneId: AccountPhoneId,
     contactId: ContactId,
-    parameter1: Nullable<TemplateMessageParameter>,
-    parameter2: Nullable<TemplateMessageParameter>,
-    parameter3: Nullable<TemplateMessageParameter>,
+    parameter1: TemplateMessageParameter,
+    parameter2: TemplateMessageParameter,
+    parameter3: TemplateMessageParameter,
     scheduleDate: Nullable<TemplateMessageScheduleDate>
   ) {
-    if (this.status.value === TemplateMessageStatuses.SENT) return;
+    if (
+      status.value !== TemplateMessageStatuses.SCHEDULED &&
+      status.value !== TemplateMessageStatuses.DRAFT &&
+      status.value !== TemplateMessageStatuses.PENDING
+    ) {
+      throw new TemplateMessageStatusError(this.id, status);
+    }
 
     this._parameter1 = parameter1;
     this._parameter2 = parameter2;
@@ -132,25 +124,9 @@ export class TemplateMessage extends AggregateRoot {
     this._templateId = templateId;
     this._accountPhoneId = accountPhoneId;
     this._contactId = contactId;
+    this._scheduleDate = scheduleDate;
 
     this.ensureConsistency();
-
-    if (status.value === TemplateMessageStatuses.SCHEDULED) {
-      this.schedule(scheduleDate);
-    }
-
-    if (status.value === TemplateMessageStatuses.SENT) {
-      this.send();
-    }
-  }
-
-  schedule(scheduleDate: Nullable<TemplateMessageScheduleDate>) {
-    if (!scheduleDate) throw ScheduleDateRequiredError;
-
-    this._status = TemplateMessageStatus.fromValue(
-      TemplateMessageStatuses.SCHEDULED
-    );
-    this._scheduleDate = scheduleDate;
   }
 
   send() {
@@ -158,6 +134,12 @@ export class TemplateMessage extends AggregateRoot {
       TemplateMessageStatuses.SENT
     );
     this._sentDate = new MessageSentDate(new Date());
+  }
+
+  setErrorStatus() {
+    this._status = TemplateMessageStatus.fromValue(
+      TemplateMessageStatuses.ERROR
+    );
   }
 
   toPrimitives(): TemplateMessagePrimitives {
@@ -225,15 +207,15 @@ export class TemplateMessage extends AggregateRoot {
     return this._scheduleDate;
   }
 
-  get parameter1(): Nullable<TemplateMessageParameter> {
+  get parameter1(): TemplateMessageParameter {
     return this._parameter1;
   }
 
-  get parameter2(): Nullable<TemplateMessageParameter> {
+  get parameter2(): TemplateMessageParameter {
     return this._parameter2;
   }
 
-  get parameter3(): Nullable<TemplateMessageParameter> {
+  get parameter3(): TemplateMessageParameter {
     return this._parameter3;
   }
 }

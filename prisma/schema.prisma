@@ -19,6 +19,7 @@ enum DictionaryKey {
 enum MessageStatus {
   DRAFT
   SENT
+  PENDING
   SCHEDULED
   ERROR
 }
