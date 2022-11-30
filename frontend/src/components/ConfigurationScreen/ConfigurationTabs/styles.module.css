@@ -1,3 +1,7 @@
-.body {
+.tab[data-active='true'] {
+  background: var(--color-primary-1);
+}
+
+.panel {
   padding-top: 2.4rem;
 }
