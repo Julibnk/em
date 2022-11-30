@@ -5,7 +5,7 @@ import { ActionIcon, ActionIconProps, Navbar } from '@mantine/core';
 import { setNavbarCollapsed } from '../../../../../store/layout-slice';
 import { useDispatch, useSelector } from '../../../../../store/store';
 
-const NavBarFooter = () => {
+export const NavBarFooter = () => {
   const dispatch = useDispatch();
 
   const { navbarCollapsed } = useSelector((state) => state.layout);
@@ -30,5 +30,3 @@ const NavBarFooter = () => {
     </Navbar.Section>
   );
 };
-
-export default NavBarFooter;

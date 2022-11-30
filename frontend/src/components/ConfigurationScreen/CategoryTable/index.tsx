@@ -1,8 +1,5 @@
 import styles from './styles.module.css';
-
-// import { useTranslation } from 'react-i18next';
-
-import CategoryTableRow from './row';
+import { CategoryTableRow } from './row';
 import { useEffect } from 'react';
 import { Table, Th } from '../../shared/MantineOverwrite/Table';
 import { init } from '../../../store/category-slice';
@@ -10,7 +7,7 @@ import { useDispatch, useSelector } from '../../../store/store';
 import { selectAllCategories } from '../../../store/category-selector';
 import { useTranslation } from '../../../hooks/useTranslation';
 
-const CategoryTable = () => {
+export const CategoryTable = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,5 +39,3 @@ const CategoryTable = () => {
     </Table>
   );
 };
-
-export default CategoryTable;

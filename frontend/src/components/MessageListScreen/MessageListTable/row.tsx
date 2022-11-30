@@ -17,7 +17,7 @@ type Props = {
   message: Message;
 };
 
-const TemplateTableRow = ({ message }: Props) => {
+export const MessageTableRow = ({ message }: Props) => {
   const { id } = message;
 
   const dispatch = useDispatch();
@@ -68,5 +68,3 @@ const TemplateTableRow = ({ message }: Props) => {
     </tr>
   );
 };
-
-export default TemplateTableRow;

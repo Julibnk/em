@@ -9,7 +9,7 @@ import {
   Textarea,
   Alert,
 } from '@mantine/core';
-import SecondaryButton from '../../shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -36,7 +36,7 @@ type Props = {
   handleOnClose: () => void;
 };
 
-const TemplateForm = ({ handleOnClose }: Props) => {
+export const TemplateForm = ({ handleOnClose }: Props) => {
   const t = useTranslation();
 
   const template = useSelector((state) => selectSelectedTemplate(state));
@@ -131,5 +131,3 @@ const TemplateForm = ({ handleOnClose }: Props) => {
     </form>
   );
 };
-
-export default TemplateForm;

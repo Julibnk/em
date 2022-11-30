@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from '@mantine/core';
 import styles from './styles.module.css';
 
-const SecondaryButton = (props) => {
+export const SecondaryButton = (props) => {
   const buttonProps: ButtonProps = {
     classNames: {
       outline: styles.outline,
@@ -13,5 +13,3 @@ const SecondaryButton = (props) => {
   };
   return <Button {...buttonProps}></Button>;
 };
-
-export default SecondaryButton;

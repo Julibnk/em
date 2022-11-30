@@ -1,7 +1,7 @@
-import { Modal, ModalProps } from '@mantine/core';
+import { Modal as MantineModal, ModalProps } from '@mantine/core';
 import styles from './styles.module.css';
 
-const CustomModal = (props: ModalProps) => {
+export const Modal = (props: ModalProps) => {
   const customProps: ModalProps = {
     classNames: {
       modal: styles.modal,
@@ -15,7 +15,5 @@ const CustomModal = (props: ModalProps) => {
     ...props,
   };
 
-  return <Modal {...customProps} />;
+  return <MantineModal {...customProps} />;
 };
-
-export default CustomModal;

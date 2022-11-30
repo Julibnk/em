@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 import { ModalProps } from '@mantine/core';
 
 // import { Modal } from '@mantine/core';
-import Modal from '../../shared/MantineOverwrite/Modal';
-import CategoryForm from './form';
+import { Modal } from '../../shared/MantineOverwrite/Modal';
+import { CategoryForm } from './form';
 import { setModalOpenend } from '../../../store/layout-slice';
 import { useSelector, useDispatch } from '../../../store/store';
 import { selectModal } from '../../../store/layout-selector';
@@ -12,7 +12,7 @@ import { selectSelectedCategory } from '../../../store/category-selector';
 
 import { ModalMode } from '../../../store/layout-slice';
 
-const CategoryModal = () => {
+export const CategoryModal = () => {
   const dispatch = useDispatch();
   const modalState = useSelector((state) => selectModal(state, 'category'));
   const category = useSelector((state) => selectSelectedCategory(state));
@@ -43,5 +43,3 @@ function getModalTitle(mode: ModalMode, categoryName: string): string {
 
   return t('create_subject', { subject: t('category', { count: 1 }) });
 }
-
-export default CategoryModal;

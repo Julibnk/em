@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
 import { Button, Group, MultiSelect, TextInput } from '@mantine/core';
-import SecondaryButton from '../../shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from '../../../store/store';
@@ -20,7 +20,7 @@ type Props = {
   handleOnClose: () => void;
 };
 
-const CategoryForm = ({ handleOnClose }: Props) => {
+export const CategoryForm = ({ handleOnClose }: Props) => {
   const t = useTranslation();
 
   const category = useSelector((state) => selectSelectedCategory(state));
@@ -66,5 +66,3 @@ const CategoryForm = ({ handleOnClose }: Props) => {
     </form>
   );
 };
-
-export default CategoryForm;

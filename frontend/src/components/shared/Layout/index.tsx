@@ -1,8 +1,8 @@
 import styles from './styles.module.css';
-import Navbar from './Navbar';
-import Main from './Main';
+import { Navbar } from './Navbar';
+import { Main } from './Main';
 
-const Layout = () => {
+export const Layout = () => {
   return (
     <div className={styles.container}>
       <Navbar />
@@ -10,5 +10,3 @@ const Layout = () => {
     </div>
   );
 };
-
-export default Layout;

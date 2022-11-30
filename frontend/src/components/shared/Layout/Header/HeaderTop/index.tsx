@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import { Breadcrum } from './Breadcrum';
 import { HeaderTopRight } from './HeaderTopRight';
 
-const HeaderTop = () => {
+export const HeaderTop = () => {
   return (
     <div className={styles.root}>
       <Breadcrum />
@@ -11,5 +11,3 @@ const HeaderTop = () => {
     </div>
   );
 };
-
-export default HeaderTop;

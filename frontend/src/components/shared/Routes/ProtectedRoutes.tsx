@@ -2,9 +2,9 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { routes } from '../../../config';
-import Layout from '../Layout';
+import { Layout } from '../Layout';
 
-const ProtectedRoutes = () => {
+export const ProtectedRoutes = () => {
   // const HomeScreen = lazy(() => import('../../views/HomeScreen'));
   // const MessageScreen = lazy(() => import('../../views/MessageScreen'));
   // const ContactScreen = lazy(() => import('../../views/ContactScreen'));
@@ -76,5 +76,3 @@ const ProtectedRoutes = () => {
     </Routes>
   );
 };
-
-export default ProtectedRoutes;

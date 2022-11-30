@@ -1,11 +1,11 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from '../../store/store';
+import { useSelector } from '../../../store/store';
 
 export interface ILocationState {
   from: { pathname?: string; search?: string };
 }
 
-const PublicRoutes = () => {
+export const PublicRoutes = () => {
   // const location = useLocation();
 
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -23,5 +23,3 @@ const PublicRoutes = () => {
     <Outlet />
   );
 };
-
-export default PublicRoutes;

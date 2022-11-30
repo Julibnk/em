@@ -6,7 +6,7 @@ import {
 import { Navbar } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import NavBarMenuItem from '../NavBarMenuItem';
+import { NavBarMenuItem } from '../NavBarMenuItem';
 // import { useTranslation } from 'react-i18next';
 import { faGear, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from '../../../../../hooks/useTranslation';
@@ -17,7 +17,7 @@ const ContactIcon = <FontAwesomeIcon icon={faAddressBook} />;
 const ConfigurationIcon = <FontAwesomeIcon icon={faGear} />;
 const UserIcon = <FontAwesomeIcon icon={faUser} />;
 
-const NavBarMenu = () => {
+export const NavBarMenu = () => {
   const t = useTranslation();
 
   return (
@@ -30,7 +30,7 @@ const NavBarMenu = () => {
       }}
       grow
     >
-      <NavBarMenuItem to='/home' text={t('home')} icon={HomeIcon} />
+      <NavBarMenuItem to='/' text={t('home')} icon={HomeIcon} />
       <NavBarMenuItem
         to='/message'
         text={t('message', { plural: true })}
@@ -51,5 +51,3 @@ const NavBarMenu = () => {
     </Navbar.Section>
   );
 };
-
-export default NavBarMenu;

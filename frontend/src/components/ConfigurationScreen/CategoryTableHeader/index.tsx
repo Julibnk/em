@@ -9,7 +9,7 @@ import { setModalOpenend } from '../../../store/layout-slice';
 import { setSelectedId } from '../../../store/category-slice';
 import { useTranslation } from '../../../hooks/useTranslation';
 
-const CategoryTableHeader = () => {
+export const CategoryTableHeader = () => {
   const t = useTranslation();
   const dispatch = useDispatch();
 
@@ -37,5 +37,3 @@ const CategoryTableHeader = () => {
     </div>
   );
 };
-
-export default CategoryTableHeader;

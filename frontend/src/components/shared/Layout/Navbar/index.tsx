@@ -1,13 +1,13 @@
-import { Navbar } from '@mantine/core';
+import { Navbar as MantineNavbar } from '@mantine/core';
 // import { useSelector } from '@store/store';
 
-import NavBarFooter from './NavBarFooter';
-import NavBarHeader from './NavBarHeader';
-import NavBarMenu from './NavBarMenu';
+import { NavBarFooter } from './NavBarFooter';
+import { NavBarHeader } from './NavBarHeader';
+import { NavBarMenu } from './NavBarMenu';
 
 import styles from './styles.module.css';
 
-const CustomNavbar = () => {
+export const Navbar = () => {
   const navbarProps = {
     classNames: {
       root: `${styles.root}`,
@@ -15,12 +15,10 @@ const CustomNavbar = () => {
   };
 
   return (
-    <Navbar {...navbarProps}>
+    <MantineNavbar {...navbarProps}>
       <NavBarHeader />
       <NavBarMenu />
       <NavBarFooter />
-    </Navbar>
+    </MantineNavbar>
   );
 };
-
-export default CustomNavbar;

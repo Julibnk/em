@@ -1,8 +1,8 @@
 import styles from './styles.module.css';
 import { Outlet } from 'react-router-dom';
-import Header from '../Header';
+import { Header } from '../Header';
 
-const Main = () => {
+export const Main = () => {
   return (
     <main>
       <div className={styles.main_container}>
@@ -14,5 +14,3 @@ const Main = () => {
     </main>
   );
 };
-
-export default Main;

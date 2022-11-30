@@ -1,7 +1,5 @@
-import TemplateTabs from './ConfigurationTabs';
+import { ConfigurationTabs } from './ConfigurationTabs';
 
-const TemplateScreen = () => {
-  return <TemplateTabs></TemplateTabs>;
+export const TemplateScreen = () => {
+  return <ConfigurationTabs></ConfigurationTabs>;
 };
-
-export default TemplateScreen;

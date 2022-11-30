@@ -1,15 +1,15 @@
 import { useCallback } from 'react';
 import { ModalProps } from '@mantine/core';
 
-import Modal from '../../shared/MantineOverwrite/Modal';
+import { Modal } from '../../shared/MantineOverwrite/Modal';
 import { ModalMode, setModalOpenend } from '../../../store/layout-slice';
 import { useSelector, useDispatch } from '../../../store/store';
-import TemplateForm from './form';
+import { TemplateForm } from './form';
 import { t } from 'i18next';
 import { selectModal } from '../../../store/layout-selector';
 import { selectSelectedTemplate } from '../../../store/template-selector';
 
-const TemplateModal = () => {
+export const TemplateModal = () => {
   const dispatch = useDispatch();
   const modalState = useSelector((state) => selectModal(state, 'template'));
   const template = useSelector((state) => selectSelectedTemplate(state));
@@ -41,5 +41,3 @@ function getModalTitle(mode: ModalMode, templateName: string): string {
 
   return t('create_subject', { subject: t('template', { count: 1 }) });
 }
-
-export default TemplateModal;

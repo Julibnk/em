@@ -7,7 +7,7 @@ import { setModalOpenend } from '../../../store/layout-slice';
 import { setSelectedId } from '../../../store/template-slice';
 import { useTranslation } from '../../../hooks/useTranslation';
 
-const TemplateTableHeader = () => {
+export const TemplateTableHeader = () => {
   const t = useTranslation();
 
   const dispatch = useDispatch();
@@ -37,5 +37,3 @@ const TemplateTableHeader = () => {
     </div>
   );
 };
-
-export default TemplateTableHeader;

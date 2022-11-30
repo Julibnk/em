@@ -9,12 +9,12 @@ import {
 // import { useTranslation } from 'react-i18next';
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
-import SecondaryButton from '../../shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../../hooks/useTranslation';
 
-const MessageLoadHeader = () => {
+export const MessageLoadHeader = () => {
   const t = useTranslation();
 
   const dispatch = useDispatch();
@@ -61,5 +61,3 @@ const MessageLoadHeader = () => {
     </div>
   );
 };
-
-export default MessageLoadHeader;

@@ -31,7 +31,7 @@ const getClassNames = (variant: ButtonVariant, collapsed: boolean) => {
   };
 };
 
-const NavBarMenuItem = ({ text, icon, className, to }: Props) => {
+export const NavBarMenuItem = ({ text, icon, className, to }: Props) => {
   const { navbarCollapsed } = useSelector((state) => state.layout);
 
   const resolved = useResolvedPath(to);
@@ -54,5 +54,3 @@ const NavBarMenuItem = ({ text, icon, className, to }: Props) => {
     </Button>
   );
 };
-
-export default NavBarMenuItem;

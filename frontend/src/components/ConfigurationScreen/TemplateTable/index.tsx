@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from '../../../store/store';
 import { selectAllTemplates } from '../../../store/template-selector';
 import { init } from '../../../store/template-slice';
 import { useEffect } from 'react';
-import TemplateTableRow from './row';
+import { TemplateTableRow } from './row';
 import { useTranslation } from '../../../hooks/useTranslation';
 
-const TemplateTable = () => {
+export const TemplateTable = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,5 +36,3 @@ const TemplateTable = () => {
     </Table>
   );
 };
-
-export default TemplateTable;

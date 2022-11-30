@@ -14,7 +14,7 @@ type Props = {
   category: Category;
 };
 
-const CategoryTableRow = ({ category }: Props) => {
+export const CategoryTableRow = ({ category }: Props) => {
   const { id, name, description, templateIds } = category;
 
   const dispatch = useDispatch();
@@ -56,5 +56,3 @@ const CategoryTableRow = ({ category }: Props) => {
     </tr>
   );
 };
-
-export default CategoryTableRow;

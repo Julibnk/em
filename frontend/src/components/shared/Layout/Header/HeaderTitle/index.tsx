@@ -5,7 +5,7 @@ import { routes } from '../../../../../config';
 
 import { Routes, Route } from 'react-router-dom';
 
-const HeaderTitle = () => {
+export const HeaderTitle = () => {
   return (
     <Routes>
       {routes.map(({ path, title }, i) => {
@@ -24,5 +24,3 @@ const HeaderTitle = () => {
     </Routes>
   );
 };
-
-export default HeaderTitle;

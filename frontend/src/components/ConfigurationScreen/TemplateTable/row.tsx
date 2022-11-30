@@ -22,7 +22,7 @@ type Props = {
   template: Template;
 };
 
-const TemplateTableRow = ({ template }: Props) => {
+export const TemplateTableRow = ({ template }: Props) => {
   const {
     id,
     name,
@@ -82,5 +82,3 @@ const TemplateTableRow = ({ template }: Props) => {
     </tr>
   );
 };
-
-export default TemplateTableRow;

@@ -3,9 +3,9 @@ import './App.css';
 import { MantineProvider, MantineProviderProps } from '@mantine/core';
 import { theme } from './config';
 
-import Modals from './components/Modals';
-import AppRouter from './AppRouter';
-import useInitApp from './hooks/useInitApp';
+import { Modals } from './components/Modals';
+import { AppRouter } from './_AppRouter';
+import { useInitApp } from './hooks/useInitApp';
 import { createClient } from '@supabase/supabase-js';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 const supabase = createClient(
@@ -32,7 +32,7 @@ const providerProps: MantineProviderProps = {
   withNormalizeCSS: true,
 };
 
-function AppTempSupabase() {
+export const AppTempSupabase = () => {
   useInitApp();
 
   console.log(window.location.href);
@@ -55,6 +55,4 @@ function AppTempSupabase() {
     />
     // </MantineProvider>
   );
-}
-
-export default AppTempSupabase;
+};

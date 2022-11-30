@@ -3,9 +3,9 @@ import './App.css';
 import { MantineProvider, MantineProviderProps } from '@mantine/core';
 import { theme } from './config';
 
-import Modals from './components/Modals';
-import AppRouter from './AppRouter';
-import useInitApp from './hooks/useInitApp';
+import { Modals } from './components/Modals';
+import { AppRouter } from './AppRouter';
+import { useInitApp } from './hooks/useInitApp';
 
 const providerProps: MantineProviderProps = {
   children: <></>,
@@ -25,7 +25,7 @@ const providerProps: MantineProviderProps = {
   withNormalizeCSS: true,
 };
 
-function App() {
+export const App = () => {
   useInitApp();
 
   return (
@@ -35,6 +35,4 @@ function App() {
       <Modals />
     </MantineProvider>
   );
-}
-
-export default App;
+};

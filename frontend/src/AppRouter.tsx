@@ -1,39 +1,28 @@
-// import { Suspense, lazy } from "react";
-// import { Suspense } from "react";
-import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import { HomeScreen } from './components/HomeScreen';
+import { NotFoundScreen } from './components/NotFoundScreen';
+import { Layout } from './components/shared/Layout';
+import { MessageScreen } from './components/MessageScreen';
+import { ContactScreen } from './components/ContactScreen';
+import { TemplateScreen } from './components/ConfigurationScreen';
+import { ProfileScreen } from './components/ProfileScreen';
 
-// import FullPageLoader from "@components/FullPageLoader/FullPageLoader";
-// import PublicRoutes from "@components/Routes/PublicRoutes";
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <NotFoundScreen />,
+    children: [
+      { index: true, element: <HomeScreen /> },
+      // { path: 'home', element: <HomeScreen /> },
+      { path: 'message', element: <MessageScreen /> },
+      { path: 'contact', element: <ContactScreen /> },
+      { path: 'configuration', element: <TemplateScreen /> },
+      { path: 'profile', element: <ProfileScreen /> },
+    ],
+  },
+]);
 
-import ProtectedRoutes from './components/shared/Routes/ProtectedRoutes';
-import PrivateRoutes from './components/shared/Routes/PrivateRoutes';
-
-// const LoginPage = lazy(() => import("@views/Login/LoginPage"));
-// const NotFoundComponent = lazy(
-//   () => import("@components/Routes/NotFoundComponent")
-// );
-
-function AppRouter() {
-  return (
-    <Router>
-      {/* <Suspense fallback={<FullPageLoader />}> */}
-      {/* <Suspense> */}
-      <Routes>
-        {/* <Route path="/" element={<PublicRoutes />}>
-            <Route path="login/*" element={<h1></h1>} />
-          </Route> */}
-
-        <Route element={<PrivateRoutes />}>
-          <Route path='/*' element={<ProtectedRoutes />} />
-        </Route>
-
-        {/* <Route path="*">
-            <Route element={<NotFoundComponent />} />
-          </Route> */}
-      </Routes>
-      {/* </Suspense> */}
-    </Router>
-  );
-}
-
-export default AppRouter;
+export const AppRouter = () => {
+  return <RouterProvider router={router}></RouterProvider>;
+};

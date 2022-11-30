@@ -1,8 +1,8 @@
-import { ScreenContent } from '../../_components/Layout/ScreenContent';
-import MessageListTable from './MessageListTable';
-import MessageListHeader from './MessageListHeader';
+import { ScreenContent } from '../../components/shared/Layout/ScreenContent';
+import { MessageListTable } from './MessageListTable';
+import { MessageListHeader } from './MessageListHeader';
 
-const MessageListScreen = () => {
+export const MessageListScreen = () => {
   return (
     <ScreenContent>
       <MessageListHeader />
@@ -10,5 +10,3 @@ const MessageListScreen = () => {
     </ScreenContent>
   );
 };
-
-export default MessageListScreen;
