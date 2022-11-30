@@ -2,7 +2,7 @@ import { MessageListScreen } from '../MessageListScreen';
 import { MessageLoadScreen } from '../MessageLoadScreen';
 import { Route, Routes } from 'react-router-dom';
 
-export const MessageScreen = () => {
+const MessageScreen = () => {
   return (
     <Routes>
       <Route index element={<MessageListScreen />} />
@@ -10,3 +10,5 @@ export const MessageScreen = () => {
     </Routes>
   );
 };
+
+export default MessageScreen;

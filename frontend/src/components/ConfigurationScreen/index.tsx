@@ -1,5 +1,5 @@
 import { ConfigurationTabs } from './ConfigurationTabs';
 
-export const TemplateScreen = () => {
+export const ConfigurationScreen = () => {
   return <ConfigurationTabs></ConfigurationTabs>;
 };

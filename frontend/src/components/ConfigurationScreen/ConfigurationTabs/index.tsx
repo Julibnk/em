@@ -12,29 +12,32 @@ import { useTranslation } from '../../../hooks/useTranslation';
 export const ConfigurationTabs = () => {
   const t = useTranslation();
   const tabsProps: TabsProps = {
-    variant: 'pills',
+    // variant: 'pills',
     children: <></>,
-    classNames: { panel: styles.body },
+    classNames: { tab: styles.tab, panel: styles.panel },
+    defaultValue: 'template',
   };
 
   return (
     <Tabs {...tabsProps}>
       <Tabs.List>
-        <Tabs.Tab value='template'>{t('template', { plural: true })}</Tabs.Tab>
         <Tabs.Tab value='category'>{t('category', { plural: true })}</Tabs.Tab>
+        <Tabs.Tab value='template'>
+          {t('whatsappTemplate', { plural: true })}
+        </Tabs.Tab>
       </Tabs.List>
-
-      <Tabs.Panel value='template'>
-        <ScreenContent>
-          <TemplateTableHeader />
-          <TemplateTable />
-        </ScreenContent>{' '}
-      </Tabs.Panel>
 
       <Tabs.Panel value='category'>
         <ScreenContent>
           <CategoryTableHeader />
           <CategoryTable />
+        </ScreenContent>
+      </Tabs.Panel>
+
+      <Tabs.Panel value='template'>
+        <ScreenContent>
+          <TemplateTableHeader />
+          <TemplateTable />
         </ScreenContent>
       </Tabs.Panel>
     </Tabs>
