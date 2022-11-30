@@ -8,7 +8,7 @@ import AppTempSupabase from './AppTempSupabase';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
-    {/* <App /> */}
-    <AppTempSupabase />
+    <App />
+    {/* <AppTempSupabase /> */}
   </Provider>
 );

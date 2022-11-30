@@ -9,18 +9,17 @@ import useInitApp from './hooks/useInitApp';
 
 const providerProps: MantineProviderProps = {
   children: <></>,
-  classNames: {
-    Button: { label: 'button_label' },
-    TextInput: { label: 'input_label' },
-    MultiSelect: { label: 'input_label' },
-    Select: { label: 'input_label' },
-    Textarea: { label: 'input_label' },
+
+  theme: {
+    components: {
+      Button: { classNames: { label: 'button_label' } },
+      TextInput: { classNames: { label: 'input_label' } },
+      MultiSelect: { classNames: { label: 'input_label' } },
+      Select: { classNames: { label: 'input_label' } },
+      Textarea: { classNames: { label: 'input_label' } },
+    },
+    ...theme,
   },
-  defaultProps: {
-    // Button: { size: 'sm' },
-    // TextInput: { size: 'sm' },
-  },
-  theme,
   withCSSVariables: true,
   withGlobalStyles: true,
   withNormalizeCSS: true,
@@ -32,7 +31,6 @@ function App() {
   return (
     <MantineProvider {...providerProps}>
       {/* // {fullPageLoading && <FullPageLoader />} */}
-
       <AppRouter />
       <Modals />
     </MantineProvider>

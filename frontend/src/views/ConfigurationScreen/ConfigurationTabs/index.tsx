@@ -7,11 +7,10 @@ import CategoryTableHeader from '../CategoryTableHeader';
 import CategoryTable from '../CategoryTable';
 import TemplateTableHeader from '../TemplateTableHeader';
 import TemplateTable from '../TemplateTable';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 const ConfigurationTabs = () => {
-  const { t } = useTranslation();
-
+  const t = useTranslation();
   const tabsProps: TabsProps = {
     variant: 'pills',
     children: <></>,
@@ -21,8 +20,8 @@ const ConfigurationTabs = () => {
   return (
     <Tabs {...tabsProps}>
       <Tabs.List>
-        <Tabs.Tab value='template'>{t('template', { count: 0 })}</Tabs.Tab>
-        <Tabs.Tab value='category'>{t('category', { count: 0 })}</Tabs.Tab>
+        <Tabs.Tab value='template'>{t('template', { plural: true })}</Tabs.Tab>
+        <Tabs.Tab value='category'>{t('category', { plural: true })}</Tabs.Tab>
       </Tabs.List>
 
       <Tabs.Panel value='template'>

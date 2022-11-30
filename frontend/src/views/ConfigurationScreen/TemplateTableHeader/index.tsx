@@ -2,13 +2,13 @@ import styles from './styles.module.css';
 import { Button, TextInput } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
 import { setSelectedId } from '../../../store/template-slice';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 const TemplateTableHeader = () => {
-  const { t } = useTranslation();
+  const t = useTranslation();
 
   const dispatch = useDispatch();
 

@@ -9,7 +9,6 @@ import {
   Textarea,
   Alert,
 } from '@mantine/core';
-import { useTranslation } from 'react-i18next';
 import SecondaryButton from '../../../components/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
@@ -21,6 +20,7 @@ import { useSelector } from '../../../store/store';
 import { selectCategoriesForCombo } from '../../../store/category-selector';
 import { selectSelectedTemplate } from '../../../store/template-selector';
 import { selectModal } from '../../../store/layout-selector';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 type TemplateFormState = {
   name: string;
@@ -37,7 +37,7 @@ type Props = {
 };
 
 const TemplateForm = ({ handleOnClose }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslation();
 
   const template = useSelector((state) => selectSelectedTemplate(state));
   const categories = useSelector((state) => selectCategoriesForCombo(state));
@@ -115,7 +115,7 @@ const TemplateForm = ({ handleOnClose }: Props) => {
 
       <MultiSelect
         data={categories}
-        label={t('category', { count: 0 })}
+        label={t('category', { plural: true })}
         {...form.getInputProps('categoryIds')}
       />
 

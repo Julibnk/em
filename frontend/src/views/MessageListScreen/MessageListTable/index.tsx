@@ -1,13 +1,12 @@
 import { Table, Th } from '../../../components/MantineOverwrite/Table';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from '../../../store/store';
 import MessageTableRow from './row';
 import { selectAllMessages } from '../../../store/message-selector';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 const MessageListTable = () => {
   const messages = useSelector((state) => selectAllMessages(state));
-
-  const { t } = useTranslation();
+  const t = useTranslation();
 
   return (
     <Table>
@@ -15,8 +14,8 @@ const MessageListTable = () => {
         <tr>
           <Th>{t('name')}</Th>
           <Th>{t('preview')}</Th>
-          <Th textAlign='center'>{t('variable', { count: 0 })}</Th>
-          <Th textAlign='center'>{t('category', { count: 0 })}</Th>
+          <Th textAlign='center'>{t('variable', { plural: true })}</Th>
+          <Th textAlign='center'>{t('category', { plural: true })}</Th>
           <Th textAlign='center'>{t('actions')}</Th>
         </tr>
       </thead>

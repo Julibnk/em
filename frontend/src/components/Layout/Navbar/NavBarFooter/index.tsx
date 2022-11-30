@@ -14,16 +14,17 @@ const NavBarFooter = () => {
     dispatch(setNavbarCollapsed(!navbarCollapsed));
   };
 
-  const actionIconProps: ActionIconProps<'button'> = {
+  const actionIconProps: ActionIconProps = {
     variant: 'filled',
     size: 'xl',
     color: 'turquoise',
-    onClick: handleClick,
+    // onClick: handleClick,
+    // type: 'button',
   };
 
   return (
     <Navbar.Section className={styles.root}>
-      <ActionIcon {...actionIconProps}>
+      <ActionIcon onClick={handleClick} {...actionIconProps}>
         <FontAwesomeIcon icon={faBars} />
       </ActionIcon>
     </Navbar.Section>
