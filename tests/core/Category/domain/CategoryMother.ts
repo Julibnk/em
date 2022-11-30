@@ -8,6 +8,7 @@ import { AccountIdMother } from '../../Account/domain/AccountIdMother';
 import { CategoryIdMother } from './CategoryIdMother';
 import { CategoryNameMother } from './CategoryNameMother';
 import { CategoryDescriptionMother } from './CategoryDescriptionMother';
+import { TemplateIdMother } from '../../Template/domain/TemplateIdMother';
 
 export class CategoryMother {
   static create(
@@ -20,16 +21,58 @@ export class CategoryMother {
     return new Category(accountId, id, name, description, templateIds);
   }
 
-  static random(
-    accountId?: AccountId,
-    templateIds?: Array<TemplateId>
-  ): Category {
+  static random(): Category {
     return this.create(
-      accountId || AccountIdMother.random(),
+      AccountIdMother.random(),
       CategoryIdMother.random(),
       CategoryNameMother.random(),
       CategoryDescriptionMother.random(),
-      templateIds || []
+      TemplateIdMother.randomArray()
+    );
+  }
+
+  static makeCopy(category: Category): Category {
+    return this.create(
+      category.accountId,
+      category.id,
+      category.name,
+      category.description,
+      category.templateIds
+    );
+  }
+
+  static withName(name: CategoryName): Category {
+    return this.create(
+      AccountIdMother.random(),
+      CategoryIdMother.random(),
+      name,
+      CategoryDescriptionMother.random(),
+      TemplateIdMother.randomArray()
+    );
+  }
+
+  // Si se necesita una category con account probablemente se esté tesetando integracion con DB
+  // por lo que NO se crean las templateIds random
+  static withAccount(accountId: AccountId): Category {
+    return this.create(
+      accountId,
+      CategoryIdMother.random(),
+      CategoryNameMother.random(),
+      CategoryDescriptionMother.random(),
+      []
+    );
+  }
+
+  static withAccountAndTemplateIds(
+    accountId: AccountId,
+    templateIds: Array<TemplateId>
+  ): Category {
+    return this.create(
+      accountId,
+      CategoryIdMother.random(),
+      CategoryNameMother.random(),
+      CategoryDescriptionMother.random(),
+      templateIds
     );
   }
 }

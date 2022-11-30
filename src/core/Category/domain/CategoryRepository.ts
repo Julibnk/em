@@ -6,8 +6,8 @@ import { Nullable } from '../../Shared/domain/Nullable';
 
 export interface CategoryRepository {
   save(category: Category): Promise<void>;
-  findById(accountId: AccountId, id: CategoryId): Promise<Category>;
-  searchByName(
+  findById(accountId: AccountId, id: CategoryId): Promise<Nullable<Category>>;
+  findByName(
     accountId: AccountId,
     name: CategoryName
   ): Promise<Nullable<Category>>;

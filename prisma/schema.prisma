@@ -19,6 +19,7 @@ enum DictionaryKey {
 enum MessageStatus {
   DRAFT
   SENT
+  PENDING
   SCHEDULED
   ERROR
 }
@@ -43,8 +44,10 @@ model Account {
   country       String  @db.VarChar(2)
   disabled      Boolean @default(false)
 
+  metaAccountId String @unique @db.Uuid
+
   // Relations
-  MetaAccount  MetaAccount?
+  MetaAccount  MetaAccount    @relation(fields: [metaAccountId], references: [id])
   User         User[]
   Contact      Contact[]
   Category     Category[]
@@ -79,9 +82,10 @@ model Contact {
   id        String @db.Uuid
 
   // Main fields
-  name        String
-  prefix      String
-  phoneNumber String
+  name     String
+  lastName String?
+  prefix   String
+  number   String
 
   // Generic fields
   createdAt DateTime @default(now())
@@ -111,7 +115,6 @@ model Category {
   //Relations
   Account  Account    @relation(fields: [accountId], references: [id])
   Template Template[]
-  Message  Message[]
 
   @@id([accountId, id])
 }
@@ -151,16 +154,14 @@ model Message {
 
   // Main fields
   status         MessageStatus
-  sentDate       DateTime
-  scheduled      Boolean
+  sentDate       DateTime?
   scheduleDate   DateTime?
-  variable1      String?
-  variable2      String?
-  variable3      String?
+  parameter1     String?
+  parameter2     String?
+  parameter3     String?
   templateId     String        @db.Uuid
   accountPhoneId String        @db.Uuid
   contactId      String        @db.Uuid
-  categoryId     String?       @db.Uuid
 
   // Generic fields
   createdAt DateTime @default(now())
@@ -170,7 +171,6 @@ model Message {
   Template     Template     @relation(fields: [accountId, templateId], references: [accountId, id])
   AccountPhone AccountPhone @relation(fields: [accountId, accountPhoneId], references: [accountId, id])
   Contact      Contact      @relation(fields: [accountId, contactId], references: [accountId, id])
-  Category     Category?    @relation(fields: [accountId, categoryId], references: [accountId, id])
 
   @@id([accountId, id])
 }
@@ -181,9 +181,9 @@ model AccountPhone {
   id        String @db.Uuid
 
   // Main fields
-  prefix      String
-  phoneNumber String
-  disabled    Boolean @default(false)
+  prefix   String
+  number   String
+  disabled Boolean @default(false)
 
   // Generic fields
   createdAt DateTime @default(now())
@@ -232,8 +232,9 @@ model MetaAccount {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  // Relation
-  accountId String @unique @db.Uuid
+  // // Relation
+  // accountId String  @db.Uuid
 
-  Account Account @relation(fields: [accountId], references: [id])
+  Account Account?
+  // Account Account @relation(fields: [accountId], references: [id])
 }

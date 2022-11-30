@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { inject } from 'inversify';
+import { inject, injectable } from 'inversify';
 import { Controller } from '../Controller';
 import { SearchAllCategoriesUseCase } from '../../../core/Category/application/SearchAllCategories';
 import { SearchAllTemplatesUseCase } from '../../../core/Template/application/SearchAllTemplates';
@@ -22,6 +22,7 @@ type ControllerResponse = Array<{
   }>;
 }>;
 
+@injectable()
 export class SearchAllCategoriesController implements Controller {
   constructor(
     @inject(SearchAllCategoriesUseCase)
@@ -30,7 +31,7 @@ export class SearchAllCategoriesController implements Controller {
     private searchAllTemplatesUseCase: SearchAllTemplatesUseCase
   ) {}
 
-  async run(req: Request, res: Response): Promise<void> {
+  async run(req: Request, res: Response) {
     const accountId = (req.params.accountId = process.env.ACCOUNT_ID || '');
     const categories = await this.searchAllCategoriesUseCase.run(accountId);
     const templates = await this.searchAllTemplatesUseCase.run(accountId);

@@ -1,13 +1,13 @@
 import { inject, injectable } from 'inversify';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
-import { DIRepository } from '../../Shared/dependency-injection';
+import { DiRepository } from '../../Shared/dependency-injection';
 import { Template } from '../domain/Template';
 import { TemplateRepository } from '../domain/TemplateRepository';
 
 @injectable()
 export class SearchAllTemplatesUseCase {
   constructor(
-    @inject(DIRepository.template)
+    @inject(DiRepository.template)
     private readonly repository: TemplateRepository
   ) {}
 

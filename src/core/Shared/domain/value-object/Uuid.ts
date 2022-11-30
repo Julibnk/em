@@ -15,7 +15,7 @@ export class Uuid extends ValueObject<string> {
   private ensureIsValidUuid(id: string): void {
     if (!validate(id)) {
       throw new InvalidArgumentError(
-        `<${this.constructor.name}> does not allow the value <${id}>`
+        `Value ${id} isn´t valid for ${this.constructor.name}`
       );
     }
   }

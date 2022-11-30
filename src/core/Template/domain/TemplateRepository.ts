@@ -6,13 +6,10 @@ import { Nullable } from '../../Shared/domain/Nullable';
 
 export interface TemplateRepository {
   save(template: Template): Promise<void>;
-
   searchAll(accountId: AccountId): Promise<Array<Template>>;
-
-  searchByName(
+  findByName(
     accountId: AccountId,
     name: TemplateName
   ): Promise<Nullable<Template>>;
-
-  findById(accountId: AccountId, id: TemplateId): Promise<Template>;
+  findById(accountId: AccountId, id: TemplateId): Promise<Nullable<Template>>;
 }

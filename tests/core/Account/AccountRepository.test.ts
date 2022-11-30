@@ -1,18 +1,19 @@
 import { AccountRepository } from '../../../src/core/Account/domain/AccountRepository';
-import { AccountNotFoundError } from '../../../src/core/Account/domain/exceptions/AccountNotFoundError';
 import { AccountId } from '../../../src/core/Account/domain/value-object/AccountId';
 import {
   container,
-  DIRepository,
+  DiDomain,
+  DiRepository,
 } from '../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../Shared/infrastructure/TestEnvironmentManager';
 import { AccountMother } from './domain/AccountMother';
+import { AccountPersistenceError } from '../../../src/core/Account/domain/exceptions/AccountPersistenceError';
 
 const environmentManager = container.get<TestEnvironmentManager>(
-  DIRepository.environmentManager
+  DiDomain.environmentManager
 );
 const accountRepository = container.get<AccountRepository>(
-  DIRepository.account
+  DiRepository.account
 );
 
 describe('AccountRepository', () => {
@@ -24,15 +25,27 @@ describe('AccountRepository', () => {
     await environmentManager.truncate();
   });
 
-  describe('save', () => {
+  describe('=> save', () => {
     it('Should save an account', async () => {
       const account = AccountMother.random();
 
       await accountRepository.save(account);
     });
+
+    it('Should throw an error if try to be related to another MetaAccount', async () => {
+      const account = AccountMother.random();
+      await accountRepository.save(account);
+
+      const accountWithSameMetaAccount = AccountMother.withMetaAccount(
+        account.metaAccount
+      );
+      expect(
+        async () => await accountRepository.save(accountWithSameMetaAccount)
+      ).rejects.toThrow(AccountPersistenceError);
+    });
   });
 
-  describe('findById', () => {
+  describe('=> findById', () => {
     it('Should find existent account', async () => {
       const account = AccountMother.random();
 
@@ -43,13 +56,10 @@ describe('AccountRepository', () => {
       expect(accountFound).toEqual(account);
     });
 
-    it('Should throw error when inexistent account', async () => {
-      try {
-        const accountId = AccountId.random();
-        await accountRepository.findById(accountId);
-      } catch (error) {
-        expect(error).toBeInstanceOf(AccountNotFoundError);
-      }
+    it('Should return null when inexistent account', async () => {
+      const accountId = AccountId.random();
+      const expectedAccount = await accountRepository.findById(accountId);
+      expect(expectedAccount).toBeNull();
     });
   });
 });

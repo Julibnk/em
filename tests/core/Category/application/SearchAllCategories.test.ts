@@ -10,9 +10,9 @@ describe('SearchAllCategories use case', () => {
   it('Should return all categories', async () => {
     const accountId = AccountIdMother.random();
     const categories = [
-      CategoryMother.random(accountId),
-      CategoryMother.random(accountId),
-      CategoryMother.random(accountId),
+      CategoryMother.withAccount(accountId),
+      CategoryMother.withAccount(accountId),
+      CategoryMother.withAccount(accountId),
     ];
 
     repository.returnSearchAll(categories);
@@ -21,7 +21,7 @@ describe('SearchAllCategories use case', () => {
       accountId.value
     );
 
-    repository.assertSearchAllHasBeenCalledWith(accountId);
+    expect(repository.mockSearchAll).toHaveBeenCalledWith(accountId);
     expect(expexctedCategories).toEqual(categories);
   });
 });

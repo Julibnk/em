@@ -1,40 +1,52 @@
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { AggregateRoot } from '../../Shared/domain/AggregateRoot';
-// import { Phone } from '../../Shared/domain/Phone/Phone';
 import { Primitives } from '../../Shared/domain/Primitives';
-import { Disabled } from '../../Shared/domain/value-object/Disabled';
-import { PhoneNumber } from '../../Shared/domain/value-object/PhoneNumber';
-import { PhonePrefix } from '../../Shared/domain/value-object/PhonePrefix';
-import { PhoneId } from './value-object/PhoneId';
+import { Phone } from '../../Shared/domain/Phone/Phone';
+import { AccountPhoneId } from './value-object/AccountPhoneId';
+
+type PhonePrimitives = Primitives<Phone>;
+type AccountPhonePrimitives = Omit<Primitives<AccountPhone>, 'phone'> &
+  PhonePrimitives;
 
 export class AccountPhone extends AggregateRoot {
   constructor(
     readonly accountId: AccountId,
-    readonly id: PhoneId,
-    readonly number: PhoneNumber,
-    readonly prefix: PhonePrefix,
-    readonly disabled: Disabled
+    readonly id: AccountPhoneId,
+    private _phone: Phone
   ) {
     super();
   }
 
-  static fromPrimitives(plainData: Primitives<AccountPhone>): AccountPhone {
+  get phone(): Phone {
+    return this._phone;
+  }
+
+  change(phone: Phone) {
+    this._phone = phone;
+  }
+
+  static create(
+    accountId: AccountId,
+    id: AccountPhoneId,
+    phone: Phone
+  ): AccountPhone {
+    return new AccountPhone(accountId, id, phone);
+  }
+
+  static fromPrimitives(plainData: AccountPhonePrimitives): AccountPhone {
     return new AccountPhone(
       new AccountId(plainData.accountId),
-      new PhoneId(plainData.id),
-      new PhoneNumber(plainData.number),
-      new PhonePrefix(plainData.prefix),
-      new Disabled(plainData.disabled)
+      new AccountPhoneId(plainData.id),
+      Phone.fromPrimitives(plainData.prefix, plainData.number)
     );
   }
 
-  toPrimitives(): Primitives<AccountPhone> {
+  toPrimitives(): AccountPhonePrimitives {
     return {
       accountId: this.accountId.value,
       id: this.id.value,
-      number: this.number.value,
-      prefix: this.prefix.value,
-      disabled: this.disabled.value,
+      prefix: this._phone.prefix.value,
+      number: this._phone.number.value,
     };
   }
 }

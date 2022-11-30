@@ -1,11 +1,11 @@
 import {
   container,
-  DIRepository,
+  DiDomain,
+  DiRepository,
 } from '../../../../src/core/Shared/dependency-injection';
 import { TestEnvironmentManager } from '../../Shared/infrastructure/TestEnvironmentManager';
 import { TemplateRepository } from '../../../../src/core/Template/domain/TemplateRepository';
 import { TemplateMother } from '../domain/TemplateMother';
-import { TemplateNotFoundError } from '../../../../src/core/Template/domain/exceptions/TemplateNotFoundError';
 import { Template } from '../../../../src/core/Template/domain/Template';
 import { TemplateNameMother } from '../domain/TemplateNameMother';
 import { AccountIdMother } from '../../Account/domain/AccountIdMother';
@@ -16,9 +16,9 @@ import { TemplatePersistenceError } from '../../../../src/core/Template/domain/e
 let account: Account;
 
 const enviromentManager = container.get<TestEnvironmentManager>(
-  DIRepository.environmentManager
+  DiDomain.environmentManager
 );
-const repository = container.get<TemplateRepository>(DIRepository.template);
+const repository = container.get<TemplateRepository>(DiRepository.template);
 
 describe('Template repository', () => {
   beforeEach(async () => {
@@ -30,26 +30,26 @@ describe('Template repository', () => {
     await enviromentManager.truncate();
   });
 
-  describe('save', () => {
+  describe('=> save', () => {
     it('Should save a template', async () => {
-      const template = TemplateMother.random(account.id);
+      const template = TemplateMother.withAccount(account.id);
       await repository.save(template);
     });
 
     it('Can´t save a template with inexistent account', async () => {
-      const template = TemplateMother.random(AccountIdMother.random());
+      const template = TemplateMother.withAccount(AccountIdMother.random());
       expect(async () => await repository.save(template)).rejects.toThrow(
         TemplatePersistenceError
       );
     });
   });
 
-  describe('searchAll', () => {
+  describe('=> searchAll', () => {
     it('Should return all templates', async () => {
       const templates = [
-        TemplateMother.random(account.id),
-        TemplateMother.random(account.id),
-        TemplateMother.random(account.id),
+        TemplateMother.withAccount(account.id),
+        TemplateMother.withAccount(account.id),
+        TemplateMother.withAccount(account.id),
       ];
 
       for (const template of templates) {
@@ -66,9 +66,9 @@ describe('Template repository', () => {
       const otherAccount = await enviromentManager.createAccount();
 
       const otherAccountTemplates = [
-        TemplateMother.random(otherAccount.id),
-        TemplateMother.random(otherAccount.id),
-        TemplateMother.random(otherAccount.id),
+        TemplateMother.withAccount(otherAccount.id),
+        TemplateMother.withAccount(otherAccount.id),
+        TemplateMother.withAccount(otherAccount.id),
       ];
 
       for (const template of otherAccountTemplates) {
@@ -80,14 +80,14 @@ describe('Template repository', () => {
     });
   });
 
-  describe('searchByName', () => {
+  describe('=> findByName', () => {
     it('Should find template by its name', async () => {
-      const template = TemplateMother.random(account.id);
+      const template = TemplateMother.withAccount(account.id);
 
       await repository.save(template);
 
-      const templateExpected = await repository.searchByName(
-        account.id,
+      const templateExpected = await repository.findByName(
+        template.accountId,
         template.name
       );
 
@@ -95,7 +95,7 @@ describe('Template repository', () => {
     });
 
     it('Should return null if template doesn´t exist', async () => {
-      const nullTemplate = await repository.searchByName(
+      const nullTemplate = await repository.findByName(
         AccountIdMother.random(),
         TemplateNameMother.random()
       );
@@ -104,24 +104,26 @@ describe('Template repository', () => {
     });
   });
 
-  describe('findById', () => {
+  describe('=> findById', () => {
     it('Should find template by its ID', async () => {
-      const template = TemplateMother.random(account.id);
+      const template = TemplateMother.withAccount(account.id);
 
       await repository.save(template);
 
       const templateExpected = await repository.findById(
-        account.id,
+        template.accountId,
         template.id
       );
 
       expect(templateExpected).toEqual(template);
     });
 
-    it('Should throw error when template does not exist', async () => {
-      expect(async () => {
-        await repository.findById(account.id, TemplateIdMother.random());
-      }).rejects.toThrow(TemplateNotFoundError);
+    it('Should return null when template does not exist', async () => {
+      const expected = await repository.findById(
+        account.id,
+        TemplateIdMother.random()
+      );
+      expect(expected).toBeNull();
     });
   });
 });

@@ -1,7 +1,7 @@
 import { TemplateRepository } from '../domain/TemplateRepository';
 import { Template } from '../domain/Template';
 import { inject, injectable } from 'inversify';
-import { DIRepository } from '../../Shared/dependency-injection';
+import { DiRepository } from '../../Shared/dependency-injection';
 import { TemplateId } from '../domain/value-object/TemplateId';
 import { TemplateName } from '../domain/value-object/TemplateName';
 import { TemplateShortDescription } from '../domain/value-object/TemplateShortDescription';
@@ -10,7 +10,7 @@ import { TemplatePreview } from '../domain/value-object/TemplatePreview';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { TemplateWithSameNameAlreadyExistsError } from '../domain/exceptions/TemplateWithSameNameAlreadyExistsError';
 
-type Params = {
+export type Params = {
   accountId: string;
   id: string;
   name: string;
@@ -24,13 +24,11 @@ type Params = {
 @injectable()
 export class SaveTemplateUseCase {
   constructor(
-    @inject(DIRepository.template)
+    @inject(DiRepository.template)
     private repository: TemplateRepository
   ) {}
 
   async run(params: Params): Promise<void> {
-    let template: Template;
-
     const accountId = new AccountId(params.accountId);
     const id = new TemplateId(params.id);
     const name = new TemplateName(params.name);
@@ -42,9 +40,9 @@ export class SaveTemplateUseCase {
     const variable2 = new TemplateVariable(params.variable2);
     const variable3 = new TemplateVariable(params.variable3);
 
-    try {
-      template = await this.repository.findById(accountId, id);
+    let template = await this.repository.findById(accountId, id);
 
+    if (template) {
       template.change(
         shortDescription,
         preview,
@@ -52,14 +50,14 @@ export class SaveTemplateUseCase {
         variable2,
         variable3
       );
-    } catch (error) {
-      const templateWithSameName = await this.repository.searchByName(
+    } else {
+      const templateWithSameName = await this.repository.findByName(
         accountId,
         name
       );
 
       if (templateWithSameName) {
-        throw new TemplateWithSameNameAlreadyExistsError(accountId, name);
+        throw new TemplateWithSameNameAlreadyExistsError(name);
       }
 
       template = Template.create(

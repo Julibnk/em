@@ -16,4 +16,11 @@ export class WordMother {
   static buildingNumber(): string {
     return MotherCreator.random().address.buildingNumber();
   }
+
+  static firstName(): string {
+    return MotherCreator.random().name.firstName();
+  }
+  static lastName(): string {
+    return MotherCreator.random().name.lastName();
+  }
 }

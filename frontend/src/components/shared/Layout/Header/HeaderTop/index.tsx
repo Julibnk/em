@@ -1,0 +1,13 @@
+import styles from './styles.module.css';
+
+import { Breadcrum } from './Breadcrum';
+import { HeaderTopRight } from './HeaderTopRight';
+
+export const HeaderTop = () => {
+  return (
+    <div className={styles.root}>
+      <Breadcrum />
+      <HeaderTopRight />
+    </div>
+  );
+};

@@ -1,21 +1,26 @@
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import errorHandler from 'errorhandler';
-import express, { Request, Response } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
 import { registerRoutes } from './routes';
+import Logger from '../core/Shared/domain/Logger';
+import { container, DiDomain } from '../core/Shared/dependency-injection';
+import { DomainError } from '../core/Shared/domain/DomainError';
 
 export class Server {
   private express: express.Express;
   private port: string;
   private httpServer?: http.Server;
+  private logger: Logger;
 
   constructor(port: string) {
     this.port = port;
     this.express = express();
+    this.logger = container.get<Logger>(DiDomain.logger);
     this.express.use(bodyParser.json());
     this.express.use(bodyParser.urlencoded({ extended: true }));
     this.express.use(helmet.xssFilter());
@@ -25,14 +30,26 @@ export class Server {
     this.express.use(compress());
     const router = Router();
     router.use(errorHandler());
+
     this.express.use(router);
 
     registerRoutes(router);
 
-    router.use((err: Error, req: Request, res: Response) => {
-      console.log(err);
-      res.status(httpStatus.INTERNAL_SERVER_ERROR);
-    });
+    //El middleware necesita 4 parametros para detectar el callback de error
+    router.use(
+      // eslint-disable-next-line
+      (err: Error, req: Request, res: Response, next: NextFunction) => {
+        this.logger.error(err);
+
+        if (err instanceof DomainError) {
+          res
+            .status(httpStatus.INTERNAL_SERVER_ERROR)
+            .json({ message: err.message });
+        }
+
+        res.status(httpStatus.INTERNAL_SERVER_ERROR).send();
+      }
+    );
   }
 
   async listen(): Promise<void> {

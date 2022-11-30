@@ -9,4 +9,8 @@ export class TemplateIdMother {
   static random(): TemplateId {
     return this.create(UuidMother.random());
   }
+
+  static randomArray(): Array<TemplateId> {
+    return [this.random(), this.random(), this.random()];
+  }
 }

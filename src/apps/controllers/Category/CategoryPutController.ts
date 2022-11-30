@@ -1,19 +1,44 @@
 // import { Request, Response } from 'express';
-import { inject } from 'inversify';
-import { SaveCategoryUseCase } from '../../../core/Category/application/SaveCategory';
-
+import { Request, Response } from 'express';
+import httpStatus from 'http-status';
+import { inject, injectable } from 'inversify';
+import {
+  SaveCategoryUseCase,
+  Params as UseCaseParams,
+} from '../../../core/Category/application/SaveCategory';
 import { Controller } from '../Controller';
+import { DiDomain } from '../../../core/Shared/dependency-injection';
+import Logger from '../../../core/Shared/domain/Logger';
+import { DomainError } from '../../../core/Shared/domain/DomainError';
 
+@injectable()
 export class CategoryPutController implements Controller {
   constructor(
     @inject(SaveCategoryUseCase)
-    private saveCategoryUseCase: SaveCategoryUseCase
+    private saveCategoryUseCase: SaveCategoryUseCase,
+    @inject(DiDomain.logger) private logger: Logger
   ) {}
 
-  run(): Promise<void> {
-    // con;
+  async run(req: Request, res: Response) {
+    try {
+      const templateIds = req.body.templates?.map((id: string) => id) || [];
+      const useCaseParams: UseCaseParams = {
+        accountId: process.env.ACCOUNT_ID || '',
+        id: req.params.id,
+        name: req.body.name,
+        description: req.body.description,
+        templateIds,
+      };
 
-    // this.saveCategoryUseCase.run();
-    throw new Error('Method not implemented.');
+      await this.saveCategoryUseCase.run(useCaseParams);
+      res.status(httpStatus.CREATED).send();
+    } catch (err) {
+      if (err instanceof DomainError) {
+        this.logger.error(err);
+        res.status(httpStatus.BAD_REQUEST).send({ message: err.message });
+      } else {
+        throw err;
+      }
+    }
   }
 }
