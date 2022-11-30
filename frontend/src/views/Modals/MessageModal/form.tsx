@@ -1,4 +1,4 @@
-import { useForm } from '@mantine/hooks';
+import { useForm } from '@mantine/form';
 import {
   Button,
   Group,

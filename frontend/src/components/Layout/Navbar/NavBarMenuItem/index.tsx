@@ -40,17 +40,16 @@ const NavBarMenuItem = ({ text, icon, className, to }: Props) => {
   const variant = match ? 'filled' : 'subtle';
 
   // Mantine Props
-  const buttonProps: ButtonProps<typeof Link> = {
+  const buttonProps: ButtonProps = {
     fullWidth: navbarCollapsed,
     variant,
     leftIcon: icon,
     classNames: getClassNames(variant, navbarCollapsed),
     size: 'md',
-    to,
   };
 
   return (
-    <Button component={Link} className={className} {...buttonProps}>
+    <Button to={to} component={Link} className={className} {...buttonProps}>
       {navbarCollapsed && text}
     </Button>
   );

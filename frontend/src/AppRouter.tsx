@@ -5,11 +5,8 @@ import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
 // import FullPageLoader from "@components/FullPageLoader/FullPageLoader";
 // import PublicRoutes from "@components/Routes/PublicRoutes";
 
-
-
 import ProtectedRoutes from './components/Routes/ProtectedRoutes';
 import PrivateRoutes from './components/Routes/PrivateRoutes';
-
 
 // const LoginPage = lazy(() => import("@views/Login/LoginPage"));
 // const NotFoundComponent = lazy(

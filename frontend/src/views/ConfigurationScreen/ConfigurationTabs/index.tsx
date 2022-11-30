@@ -15,23 +15,29 @@ const ConfigurationTabs = () => {
   const tabsProps: TabsProps = {
     variant: 'pills',
     children: <></>,
-    classNames: { tabActive: styles.tabActive, body: styles.body },
+    classNames: { panel: styles.body },
   };
 
   return (
     <Tabs {...tabsProps}>
-      <Tabs.Tab label={t('template', { count: 0 })}>
+      <Tabs.List>
+        <Tabs.Tab value='template'>{t('template', { count: 0 })}</Tabs.Tab>
+        <Tabs.Tab value='category'>{t('category', { count: 0 })}</Tabs.Tab>
+      </Tabs.List>
+
+      <Tabs.Panel value='template'>
         <ScreenContent>
           <TemplateTableHeader />
           <TemplateTable />
-        </ScreenContent>
-      </Tabs.Tab>
-      <Tabs.Tab label={t('category', { count: 0 })}>
+        </ScreenContent>{' '}
+      </Tabs.Panel>
+
+      <Tabs.Panel value='category'>
         <ScreenContent>
           <CategoryTableHeader />
           <CategoryTable />
         </ScreenContent>
-      </Tabs.Tab>
+      </Tabs.Panel>
     </Tabs>
   );
 };

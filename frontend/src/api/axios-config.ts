@@ -1,5 +1,5 @@
 // import { axiosClient } from "./mock/mock";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
 const axiosClient = axios.create();
 
@@ -19,23 +19,6 @@ axiosClient.interceptors.response.use(
     throw error;
   }
 );
-
-axiosClient.defaults = {
-  baseURL: `${process.env.REACT_APP_BACKEND_ENDPOINT}`,
-  headers: {
-    common: {
-      Accept: "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-    delete: {},
-    get: {},
-    head: {},
-    post: {},
-    put: {},
-    patch: {},
-  },
-  timeout: Number(process.env.REACT_APP_API_TIMEOUT) || 60000,
-};
 
 export function getRequest(URL, config?: AxiosRequestConfig) {
   return axiosClient.get(URL, config).then((response) => response);
