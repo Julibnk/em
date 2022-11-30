@@ -1,6 +1,5 @@
 import { useForm } from '@mantine/form';
 import { Button, Group, MultiSelect, TextInput } from '@mantine/core';
-import { useTranslation } from 'react-i18next';
 import SecondaryButton from '../../../components/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
@@ -9,6 +8,7 @@ import { selectSelectedCategory } from '../../../store/category-selector';
 import { selectTemplatesForCombo } from '../../../store/template-selector';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { selectModal } from '../../../store/layout-selector';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 type CategoryFormState = {
   name: string;
@@ -21,7 +21,7 @@ type Props = {
 };
 
 const CategoryForm = ({ handleOnClose }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslation();
 
   const category = useSelector((state) => selectSelectedCategory(state));
   const templates = useSelector((state) => selectTemplatesForCombo(state));
@@ -51,7 +51,7 @@ const CategoryForm = ({ handleOnClose }: Props) => {
       />
       <MultiSelect
         data={templates}
-        label={t('template', { count: 0 })}
+        label={t('template', { plural: true })}
         {...form.getInputProps('templateIds')}
       />
       <Group position='right' mt='md'>

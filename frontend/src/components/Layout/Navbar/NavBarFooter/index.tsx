@@ -14,11 +14,12 @@ const NavBarFooter = () => {
     dispatch(setNavbarCollapsed(!navbarCollapsed));
   };
 
-  const actionIconProps: ActionIconProps<'button'> = {
+  const actionIconProps: ActionIconProps = {
     variant: 'filled',
     size: 'xl',
     color: 'turquoise',
     onClick: handleClick,
+    type: 'button',
   };
 
   return (

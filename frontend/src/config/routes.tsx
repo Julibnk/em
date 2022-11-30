@@ -15,27 +15,27 @@ export const routes: Route[] = [
   },
   {
     path: 'message/*',
-    title: i18n.t('message', { count: 0 }),
-    subtitle: i18n.t('message_subtitle'),
+    title: i18n.t('message', { count: 0 }) || undefined,
+    subtitle: i18n.t('message_subtitle') || undefined,
     component: lazy(() => import('../views/MessageScreen')),
   },
   {
     path: 'contact/*',
-    title: i18n.t('contact', { count: 0 }),
-    subtitle: i18n.t('contact_subtitle'),
+    title: i18n.t('contact', { count: 0 }) || undefined,
+    subtitle: i18n.t('contact_subtitle') || undefined,
 
     component: lazy(() => import('../views/ContactScreen')),
   },
   {
     path: 'configuration/*',
-    title: i18n.t('configuration', { count: 0 }),
-    subtitle: i18n.t('configuration_subtitle'),
+    title: i18n.t('configuration', { count: 0 }) || undefined,
+    subtitle: i18n.t('configuration_subtitle') || undefined,
     component: lazy(() => import('../views/ConfigurationScreen')),
   },
   {
     path: 'profile/*',
-    title: i18n.t('profile'),
-    subtitle: i18n.t('profile_subtitle'),
+    title: i18n.t('profile') || undefined,
+    subtitle: i18n.t('profile_subtitle') || undefined,
     component: lazy(() => import('../views/ProfileScreen')),
   },
 ];

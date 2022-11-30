@@ -6,15 +6,16 @@ import {
   faFilter,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
 import SecondaryButton from '../../../components/MantineOverwrite/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 const MessageListHeader = () => {
-  const { t } = useTranslation();
+  const t = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -38,7 +39,7 @@ const MessageListHeader = () => {
           icon={<FontAwesomeIcon icon={faSearch} />}
         />
         <SecondaryButton leftIcon={<FontAwesomeIcon icon={faFilter} />}>
-          {t('filter', { count: 0 })}
+          {t('filter', { plural: true })}
         </SecondaryButton>
       </div>
 

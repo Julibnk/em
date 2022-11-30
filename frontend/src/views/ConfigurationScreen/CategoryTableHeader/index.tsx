@@ -1,6 +1,5 @@
 import styles from './styles.module.css';
 
-import { useTranslation } from 'react-i18next';
 import { Button, TextInput } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAdd } from '@fortawesome/free-solid-svg-icons';
@@ -8,9 +7,10 @@ import { faSearch, faAdd } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
 import { setSelectedId } from '../../../store/category-slice';
+import { useTranslation } from '../../../hooks/useTranslation';
 
 const CategoryTableHeader = () => {
-  const { t } = useTranslation();
+  const t = useTranslation();
   const dispatch = useDispatch();
 
   const handleOnAdd = () => {
