@@ -3,7 +3,7 @@ import './App.css';
 import { MantineProvider, MantineProviderProps } from '@mantine/core';
 import { theme } from './config';
 
-import Modals from './views/Modals';
+import Modals from './components/Modals';
 import AppRouter from './AppRouter';
 import useInitApp from './hooks/useInitApp';
 import { createClient } from '@supabase/supabase-js';
