@@ -56,8 +56,6 @@
     "@mantine/form": "^5.8.4",
     "@mantine/hooks": "^5.8.4",
     "@prisma/client": "^4.4.0",
-    "@supabase/auth-ui-react": "^0.2.6",
-    "@supabase/supabase-js": "^2.1.1",
     "@types/uuid": "^8.3.4",
     "ajv": "^8.11.0",
     "app-root-path": "^3.1.0",

@@ -18,6 +18,8 @@
     "@mantine/dropzone": "^5.8.4",
     "@mantine/form": "^5.8.4",
     "@reduxjs/toolkit": "^1.9.0",
+    "@supabase/auth-ui-react": "^0.2.6",
+    "@supabase/supabase-js": "^2.1.1",
     "axios": "^1.2.0",
     "i18next": "^22.0.6",
     "i18next-browser-languagedetector": "^7.0.1",
