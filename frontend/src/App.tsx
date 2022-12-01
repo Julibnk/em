@@ -7,8 +7,6 @@ import { Modals } from './components/Modals';
 import { AppRouter } from './AppRouter';
 import { useInitApp } from './hooks/useInitApp';
 
-//test deploy front
-
 const providerProps: MantineProviderProps = {
   children: <></>,
 
