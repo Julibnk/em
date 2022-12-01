@@ -7,6 +7,8 @@ try {
   process.exit(1);
 }
 
+// test deploy only backend
+
 process.on('uncaughtException', (err) => {
   console.log('uncaughtException', err);
   process.exit(1);
