@@ -14,23 +14,27 @@ jobs:
   cancel-previous:
     runs-on: ubuntu-22.04
     steps:
-      - uses: styfle/cancel-workflow-action@0.11.0
+      - name: Cancela la ejecución anterior
+        uses: styfle/cancel-workflow-action@0.11.0
         with:
           access_token: ${{ github.token }}
 
   npm-ci:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - name: Descarga el código fuente
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - name: Configura Node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+          cache-dependency-path: './backend/package-lock.json'
 
-      - name: Install dependencies
+      - name: Instala las dependencias
         run: npm ci
 
   lint:
@@ -38,19 +42,22 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Descarga el código fuente
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - name: Configura Node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+          cache-dependency-path: './backend/package-lock.json'
 
-      - name: Install dependencies
+      - name: Instala dependencias
         run: npm ci
 
-      - name: Lint code
+      - name: Ejecuta el linter
         run: npm run lint
 
   build:
@@ -58,33 +65,28 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Descarga el código fuente
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - name: Configura Node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+          cache-dependency-path: './backend/package-lock.json'
 
-      - name: Install dependencies
+      - name: Instala dependencias
         run: npm ci
 
-      - name: Build
+      - name: Hace la build
         run: npm run build
-
-      # Unusued beacuse render makes the build again
-      # - name: Upload build
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: build
-      #     path: build
 
   test:
     needs: [lint, build]
     runs-on: ubuntu-22.04
     environment: test
-
     container: node:16
 
     env:
@@ -103,33 +105,29 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Descarga el código fuente
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - name: Configura Node
+        uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: 'npm'
+          cache-dependency-path: './backend/package-lock.json'
 
-      - name: Install prisma
+      - name: Instala prisma de forma global
         run: npm install -g prisma
 
-      - name: Generate prisma client
+      - name: Genera el prisma client
         run: prisma generate
 
-      - name: Migrate BD schema
+      - name: Migra el esquema de BD
         run: prisma migrate deploy
 
-      - name: Install dependencies
+      - name: Instala dependencias
         run: npm ci
 
-      # Unusued beacuse render makes the build again
-      # - name: Download build
-      #   uses: actions/download-artifact@v3
-      #   with:
-      #     name: build
-      #     path: build
-
-      - name: Execute tests
+      - name: Ejecuta los tests
         run: npm test
