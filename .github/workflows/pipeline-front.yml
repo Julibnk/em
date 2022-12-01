@@ -4,13 +4,15 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize]
+    paths:
+      - 'frontend/**'
+defaults:
+  run:
+    working-directory: frontend
 
 jobs:
   cancel-previous:
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: styfle/cancel-workflow-action@0.11.0
         with:
@@ -18,9 +20,6 @@ jobs:
 
   npm-ci:
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v3
         with:
@@ -37,9 +36,6 @@ jobs:
   lint:
     needs: npm-ci
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v3
         with:
@@ -59,9 +55,6 @@ jobs:
   build:
     needs: npm-ci
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: frontend
     steps:
       - uses: actions/checkout@v3
         with:
