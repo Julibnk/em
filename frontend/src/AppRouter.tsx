@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/',
+    path: '/*',
     element: <Layout />,
     errorElement: <NotFoundScreen />,
     children: [
@@ -73,6 +73,67 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
+type screenConfig = {
+  path: string;
+  title: string;
+  subtitle: string;
+};
+
+export const screenConfig: Array<screenConfig> = [
+  // {
+  //   path: '/',
+  // },
+  {
+    path: 'message/*',
+    title: 'message',
+    subtitle: 'message_subtitle',
+  },
+  {
+    path: 'contact/*',
+    title: 'contact',
+    subtitle: 'contact_subtitle',
+  },
+  {
+    path: 'configuration/*',
+    title: 'configuration',
+    subtitle: 'configuration_subtitle',
+  },
+  {
+    path: 'profile/*',
+    title: 'profile',
+    subtitle: 'profile_subtitle',
+  },
+];
+
+// {
+//   path: 'home/*',
+//   component: lazy(() => import('../components/HomeScreen')),
+// },
+// {
+//   path: 'message/*',
+//   title: i18n.t('message', { count: 0 }) || undefined,
+//   subtitle: i18n.t('message_subtitle') || undefined,
+//   component: lazy(() => import('../components/MessageScreen')),
+// },
+// {
+//   path: 'contact/*',
+//   title: i18n.t('contact', { count: 0 }) || undefined,
+//   subtitle: i18n.t('contact_subtitle') || undefined,
+//   component: lazy(() => import('../components/ContactScreen')),
+// },
+// {
+//   path: 'configuration/*',
+//   title: i18n.t('configuration', { count: 0 }) || undefined,
+//   subtitle: i18n.t('configuration_subtitle') || undefined,
+//   component: lazy(() => import('../components/ConfigurationScreen')),
+// },
+// {
+//   path: 'profile/*',
+//   title: i18n.t('profile') || undefined,
+//   subtitle: i18n.t('profile_subtitle') || undefined,
+//   component: lazy(() => import('../components/ProfileScreen')),
+// },
 
 export const AppRouter = () => {
   return <RouterProvider router={router}></RouterProvider>;

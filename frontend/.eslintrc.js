@@ -5,15 +5,18 @@ module.exports = {
     sourceType: 'module', // Allows for the use of imports
   },
   extends: [
-    // 'eslint:recommended',
-    // 'plugin:@typescript-eslint/recommended',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:security/recommended',
+    // 'plugin:unused-imports',
     // 'plugin:react/recommended',
     // 'plugin:react/jsx-runtime',
-  ], // Uses the linting rules from @typescript-eslint/eslint-plugin
+  ],
   env: {
-    node: true, // Enable Node.js global variables
+    node: true,
+    // jsx: true,
   },
   rules: {
-    '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-unused-vars': 'error',
   },
 };

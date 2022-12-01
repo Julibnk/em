@@ -5,17 +5,21 @@ import { routes } from '../../../../../config';
 
 import { Routes, Route } from 'react-router-dom';
 
+import { screenConfig } from '../../../../../AppRouter';
+import { useTranslation } from '../../../../../hooks/useTranslation';
+
 export const HeaderSubtitle = () => {
+  const t = useTranslation();
   return (
     <Routes>
-      {routes.map(({ path, subtitle }, i) => {
+      {screenConfig.map(({ path, subtitle }, i) => {
         return (
           <Route
             key={i}
             path={path}
             element={
               <Title className={styles.title} order={4}>
-                {subtitle}
+                {t(subtitle)}
               </Title>
             }
           />
