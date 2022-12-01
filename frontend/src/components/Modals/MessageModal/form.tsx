@@ -2,17 +2,17 @@ import { useForm } from '@mantine/form';
 import {
   Button,
   Group,
-  MultiSelect,
-  TextInput,
-  Textarea,
-  Alert,
+  // MultiSelect,
+  // TextInput,
+  // Textarea,
+  // Alert,
 } from '@mantine/core';
 import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from '../../../store/store';
-import { selectCategoriesForCombo } from '../../../store/category-selector';
+// import { selectCategoriesForCombo } from '../../../store/category-selector';
 import { selectSelectedTemplate } from '../../../store/template-selector';
 import { selectModal } from '../../../store/layout-selector';
 import { useTranslation } from '../../../hooks/useTranslation';
@@ -35,7 +35,7 @@ export const MessageForm = ({ handleOnClose }: Props) => {
   const t = useTranslation();
 
   const template = useSelector((state) => selectSelectedTemplate(state));
-  const categories = useSelector((state) => selectCategoriesForCombo(state));
+  // const categories = useSelector((state) => selectCategoriesForCombo(state));
   const { mode } = useSelector((state) => selectModal(state, 'template'));
 
   const initialValues: TemplateFormState = {

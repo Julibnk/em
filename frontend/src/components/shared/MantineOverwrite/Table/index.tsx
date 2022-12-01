@@ -1,3 +1,4 @@
+/* eslint-disable security/detect-object-injection */
 import { Table as MantineTable } from '@mantine/core';
 import styles from './styles.module.css';
 

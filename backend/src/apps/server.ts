@@ -10,7 +10,6 @@ import { registerRoutes } from './routes';
 import Logger from '../core/Shared/domain/Logger';
 import { container, DiDomain } from '../core/Shared/dependency-injection';
 import { DomainError } from '../core/Shared/domain/DomainError';
-
 export class Server {
   private express: express.Express;
   private port: string;

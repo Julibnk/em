@@ -15,5 +15,6 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/no-var-requires': 0,
+    '@typescript-eslint/no-unused-vars': [1, { ignoreRestSiblings: true }],
   },
 };

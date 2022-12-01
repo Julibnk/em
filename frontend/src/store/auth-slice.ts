@@ -18,14 +18,17 @@ const initialState: AuthState = {
 
 export const getUserAuth = createAsyncThunk(
   'auth/getUserAuth',
-  async (userData: FormData, { rejectWithValue }) => {
+  async (userData: FormData) => {
+    console.log(userData);
     // return true;
   }
 );
 
 export const initApp = createAsyncThunk(
   'auth/initApp',
-  async (username: string, { dispatch, rejectWithValue }) => {
+  // async (username: string, { dispatch, rejectWithValue }) => {
+  async (username: string) => {
+    console.log(username);
     return { masterdata: [], user: {} };
   }
 );
@@ -44,7 +47,7 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     //Get auth
-    builder.addCase(getUserAuth.fulfilled, (state, action) => {
+    builder.addCase(getUserAuth.fulfilled, (state) => {
       state.isAuthenticated = false;
     });
     builder.addCase(getUserAuth.rejected, (state) => {
@@ -57,7 +60,9 @@ export const authSlice = createSlice({
       state.isAuthenticated = true;
       state.user = { username: action.payload.user } as AuthUser;
     });
-    builder.addCase(initApp.rejected, (state) => {});
+    builder.addCase(initApp.rejected, (state) => {
+      console.log(state);
+    });
   },
 });
 

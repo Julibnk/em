@@ -1,8 +1,6 @@
 import styles from './styles.module.css';
 import { Title } from '@mantine/core';
 
-import { routes } from '../../../../../config';
-
 import { Routes, Route } from 'react-router-dom';
 
 import { screenConfig } from '../../../../../AppRouter';

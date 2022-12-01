@@ -1,20 +1,20 @@
-import { Request, Response } from 'express';
-import { inject, injectable } from 'inversify';
-import { FindTemplateUseCase } from '../../../core/Template/application/FindTemplate';
-import { Controller } from '../Controller';
-import httpStatus from 'http-status';
-import { TemplateNotFoundError } from '../../../core/Template/domain/exceptions/TemplateNotFoundError';
+// import { Request, Response } from 'express';
+// import { inject, injectable } from 'inversify';
+// import { FindTemplateUseCase } from '../../../core/Template/application/FindTemplate';
+// import { Controller } from '../Controller';
+// import httpStatus from 'http-status';
+// import { TemplateNotFoundError } from '../../../core/Template/domain/exceptions/TemplateNotFoundError';
 
-type ControllerResponse = {
-  id: string;
-  name: string;
-  shortDescription: string;
-  preview: string;
-  variable1: string;
-  variable2: string;
-  variable3: string;
-  status: string;
-};
+// type ControllerResponse = {
+//   id: string;
+//   name: string;
+//   shortDescription: string;
+//   preview: string;
+//   variable1: string;
+//   variable2: string;
+//   variable3: string;
+//   status: string;
+// };
 
 // @injectable()
 // export class TemplateGetController implements Controller {

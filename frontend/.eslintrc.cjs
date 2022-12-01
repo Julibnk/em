@@ -14,9 +14,9 @@ module.exports = {
   ],
   env: {
     node: true,
-    // jsx: true,
+    browser: true,
   },
   rules: {
-    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-unused-vars': [1, { ignoreRestSiblings: true }],
   },
 };

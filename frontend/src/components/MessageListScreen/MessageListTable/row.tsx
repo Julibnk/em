@@ -2,14 +2,13 @@ import { Td } from '../../shared/MantineOverwrite/Table';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ActionIcon, Badge } from '@mantine/core';
+import { ActionIcon } from '@mantine/core';
 
 import { setModalOpenend } from '../../../store/layout-slice';
 import { useDispatch } from '../../../store/store';
 import { ActionCell } from '../../shared/TableCells';
 
 import { Message } from '../../../types/store';
-import { CategoryBadge } from '../../shared/Badges';
 import { setSelectedId } from '../../../store/template-slice';
 import { EntityId } from '@reduxjs/toolkit';
 

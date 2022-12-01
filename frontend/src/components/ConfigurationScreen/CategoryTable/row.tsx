@@ -36,7 +36,7 @@ export const CategoryTableRow = ({ category }: Props) => {
       <Td>{description}</Td>
       <Td>
         <BadgeCell>
-          {templateIds.map((templateId, i) => {
+          {templateIds.map((templateId) => {
             return (
               <TemplateBadge key={templateId} id={templateId}></TemplateBadge>
             );
