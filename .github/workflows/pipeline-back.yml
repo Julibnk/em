@@ -6,6 +6,9 @@ on:
     types: [opened, synchronize]
     paths:
       - 'backend/**'
+defaults:
+  run:
+    working-directory: ./backend
 
 jobs:
   cancel-previous:
@@ -17,9 +20,6 @@ jobs:
 
   npm-ci:
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: backend
     steps:
       - uses: actions/checkout@v3
         with:
@@ -36,9 +36,7 @@ jobs:
   lint:
     needs: npm-ci
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: backend
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -58,9 +56,7 @@ jobs:
   build:
     needs: npm-ci
     runs-on: ubuntu-22.04
-    defaults:
-      run:
-        working-directory: backend
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -90,10 +86,6 @@ jobs:
     environment: test
 
     container: node:16
-
-    defaults:
-      run:
-        working-directory: backend
 
     env:
       DATABASE_URL: 'postgres://postgres:postgres@postgres:5432/em_test'

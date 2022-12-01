@@ -8,7 +8,7 @@ on:
       - 'frontend/**'
 defaults:
   run:
-    working-directory: frontend
+    working-directory: ./frontend
 
 jobs:
   cancel-previous:
