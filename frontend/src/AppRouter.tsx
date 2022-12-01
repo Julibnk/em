@@ -1,36 +1,75 @@
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
-import { HomeScreen } from './components/HomeScreen';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import { NotFoundScreen } from './components/NotFoundScreen';
 import { Layout } from './components/shared/Layout';
-// import MessageScreen from './components/MessageScreen';
-import { ContactScreen } from './components/ContactScreen';
-import { ConfigurationScreen } from './components/ConfigurationScreen';
-import { ProfileScreen } from './components/ProfileScreen';
-import { lazy, LazyExoticComponent } from 'react';
-import { LoginScreen } from './components/LoginScreen';
+import { lazy, Suspense } from 'react';
+import { FullPageLoader } from './components/shared/Layout/FullPageLoader/index';
 
+const HomeScreen = lazy(() => import('./components/HomeScreen'));
+const ContactScreen = lazy(() => import('./components/ContactScreen'));
 const MessageScreen = lazy(() => import('./components/MessageScreen'));
+const ConfigurationScreen = lazy(
+  () => import('./components/ConfigurationScreen')
+);
+const ProfileScreen = lazy(() => import('./components/ProfileScreen'));
+const LoginScreen = lazy(() => import('./components/LoginScreen'));
 
 const router = createBrowserRouter([
   {
     path: '/login',
-    element: <LoginScreen />,
+    element: (
+      <Suspense fallback={<FullPageLoader />}>
+        <LoginScreen />
+      </Suspense>
+    ),
   },
   {
-    path: '/*',
+    path: '/',
     element: <Layout />,
     errorElement: <NotFoundScreen />,
     children: [
-      { index: true, element: <HomeScreen /> },
+      {
+        index: true,
+        element: (
+          <Suspense fallback={<FullPageLoader />}>
+            <HomeScreen />
+          </Suspense>
+        ),
+      },
 
-      { path: 'message/*', element: <MessageScreen /> },
+      {
+        path: 'message/*',
+        element: (
+          <Suspense fallback={<FullPageLoader />}>
+            <MessageScreen />
+          </Suspense>
+        ),
+      },
 
-      { path: 'contact/*', element: <ContactScreen /> },
+      {
+        path: 'contact/*',
+        element: (
+          <Suspense fallback={<FullPageLoader />}>
+            <ContactScreen />
+          </Suspense>
+        ),
+      },
       {
         path: 'configuration/*',
-        element: <ConfigurationScreen />,
+        element: (
+          <Suspense fallback={<FullPageLoader />}>
+            <ConfigurationScreen />
+          </Suspense>
+        ),
       },
-      { path: 'profile/*', element: <ProfileScreen /> },
+      {
+        path: 'profile/*',
+        element: (
+          <Suspense fallback={<FullPageLoader />}>
+            <ProfileScreen />
+          </Suspense>
+        ),
+      },
     ],
   },
 ]);

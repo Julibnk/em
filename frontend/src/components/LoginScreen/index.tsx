@@ -1,3 +1,4 @@
+import styles from './styles.module.css';
 import { Auth, ThemeSupa } from '@supabase/auth-ui-react';
 import { createClient } from '@supabase/supabase-js';
 
@@ -19,14 +20,20 @@ supabase.auth.onAuthStateChange((event, session) => {
   }
 });
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
   return (
-    <Auth
-      supabaseClient={supabase}
-      appearance={{ theme: ThemeSupa }}
-      socialLayout='horizontal'
-      providers={['facebook']}
-      // socialButtonSize='xlarge'
-    />
+    <div className={styles.root}>
+      <div className={styles.form}>
+        <Auth
+          supabaseClient={supabase}
+          appearance={{ theme: ThemeSupa }}
+          socialLayout='horizontal'
+          providers={['facebook']}
+          // socialButtonSize='xlarge'
+        />
+      </div>
+    </div>
   );
 };
+
+export default LoginScreen;
