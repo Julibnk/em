@@ -1,0 +1,12 @@
+/node_modules
+/dist
+/build
+/logs
+
+/.tmp
+
+
+
+/.env
+/.env.development
+/.env.test
