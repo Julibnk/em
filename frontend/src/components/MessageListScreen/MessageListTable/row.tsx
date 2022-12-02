@@ -1,4 +1,4 @@
-import { Td } from '../../shared/MantineOverwrite/Table';
+import { Td } from '../../Shared/MantineOverwrite/Table';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,7 +6,7 @@ import { ActionIcon } from '@mantine/core';
 
 import { setModalOpenend } from '../../../store/layout-slice';
 import { useDispatch } from '../../../store/store';
-import { ActionCell } from '../../shared/TableCells';
+import { ActionCell } from '../../Shared/TableCells';
 
 import { Message } from '../../../Message/Message';
 import { setSelectedId } from '../../../Template/template-slice';

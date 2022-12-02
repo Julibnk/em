@@ -2,12 +2,12 @@ import styles from './styles.module.css';
 
 import { Tabs, TabsProps } from '@mantine/core';
 
-import { ScreenContent } from '../../../components/shared/Layout/ScreenContent';
+import { ScreenContent } from '../../../components/Shared/Layout/ScreenContent';
 import { CategoryTableHeader } from '../CategoryTableHeader';
 import { CategoryTable } from '../CategoryTable';
 import { TemplateTableHeader } from '../TemplateTableHeader';
 import { TemplateTable } from '../TemplateTable';
-import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { useTranslation } from '../../../Shared/hooks/useTranslation';
 
 export const ConfigurationTabs = () => {
   const t = useTranslation();

@@ -1,4 +1,4 @@
-import { Td } from '../../shared/MantineOverwrite/Table';
+import { Td } from '../../Shared/MantineOverwrite/Table';
 
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
@@ -12,9 +12,9 @@ import {
   ActionCell,
   BadgeCell,
   CellWithSubtitle,
-} from '../../shared/TableCells';
+} from '../../Shared/TableCells';
 import { Template } from '../../../Template/Template';
-import { CategoryBadge } from '../../shared/Badges';
+import { CategoryBadge } from '../../Shared/Badges';
 import { setSelectedId } from '../../../Template/template-slice';
 import { EntityId } from '@reduxjs/toolkit';
 

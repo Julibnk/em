@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { NotFoundScreen } from './components/NotFoundScreen';
-import { Layout } from './components/shared/Layout';
+import { Layout } from './components/Shared/Layout';
 import { lazy, Suspense } from 'react';
-import { FullPageLoader } from './components/shared/Layout/FullPageLoader/index';
+import { FullPageLoader } from './components/Shared/Layout/FullPageLoader/index';
 
 const HomeScreen = lazy(() => import('./components/HomeScreen'));
 const ContactScreen = lazy(() => import('./components/ContactScreen'));

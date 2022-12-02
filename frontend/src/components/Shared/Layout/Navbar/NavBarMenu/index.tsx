@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavBarMenuItem } from '../NavBarMenuItem';
 // import { useTranslation } from 'react-i18next';
 import { faGear, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from '../../../../../shared/hooks/useTranslation';
+import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
 
 const HomeIcon = <FontAwesomeIcon icon={faHouse} />;
 const CommentIcon = <FontAwesomeIcon icon={faComment} />;

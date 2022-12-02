@@ -1,5 +1,5 @@
-import { Td } from '../../shared/MantineOverwrite/Table';
-import { ActionCell, BadgeCell } from '../../shared/TableCells';
+import { Td } from '../../Shared/MantineOverwrite/Table';
+import { ActionCell, BadgeCell } from '../../Shared/TableCells';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +7,7 @@ import { ActionIcon } from '@mantine/core';
 import { setModalOpenend } from '../../../store/layout-slice';
 import { useDispatch } from '../../../store/store';
 import { Category } from '../../../Category/Category';
-import { TemplateBadge } from '../../shared/Badges';
+import { TemplateBadge } from '../../Shared/Badges';
 import { setSelectedId } from '../../../Category/category-slice';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { createSlice, createEntityAdapter, EntityId } from '@reduxjs/toolkit';
 
-import { setSelectedId as helperSetSelectedId } from '../shared/helpers/reducers';
+import { setSelectedId as helperSetSelectedId } from '../Shared/helpers/reducers';
 
 import { Message } from '../Message/Message';
 

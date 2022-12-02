@@ -1,6 +1,6 @@
 import { createSlice, createEntityAdapter, EntityId } from '@reduxjs/toolkit';
 import { Category } from './Category';
-import { setSelectedId as helperSetSelectedId } from '../shared/helpers/reducers';
+import { setSelectedId as helperSetSelectedId } from '../Shared/helpers/reducers';
 
 export const categoryAdapter = createEntityAdapter<Category>();
 

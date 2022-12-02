@@ -1,8 +1,8 @@
-import { Table, Th } from '../../shared/MantineOverwrite/Table';
+import { Table, Th } from '../../Shared/MantineOverwrite/Table';
 import { useSelector } from '../../../store/store';
 import { MessageTableRow } from './row';
 import { selectAllMessages } from '../../../Message/message-selector';
-import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { useTranslation } from '../../../Shared/hooks/useTranslation';
 
 export const MessageListTable = () => {
   const messages = useSelector((state) => selectAllMessages(state));

@@ -9,10 +9,10 @@ import {
 // import { useTranslation } from 'react-i18next';
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
-import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../Shared/MantineOverwrite/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { useTranslation } from '../../../Shared/hooks/useTranslation';
 
 export const MessageLoadHeader = () => {
   const t = useTranslation();

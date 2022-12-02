@@ -1,21 +1,26 @@
+import styles from './styles.module.css';
+
 import { useForm } from '@mantine/form';
 import {
   Button,
   Group,
-  // MultiSelect,
-  // TextInput,
-  // Textarea,
-  // Alert,
+  MultiSelect,
+  TextInput,
+  Textarea,
+  Alert,
 } from '@mantine/core';
-import { SecondaryButton } from '../../../../shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../../../Shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
-import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFloppyDisk,
+  faTriangleExclamation,
+} from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from '../../../../../store/store';
-// import { selectCategoriesForCombo } from '../../../store/category-selector';
+import { selectCategoriesForCombo } from '../../../../../Category/category-selector';
 import { selectSelectedTemplate } from '../../../../../Template/template-selector';
 import { selectModal } from '../../../../../store/layout-selector';
-import { useTranslation } from '../../../../../shared/hooks/useTranslation';
+import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
 
 type TemplateFormState = {
   name: string;
@@ -31,11 +36,11 @@ type Props = {
   handleOnClose: () => void;
 };
 
-export const MessageForm = ({ handleOnClose }: Props) => {
+export const TemplateForm = ({ handleOnClose }: Props) => {
   const t = useTranslation();
 
   const template = useSelector((state) => selectSelectedTemplate(state));
-  // const categories = useSelector((state) => selectCategoriesForCombo(state));
+  const categories = useSelector((state) => selectCategoriesForCombo(state));
   const { mode } = useSelector((state) => selectModal(state, 'template'));
 
   const initialValues: TemplateFormState = {
@@ -59,7 +64,7 @@ export const MessageForm = ({ handleOnClose }: Props) => {
 
   return (
     <form className='modal_form' onSubmit={form.onSubmit(handleOnSubmit)}>
-      {/* <Alert
+      <Alert
         icon={<FontAwesomeIcon icon={faTriangleExclamation}></FontAwesomeIcon>}
         title={t('template_warning_title')}
         color='yellow'
@@ -110,9 +115,9 @@ export const MessageForm = ({ handleOnClose }: Props) => {
 
       <MultiSelect
         data={categories}
-        label={t('category', { count: 0 })}
+        label={t('category', { plural: true })}
         {...form.getInputProps('categoryIds')}
-      /> */}
+      />
 
       <Group position='right' mt='md'>
         <SecondaryButton onClick={handleOnClose}>{t('cancel')}</SecondaryButton>

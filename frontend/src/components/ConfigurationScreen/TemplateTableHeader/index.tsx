@@ -5,7 +5,7 @@ import { faAdd, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
 import { setSelectedId } from '../../../Template/template-slice';
-import { useTranslation } from '../../../shared/hooks/useTranslation';
+import { useTranslation } from '../../../Shared/hooks/useTranslation';
 
 export const TemplateTableHeader = () => {
   const t = useTranslation();
