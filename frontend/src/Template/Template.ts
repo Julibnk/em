@@ -1,3 +1,5 @@
+import { Nullable } from '../Shared/Nullable';
+
 export type Template = {
   id: string;
   name: string;
@@ -8,3 +10,8 @@ export type Template = {
   variable3?: string;
   categoryIds: string[];
 };
+
+export interface TemplateRepository {
+  searchAll(): Promise<Template[]>;
+  searchById(id: string): Promise<Nullable<Template>>;
+}
