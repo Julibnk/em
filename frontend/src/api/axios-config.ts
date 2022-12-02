@@ -20,18 +20,26 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export function getRequest(URL, config?: AxiosRequestConfig) {
+export function getRequest(URL: string, config?: AxiosRequestConfig) {
   return axiosClient.get(URL, config).then((response) => response);
 }
 
-export function postRequest(URL, payload, config?: AxiosRequestConfig) {
+export function postRequest(
+  URL: string,
+  payload: any,
+  config?: AxiosRequestConfig
+) {
   return axiosClient.post(URL, payload, config).then((response) => response);
 }
 
-export function putRequest(URL, payload?, config?: AxiosRequestConfig) {
+export function putRequest(
+  URL: string,
+  payload?: any,
+  config?: AxiosRequestConfig
+) {
   return axiosClient.put(URL, payload, config).then((response) => response);
 }
 
-export function deleteRequest(URL, config?: AxiosRequestConfig) {
+export function deleteRequest(URL: string, config?: AxiosRequestConfig) {
   return axiosClient.delete(URL, config).then((response) => response);
 }

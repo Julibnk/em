@@ -1,12 +1,12 @@
 // import { Suspense, lazy } from "react";
 // import { Suspense } from "react";
-import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
+// import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
 
 // import FullPageLoader from "@components/FullPageLoader/FullPageLoader";
 // import PublicRoutes from "@components/Routes/PublicRoutes";
 
-import { ProtectedRoutes } from './components/shared/Routes/ProtectedRoutes';
-import { PrivateRoutes } from './components/shared/Routes/PrivateRoutes';
+// import { ProtectedRoutes } from './components/shared/Routes/ProtectedRoutes';
+// import { PrivateRoutes } from './components/shared/Routes/PrivateRoutes';
 
 // const LoginPage = lazy(() => import("@views/Login/LoginPage"));
 // const NotFoundComponent = lazy(
@@ -15,23 +15,24 @@ import { PrivateRoutes } from './components/shared/Routes/PrivateRoutes';
 
 export const AppRouter = () => {
   return (
-    <Router>
-      {/* <Suspense fallback={<FullPageLoader />}> */}
-      {/* <Suspense> */}
-      <Routes>
-        {/* <Route path="/" element={<PublicRoutes />}>
-            <Route path="login/*" element={<h1></h1>} />
-          </Route> */}
+    <></>
+    // <Router>
+    //   {/* <Suspense fallback={<FullPageLoader />}> */}
+    //   {/* <Suspense> */}
+    //   <Routes>
+    //     {/* <Route path="/" element={<PublicRoutes />}>
+    //         <Route path="login/*" element={<h1></h1>} />
+    //       </Route> */}
 
-        <Route element={<PrivateRoutes />}>
-          <Route path='/*' element={<ProtectedRoutes />} />
-        </Route>
+    //     <Route element={<PrivateRoutes />}>
+    //       <Route path='/*' element={<ProtectedRoutes />} />
+    //     </Route>
 
-        {/* <Route path="*">
-            <Route element={<NotFoundComponent />} />
-          </Route> */}
-      </Routes>
-      {/* </Suspense> */}
-    </Router>
+    //     {/* <Route path="*">
+    //         <Route element={<NotFoundComponent />} />
+    //       </Route> */}
+    //   </Routes>
+    //   {/* </Suspense> */}
+    // </Router>
   );
 };

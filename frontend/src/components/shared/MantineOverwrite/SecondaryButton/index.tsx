@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from '@mantine/core';
 import styles from './styles.module.css';
 
-export const SecondaryButton = (props) => {
+export const SecondaryButton = (props: any) => {
   const buttonProps: ButtonProps = {
     classNames: {
       outline: styles.outline,

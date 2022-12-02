@@ -8,9 +8,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:security/recommended',
-    // 'plugin:unused-imports',
-    // 'plugin:react/recommended',
-    // 'plugin:react/jsx-runtime',
+    'plugin:react/recommended',
   ],
   env: {
     node: true,
@@ -18,5 +16,6 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/no-unused-vars': [1, { ignoreRestSiblings: true }],
+    'react/react-in-jsx-scope': 0,
   },
 };

@@ -35,7 +35,7 @@ export const CategoryForm = ({ handleOnClose }: Props) => {
 
   const form = useForm({ initialValues });
 
-  const handleOnSubmit = (values) => {
+  const handleOnSubmit = (values: CategoryFormState) => {
     console.log(values);
   };
 

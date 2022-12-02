@@ -55,7 +55,7 @@ export const TemplateForm = ({ handleOnClose }: Props) => {
 
   const form = useForm({ initialValues });
 
-  const handleOnSubmit = (values) => {
+  const handleOnSubmit = (values: TemplateFormState) => {
     console.log(values);
   };
 
