@@ -2,10 +2,10 @@ import styles from './styles.module.css';
 import { CategoryTableRow } from './row';
 import { useEffect } from 'react';
 import { Table, Th } from '../../shared/MantineOverwrite/Table';
-import { init } from '../../../store/category-slice';
+import { init } from '../../../Category/category-slice';
 import { useDispatch, useSelector } from '../../../store/store';
-import { selectAllCategories } from '../../../store/category-selector';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { selectAllCategories } from '../../../Category/category-selector';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 export const CategoryTable = () => {
   const dispatch = useDispatch();

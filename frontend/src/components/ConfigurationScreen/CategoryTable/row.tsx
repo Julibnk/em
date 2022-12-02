@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon } from '@mantine/core';
 import { setModalOpenend } from '../../../store/layout-slice';
 import { useDispatch } from '../../../store/store';
-import { Category } from '../../../types/store';
+import { Category } from '../../../Category/Category';
 import { TemplateBadge } from '../../shared/Badges';
-import { setSelectedId } from '../../../store/category-slice';
+import { setSelectedId } from '../../../Category/category-slice';
 
 type Props = {
   category: Category;

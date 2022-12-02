@@ -1,8 +1,8 @@
 import './App.css';
 
-import { Modals } from './components/Modals';
+import { Modals } from './Modals';
 import { AppRouter } from './AppRouter';
-import { useInitApp } from './hooks/useInitApp';
+import { useInitApp } from './shared/hooks/useInitApp';
 import { MantineProvider } from './MantineProvider';
 
 export const App = () => {

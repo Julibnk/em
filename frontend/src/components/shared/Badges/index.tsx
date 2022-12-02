@@ -1,8 +1,8 @@
 import { Badge, MantineColor } from '@mantine/core';
 import { EntityId } from '@reduxjs/toolkit';
-import { selectCategoryById } from '../../../store/category-selector';
+import { selectCategoryById } from '../../../Category/category-selector';
 import { useSelector } from '../../../store/store';
-import { selectTemplateById } from '../../../store/template-selector';
+import { selectTemplateById } from '../../../Template/template-selector';
 
 type Props = {
   id: EntityId;

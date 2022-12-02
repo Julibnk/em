@@ -7,9 +7,9 @@ import {
 
 import authReducer from './auth-slice';
 import layoutReducer from './layout-slice';
-import categoryReducer from './category-slice';
-import templateReducer from './template-slice';
-import messageReducer from './message-slice';
+import categoryReducer from '../Category/category-slice';
+import templateReducer from '../Template/template-slice';
+import messageReducer from '../Message/message-slice';
 
 // export type RootState = {
 //   auth: AuthState;

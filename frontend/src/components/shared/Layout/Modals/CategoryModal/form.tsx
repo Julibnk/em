@@ -1,14 +1,14 @@
 import { useForm } from '@mantine/form';
 import { Button, Group, MultiSelect, TextInput } from '@mantine/core';
-import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../../../shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
-import { useSelector } from '../../../store/store';
-import { selectSelectedCategory } from '../../../store/category-selector';
-import { selectTemplatesForCombo } from '../../../store/template-selector';
+import { useSelector } from '../../../../../store/store';
+import { selectSelectedCategory } from '../../../../../Category/category-selector';
+import { selectTemplatesForCombo } from '../../../../../Template/template-selector';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { selectModal } from '../../../store/layout-selector';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { selectModal } from '../../../../../store/layout-selector';
+import { useTranslation } from '../../../../../shared/hooks/useTranslation';
 
 type CategoryFormState = {
   name: string;

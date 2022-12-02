@@ -8,8 +8,8 @@ import { setModalOpenend } from '../../../store/layout-slice';
 import { useDispatch } from '../../../store/store';
 import { ActionCell } from '../../shared/TableCells';
 
-import { Message } from '../../../types/store';
-import { setSelectedId } from '../../../store/template-slice';
+import { Message } from '../../../Message/Message';
+import { setSelectedId } from '../../../Template/template-slice';
 import { EntityId } from '@reduxjs/toolkit';
 
 type Props = {

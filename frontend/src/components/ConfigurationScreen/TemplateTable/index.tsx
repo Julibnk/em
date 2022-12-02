@@ -1,11 +1,11 @@
 import styles from './styles.module.css';
 import { Table, Th } from '../../shared/MantineOverwrite/Table';
 import { useDispatch, useSelector } from '../../../store/store';
-import { selectAllTemplates } from '../../../store/template-selector';
-import { init } from '../../../store/template-slice';
+import { selectAllTemplates } from '../../../Template/template-selector';
+import { init } from '../../../Template/template-slice';
 import { useEffect } from 'react';
 import { TemplateTableRow } from './row';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 export const TemplateTable = () => {
   const dispatch = useDispatch();

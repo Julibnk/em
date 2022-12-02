@@ -1,5 +1,5 @@
 import { templateAdapter } from './template-slice';
-import { RootState } from './store';
+import { RootState } from '../store/store';
 import { SelectItem } from '@mantine/core';
 
 // Selector que localiza las templates en el state

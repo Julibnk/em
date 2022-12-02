@@ -4,7 +4,7 @@ import { Title } from '@mantine/core';
 import { Routes, Route } from 'react-router-dom';
 
 import { screenConfig } from '../../../../../AppRouter';
-import { useTranslation } from '../../../../../hooks/useTranslation';
+import { useTranslation } from '../../../../../shared/hooks/useTranslation';
 
 export const HeaderSubtitle = () => {
   const t = useTranslation();

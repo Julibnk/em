@@ -7,7 +7,7 @@ import { CategoryTableHeader } from '../CategoryTableHeader';
 import { CategoryTable } from '../CategoryTable';
 import { TemplateTableHeader } from '../TemplateTableHeader';
 import { TemplateTable } from '../TemplateTable';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 export const ConfigurationTabs = () => {
   const t = useTranslation();

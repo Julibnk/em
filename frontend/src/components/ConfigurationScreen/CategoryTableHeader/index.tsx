@@ -6,8 +6,8 @@ import { faSearch, faAdd } from '@fortawesome/free-solid-svg-icons';
 
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
-import { setSelectedId } from '../../../store/category-slice';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { setSelectedId } from '../../../Category/category-slice';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 export const CategoryTableHeader = () => {
   const t = useTranslation();

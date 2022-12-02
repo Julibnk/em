@@ -1,15 +1,15 @@
 import { Button, Group, ModalProps } from '@mantine/core';
-import { Modal } from '../../shared/MantineOverwrite/Modal';
-import { setModalOpenend } from '../../../store/layout-slice';
-import { useSelector, useDispatch } from '../../../store/store';
-import { selectModal } from '../../../store/layout-selector';
+import { Modal } from '../../../../shared/MantineOverwrite/Modal';
+import { setModalOpenend } from '../../../../../store/layout-slice';
+import { useSelector, useDispatch } from '../../../../../store/store';
+import { selectModal } from '../../../../../store/layout-selector';
 
-import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../../../shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import { Dropzone } from '@mantine/dropzone';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { useTranslation } from '../../../../../shared/hooks/useTranslation';
 
 export const MessageLoadModal = () => {
   const dispatch = useDispatch();

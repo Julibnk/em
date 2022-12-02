@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from '../../../store/store';
 import { setModalOpenend } from '../../../store/layout-slice';
-import { setSelectedId } from '../../../store/template-slice';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { setSelectedId } from '../../../Template/template-slice';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 export const TemplateTableHeader = () => {
   const t = useTranslation();

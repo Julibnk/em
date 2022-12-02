@@ -2,15 +2,15 @@ import { useCallback } from 'react';
 import { ModalProps } from '@mantine/core';
 
 // import { Modal } from '@mantine/core';
-import { Modal } from '../../shared/MantineOverwrite/Modal';
+import { Modal } from '../../../../shared/MantineOverwrite/Modal';
 import { CategoryForm } from './form';
-import { setModalOpenend } from '../../../store/layout-slice';
-import { useSelector, useDispatch } from '../../../store/store';
-import { selectModal } from '../../../store/layout-selector';
+import { setModalOpenend } from '../../../../../store/layout-slice';
+import { useSelector, useDispatch } from '../../../../../store/store';
+import { selectModal } from '../../../../../store/layout-selector';
 import { t } from 'i18next';
-import { selectSelectedCategory } from '../../../store/category-selector';
+import { selectSelectedCategory } from '../../../../../Category/category-selector';
 
-import { ModalMode } from '../../../store/layout-slice';
+import { ModalMode } from '../../../../../store/layout-slice';
 
 export const CategoryModal = () => {
   const dispatch = useDispatch();

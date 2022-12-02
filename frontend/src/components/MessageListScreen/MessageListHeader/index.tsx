@@ -12,7 +12,7 @@ import { setModalOpenend } from '../../../store/layout-slice';
 import { SecondaryButton } from '../../shared/MantineOverwrite/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../../../hooks/useTranslation';
+import { useTranslation } from '../../../shared/hooks/useTranslation';
 
 export const MessageListHeader = () => {
   const t = useTranslation();

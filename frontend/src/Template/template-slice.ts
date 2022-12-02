@@ -2,7 +2,7 @@ import { createSlice, createEntityAdapter, EntityId } from '@reduxjs/toolkit';
 
 import { setSelectedId as helperSetSelectedId } from '../shared/helpers/reducers';
 
-import { Template } from '../types/store';
+import { Template } from '../Template/Template';
 
 export const templateAdapter = createEntityAdapter<Template>({
   sortComparer: (a, b) => a.name.localeCompare(b.name),

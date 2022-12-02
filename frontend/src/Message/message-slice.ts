@@ -2,7 +2,7 @@ import { createSlice, createEntityAdapter, EntityId } from '@reduxjs/toolkit';
 
 import { setSelectedId as helperSetSelectedId } from '../shared/helpers/reducers';
 
-import { Message } from '../types/store';
+import { Message } from '../Message/Message';
 
 export const messageAdapter = createEntityAdapter<Message>();
 

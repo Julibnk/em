@@ -13,9 +13,9 @@ import {
   BadgeCell,
   CellWithSubtitle,
 } from '../../shared/TableCells';
-import { Template } from '../../../types/store';
+import { Template } from '../../../Template/Template';
 import { CategoryBadge } from '../../shared/Badges';
-import { setSelectedId } from '../../../store/template-slice';
+import { setSelectedId } from '../../../Template/template-slice';
 import { EntityId } from '@reduxjs/toolkit';
 
 type Props = {
