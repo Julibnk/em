@@ -5,8 +5,8 @@ import {
   useSelector as useReduxSelector,
 } from 'react-redux';
 
-import authReducer from './auth-slice';
-import layoutReducer from './layout-slice';
+import authReducer from '../Auth/auth-slice';
+import layoutReducer from '../components/Shared/Layout/layout-slice';
 import categoryReducer from '../Category/category-slice';
 import templateReducer from '../Template/template-slice';
 import messageReducer from '../Message/message-slice';

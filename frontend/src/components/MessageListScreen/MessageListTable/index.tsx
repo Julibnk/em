@@ -1,5 +1,5 @@
 import { Table, Th } from '../../Shared/MantineOverwrite/Table';
-import { useSelector } from '../../../store/store';
+import { useSelector } from '../../../config/store';
 import { MessageTableRow } from './row';
 import { selectAllMessages } from '../../../Message/message-selector';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';

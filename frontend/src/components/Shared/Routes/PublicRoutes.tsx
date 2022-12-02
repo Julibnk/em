@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useSelector } from '../../../store/store';
+import { useSelector } from '../../../config/store';
 
 export interface ILocationState {
   from: { pathname?: string; search?: string };

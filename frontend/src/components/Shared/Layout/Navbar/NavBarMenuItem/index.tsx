@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 
 import { Button, ButtonProps, ButtonVariant } from '@mantine/core';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import { useSelector } from '../../../../../store/store';
+import { useSelector } from '../../../../../config/store';
 
 type Props = {
   to: string;

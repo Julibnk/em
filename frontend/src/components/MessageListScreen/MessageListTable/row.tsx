@@ -4,8 +4,8 @@ import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon } from '@mantine/core';
 
-import { setModalOpenend } from '../../../store/layout-slice';
-import { useDispatch } from '../../../store/store';
+import { setModalOpenend } from '../../Shared/Layout/layout-slice';
+import { useDispatch } from '../../../config/store';
 import { ActionCell } from '../../Shared/TableCells';
 
 import { Message } from '../../../Message/Message';

@@ -1,4 +1,4 @@
-import { RootState } from '../store/store';
+import { RootState } from '../config/store';
 import { messageAdapter } from './message-slice';
 
 // Selector que localiza las templates en el state

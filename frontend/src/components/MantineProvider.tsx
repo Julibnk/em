@@ -2,7 +2,7 @@ import {
   MantineProvider as Mantine,
   MantineProviderProps,
 } from '@mantine/core';
-import { theme } from './config';
+import { theme } from '../config/theme';
 
 type Props = {
   children?: React.ReactNode;

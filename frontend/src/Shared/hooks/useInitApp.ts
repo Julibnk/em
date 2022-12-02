@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
-import { initApp } from '../../store/auth-slice';
-import { useDispatch } from '../../store/store';
+import { initApp } from '../../Auth/auth-slice';
+import { useDispatch } from '../../config/store';
 
 export const useInitApp = () => {
   const dispatch = useDispatch();

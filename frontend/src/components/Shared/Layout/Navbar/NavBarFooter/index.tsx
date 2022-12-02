@@ -2,8 +2,8 @@ import styles from './styles.module.css';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon, ActionIconProps, Navbar } from '@mantine/core';
-import { setNavbarCollapsed } from '../../../../../store/layout-slice';
-import { useDispatch, useSelector } from '../../../../../store/store';
+import { setNavbarCollapsed } from '../../layout-slice';
+import { useDispatch, useSelector } from '../../../../../config/store';
 
 export const NavBarFooter = () => {
   const dispatch = useDispatch();

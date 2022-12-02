@@ -1,4 +1,4 @@
-import { RootState } from './store';
+import { RootState } from '../../../config/store';
 import { AllModals } from './layout-slice';
 
 export const selectModal = (state: RootState, modal: AllModals) => {

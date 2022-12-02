@@ -3,7 +3,7 @@ import { CategoryTableRow } from './row';
 import { useEffect } from 'react';
 import { Table, Th } from '../../Shared/MantineOverwrite/Table';
 import { init } from '../../../Category/category-slice';
-import { useDispatch, useSelector } from '../../../store/store';
+import { useDispatch, useSelector } from '../../../config/store';
 import { selectAllCategories } from '../../../Category/category-selector';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
 

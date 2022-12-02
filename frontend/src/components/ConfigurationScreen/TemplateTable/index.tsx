@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 import { Table, Th } from '../../Shared/MantineOverwrite/Table';
-import { useDispatch, useSelector } from '../../../store/store';
+import { useDispatch, useSelector } from '../../../config/store';
 import { selectAllTemplates } from '../../../Template/template-selector';
 import { init } from '../../../Template/template-slice';
 import { useEffect } from 'react';

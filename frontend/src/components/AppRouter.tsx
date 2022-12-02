@@ -1,18 +1,16 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { NotFoundScreen } from './components/NotFoundScreen';
-import { Layout } from './components/Shared/Layout';
+import { NotFoundScreen } from './NotFoundScreen';
+import { Layout } from './Shared/Layout';
 import { lazy, Suspense } from 'react';
-import { FullPageLoader } from './components/Shared/Layout/FullPageLoader/index';
+import { FullPageLoader } from './Shared/Layout/FullPageLoader/index';
 
-const HomeScreen = lazy(() => import('./components/HomeScreen'));
-const ContactScreen = lazy(() => import('./components/ContactScreen'));
-const MessageScreen = lazy(() => import('./components/MessageScreen'));
-const ConfigurationScreen = lazy(
-  () => import('./components/ConfigurationScreen')
-);
-const ProfileScreen = lazy(() => import('./components/ProfileScreen'));
-const LoginScreen = lazy(() => import('./components/LoginScreen'));
+const HomeScreen = lazy(() => import('./HomeScreen'));
+const ContactScreen = lazy(() => import('./ContactScreen'));
+const MessageScreen = lazy(() => import('./MessageScreen'));
+const ConfigurationScreen = lazy(() => import('./ConfigurationScreen'));
+const ProfileScreen = lazy(() => import('./ProfileScreen'));
+const LoginScreen = lazy(() => import('./LoginScreen'));
 
 const router = createBrowserRouter([
   {
@@ -138,3 +136,42 @@ export const screenConfig: Array<screenConfig> = [
 export const AppRouter = () => {
   return <RouterProvider router={router}></RouterProvider>;
 };
+
+// import { Suspense, lazy } from "react";
+// import { Suspense } from "react";
+// import { Routes, BrowserRouter as Router, Route } from 'react-router-dom';
+
+// import FullPageLoader from "@components/FullPageLoader/FullPageLoader";
+// import PublicRoutes from "@components/Routes/PublicRoutes";
+
+// import { ProtectedRoutes } from './components/shared/Routes/ProtectedRoutes';
+// import { PrivateRoutes } from './components/shared/Routes/PrivateRoutes';
+
+// const LoginPage = lazy(() => import("@views/Login/LoginPage"));
+// const NotFoundComponent = lazy(
+//   () => import("@components/Routes/NotFoundComponent")
+// );
+
+// export const AppRouter = () => {
+// return (
+<></>;
+// <Router>
+//   {/* <Suspense fallback={<FullPageLoader />}> */}
+//   {/* <Suspense> */}
+//   <Routes>
+//     {/* <Route path="/" element={<PublicRoutes />}>
+//         <Route path="login/*" element={<h1></h1>} />
+//       </Route> */}
+
+//     <Route element={<PrivateRoutes />}>
+//       <Route path='/*' element={<ProtectedRoutes />} />
+//     </Route>
+
+//     {/* <Route path="*">
+//         <Route element={<NotFoundComponent />} />
+//       </Route> */}
+//   </Routes>
+//   {/* </Suspense> */}
+// </Router>
+// );
+// };

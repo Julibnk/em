@@ -3,11 +3,11 @@ import { Button, Group, MultiSelect, TextInput } from '@mantine/core';
 import { SecondaryButton } from '../../../../Shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
-import { useSelector } from '../../../../../store/store';
+import { useSelector } from '../../../../../config/store';
 import { selectSelectedCategory } from '../../../../../Category/category-selector';
 import { selectTemplatesForCombo } from '../../../../../Template/template-selector';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { selectModal } from '../../../../../store/layout-selector';
+import { selectModal } from '../../layout-selector';
 import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
 
 type CategoryFormState = {

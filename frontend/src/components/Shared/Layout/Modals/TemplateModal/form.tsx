@@ -16,10 +16,10 @@ import {
   faFloppyDisk,
   faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from '../../../../../store/store';
+import { useSelector } from '../../../../../config/store';
 import { selectCategoriesForCombo } from '../../../../../Category/category-selector';
 import { selectSelectedTemplate } from '../../../../../Template/template-selector';
-import { selectModal } from '../../../../../store/layout-selector';
+import { selectModal } from '../../layout-selector';
 import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
 
 type TemplateFormState = {

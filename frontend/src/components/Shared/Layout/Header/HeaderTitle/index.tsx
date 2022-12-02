@@ -6,7 +6,7 @@ import { Title } from '@mantine/core';
 // export screenConfig
 
 import { Routes, Route } from 'react-router-dom';
-import { screenConfig } from '../../../../../AppRouter';
+import { screenConfig } from '../../../../AppRouter';
 import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
 
 export const HeaderTitle = () => {

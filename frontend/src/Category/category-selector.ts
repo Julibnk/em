@@ -1,6 +1,6 @@
 import { SelectItem } from '@mantine/core';
 import { categoryAdapter } from './category-slice';
-import { RootState } from '../store/store';
+import { RootState } from '../config/store';
 // import { CategoryWithTemplates, TemplateWithCategories } from '../types/store';
 
 // Selector que localiza las categories en el state

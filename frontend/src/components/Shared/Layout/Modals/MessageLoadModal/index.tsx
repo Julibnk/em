@@ -1,8 +1,8 @@
 import { Button, Group, ModalProps } from '@mantine/core';
 import { Modal } from '../../../../Shared/MantineOverwrite/Modal';
-import { setModalOpenend } from '../../../../../store/layout-slice';
-import { useSelector, useDispatch } from '../../../../../store/store';
-import { selectModal } from '../../../../../store/layout-selector';
+import { setModalOpenend } from '../../layout-slice';
+import { useSelector, useDispatch } from '../../../../../config/store';
+import { selectModal } from '../../layout-selector';
 
 import { SecondaryButton } from '../../../../Shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

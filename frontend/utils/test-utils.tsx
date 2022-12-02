@@ -3,8 +3,8 @@
 import { cleanup, render, RenderOptions } from '@testing-library/react';
 import { afterEach } from 'vitest';
 import { Provider as ReduxProvider } from 'react-redux';
-import { store } from '../src/store/store';
-import { MantineProvider } from '../src/MantineProvider';
+import { store } from '../src/config/store';
+import { MantineProvider } from '../src/components/MantineProvider';
 import React from 'react';
 
 afterEach(() => {

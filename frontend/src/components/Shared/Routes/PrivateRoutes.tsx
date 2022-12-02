@@ -1,5 +1,5 @@
 import { Navigate, useLocation, Outlet } from 'react-router-dom';
-import { useSelector } from '../../../store/store';
+import { useSelector } from '../../../config/store';
 
 export const PrivateRoutes = () => {
   const { isAuthenticated } = useSelector((state) => state.auth);

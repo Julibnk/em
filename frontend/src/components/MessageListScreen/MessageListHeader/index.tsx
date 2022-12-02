@@ -7,8 +7,8 @@ import {
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 // import { useTranslation } from 'react-i18next';
-import { useDispatch } from '../../../store/store';
-import { setModalOpenend } from '../../../store/layout-slice';
+import { useDispatch } from '../../../config/store';
+import { setModalOpenend } from '../../Shared/Layout/layout-slice';
 import { SecondaryButton } from '../../Shared/MantineOverwrite/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
