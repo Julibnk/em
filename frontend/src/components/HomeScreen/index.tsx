@@ -1,5 +1,5 @@
 import { Card, Group, Text, Badge, Image, Button } from '@mantine/core';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from '@react-spring/web';
 import { ScreenContent } from '../../components/Shared/Layout/ScreenContent';
 
 const HomeScreen = () => {

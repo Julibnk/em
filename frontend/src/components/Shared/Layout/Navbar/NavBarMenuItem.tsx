@@ -51,6 +51,7 @@ export const NavBarMenuItem = ({ text, icon, className, to }: Props) => {
   return (
     <Button to={to} component={Link} className={className} {...buttonProps}>
       {navbarCollapsed && text}
+      {/* {text} */}
     </Button>
   );
 };
