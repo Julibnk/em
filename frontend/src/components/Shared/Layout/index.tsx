@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { Navbar } from './Navbar';
+import { Navbar } from './Navbar/NavBar';
 import { Main } from './Main';
 
 export const Layout = () => {

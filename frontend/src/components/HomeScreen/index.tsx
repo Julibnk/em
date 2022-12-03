@@ -1,10 +1,43 @@
+import { Card, Group, Text, Badge, Image, Button } from '@mantine/core';
+import { useSpring, animated } from 'react-spring';
 import { ScreenContent } from '../../components/Shared/Layout/ScreenContent';
 
 const HomeScreen = () => {
+  // const styles = useSpring({ opacity: toggle ? 1 : 0 });
+
+  const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 } });
+
   return (
-    <ScreenContent>
-      <h1>Home</h1>
-    </ScreenContent>
+    <animated.div style={props}>
+      <ScreenContent>
+        <Card shadow='sm' p='lg' radius='md' withBorder>
+          <Card.Section>
+            <Image
+              src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
+              height={160}
+              alt='Norway'
+            />
+          </Card.Section>
+
+          <Group position='apart' mt='md' mb='xs'>
+            <Text weight={500}>Norway Fjord Adventures</Text>
+            <Badge color='pink' variant='light'>
+              On Sale
+            </Badge>
+          </Group>
+
+          <Text size='sm' color='dimmed'>
+            With Fjord Tours you can explore more of the magical fjord
+            landscapes with tours and activities on and around the fjords of
+            Norway
+          </Text>
+
+          <Button variant='light' color='blue' fullWidth mt='md' radius='md'>
+            Book classic tour now
+          </Button>
+        </Card>
+      </ScreenContent>
+    </animated.div>
   );
 };
 

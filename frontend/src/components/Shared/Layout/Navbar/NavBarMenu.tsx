@@ -6,10 +6,10 @@ import {
 import { Navbar } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { NavBarMenuItem } from '../NavBarMenuItem';
+import { NavBarMenuItem } from './NavBarMenuItem';
 // import { useTranslation } from 'react-i18next';
 import { faGear, faHouse } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
+import { useTranslation } from '../../../../Shared/hooks/useTranslation';
 
 const HomeIcon = <FontAwesomeIcon icon={faHouse} />;
 const CommentIcon = <FontAwesomeIcon icon={faComment} />;

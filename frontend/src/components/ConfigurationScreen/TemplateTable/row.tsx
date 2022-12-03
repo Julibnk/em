@@ -63,11 +63,11 @@ export const TemplateTableRow = ({ template }: Props) => {
         </BadgeCell>
       </Td>
       <Td>
-        <BadgeCell>
+        {/* <BadgeCell>
           {categoryIds.map((id) => {
             return <CategoryBadge key={id} id={id}></CategoryBadge>;
           })}
-        </BadgeCell>
+        </BadgeCell> */}
       </Td>
       <Td>
         <ActionCell>

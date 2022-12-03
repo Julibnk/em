@@ -3,19 +3,34 @@ import { Table, Th } from '../../Shared/MantineOverwrite/Table';
 import { useDispatch, useSelector } from '../../../config/store';
 import { selectAllTemplates } from '../../../Template/template-selector';
 import { init } from '../../../Template/template-slice';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { TemplateTableRow } from './row';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
+import { RestCategoryRespository } from '../../../Category/RestCategoryRepository';
+import { Template } from '../../../Template/Template';
+import { RestTemplateRepository } from '../../../Template/RestTemplateRepository';
+
+const repository = new RestTemplateRepository();
 
 export const TemplateTable = () => {
-  const dispatch = useDispatch();
+  const t = useTranslation();
+  // const dispatch = useDispatch();
+
+  const [templates, setTemplates] = useState<Template[]>([]);
 
   useEffect(() => {
-    dispatch(init());
-  }, [dispatch]);
+    repository.searchAll().then((templates) => {
+      setTemplates(templates);
+    });
+    // setTemplates();
+    // const templates = repository.searchAll();
+  }, []);
 
-  const templates = useSelector((state) => selectAllTemplates(state));
-  const t = useTranslation();
+  // useEffect(() => {
+  //   dispatch(init());
+  // }, [dispatch]);
+
+  // const templates = useSelector((state) => selectAllTemplates(state));
 
   return (
     <Table className={styles.table}>

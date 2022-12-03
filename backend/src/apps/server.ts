@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import errorHandler from 'errorhandler';
+import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
@@ -27,6 +28,8 @@ export class Server {
     this.express.use(helmet.hidePoweredBy());
     this.express.use(helmet.frameguard({ action: 'deny' }));
     this.express.use(compress());
+    process.env.NODE_ENV === 'development' && this.express.use(cors());
+
     const router = Router();
     router.use(errorHandler());
 

@@ -1,7 +1,46 @@
+/*ROOT */
+
 .root {
   background-color: transparent;
   border: none;
   width: auto;
   padding: 2.4rem 1.6rem;
   gap: 1.2rem;
+}
+
+/* MENU ITEM  */
+.menu_item_root {
+  padding: 0 1.2rem;
+}
+.menu_item_inner {
+  justify-content: flex-start;
+}
+
+.menu_item_icon_collapsed {
+  margin-right: 0;
+}
+
+/* Subtle variant */
+.menu_item_subtle_root {
+  color: var(--color-primary-1);
+}
+.menu_item_subtle_root:hover {
+  color: var(--color-primary-6);
+}
+.menu_item_subtle_root:hover svg {
+  color: var(--color-primary-6);
+}
+.menu_item_subtle_icon {
+  color: var(--color-primary-1);
+}
+
+/* Filled variant */
+.menu_item_filled_root:hover {
+  background-color: var(--color-primary-6);
+}
+
+/* FOOTER */
+.footer_root {
+  border-top: 1px solid var(--color-primary-1);
+  padding-top: 1.2rem;
 }

@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 
 import { Button, ButtonProps, ButtonVariant } from '@mantine/core';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import { useSelector } from '../../../../../config/store';
+import { useSelector } from '../../../../config/store';
 
 type Props = {
   to: string;
@@ -12,22 +12,22 @@ type Props = {
   variant?: ButtonVariant;
 };
 
-//TODO Tipar return antes estaba {} pero eslint peta
-// Define los estilos del componente botton en funcion de la variante
 const getClassNames = (variant: ButtonVariant, collapsed: boolean) => {
   if (variant === 'subtle') {
     return {
-      root: `${styles.root} ${styles.subtle_root}`,
-      inner: styles.inner,
-      icon: `${styles.icon} ${styles.subtle_icon} ${
-        !collapsed && styles.icon_collapsed
+      root: `${styles.menu_item_root} ${styles.menu_item_subtle_root}`,
+      inner: styles.menu_item_inner,
+      icon: `${styles.menu_item_icon} ${styles.menu_item_subtle_icon} ${
+        !collapsed && styles.menu_item_icon_collapsed
       }`,
     };
   }
   return {
-    root: `${styles.root} ${styles.filled_root}`,
-    inner: styles.inner,
-    icon: `${styles.icon} ${!collapsed && styles.icon_collapsed}`,
+    root: `${styles.menu_item_root} ${styles.menu_item_filled_root}`,
+    inner: styles.menu_item_inner,
+    icon: `${styles.menu_item_icon} ${
+      !collapsed && styles.menu_item_icon_collapsed
+    }`,
   };
 };
 
