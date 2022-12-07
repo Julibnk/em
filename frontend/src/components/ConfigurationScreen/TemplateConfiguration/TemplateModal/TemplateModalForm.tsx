@@ -1,69 +1,42 @@
 import styles from './styles.module.css';
 
 import { useForm } from '@mantine/form';
-import {
-  Button,
-  Group,
-  MultiSelect,
-  TextInput,
-  Textarea,
-  Alert,
-} from '@mantine/core';
-import { SecondaryButton } from '../../../Shared/MantineOverwrite/SecondaryButton';
+import { Button, Group, TextInput, Textarea, Alert } from '@mantine/core';
+import { SecondaryButton } from '../../../Shared/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import {
   faFloppyDisk,
   faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from '../../../../config/store';
-import { selectCategoriesForCombo } from '../../../../Category/category-selector';
-import { selectSelectedTemplate } from '../../../../Template/template-selector';
-import { selectModal } from '../../../Shared/Layout/layout-selector';
+
 import { useTranslation } from '../../../../Shared/hooks/useTranslation';
+import { Template } from '../../../../Template/Template';
+import { ModalMode } from '../../../Shared/Modal/Modal';
+import { Nullable } from '../../../../Shared/Nullable';
 
-type TemplateFormState = {
-  name: string;
-  description: string;
-  preview: string;
-  variable1: string;
-  variable2: string;
-  variable3: string;
-  categoryIds: string[];
-};
+export interface Props {
+  handleClose: () => void;
+  handleSubmit: () => void;
+  template: Template;
+  mode: Nullable<ModalMode>;
+}
 
-type Props = {
-  handleOnClose: () => void;
-};
-
-export const TemplateForm = ({ handleOnClose }: Props) => {
+export const TemplateForm = ({
+  handleClose,
+  handleSubmit,
+  template,
+  mode,
+}: Props) => {
   const t = useTranslation();
 
-  const template = useSelector((state) => selectSelectedTemplate(state));
-  const categories = useSelector((state) => selectCategoriesForCombo(state));
-  const { mode } = useSelector((state) => selectModal(state, 'template'));
+  const form = useForm({ initialValues: template });
 
-  const initialValues: TemplateFormState = {
-    name: template?.name || '',
-    description: template?.description || '',
-    preview: template?.preview || '',
-    variable1: template?.variable1 || '',
-    variable2: template?.variable2 || '',
-    variable3: template?.variable3 || '',
-    categoryIds: template?.categoryIds as string[],
-  };
-
-  const form = useForm({ initialValues });
-
-  const handleOnSubmit = (values: TemplateFormState) => {
-    console.log(values);
-  };
-
-  const mainButtonIcon = mode === 'create' ? faFile : faFloppyDisk;
-  const mainButtonText = mode === 'create' ? t('create') : t('save');
+  const mainButtonIcon = mode === 'CREATE' ? faFile : faFloppyDisk;
+  const mainButtonText = mode === 'CREATE' ? t('create') : t('save');
 
   return (
-    <form className='modal_form' onSubmit={form.onSubmit(handleOnSubmit)}>
+    <form className='modal_form' onSubmit={form.onSubmit(handleSubmit)}>
       <Alert
         icon={<FontAwesomeIcon icon={faTriangleExclamation}></FontAwesomeIcon>}
         title={t('template_warning_title')}
@@ -113,14 +86,8 @@ export const TemplateForm = ({ handleOnClose }: Props) => {
         />
       </div>
 
-      <MultiSelect
-        data={categories}
-        label={t('category', { plural: true })}
-        {...form.getInputProps('categoryIds')}
-      />
-
       <Group position='right' mt='md'>
-        <SecondaryButton onClick={handleOnClose}>{t('cancel')}</SecondaryButton>
+        <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
         <Button
           type='submit'
           leftIcon={<FontAwesomeIcon icon={mainButtonIcon} />}

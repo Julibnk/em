@@ -9,7 +9,7 @@ import {
 // import { useTranslation } from 'react-i18next';
 import { useDispatch } from '../../../config/store';
 import { setModalOpenend } from '../../Shared/Layout/layout-slice';
-import { SecondaryButton } from '../../Shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';

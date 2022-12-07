@@ -7,7 +7,7 @@ import {
   // Textarea,
   // Alert,
 } from '@mantine/core';
-import { SecondaryButton } from '../../../../Shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../../SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';

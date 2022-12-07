@@ -11,3 +11,7 @@ process.on('uncaughtException', (err) => {
   console.log('uncaughtException', err);
   process.exit(1);
 });
+
+process.on('SIGTERM', () => {
+  process.exit(1);
+});

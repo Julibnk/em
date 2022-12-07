@@ -1,6 +1,6 @@
 import { useForm } from '@mantine/form';
 import { Button, Group, MultiSelect, TextInput } from '@mantine/core';
-import { SecondaryButton } from '../../../Shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../../Shared/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { useSelector } from '../../../../config/store';

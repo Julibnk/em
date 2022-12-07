@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { ModalProps } from '@mantine/core';
 
 // import { Modal } from '@mantine/core';
-import { Modal } from '../../../Shared/MantineOverwrite/Modal';
+import { Modal } from '../../../Shared/Modal/Modal';
 import { CategoryForm } from './form';
 import { setModalOpenend } from '../../../Shared/Layout/layout-slice';
 import { useSelector, useDispatch } from '../../../../config/store';

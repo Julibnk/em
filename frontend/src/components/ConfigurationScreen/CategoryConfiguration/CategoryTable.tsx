@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 import { CategoryTableRow } from './CategoryTableRow';
 import { useEffect } from 'react';
-import { Table, Th } from '../../Shared/MantineOverwrite/Table';
+import { Table, Th } from '../../Shared/Table';
 import { init } from '../../../Category/category-slice';
 import { useDispatch, useSelector } from '../../../config/store';
 import { selectAllCategories } from '../../../Category/category-selector';

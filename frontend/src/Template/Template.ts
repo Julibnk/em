@@ -8,7 +8,6 @@ export type Template = {
   variable1?: string;
   variable2?: string;
   variable3?: string;
-  categoryIds: string[];
 };
 
 export interface TemplateRepository {

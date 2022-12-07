@@ -1,4 +1,4 @@
-import { Table, Th } from '../../Shared/MantineOverwrite/Table';
+import { Table, Th } from '../../Shared/Table';
 import { useSelector } from '../../../config/store';
 import { MessageTableRow } from './row';
 import { selectAllMessages } from '../../../Message/message-selector';

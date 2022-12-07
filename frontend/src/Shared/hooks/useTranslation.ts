@@ -3,6 +3,7 @@ import { useTranslation as externalUseTranslation } from 'react-i18next';
 export type TranslationParams = {
   plural?: boolean;
   number?: number;
+  subject?: string;
 };
 
 export const useTranslation = () => {
@@ -11,6 +12,7 @@ export const useTranslation = () => {
     const translationParams = {
       count: params?.plural ? 0 : undefined,
       number: params?.number,
+      subject: params?.subject,
     };
 
     const translation = t(text, translationParams);

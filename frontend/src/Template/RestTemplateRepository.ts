@@ -9,10 +9,10 @@ export class RestTemplateRepository implements TemplateRepository {
         'Access-Control-Allow-Origin': '*',
       },
     });
-
     const templates: Template[] = await response.json();
-
     return templates;
+
+    // return [];
   }
 
   async searchById(id: string): Promise<Nullable<Template>> {
@@ -26,5 +26,6 @@ export class RestTemplateRepository implements TemplateRepository {
     const template: Nullable<Template> = await response.json();
 
     return template;
+    // return null;
   }
 }

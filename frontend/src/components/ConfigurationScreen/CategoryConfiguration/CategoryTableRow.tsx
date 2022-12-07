@@ -1,4 +1,4 @@
-import { Td } from '../../Shared/MantineOverwrite/Table';
+import { Td } from '../../Shared/Table';
 import { ActionCell, BadgeCell } from '../../Shared/TableCells';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';

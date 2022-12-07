@@ -4,6 +4,9 @@ import { Tabs, TabsProps } from '@mantine/core';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfiguration';
 import { TemplateConfiguration } from './TemplateConfiguration/TemplateConfiguration';
+import { RestTemplateRepository } from '../../Template/RestTemplateRepository';
+
+const repository = new RestTemplateRepository();
 
 export const ConfigurationTabs = () => {
   const t = useTranslation();
@@ -28,7 +31,7 @@ export const ConfigurationTabs = () => {
       </Tabs.Panel>
 
       <Tabs.Panel value='template'>
-        <TemplateConfiguration />
+        <TemplateConfiguration repository={repository} />
       </Tabs.Panel>
     </Tabs>
   );
