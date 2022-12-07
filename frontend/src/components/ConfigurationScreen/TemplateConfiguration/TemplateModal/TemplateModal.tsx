@@ -1,7 +1,7 @@
-import { ModalProps } from '@mantine/core';
-import { Modal, ModalTitle } from '../../../Shared/Modal/Modal';
+import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
 import { TemplateForm } from './TemplateModalForm';
 import { TemplateModalState } from '../useTemplateModal';
+import { ModalTitle } from '../../../Shared/Modal/ModalTitle';
 
 export interface Props {
   state: TemplateModalState;
@@ -17,6 +17,7 @@ export const TemplateModal = ({ state, handleClose, handleSubmit }: Props) => {
     onClose: handleClose,
     title: <ModalTitle mode={mode} subject={template?.name || ''} />,
     size: 600,
+    loading: state.loading,
   };
 
   if (!template) return null;

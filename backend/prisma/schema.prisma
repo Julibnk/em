@@ -125,15 +125,15 @@ model Template {
   id        String @db.Uuid
 
   // Main fields
-  name             String
-  status           TemplateStatus
-  shortDescription String?
-  preview          String?
-  variable1        String?
-  variable2        String?
-  variable3        String?
-  disabled         Boolean        @default(false)
-  categoryId       String?        @db.Uuid
+  name        String
+  status      TemplateStatus
+  description String?
+  preview     String?
+  variable1   String?
+  variable2   String?
+  variable3   String?
+  disabled    Boolean        @default(false)
+  categoryId  String?        @db.Uuid
 
   // Generic fields
   createdAt DateTime @default(now())

@@ -2,7 +2,7 @@ import { SaveTemplateUseCase } from '../../../../src/core/Template/application/S
 import { TemplateMother } from '../domain/TemplateMother';
 import { TemplateRepositoryMock } from '../__mocks__/TemplateRepositoryMock';
 import { TemplateWithSameNameAlreadyExistsError } from '../../../../src/core/Template/domain/exceptions/TemplateWithSameNameAlreadyExistsError';
-import { TemplateShortDescriptionMother } from '../domain/TemplateShortDescriptionMother';
+import { TemplateDescriptionMother } from '../domain/TemplateDescriptionMother';
 import { TemplateVariableMother } from '../domain/TemplateVariableMother';
 import { TemplatePreviewMother } from '../domain/TemplatePreviewMother';
 import { InconsistentTemplateVariableError } from '../../../../src/core/Template/domain/exceptions/InconsistentTemplateVariableError';
@@ -32,7 +32,7 @@ describe('SaveTemplate use case', () => {
       const changedTemplate = TemplateMother.makeCopy(template);
 
       changedTemplate.change(
-        TemplateShortDescriptionMother.random(),
+        TemplateDescriptionMother.random(),
         TemplatePreviewMother.random(),
         TemplateVariableMother.random(),
         TemplateVariableMother.random(),
@@ -48,7 +48,7 @@ describe('SaveTemplate use case', () => {
       template.change = jest.fn();
       await saveTemplateUseCase.run(useCaseParams);
       expect(template.change).toHaveBeenCalledWith(
-        changedTemplate.shortDescription,
+        changedTemplate.description,
         changedTemplate.preview,
         changedTemplate.variable1,
         changedTemplate.variable2,

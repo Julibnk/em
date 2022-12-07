@@ -24,7 +24,7 @@ export class TemplatePutController implements Controller {
         accountId: process.env.ACCOUNT_ID || '',
         id: req.params.id,
         name: req.body.name,
-        shortDescription: req.body.shortDescription,
+        description: req.body.description,
         preview: req.body.preview,
         variable1: req.body.variable1,
         variable2: req.body.variable2,

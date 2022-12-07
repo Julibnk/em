@@ -7,7 +7,7 @@ import { Template } from '../../../core/Template/domain/Template';
 type ControllerResponse = Array<{
   id: string;
   name: string;
-  shortDescription: string;
+  description: string;
   preview: string;
   variable1: string;
   variable2: string;

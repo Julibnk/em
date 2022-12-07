@@ -5,7 +5,7 @@ import {
   TemplateStatus,
   TemplateStatuses,
 } from './value-object/TemplateStatus';
-import { TemplateShortDescription } from './value-object/TemplateShortDescription';
+import { TemplateDescription } from './value-object/TemplateDescription';
 import { TemplatePreview } from './value-object/TemplatePreview';
 import { TemplateVariable } from './value-object/TemplateVariable';
 import { Primitives } from '../../Shared/domain/Primitives';
@@ -23,7 +23,7 @@ export class Template extends AggregateRoot {
     readonly id: TemplateId,
     readonly name: TemplateName,
     private _status: TemplateStatus,
-    private _shortDescription: TemplateShortDescription,
+    private _description: TemplateDescription,
     private _preview: TemplatePreview,
     private _variable1: TemplateVariable,
     private _variable2: TemplateVariable,
@@ -36,8 +36,8 @@ export class Template extends AggregateRoot {
   public get status(): TemplateStatus {
     return this._status;
   }
-  public get shortDescription(): TemplateShortDescription {
-    return this._shortDescription;
+  public get description(): TemplateDescription {
+    return this._description;
   }
   public get preview(): TemplatePreview {
     return this._preview;
@@ -58,7 +58,7 @@ export class Template extends AggregateRoot {
       new TemplateId(plainData.id),
       new TemplateName(plainData.name),
       TemplateStatus.fromValue(plainData.status),
-      new TemplateShortDescription(plainData.shortDescription),
+      new TemplateDescription(plainData.description),
       new TemplatePreview(plainData.preview),
       new TemplateVariable(plainData.variable1),
       new TemplateVariable(plainData.variable2),
@@ -70,7 +70,7 @@ export class Template extends AggregateRoot {
     accountId: AccountId,
     id: TemplateId,
     name: TemplateName,
-    shortDescription: TemplateShortDescription,
+    description: TemplateDescription,
     preview: TemplatePreview,
     variable1: TemplateVariable,
     variable2: TemplateVariable,
@@ -81,7 +81,7 @@ export class Template extends AggregateRoot {
       id,
       name,
       TemplateStatus.fromValue(TemplateStatuses.NOT_SENT),
-      shortDescription,
+      description,
       preview,
       variable1,
       variable2,
@@ -90,13 +90,13 @@ export class Template extends AggregateRoot {
   }
 
   change(
-    shortDescription: TemplateShortDescription,
+    description: TemplateDescription,
     preview: TemplatePreview,
     variable1: TemplateVariable,
     variable2: TemplateVariable,
     variable3: TemplateVariable
   ): void {
-    this._shortDescription = shortDescription;
+    this._description = description;
     this._preview = preview;
     this._variable1 = variable1;
     this._variable2 = variable2;
@@ -115,7 +115,7 @@ export class Template extends AggregateRoot {
       id: this.id.value,
       name: this.name.value,
       status: this.status.value,
-      shortDescription: this.shortDescription.value,
+      description: this.description.value,
       preview: this.preview.value,
       variable1: this.variable1.value,
       variable2: this.variable2.value,

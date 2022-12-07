@@ -2,13 +2,13 @@ import { Template } from '../../../../src/core/Template/domain/Template';
 import { TemplateIdMother } from './TemplateIdMother';
 import { TemplateNameMother } from './TemplateNameMother';
 import { TemplateStatusMother } from './TemplateStatusMother';
-import { TemplateShortDescriptionMother } from './TemplateShortDescriptionMother';
+import { TemplateDescriptionMother } from './TemplateDescriptionMother';
 import { TemplatePreviewMother } from './TemplatePreviewMother';
 import { TemplateVariableMother } from './TemplateVariableMother';
 import { TemplateId } from '../../../../src/core/Template/domain/value-object/TemplateId';
 import { TemplateStatus } from '../../../../src/core/Template/domain/value-object/TemplateStatus';
 import { TemplateName } from '../../../../src/core/Template/domain/value-object/TemplateName';
-import { TemplateShortDescription } from '../../../../src/core/Template/domain/value-object/TemplateShortDescription';
+import { TemplateDescription } from '../../../../src/core/Template/domain/value-object/TemplateDescription';
 import { TemplatePreview } from '../../../../src/core/Template/domain/value-object/TemplatePreview';
 import { TemplateVariable } from '../../../../src/core/Template/domain/value-object/TemplateVariable';
 import { AccountId } from '../../../../src/core/Account/domain/value-object/AccountId';
@@ -20,7 +20,7 @@ export class TemplateMother {
     id: TemplateId,
     name: TemplateName,
     status: TemplateStatus,
-    shortDescription: TemplateShortDescription,
+    description: TemplateDescription,
     preview: TemplatePreview,
     variable1: TemplateVariable,
     variable2: TemplateVariable,
@@ -31,7 +31,7 @@ export class TemplateMother {
       id,
       name,
       status,
-      shortDescription,
+      description,
       preview,
       variable1,
       variable2,
@@ -45,7 +45,7 @@ export class TemplateMother {
       TemplateIdMother.random(),
       TemplateNameMother.random(),
       TemplateStatusMother.random(),
-      TemplateShortDescriptionMother.random(),
+      TemplateDescriptionMother.random(),
       TemplatePreviewMother.random(),
       TemplateVariableMother.random(),
       TemplateVariableMother.random(),
@@ -59,7 +59,7 @@ export class TemplateMother {
       template.id,
       template.name,
       template.status,
-      template.shortDescription,
+      template.description,
       template.preview,
       template.variable1,
       template.variable2,
@@ -72,7 +72,7 @@ export class TemplateMother {
       accountId || AccountIdMother.random(),
       TemplateIdMother.random(),
       TemplateNameMother.random(),
-      TemplateShortDescriptionMother.random(),
+      TemplateDescriptionMother.random(),
       TemplatePreviewMother.random(),
       TemplateVariableMother.random(),
       TemplateVariableMother.random(),
@@ -85,7 +85,7 @@ export class TemplateMother {
       accountId,
       TemplateIdMother.random(),
       TemplateNameMother.random(),
-      TemplateShortDescriptionMother.random(),
+      TemplateDescriptionMother.random(),
       TemplatePreviewMother.random(),
       TemplateVariableMother.random(),
       TemplateVariableMother.random(),

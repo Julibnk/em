@@ -20,7 +20,7 @@ const initialState: TemplateModalState = {
 
 type TemplateModalAction =
   | {
-      type: TemplateModalActionTypes.CLOSE;
+      type: TemplateModalActionTypes.CLOSE | TemplateModalActionTypes.LOADING;
     }
   | {
       type: TemplateModalActionTypes.CREATE | TemplateModalActionTypes.EDIT;
@@ -31,6 +31,7 @@ enum TemplateModalActionTypes {
   CREATE = 'CREATE',
   CLOSE = 'CLOSE',
   EDIT = 'EDIT',
+  LOADING = 'LOADING',
 }
 
 const templateModalReducer = (
@@ -40,7 +41,7 @@ const templateModalReducer = (
   switch (action.type) {
     case TemplateModalActionTypes.CREATE:
       return {
-        ...state,
+        ...initialState,
         opened: true,
         mode: ModalMode.CREATE,
         template: action.payload,
@@ -48,17 +49,19 @@ const templateModalReducer = (
 
     case TemplateModalActionTypes.EDIT:
       return {
-        ...state,
+        ...initialState,
         opened: true,
         mode: ModalMode.EDIT,
         template: action.payload,
       };
 
     case TemplateModalActionTypes.CLOSE:
+      return initialState;
+
+    case TemplateModalActionTypes.LOADING:
       return {
         ...state,
-        opened: false,
-        template: null,
+        loading: true,
       };
   }
 };
@@ -88,7 +91,7 @@ export function useTemplateModal(repository: TemplateRepository) {
   }, []);
 
   const submit = useCallback(() => {
-    dispatch({ type: TemplateModalActionTypes.CLOSE });
+    dispatch({ type: TemplateModalActionTypes.LOADING });
   }, []);
 
   return {

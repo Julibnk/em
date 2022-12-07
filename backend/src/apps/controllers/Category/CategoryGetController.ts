@@ -15,7 +15,7 @@ type ControllerResponse = {
   templates: Array<{
     id: string;
     name: string;
-    shortDescription: string;
+    description: string;
     preview: string;
     variable1: string;
     variable2: string;
@@ -68,7 +68,7 @@ export class CategoryGetController implements Controller {
       templates: categoryTemplates.map((template) => ({
         id: template.id.value,
         name: template.name.value,
-        shortDescription: template.shortDescription.value,
+        description: template.description.value,
         preview: template.preview.value,
         variable1: template.variable1.value,
         variable2: template.variable2.value,

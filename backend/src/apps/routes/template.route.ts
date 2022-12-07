@@ -11,7 +11,7 @@ import { validateReqSchema } from '.';
 const putPostSchema = [
   param('id').exists().isString(),
   body('name').exists().isString(),
-  body('shortDescription').exists().isString(),
+  body('description').exists().isString(),
   body('preview').optional().isString(),
   body('variable1').optional().isString(),
   body('variable2').optional().isString(),

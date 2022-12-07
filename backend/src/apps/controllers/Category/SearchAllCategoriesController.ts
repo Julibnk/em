@@ -13,7 +13,7 @@ type ControllerResponse = Array<{
   templates: Array<{
     id: string;
     name: string;
-    shortDescription: string;
+    description: string;
     preview: string;
     variable1: string;
     variable2: string;
