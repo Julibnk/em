@@ -2,13 +2,18 @@ import { useTranslation } from '../../../Shared/hooks/useTranslation';
 import { Nullable } from '../../../Shared/Nullable';
 import { ModalMode } from './Modal';
 
-interface ModalTitleProps {
+export enum ModalTitleEntity {
+  CATEGORY = 'category',
+  TEMPLATE = 'template',
+}
+
+interface Props {
   mode: Nullable<ModalMode>;
+  entity: ModalTitleEntity;
   subject?: string;
 }
 
-export const ModalTitle = (props: ModalTitleProps) => {
-  const { mode, subject } = props;
+export const ModalTitle = ({ mode, subject, entity }: Props) => {
   const t = useTranslation();
 
   if (!mode) {
@@ -20,8 +25,6 @@ export const ModalTitle = (props: ModalTitleProps) => {
   }
 
   return (
-    <h3>
-      {t('create_subject', { subject: t('template', { plural: false }) })}
-    </h3>
+    <h3>{t('create_subject', { subject: t(entity, { plural: false }) })}</h3>
   );
 };

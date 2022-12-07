@@ -5,13 +5,14 @@ import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfiguration';
 import { TemplateConfiguration } from './TemplateConfiguration/TemplateConfiguration';
 import { RestTemplateRepository } from '../../Template/RestTemplateRepository';
+import { RestCategoryRespository } from '../../Category/RestCategoryRepository';
 
-const repository = new RestTemplateRepository();
+const templateRepository = new RestTemplateRepository();
+const categoryRepository = new RestCategoryRespository();
 
 export const ConfigurationTabs = () => {
   const t = useTranslation();
   const tabsProps: TabsProps = {
-    // variant: 'pills',
     children: <></>,
     classNames: { tab: styles.tab, panel: styles.panel },
     defaultValue: 'category',
@@ -27,11 +28,14 @@ export const ConfigurationTabs = () => {
       </Tabs.List>
 
       <Tabs.Panel value='category'>
-        <CategoryConfiguration />
+        <CategoryConfiguration
+          repository={categoryRepository}
+          templateRepository={templateRepository}
+        />
       </Tabs.Panel>
 
       <Tabs.Panel value='template'>
-        <TemplateConfiguration repository={repository} />
+        <TemplateConfiguration repository={templateRepository} />
       </Tabs.Panel>
     </Tabs>
   );

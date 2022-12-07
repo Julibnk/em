@@ -1,7 +1,7 @@
 import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
 import { TemplateForm } from './TemplateModalForm';
 import { TemplateModalState } from '../useTemplateModal';
-import { ModalTitle } from '../../../Shared/Modal/ModalTitle';
+import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';
 
 export interface Props {
   state: TemplateModalState;
@@ -15,7 +15,13 @@ export const TemplateModal = ({ state, handleClose, handleSubmit }: Props) => {
   const modalProps: ModalProps = {
     opened: opened,
     onClose: handleClose,
-    title: <ModalTitle mode={mode} subject={template?.name || ''} />,
+    title: (
+      <ModalTitle
+        mode={mode}
+        entity={ModalTitleEntity.TEMPLATE}
+        subject={template?.name || ''}
+      />
+    ),
     size: 600,
     loading: state.loading,
   };

@@ -1,7 +1,7 @@
 import { CategoryModalState } from '../useCategoryModal';
 import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
 import { CategoryModalForm } from './CategoryModalForm';
-import { ModalTitle } from '../../../Shared/Modal/ModalTitle';
+import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';
 
 export interface Props {
   state: CategoryModalState;
@@ -15,7 +15,13 @@ export const CategoryModal = ({ state, handleClose, handleSubmit }: Props) => {
   const modalProps: ModalProps = {
     opened: opened,
     onClose: handleClose,
-    title: <ModalTitle mode={mode} subject={category?.name || ''} />,
+    title: (
+      <ModalTitle
+        mode={mode}
+        entity={ModalTitleEntity.CATEGORY}
+        subject={category?.name || ''}
+      />
+    ),
     loading: state.loading,
   };
 
