@@ -5,3 +5,9 @@ export interface Category {
   description: string;
   templates: Template[];
 }
+export interface CategoryOnlyIds {
+  id: string;
+  name: string;
+  description: string;
+  templates: string[];
+}

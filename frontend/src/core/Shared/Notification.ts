@@ -7,5 +7,4 @@ export interface Props {
 
 export const showNotification = (props: Props) => {
   mantineShowNotification(props);
-  //   console.log('showNotification');
 };

@@ -2,11 +2,12 @@ import { CategoryModalState } from '../useCategoryModal';
 import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
 import { CategoryModalForm } from './CategoryModalForm';
 import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';
+import { CategoryOnlyIds } from '../../../../core/Category/Category';
 
 export interface Props {
   state: CategoryModalState;
   handleClose: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (category: CategoryOnlyIds) => void;
 }
 
 export const CategoryModal = ({ state, handleClose, handleSubmit }: Props) => {

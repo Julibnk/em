@@ -11,7 +11,7 @@ import { Template } from '../../../core/Template/domain/Template';
 type ControllerResponse = {
   id: string;
   name: string;
-  descriptiton: string;
+  description: string;
   templates: Array<{
     id: string;
     name: string;
@@ -64,7 +64,7 @@ export class CategoryGetController implements Controller {
     return {
       id: category.id.value,
       name: category.name.value,
-      descriptiton: category.description.value,
+      description: category.description.value,
       templates: categoryTemplates.map((template) => ({
         id: template.id.value,
         name: template.name.value,

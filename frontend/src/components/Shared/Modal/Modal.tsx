@@ -14,6 +14,8 @@ export type Props = {
 } & ModalProps;
 
 export const Modal = (props: Props) => {
+  const { loading, ...rest } = props;
+
   const customProps: ModalProps = {
     classNames: {
       modal: styles.modal,
@@ -24,12 +26,12 @@ export const Modal = (props: Props) => {
     },
     centered: true,
     closeOnClickOutside: false,
-    ...props,
+    ...rest,
   };
 
   return (
     <MantineModal {...customProps}>
-      <LoadingOverlay loading={props.loading} />
+      <LoadingOverlay loading={loading} />
       {props.children}
     </MantineModal>
   );

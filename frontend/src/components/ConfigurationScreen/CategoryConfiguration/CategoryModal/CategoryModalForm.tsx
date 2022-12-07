@@ -10,7 +10,7 @@ import { SecondaryButton } from '../../../Shared/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { Category } from '../../../../core/Category/Category';
+import { Category, CategoryOnlyIds } from '../../../../core/Category/Category';
 import { ModalMode } from '../../../Shared/Modal/Modal';
 import { Nullable } from '../../../../core/Shared/Nullable';
 import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
@@ -18,7 +18,7 @@ import { Template } from '../../../../core/Template/Template';
 
 export interface Props {
   handleClose: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (category: CategoryOnlyIds) => void;
   category: Category;
   allTemplates: Template[];
   mode: Nullable<ModalMode>;
@@ -49,7 +49,10 @@ export const CategoryModalForm = ({
   }));
 
   return (
-    <form className='modal_form' onSubmit={form.onSubmit(handleSubmit)}>
+    <form
+      className='modal_form'
+      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+    >
       <TextInput required label={t('name')} {...form.getInputProps('name')} />
       <TextInput
         label={t('description')}

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { CategoryRepository } from '../../../core/Category/CategoryRepository';
 import { ScreenContent } from '../../Shared/Layout/ScreenContent';
 import { CategoryModal } from './CategoryModal/CategoryModal';
@@ -7,6 +7,7 @@ import { CategoryTableHeader } from './CategoryTableHeader';
 import { useCategoryModal } from './useCategoryModal';
 import { useCategoryTable } from './useCategoryTable';
 import { TemplateRepository } from '../../../core/Template/TemplateRepository';
+import { LoadingOverlay } from '../../Shared/Loading';
 
 export interface Props {
   repository: CategoryRepository;
@@ -17,10 +18,16 @@ export const CategoryConfiguration = ({
   repository,
   templateRepository,
 }: Props) => {
-  const { categories, loadCategories } = useCategoryTable(repository);
+  const { categories, loadCategories, loading } = useCategoryTable(repository);
+
+  const onSubmitSuccess = useCallback(() => {
+    loadCategories();
+  }, []);
+
   const { categoryModalState, add, close, submit, edit } = useCategoryModal(
     repository,
-    templateRepository
+    templateRepository,
+    onSubmitSuccess
   );
 
   useEffect(() => {
@@ -29,6 +36,7 @@ export const CategoryConfiguration = ({
 
   return (
     <ScreenContent>
+      <LoadingOverlay loading={loading} />
       <CategoryTableHeader handleAdd={add} />
       <CategoryTable
         categories={categories}

@@ -1,5 +1,5 @@
 import { Nullable } from '../Shared/Nullable';
-import { Category } from './Category';
+import { Category, CategoryOnlyIds } from './Category';
 import { CategoryRepository } from './CategoryRepository';
 
 export class RestCategoryRespository implements CategoryRepository {
@@ -19,8 +19,15 @@ export class RestCategoryRespository implements CategoryRepository {
     return category;
   }
 
-  async save(category: Category): Promise<void> {
-    throw new Error('Method not implemented.');
+  async save(category: CategoryOnlyIds): Promise<void> {
+    await fetch(`http://localhost:3000/category/${category.id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      method: 'PUT',
+      body: JSON.stringify(category),
+    });
   }
 
   async searchAll(): Promise<Category[]> {

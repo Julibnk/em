@@ -1,8 +1,8 @@
 import { Nullable } from '../Shared/Nullable';
-import { Category } from './Category';
+import { Category, CategoryOnlyIds } from './Category';
 
 export interface CategoryRepository {
   searchAll(): Promise<Category[]>;
   searchById(categoryId: string): Promise<Nullable<Category>>;
-  save(category: Category): Promise<void>;
+  save(category: CategoryOnlyIds): Promise<void>;
 }

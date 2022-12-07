@@ -1,12 +1,13 @@
 import { useCallback, useReducer } from 'react';
 
-import { Category } from '../../../core/Category/Category';
+import { Category, CategoryOnlyIds } from '../../../core/Category/Category';
 import { Nullable } from '../../../core/Shared/Nullable';
 import { ModalMode } from '../../Shared/Modal/Modal';
 import { CategoryRepository } from '../../../core/Category/CategoryRepository';
 import { Uuid } from '../../../core/Shared/Uuid';
 import { Template } from '../../../core/Template/Template';
 import { TemplateRepository } from '../../../core/Template/TemplateRepository';
+import { showNotification } from '../../../core/Shared/Notification';
 
 enum CategoryModalActionTypes {
   CREATE = 'CREATE',
@@ -33,8 +34,9 @@ const initialState: CategoryModalState = {
 
 type CategoryModalAction =
   | {
-      type: CategoryModalActionTypes.CLOSE | CategoryModalActionTypes.LOADING;
+      type: CategoryModalActionTypes.CLOSE;
     }
+  | { type: CategoryModalActionTypes.LOADING; payload: boolean }
   | {
       type: CategoryModalActionTypes.CREATE | CategoryModalActionTypes.EDIT;
       payload: { category: Category; allTemplates: Template[] };
@@ -69,14 +71,15 @@ const categoryModalReducer = (
     case CategoryModalActionTypes.LOADING:
       return {
         ...state,
-        loading: true,
+        loading: action.payload,
       };
   }
 };
 
 export function useCategoryModal(
   repository: CategoryRepository,
-  templateRepository: TemplateRepository
+  templateRepository: TemplateRepository,
+  onSubmitSuccess: () => void
 ) {
   const [categoryModalState, dispatch] = useReducer(
     categoryModalReducer,
@@ -86,17 +89,19 @@ export function useCategoryModal(
   const add = useCallback(async () => {
     const allTemplates = await templateRepository.searchAll();
 
+    const payload = {
+      category: {
+        id: Uuid.create(),
+        name: '',
+        description: '',
+        templates: [],
+      },
+      allTemplates,
+    };
+
     dispatch({
       type: CategoryModalActionTypes.CREATE,
-      payload: {
-        category: {
-          id: Uuid.create(),
-          name: '',
-          description: '',
-          templates: [],
-        },
-        allTemplates,
-      },
+      payload,
     });
   }, []);
 
@@ -117,8 +122,16 @@ export function useCategoryModal(
     });
   }, []);
 
-  const submit = useCallback(() => {
-    dispatch({ type: CategoryModalActionTypes.LOADING });
+  const submit = useCallback(async (category: CategoryOnlyIds) => {
+    try {
+      dispatch({ type: CategoryModalActionTypes.LOADING, payload: true });
+      await repository.save(category);
+      dispatch({ type: CategoryModalActionTypes.CLOSE });
+      onSubmitSuccess();
+    } catch (error) {
+      showNotification({ title: 'Error', message: 'error' });
+      dispatch({ type: CategoryModalActionTypes.LOADING, payload: false });
+    }
   }, []);
 
   return {

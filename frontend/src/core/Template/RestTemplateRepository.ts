@@ -4,7 +4,14 @@ import { TemplateRepository } from './TemplateRepository';
 
 export class RestTemplateRepository implements TemplateRepository {
   async save(template: Template): Promise<void> {
-    throw new Error('Method not implemented.');
+    await fetch(`http://localhost:3000/template/${template.id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      method: 'PUT',
+      body: JSON.stringify(template),
+    });
   }
 
   async searchAll(): Promise<Template[]> {
@@ -18,13 +25,16 @@ export class RestTemplateRepository implements TemplateRepository {
     return templates;
   }
 
-  async searchById(id: string): Promise<Nullable<Template>> {
-    const response = await fetch(`http://localhost:3000/template/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-    });
+  async searchById(templateId: string): Promise<Nullable<Template>> {
+    const response = await fetch(
+      `http://localhost:3000/template/${templateId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    );
 
     const template: Nullable<Template> = await response.json();
 
