@@ -1,4 +1,4 @@
-import { CategoryModalState } from '../useCategoryModal';
+import { CategoryModalState } from './useCategoryModal';
 import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
 import { CategoryModalForm } from './CategoryModalForm';
 import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';

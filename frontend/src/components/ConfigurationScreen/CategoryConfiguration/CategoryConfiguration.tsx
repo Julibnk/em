@@ -4,7 +4,7 @@ import { ScreenContent } from '../../Shared/Layout/ScreenContent';
 import { CategoryModal } from './CategoryModal/CategoryModal';
 import { CategoryTable } from './CategoryTable';
 import { CategoryTableHeader } from './CategoryTableHeader';
-import { useCategoryModal } from './useCategoryModal';
+import { useCategoryModal } from './CategoryModal/useCategoryModal';
 import { useCategoryTable } from './useCategoryTable';
 import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 import { LoadingOverlay } from '../../Shared/Loading';

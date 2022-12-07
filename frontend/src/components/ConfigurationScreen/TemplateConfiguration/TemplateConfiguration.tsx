@@ -4,7 +4,7 @@ import { TemplateTable } from './TemplateTable';
 import { TemplateTableHeader } from './TemplateTableHeader';
 import { useTemplateTable } from './useTemplateTable';
 import { useEffect } from 'react';
-import { useTemplateModal } from './useTemplateModal';
+import { useTemplateModal } from './TemplateModal/useTemplateModal';
 import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 
 export interface Props {

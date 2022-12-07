@@ -1,13 +1,13 @@
 import { useCallback, useReducer } from 'react';
 
-import { Category, CategoryOnlyIds } from '../../../core/Category/Category';
-import { Nullable } from '../../../core/Shared/Nullable';
-import { ModalMode } from '../../Shared/Modal/Modal';
-import { CategoryRepository } from '../../../core/Category/CategoryRepository';
-import { Uuid } from '../../../core/Shared/Uuid';
-import { Template } from '../../../core/Template/Template';
-import { TemplateRepository } from '../../../core/Template/TemplateRepository';
-import { showNotification } from '../../../core/Shared/Notification';
+import { Category, CategoryOnlyIds } from '../../../../core/Category/Category';
+import { Nullable } from '../../../../core/Shared/Nullable';
+import { ModalMode } from '../../../Shared/Modal/Modal';
+import { CategoryRepository } from '../../../../core/Category/CategoryRepository';
+import { Uuid } from '../../../../core/Shared/Uuid';
+import { Template } from '../../../../core/Template/Template';
+import { TemplateRepository } from '../../../../core/Template/TemplateRepository';
+import { showNotification } from '../../../../core/Shared/Notification';
 
 enum CategoryModalActionTypes {
   CREATE = 'CREATE',

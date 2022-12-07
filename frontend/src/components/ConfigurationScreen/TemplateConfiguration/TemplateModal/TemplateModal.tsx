@@ -1,6 +1,6 @@
 import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
 import { TemplateForm } from './TemplateModalForm';
-import { TemplateModalState } from '../useTemplateModal';
+import { TemplateModalState } from './useTemplateModal';
 import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';
 
 export interface Props {
