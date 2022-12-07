@@ -20,7 +20,7 @@ export const TemplateTableHeader = () => {
   };
 
   return (
-    <div className={styles.root}>
+    <header className={styles.header}>
       <TextInput
         type='search'
         placeholder={t('search')}
@@ -34,6 +34,6 @@ export const TemplateTableHeader = () => {
       >
         {t('add')}
       </Button>
-    </div>
+    </header>
   );
 };

@@ -8,7 +8,9 @@ import { FullPageLoader } from './Shared/Layout/FullPageLoader/index';
 const HomeScreen = lazy(() => import('./HomeScreen'));
 const ContactScreen = lazy(() => import('./ContactScreen'));
 const MessageScreen = lazy(() => import('./MessageScreen'));
-const ConfigurationScreen = lazy(() => import('./ConfigurationScreen'));
+const ConfigurationScreen = lazy(
+  () => import('./ConfigurationScreen/ConfigurationScreen')
+);
 const ProfileScreen = lazy(() => import('./ProfileScreen'));
 const LoginScreen = lazy(() => import('./LoginScreen'));
 

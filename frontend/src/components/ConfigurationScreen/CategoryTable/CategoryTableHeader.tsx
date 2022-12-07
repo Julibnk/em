@@ -21,7 +21,7 @@ export const CategoryTableHeader = () => {
   };
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <TextInput
         type='search'
         placeholder={t('search')}
@@ -34,6 +34,6 @@ export const CategoryTableHeader = () => {
       >
         {t('add')}
       </Button>
-    </div>
+    </header>
   );
 };

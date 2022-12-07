@@ -1,5 +1,5 @@
 import styles from './styles.module.css';
-import { CategoryTableRow } from './row';
+import { CategoryTableRow } from './CategoryTableRow';
 import { useEffect } from 'react';
 import { Table, Th } from '../../Shared/MantineOverwrite/Table';
 import { init } from '../../../Category/category-slice';

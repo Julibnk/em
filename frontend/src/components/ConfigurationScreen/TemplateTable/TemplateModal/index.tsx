@@ -1,13 +1,16 @@
 import { useCallback } from 'react';
 import { ModalProps } from '@mantine/core';
 
-import { Modal } from '../../../../Shared/MantineOverwrite/Modal';
-import { ModalMode, setModalOpenend } from '../../layout-slice';
-import { useSelector, useDispatch } from '../../../../../config/store';
+import { Modal } from '../../../Shared/MantineOverwrite/Modal';
+import {
+  ModalMode,
+  setModalOpenend,
+} from '../../../Shared/Layout/layout-slice';
+import { useSelector, useDispatch } from '../../../../config/store';
 import { TemplateForm } from './form';
 import { t } from 'i18next';
-import { selectModal } from '../../layout-selector';
-import { selectSelectedTemplate } from '../../../../../Template/template-selector';
+import { selectModal } from '../../../Shared/Layout/layout-selector';
+import { selectSelectedTemplate } from '../../../../Template/template-selector';
 
 export const TemplateModal = () => {
   const dispatch = useDispatch();

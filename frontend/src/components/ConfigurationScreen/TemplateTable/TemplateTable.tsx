@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from '../../../config/store';
 import { selectAllTemplates } from '../../../Template/template-selector';
 import { init } from '../../../Template/template-slice';
 import { useEffect, useState } from 'react';
-import { TemplateTableRow } from './row';
+import { TemplateTableRow } from './TemplateTableRow';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
 import { RestCategoryRespository } from '../../../Category/RestCategoryRepository';
 import { Template } from '../../../Template/Template';

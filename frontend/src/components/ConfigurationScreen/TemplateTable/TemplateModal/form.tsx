@@ -9,18 +9,18 @@ import {
   Textarea,
   Alert,
 } from '@mantine/core';
-import { SecondaryButton } from '../../../../Shared/MantineOverwrite/SecondaryButton';
+import { SecondaryButton } from '../../../Shared/MantineOverwrite/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import {
   faFloppyDisk,
   faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from '../../../../../config/store';
-import { selectCategoriesForCombo } from '../../../../../Category/category-selector';
-import { selectSelectedTemplate } from '../../../../../Template/template-selector';
-import { selectModal } from '../../layout-selector';
-import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
+import { useSelector } from '../../../../config/store';
+import { selectCategoriesForCombo } from '../../../../Category/category-selector';
+import { selectSelectedTemplate } from '../../../../Template/template-selector';
+import { selectModal } from '../../../Shared/Layout/layout-selector';
+import { useTranslation } from '../../../../Shared/hooks/useTranslation';
 
 type TemplateFormState = {
   name: string;

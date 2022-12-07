@@ -1,4 +1,4 @@
-import ConfigurationScreen from '../../../src/components/ConfigurationScreen/index';
+import ConfigurationScreen from '../../../src/components/ConfigurationScreen/ConfigurationScreen';
 import { render, screen } from '../../..//utils/test-utils';
 // import render from '../../../test-utils';
 

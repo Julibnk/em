@@ -2,12 +2,14 @@ import styles from './styles.module.css';
 
 import { Tabs, TabsProps } from '@mantine/core';
 
-import { ScreenContent } from '../../../components/Shared/Layout/ScreenContent';
-import { CategoryTableHeader } from '../CategoryTableHeader';
-import { CategoryTable } from '../CategoryTable';
-import { TemplateTableHeader } from '../TemplateTableHeader';
-import { TemplateTable } from '../TemplateTable';
-import { useTranslation } from '../../../Shared/hooks/useTranslation';
+import { ScreenContent } from '../Shared/Layout/ScreenContent';
+import { CategoryTableHeader } from './CategoryTable/CategoryTableHeader';
+import { CategoryTable } from './CategoryTable/CategoryTable';
+import { TemplateTableHeader } from './TemplateTable/TemplateTableHeader';
+import { TemplateTable } from './TemplateTable/TemplateTable';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
+import { CategoryModal } from './CategoryTable/CategoryModal';
+import { TemplateModal } from './TemplateTable/TemplateModal';
 
 export const ConfigurationTabs = () => {
   const t = useTranslation();
@@ -31,6 +33,7 @@ export const ConfigurationTabs = () => {
         <ScreenContent>
           <CategoryTableHeader />
           <CategoryTable />
+          <CategoryModal />
         </ScreenContent>
       </Tabs.Panel>
 
@@ -38,6 +41,7 @@ export const ConfigurationTabs = () => {
         <ScreenContent>
           <TemplateTableHeader />
           <TemplateTable />
+          <TemplateModal />
         </ScreenContent>
       </Tabs.Panel>
     </Tabs>
