@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { NotFoundScreen } from './NotFoundScreen';
+import { NotFoundScreen } from './Shared/NotFoundScreen';
 import { Layout } from './Shared/Layout';
 import { lazy, Suspense } from 'react';
 import { FullPageLoader } from './Shared/Layout/FullPageLoader/index';
