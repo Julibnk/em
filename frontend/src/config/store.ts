@@ -8,7 +8,7 @@ import {
 import authReducer from '../Auth/auth-slice';
 import layoutReducer from '../components/Shared/Layout/layout-slice';
 import categoryReducer from '../Category/category-slice';
-import templateReducer from '../Template/template-slice';
+// import templateReducer from '../Template/template-slice';
 import messageReducer from '../Message/message-slice';
 
 // export type RootState = {
@@ -24,7 +24,7 @@ export const store = configureStore({
     auth: authReducer,
     layout: layoutReducer,
     category: categoryReducer,
-    template: templateReducer,
+    // template: templateReducer,
     message: messageReducer,
   },
 });

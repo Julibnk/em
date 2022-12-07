@@ -5,6 +5,3 @@ export interface Category {
   description: string;
   templates: Template[];
 }
-export interface CategoryRepository {
-  searchAll(): Promise<Category[]>;
-}

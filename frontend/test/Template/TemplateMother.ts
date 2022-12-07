@@ -12,7 +12,6 @@ export class TemplateMother {
       variable1: WordMother.random(),
       variable2: WordMother.random(),
       variable3: WordMother.random(),
-      categoryIds: [],
       ...params,
     };
     return template;

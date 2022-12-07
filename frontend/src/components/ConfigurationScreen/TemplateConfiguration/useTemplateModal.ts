@@ -1,9 +1,16 @@
 import { useCallback, useReducer } from 'react';
 import { Nullable } from '../../../Shared/Nullable';
 import { Uuid } from '../../../Shared/Uuid';
-import { Template, TemplateRepository } from '../../../Template/Template';
+import { Template } from '../../../Template/Template';
+import { TemplateRepository } from '../../../Template/TemplateRepository';
 import { ModalMode } from '../../Shared/Modal/Modal';
 
+enum TemplateModalActionTypes {
+  CREATE = 'CREATE',
+  CLOSE = 'CLOSE',
+  EDIT = 'EDIT',
+  LOADING = 'LOADING',
+}
 export interface TemplateModalState {
   template: Nullable<Template>;
   loading: boolean;
@@ -26,13 +33,6 @@ type TemplateModalAction =
       type: TemplateModalActionTypes.CREATE | TemplateModalActionTypes.EDIT;
       payload: Template;
     };
-
-enum TemplateModalActionTypes {
-  CREATE = 'CREATE',
-  CLOSE = 'CLOSE',
-  EDIT = 'EDIT',
-  LOADING = 'LOADING',
-}
 
 const templateModalReducer = (
   state: TemplateModalState,
@@ -72,7 +72,7 @@ export function useTemplateModal(repository: TemplateRepository) {
     initialState
   );
 
-  const newTemplate = useCallback(() => {
+  const add = useCallback(() => {
     dispatch({
       type: TemplateModalActionTypes.CREATE,
       payload: { id: Uuid.create(), name: '' },
@@ -96,7 +96,7 @@ export function useTemplateModal(repository: TemplateRepository) {
 
   return {
     templateModalState,
-    newTemplate,
+    add,
     close,
     submit,
     edit,

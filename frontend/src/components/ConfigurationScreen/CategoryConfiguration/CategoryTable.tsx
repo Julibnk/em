@@ -1,21 +1,20 @@
 import styles from './styles.module.css';
 import { CategoryTableRow } from './CategoryTableRow';
-import { useEffect } from 'react';
 import { Table, Th } from '../../Shared/Table';
-import { init } from '../../../Category/category-slice';
-import { useDispatch, useSelector } from '../../../config/store';
-import { selectAllCategories } from '../../../Category/category-selector';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
+import { Category } from '../../../Category/Category';
 
-export const CategoryTable = () => {
-  const dispatch = useDispatch();
+export interface Props {
+  categories: Category[];
+  handleEdit: (templateId: string) => void;
+  handleDelete: (templateId: string) => void;
+}
 
-  useEffect(() => {
-    dispatch(init());
-  }, [dispatch]);
-
-  const categories = useSelector((state) => selectAllCategories(state));
-
+export const CategoryTable = ({
+  categories,
+  handleDelete,
+  handleEdit,
+}: Props) => {
   const t = useTranslation();
 
   return (
@@ -33,6 +32,8 @@ export const CategoryTable = () => {
           <CategoryTableRow
             key={category.id}
             category={category}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
           ></CategoryTableRow>
         ))}
       </tbody>

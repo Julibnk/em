@@ -1,4 +1,3 @@
-import { RestTemplateRepository } from '../../../Template/RestTemplateRepository';
 import { ScreenContent } from '../../Shared/Layout/ScreenContent';
 import { TemplateModal } from './TemplateModal/TemplateModal';
 import { TemplateTable } from './TemplateTable';
@@ -6,16 +5,15 @@ import { TemplateTableHeader } from './TemplateTableHeader';
 import { useTemplateTable } from './useTemplateTable';
 import { useEffect } from 'react';
 import { useTemplateModal } from './useTemplateModal';
+import { TemplateRepository } from '../../../Template/TemplateRepository';
 
-export interface TemplateConfigurationProps {
-  repository: RestTemplateRepository;
+export interface Props {
+  repository: TemplateRepository;
 }
 
-export const TemplateConfiguration = ({
-  repository,
-}: TemplateConfigurationProps) => {
+export const TemplateConfiguration = ({ repository }: Props) => {
   const { templates, loadTemplates } = useTemplateTable(repository);
-  const { templateModalState, newTemplate, close, submit, edit } =
+  const { templateModalState, add, close, submit, edit } =
     useTemplateModal(repository);
 
   useEffect(() => {
@@ -24,7 +22,7 @@ export const TemplateConfiguration = ({
 
   return (
     <ScreenContent>
-      <TemplateTableHeader newTemplateHandler={newTemplate} />
+      <TemplateTableHeader handleAdd={add} />
       <TemplateTable
         templates={templates}
         handleEdit={edit}

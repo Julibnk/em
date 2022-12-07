@@ -4,31 +4,21 @@ import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon } from '@mantine/core';
-import { setModalOpenend } from '../../Shared/Layout/layout-slice';
-import { useDispatch } from '../../../config/store';
 import { Category } from '../../../Category/Category';
-import { TemplateBadge } from '../../Shared/Badges';
-import { setSelectedId } from '../../../Category/category-slice';
+import { Badge } from '../../Shared/Badge';
 
 type Props = {
   category: Category;
+  handleEdit: (templateId: string) => void;
+  handleDelete: (templateId: string) => void;
 };
 
-export const CategoryTableRow = ({ category }: Props) => {
-  const { id, name, description, templateIds } = category;
-
-  const dispatch = useDispatch();
-
-  const handleOnEdit = () => {
-    dispatch(setSelectedId(id));
-    dispatch(
-      setModalOpenend({ modal: 'category', opened: true, mode: 'edit' })
-    );
-  };
-  const handleOnDelete = () => {
-    dispatch(setSelectedId(id));
-    dispatch(setModalOpenend({ modal: 'category', opened: true }));
-  };
+export const CategoryTableRow = ({
+  category,
+  handleEdit,
+  handleDelete,
+}: Props) => {
+  const { id, name, description, templates } = category;
 
   return (
     <tr key={id}>
@@ -36,19 +26,17 @@ export const CategoryTableRow = ({ category }: Props) => {
       <Td>{description}</Td>
       <Td>
         <BadgeCell>
-          {templateIds.map((templateId) => {
-            return (
-              <TemplateBadge key={templateId} id={templateId}></TemplateBadge>
-            );
+          {templates.map((template) => {
+            return <Badge key={template.id} text={template.name} />;
           })}
         </BadgeCell>
       </Td>
       <Td>
         <ActionCell>
-          <ActionIcon onClick={handleOnEdit}>
+          <ActionIcon onClick={() => handleEdit(id)}>
             <FontAwesomeIcon size='lg' icon={faPen}></FontAwesomeIcon>
           </ActionIcon>
-          <ActionIcon onClick={handleOnDelete}>
+          <ActionIcon onClick={() => handleDelete(id)}>
             <FontAwesomeIcon size='lg' icon={faTrashAlt}></FontAwesomeIcon>
           </ActionIcon>
         </ActionCell>

@@ -5,10 +5,10 @@ import { faAdd, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
 
 export interface Props {
-  newTemplateHandler: () => void;
+  handleAdd: () => void;
 }
 
-export const TemplateTableHeader = ({ newTemplateHandler }: Props) => {
+export const TemplateTableHeader = ({ handleAdd }: Props) => {
   const t = useTranslation();
 
   return (
@@ -20,7 +20,7 @@ export const TemplateTableHeader = ({ newTemplateHandler }: Props) => {
       />
 
       <Button
-        onClick={newTemplateHandler}
+        onClick={handleAdd}
         variant='filled'
         leftIcon={<FontAwesomeIcon icon={faAdd} />}
       >

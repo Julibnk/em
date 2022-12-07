@@ -1,7 +1,12 @@
 import { Nullable } from '../Shared/Nullable';
-import { Template, TemplateRepository } from './Template';
+import { Template } from './Template';
+import { TemplateRepository } from './TemplateRepository';
 
 export class RestTemplateRepository implements TemplateRepository {
+  async save(template: Template): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+
   async searchAll(): Promise<Template[]> {
     const response = await fetch('http://localhost:3000/template', {
       headers: {
@@ -11,8 +16,6 @@ export class RestTemplateRepository implements TemplateRepository {
     });
     const templates: Template[] = await response.json();
     return templates;
-
-    // return [];
   }
 
   async searchById(id: string): Promise<Nullable<Template>> {
@@ -26,6 +29,5 @@ export class RestTemplateRepository implements TemplateRepository {
     const template: Nullable<Template> = await response.json();
 
     return template;
-    // return null;
   }
 }

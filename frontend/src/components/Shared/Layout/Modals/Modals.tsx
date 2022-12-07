@@ -1,4 +1,4 @@
-import { CategoryModal } from '../../../ConfigurationScreen/CategoryConfiguration/CategoryModal/index';
+import { CategoryModal } from '../../../ConfigurationScreen/CategoryConfiguration/CategoryModal/CategoryModal';
 import { TemplateModal } from '../../../ConfigurationScreen/TemplateConfiguration/TemplateModal/TemplateModal';
 import { MessageLoadModal } from './MessageLoadModal/index';
 import { MessageModal } from './MessageModal/index';
