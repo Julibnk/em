@@ -4,7 +4,7 @@ import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon } from '@mantine/core';
-import { Category } from '../../../Category/Category';
+import { Category } from '../../../core/Category/Category';
 import { Badge } from '../../Shared/Badge';
 
 type Props = {

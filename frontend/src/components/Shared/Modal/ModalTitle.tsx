@@ -1,5 +1,5 @@
-import { useTranslation } from '../../../Shared/hooks/useTranslation';
-import { Nullable } from '../../../Shared/Nullable';
+import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { Nullable } from '../../../core/Shared/Nullable';
 import { ModalMode } from './Modal';
 
 export enum ModalTitleEntity {

@@ -1,4 +1,4 @@
-import { Category } from '../../src/Category/Category';
+import { Category } from '../../../src/core/Category/Category';
 import { UuidMother } from '../Shared/UuidMother';
 import { WordMother } from '../Shared/WordMother';
 

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { Template } from '../../../Template/Template';
-import { TemplateRepository } from '../../../Template/TemplateRepository';
+import { Template } from '../../../core/Template/Template';
+import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 
 export function useTemplateTable(repository: TemplateRepository) {
   const [templates, setTemplates] = useState<Template[]>([]);

@@ -10,7 +10,7 @@ import {
   BadgeCell,
   CellWithSubtitle,
 } from '../../Shared/TableCells';
-import { Template } from '../../../Template/Template';
+import { Template } from '../../../core/Template/Template';
 
 export interface Props {
   template: Template;

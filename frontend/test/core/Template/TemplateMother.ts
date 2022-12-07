@@ -1,4 +1,4 @@
-import { Template } from '../../src/Template/Template';
+import { Template } from '../../../src/core/Template/Template';
 import { UuidMother } from '../Shared/UuidMother';
 import { WordMother } from '../Shared/WordMother';
 

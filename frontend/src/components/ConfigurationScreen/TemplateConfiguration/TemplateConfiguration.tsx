@@ -5,7 +5,7 @@ import { TemplateTableHeader } from './TemplateTableHeader';
 import { useTemplateTable } from './useTemplateTable';
 import { useEffect } from 'react';
 import { useTemplateModal } from './useTemplateModal';
-import { TemplateRepository } from '../../../Template/TemplateRepository';
+import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 
 export interface Props {
   repository: TemplateRepository;

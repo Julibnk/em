@@ -1,11 +1,11 @@
 import styles from './styles.module.css';
 
 import { Tabs, TabsProps } from '@mantine/core';
-import { useTranslation } from '../../Shared/hooks/useTranslation';
+import { useTranslation } from '../../core/Shared/hooks/useTranslation';
 import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfiguration';
 import { TemplateConfiguration } from './TemplateConfiguration/TemplateConfiguration';
-import { RestTemplateRepository } from '../../Template/RestTemplateRepository';
-import { RestCategoryRespository } from '../../Category/RestCategoryRepository';
+import { RestTemplateRepository } from '../../core/Template/RestTemplateRepository';
+import { RestCategoryRespository } from '../../core/Category/RestCategoryRepository';
 
 const templateRepository = new RestTemplateRepository();
 const categoryRepository = new RestCategoryRespository();

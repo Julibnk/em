@@ -1,8 +1,8 @@
 import { useCallback, useReducer } from 'react';
-import { Nullable } from '../../../Shared/Nullable';
-import { Uuid } from '../../../Shared/Uuid';
-import { Template } from '../../../Template/Template';
-import { TemplateRepository } from '../../../Template/TemplateRepository';
+import { Nullable } from '../../../core/Shared/Nullable';
+import { Uuid } from '../../../core/Shared/Uuid';
+import { Template } from '../../../core/Template/Template';
+import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 import { ModalMode } from '../../Shared/Modal/Modal';
 
 enum TemplateModalActionTypes {

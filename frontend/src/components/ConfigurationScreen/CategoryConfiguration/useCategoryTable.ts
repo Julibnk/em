@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
-import { Category } from '../../../Category/Category';
-import { CategoryRepository } from '../../../Category/CategoryRepository';
+import { Category } from '../../../core/Category/Category';
+import { CategoryRepository } from '../../../core/Category/CategoryRepository';
 
 export function useCategoryTable(repository: CategoryRepository) {
   const [categories, setCategories] = useState<Category[]>([]);

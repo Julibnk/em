@@ -4,11 +4,11 @@ import { SecondaryButton } from '../../../Shared/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import { Category } from '../../../../Category/Category';
+import { Category } from '../../../../core/Category/Category';
 import { ModalMode } from '../../../Shared/Modal/Modal';
-import { Nullable } from '../../../../Shared/Nullable';
-import { useTranslation } from '../../../../Shared/hooks/useTranslation';
-import { Template } from '../../../../Template/Template';
+import { Nullable } from '../../../../core/Shared/Nullable';
+import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
+import { Template } from '../../../../core/Template/Template';
 
 export interface Props {
   handleClose: () => void;

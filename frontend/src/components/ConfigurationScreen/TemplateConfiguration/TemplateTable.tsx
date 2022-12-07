@@ -1,8 +1,8 @@
 import styles from './styles.module.css';
 import { Table, Th } from '../../Shared/Table';
 import { TemplateTableRow } from './TemplateTableRow';
-import { useTranslation } from '../../../Shared/hooks/useTranslation';
-import { Template } from '../../../Template/Template';
+import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { Template } from '../../../core/Template/Template';
 
 export interface Props {
   templates: Template[];

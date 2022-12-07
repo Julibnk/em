@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import { Dropzone } from '@mantine/dropzone';
-import { useTranslation } from '../../../../../Shared/hooks/useTranslation';
+import { useTranslation } from '../../../../../core/Shared/hooks/useTranslation';
 
 export const MessageLoadModal = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export const MessageLoadModal = () => {
   };
 
   return (
-    <Modal {...modalProps}>
+    <Modal loading {...modalProps}>
       <Dropzone
         onDrop={(files) => console.log('accepted files', files)}
         onReject={(files) => console.log('rejected files', files)}

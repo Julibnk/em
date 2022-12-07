@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { CategoryRepository } from '../../../Category/CategoryRepository';
+import { CategoryRepository } from '../../../core/Category/CategoryRepository';
 import { ScreenContent } from '../../Shared/Layout/ScreenContent';
 import { CategoryModal } from './CategoryModal/CategoryModal';
 import { CategoryTable } from './CategoryTable';
 import { CategoryTableHeader } from './CategoryTableHeader';
 import { useCategoryModal } from './useCategoryModal';
 import { useCategoryTable } from './useCategoryTable';
-import { TemplateRepository } from '../../../Template/TemplateRepository';
+import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 
 export interface Props {
   repository: CategoryRepository;

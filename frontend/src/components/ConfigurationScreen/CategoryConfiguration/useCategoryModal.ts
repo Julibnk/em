@@ -1,12 +1,12 @@
 import { useCallback, useReducer } from 'react';
 
-import { Category } from '../../../Category/Category';
-import { Nullable } from '../../../Shared/Nullable';
+import { Category } from '../../../core/Category/Category';
+import { Nullable } from '../../../core/Shared/Nullable';
 import { ModalMode } from '../../Shared/Modal/Modal';
-import { CategoryRepository } from '../../../Category/CategoryRepository';
-import { Uuid } from '../../../Shared/Uuid';
-import { Template } from '../../../Template/Template';
-import { TemplateRepository } from '../../../Template/TemplateRepository';
+import { CategoryRepository } from '../../../core/Category/CategoryRepository';
+import { Uuid } from '../../../core/Shared/Uuid';
+import { Template } from '../../../core/Template/Template';
+import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 
 enum CategoryModalActionTypes {
   CREATE = 'CREATE',

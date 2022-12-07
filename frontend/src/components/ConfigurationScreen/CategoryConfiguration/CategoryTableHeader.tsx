@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 import { Button, TextInput } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faAdd } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from '../../../Shared/hooks/useTranslation';
+import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
 
 export interface Props {
   handleAdd: () => void;

@@ -1,8 +1,8 @@
 import styles from './styles.module.css';
 import { CategoryTableRow } from './CategoryTableRow';
 import { Table, Th } from '../../Shared/Table';
-import { useTranslation } from '../../../Shared/hooks/useTranslation';
-import { Category } from '../../../Category/Category';
+import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { Category } from '../../../core/Category/Category';
 
 export interface Props {
   categories: Category[];
