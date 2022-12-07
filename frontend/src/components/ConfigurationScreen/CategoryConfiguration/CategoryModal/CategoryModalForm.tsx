@@ -1,5 +1,11 @@
 import { useForm } from '@mantine/form';
-import { Button, Group, MultiSelect, TextInput } from '@mantine/core';
+import {
+  Button,
+  Group,
+  MultiSelect,
+  SelectItem,
+  TextInput,
+} from '@mantine/core';
 import { SecondaryButton } from '../../../Shared/SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-regular-svg-icons';
@@ -27,10 +33,20 @@ export const CategoryModalForm = ({
 }: Props) => {
   const t = useTranslation();
 
-  const form = useForm({ initialValues: category });
+  const form = useForm({
+    initialValues: {
+      ...category,
+      templates: category.templates.map((template) => template.id),
+    },
+  });
 
   const mainButtonIcon = mode === 'CREATE' ? faFile : faFloppyDisk;
   const mainButtonText = mode === 'CREATE' ? t('create') : t('save');
+
+  const multiSelectData: SelectItem[] = allTemplates.map((template) => ({
+    value: template.id,
+    label: template.name,
+  }));
 
   return (
     <form className='modal_form' onSubmit={form.onSubmit(handleSubmit)}>
@@ -40,9 +56,9 @@ export const CategoryModalForm = ({
         {...form.getInputProps('description')}
       />
       <MultiSelect
-        data={allTemplates}
+        data={multiSelectData}
         label={t('template', { plural: true })}
-        {...form.getInputProps('templateIds')}
+        {...form.getInputProps('templates')}
       />
       <Group position='right' mt='md'>
         <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>

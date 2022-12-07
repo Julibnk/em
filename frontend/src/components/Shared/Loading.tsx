@@ -5,5 +5,11 @@ export interface Props {
 }
 
 export const LoadingOverlay = ({ loading }: Props) => {
-  return <MantineLoadingOverlay visible={loading} overlayBlur={0} />;
+  return (
+    <MantineLoadingOverlay
+      visible={loading}
+      overlayBlur={1}
+      overlayOpacity={0.3}
+    />
+  );
 };

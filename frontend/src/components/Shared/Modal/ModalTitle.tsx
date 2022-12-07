@@ -3,8 +3,8 @@ import { Nullable } from '../../../core/Shared/Nullable';
 import { ModalMode } from './Modal';
 
 export enum ModalTitleEntity {
-  CATEGORY = 'category',
-  TEMPLATE = 'template',
+  CATEGORY = 'categoria',
+  TEMPLATE = 'plantilla',
 }
 
 interface Props {
