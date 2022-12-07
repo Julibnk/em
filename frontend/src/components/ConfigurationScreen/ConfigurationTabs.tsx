@@ -1,15 +1,9 @@
 import styles from './styles.module.css';
 
 import { Tabs, TabsProps } from '@mantine/core';
-
-import { ScreenContent } from '../Shared/Layout/ScreenContent';
-import { CategoryTableHeader } from './CategoryTable/CategoryTableHeader';
-import { CategoryTable } from './CategoryTable/CategoryTable';
-import { TemplateTableHeader } from './TemplateTable/TemplateTableHeader';
-import { TemplateTable } from './TemplateTable/TemplateTable';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
-import { CategoryModal } from './CategoryTable/CategoryModal';
-import { TemplateModal } from './TemplateTable/TemplateModal';
+import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfiguration';
+import { TemplateConfiguration } from './TemplateConfiguration/TemplateConfiguration';
 
 export const ConfigurationTabs = () => {
   const t = useTranslation();
@@ -30,19 +24,11 @@ export const ConfigurationTabs = () => {
       </Tabs.List>
 
       <Tabs.Panel value='category'>
-        <ScreenContent>
-          <CategoryTableHeader />
-          <CategoryTable />
-          <CategoryModal />
-        </ScreenContent>
+        <CategoryConfiguration />
       </Tabs.Panel>
 
       <Tabs.Panel value='template'>
-        <ScreenContent>
-          <TemplateTableHeader />
-          <TemplateTable />
-          <TemplateModal />
-        </ScreenContent>
+        <TemplateConfiguration />
       </Tabs.Panel>
     </Tabs>
   );
