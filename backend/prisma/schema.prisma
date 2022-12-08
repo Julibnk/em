@@ -47,13 +47,14 @@ model Account {
   metaAccountId String @unique @db.Uuid
 
   // Relations
-  MetaAccount  MetaAccount    @relation(fields: [metaAccountId], references: [id])
-  User         User[]
-  Contact      Contact[]
-  Category     Category[]
-  Template     Template[]
-  Message      Message[]
-  AccountPhone AccountPhone[]
+  metaAccount           MetaAccount             @relation(fields: [metaAccountId], references: [id])
+  user                  User[]
+  contact               Contact[]
+  category              Category[]
+  template              Template[]
+  message               Message[]
+  accountPhone          AccountPhone[]
+  templatesOnCategories TemplatesOnCategories[]
 }
 
 model User {
@@ -71,7 +72,7 @@ model User {
   updatedAt DateTime @default(now())
 
   //Relation
-  Account Account @relation(fields: [accountId], references: [id])
+  account Account @relation(fields: [accountId], references: [id])
 
   @@id([accountId, id])
 }
@@ -92,8 +93,8 @@ model Contact {
   updatedAt DateTime @default(now())
 
   // Relations
-  Account Account   @relation(fields: [accountId], references: [id])
-  Message Message[]
+  account Account   @relation(fields: [accountId], references: [id])
+  message Message[]
 
   @@id([accountId, id])
 }
@@ -113,8 +114,8 @@ model Category {
   updatedAt DateTime @default(now())
 
   //Relations
-  Account  Account    @relation(fields: [accountId], references: [id])
-  Template Template[]
+  account   Account                 @relation(fields: [accountId], references: [id])
+  templates TemplatesOnCategories[]
 
   @@id([accountId, id])
 }
@@ -133,18 +134,31 @@ model Template {
   variable2   String?
   variable3   String?
   disabled    Boolean        @default(false)
-  categoryId  String?        @db.Uuid
+  // categoryId  String?        @db.Uuid
 
   // Generic fields
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
   // Relation
-  Account  Account   @relation(fields: [accountId], references: [id])
-  Message  Message[]
-  Category Category? @relation(fields: [accountId, categoryId], references: [accountId, id])
+  account    Account                 @relation(fields: [accountId], references: [id])
+  message    Message[]
+  categories TemplatesOnCategories[]
 
   @@id([accountId, id])
+}
+
+model TemplatesOnCategories {
+  // PK
+  accountId  String @db.Uuid
+  categoryId String @db.Uuid
+  templateId String @db.Uuid
+
+  account  Account  @relation(fields: [accountId], references: [id])
+  category Category @relation(fields: [accountId, categoryId], references: [accountId, id])
+  template Template @relation(fields: [accountId, templateId], references: [accountId, id])
+
+  @@id([accountId, categoryId, templateId])
 }
 
 model Message {
@@ -167,10 +181,10 @@ model Message {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  Account      Account      @relation(fields: [accountId], references: [id])
-  Template     Template     @relation(fields: [accountId, templateId], references: [accountId, id])
-  AccountPhone AccountPhone @relation(fields: [accountId, accountPhoneId], references: [accountId, id])
-  Contact      Contact      @relation(fields: [accountId, contactId], references: [accountId, id])
+  account      Account      @relation(fields: [accountId], references: [id])
+  template     Template     @relation(fields: [accountId, templateId], references: [accountId, id])
+  accountPhone AccountPhone @relation(fields: [accountId, accountPhoneId], references: [accountId, id])
+  contact      Contact      @relation(fields: [accountId, contactId], references: [accountId, id])
 
   @@id([accountId, id])
 }
@@ -190,8 +204,8 @@ model AccountPhone {
   updatedAt DateTime @default(now())
 
   //Relations
-  Account Account   @relation(fields: [accountId], references: [id])
-  Message Message[]
+  account Account   @relation(fields: [accountId], references: [id])
+  message Message[]
 
   @@id([accountId, id])
 }
@@ -221,7 +235,7 @@ model DictionaryText {
   text     String
 
   // Relation
-  Dictionary Dictionary @relation(fields: [key, value], references: [key, value])
+  dictionary Dictionary @relation(fields: [key, value], references: [key, value])
 
   @@unique([key, language, value])
 }
@@ -235,6 +249,5 @@ model MetaAccount {
   // // Relation
   // accountId String  @db.Uuid
 
-  Account Account?
-  // Account Account @relation(fields: [accountId], references: [id])
+  account Account?
 }
