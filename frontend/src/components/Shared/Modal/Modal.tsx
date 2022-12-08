@@ -26,6 +26,7 @@ export const Modal = (props: Props) => {
     },
     centered: true,
     closeOnClickOutside: false,
+    overflow: 'inside',
     ...rest,
   };
 
