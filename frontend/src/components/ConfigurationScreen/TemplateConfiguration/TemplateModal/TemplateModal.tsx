@@ -1,12 +1,13 @@
 import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
 import { TemplateForm } from './TemplateModalForm';
-import { TemplateModalState } from './useTemplateModal';
+import { TemplateModalState } from './templateModalReducer';
 import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';
+import { Template } from '../../../../core/Template/Template';
 
 export interface Props {
   state: TemplateModalState;
   handleClose: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (template: Template) => void;
 }
 
 export const TemplateModal = ({ state, handleClose, handleSubmit }: Props) => {

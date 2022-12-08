@@ -25,8 +25,9 @@ export const initialState: TemplateModalState = {
 
 export type TemplateModalAction =
   | {
-      type: TemplateModalActionTypes.CLOSE | TemplateModalActionTypes.LOADING;
+      type: TemplateModalActionTypes.CLOSE;
     }
+  | { type: TemplateModalActionTypes.LOADING; payload: boolean }
   | {
       type: TemplateModalActionTypes.CREATE | TemplateModalActionTypes.EDIT;
       payload: Template;
@@ -59,7 +60,7 @@ export const templateModalReducer = (
     case TemplateModalActionTypes.LOADING:
       return {
         ...state,
-        loading: true,
+        loading: action.payload,
       };
   }
 };

@@ -17,7 +17,7 @@ import { Nullable } from '../../../../core/Shared/Nullable';
 
 export interface Props {
   handleClose: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (template: Template) => void;
   template: Template;
   mode: Nullable<ModalMode>;
 }
@@ -36,7 +36,10 @@ export const TemplateForm = ({
   const mainButtonText = mode === 'CREATE' ? t('create') : t('save');
 
   return (
-    <form className='modal_form' onSubmit={form.onSubmit(handleSubmit)}>
+    <form
+      className='modal_form'
+      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+    >
       <Alert
         icon={<FontAwesomeIcon icon={faTriangleExclamation}></FontAwesomeIcon>}
         title={t('template_warning_title')}

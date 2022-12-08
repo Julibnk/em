@@ -3,7 +3,7 @@ import { TemplateModal } from './TemplateModal/TemplateModal';
 import { TemplateTable } from './TemplateTable';
 import { TemplateTableHeader } from './TemplateTableHeader';
 import { useTemplateTable } from './useTemplateTable';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useTemplateModal } from './TemplateModal/useTemplateModal';
 import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 
@@ -13,8 +13,15 @@ export interface Props {
 
 export const TemplateConfiguration = ({ repository }: Props) => {
   const { templates, loadTemplates } = useTemplateTable(repository);
-  const { templateModalState, add, close, submit, edit } =
-    useTemplateModal(repository);
+
+  const onSubmitSuccess = useCallback(() => {
+    loadTemplates();
+  }, []);
+
+  const { templateModalState, add, close, submit, edit } = useTemplateModal(
+    repository,
+    onSubmitSuccess
+  );
 
   useEffect(() => {
     loadTemplates();
