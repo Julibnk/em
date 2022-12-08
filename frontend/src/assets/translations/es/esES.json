@@ -60,5 +60,9 @@
 
   "--- MESSAGE TABLE HEADER -----": "",
   "create_message": "Crear mensaje",
-  "message_load": "Cargar mensajes"
+  "message_load": "Cargar mensajes",
+
+  "--- NOT FOUND ----": "",
+  "not_found_title": "Upss... no hemos encontrado lo que buscas",
+  "not_found_subtitle": "Volver a la pagina principal"
 }
