@@ -5,23 +5,16 @@ import { TemplateTableHeader } from './TemplateTableHeader';
 import { useTemplateTable } from './useTemplateTable';
 import { useEffect, useCallback } from 'react';
 import { useTemplateModal } from './TemplateModal/useTemplateModal';
-import { TemplateRepository } from '../../../core/Template/TemplateRepository';
 
-export interface Props {
-  repository: TemplateRepository;
-}
-
-export const TemplateConfiguration = ({ repository }: Props) => {
-  const { templates, loadTemplates } = useTemplateTable(repository);
+export const TemplateConfiguration = () => {
+  const { templates, loadTemplates } = useTemplateTable();
 
   const onSubmitSuccess = useCallback(() => {
     loadTemplates();
   }, []);
 
-  const { templateModalState, add, close, submit, edit } = useTemplateModal(
-    repository,
-    onSubmitSuccess
-  );
+  const { templateModalState, add, close, submit, edit } =
+    useTemplateModal(onSubmitSuccess);
 
   useEffect(() => {
     loadTemplates();

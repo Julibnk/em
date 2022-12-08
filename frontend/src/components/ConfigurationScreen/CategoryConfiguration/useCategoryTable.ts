@@ -1,8 +1,10 @@
 import { useState, useCallback } from 'react';
 import { Category } from '../../../core/Category/Category';
-import { CategoryRepository } from '../../../core/Category/CategoryRepository';
+import { useConfigurationScreenContext } from '../ConfigurationScreenContext';
 
-export function useCategoryTable(repository: CategoryRepository) {
+export function useCategoryTable() {
+  const { categoryRepository: repository } = useConfigurationScreenContext();
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 

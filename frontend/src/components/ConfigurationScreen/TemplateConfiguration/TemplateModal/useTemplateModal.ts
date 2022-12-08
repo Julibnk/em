@@ -2,17 +2,16 @@ import { useCallback, useReducer } from 'react';
 import { showNotification } from '../../../../core/Shared/Notification';
 import { Uuid } from '../../../../core/Shared/Uuid';
 import { Template } from '../../../../core/Template/Template';
-import { TemplateRepository } from '../../../../core/Template/TemplateRepository';
+import { useConfigurationScreenContext } from '../../ConfigurationScreenContext';
 import {
   initialState,
   TemplateModalActionTypes,
   templateModalReducer,
 } from './templateModalReducer';
 
-export function useTemplateModal(
-  repository: TemplateRepository,
-  onSubmitSuccess: () => void
-) {
+export function useTemplateModal(onSubmitSuccess: () => void) {
+  const { templateRepository } = useConfigurationScreenContext();
+
   const [templateModalState, dispatch] = useReducer(
     templateModalReducer,
     initialState
@@ -40,7 +39,7 @@ export function useTemplateModal(
   }, []);
 
   const edit = useCallback(async (templateId: string) => {
-    const template = await repository.searchById(templateId);
+    const template = await templateRepository.searchById(templateId);
 
     if (template)
       dispatch({ type: TemplateModalActionTypes.EDIT, payload: template });
@@ -49,7 +48,7 @@ export function useTemplateModal(
   const submit = useCallback(async (template: Template) => {
     try {
       dispatch({ type: TemplateModalActionTypes.LOADING, payload: true });
-      await repository.save(template);
+      await templateRepository.save(template);
       dispatch({ type: TemplateModalActionTypes.CLOSE });
       onSubmitSuccess();
     } catch (error) {

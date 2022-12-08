@@ -1,20 +1,18 @@
 import { useCallback, useReducer } from 'react';
 import { CategoryOnlyIds } from '../../../../core/Category/Category';
-import { CategoryRepository } from '../../../../core/Category/CategoryRepository';
 import { Uuid } from '../../../../core/Shared/Uuid';
-import { TemplateRepository } from '../../../../core/Template/TemplateRepository';
 import { showNotification } from '../../../../core/Shared/Notification';
 import {
   CategoryModalActionTypes,
   categoryModalReducer,
   initialState,
 } from './categoryModalReducer';
+import { useConfigurationScreenContext } from '../../ConfigurationScreenContext';
 
-export function useCategoryModal(
-  repository: CategoryRepository,
-  templateRepository: TemplateRepository,
-  onSubmitSuccess: () => void
-) {
+export function useCategoryModal(onSubmitSuccess: () => void) {
+  const { templateRepository, categoryRepository } =
+    useConfigurationScreenContext();
+
   const [categoryModalState, dispatch] = useReducer(
     categoryModalReducer,
     initialState
@@ -45,7 +43,7 @@ export function useCategoryModal(
 
   const edit = useCallback((categoryId: string) => {
     Promise.all([
-      repository.searchById(categoryId),
+      categoryRepository.searchById(categoryId),
       templateRepository.searchAll(),
     ]).then(([category, allTemplates]) => {
       if (category)
@@ -59,7 +57,7 @@ export function useCategoryModal(
   const submit = useCallback(async (category: CategoryOnlyIds) => {
     try {
       dispatch({ type: CategoryModalActionTypes.LOADING, payload: true });
-      await repository.save(category);
+      await categoryRepository.save(category);
       dispatch({ type: CategoryModalActionTypes.CLOSE });
       onSubmitSuccess();
     } catch (error) {

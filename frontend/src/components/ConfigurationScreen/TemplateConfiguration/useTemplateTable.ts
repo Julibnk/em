@@ -1,14 +1,16 @@
 import { useState, useCallback } from 'react';
 import { Template } from '../../../core/Template/Template';
-import { TemplateRepository } from '../../../core/Template/TemplateRepository';
+import { useConfigurationScreenContext } from '../ConfigurationScreenContext';
 
-export function useTemplateTable(repository: TemplateRepository) {
+export function useTemplateTable() {
+  const { templateRepository } = useConfigurationScreenContext();
+
   const [templates, setTemplates] = useState<Template[]>([]);
 
   const loadTemplates = useCallback(async () => {
-    const templates = await repository.searchAll();
+    const templates = await templateRepository.searchAll();
     setTemplates(templates);
-  }, [repository]);
+  }, [templateRepository]);
 
   return {
     templates,
