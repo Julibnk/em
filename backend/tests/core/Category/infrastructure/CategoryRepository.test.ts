@@ -66,6 +66,33 @@ describe('CategoryRepository', () => {
       ]);
       await repository.save(category);
     });
+    it('Should delete unused templates', async () => {
+      const template = TemplateMother.withAccount(account.id);
+      const otherTemplate = TemplateMother.withAccount(account.id);
+      await templateRepository.save(template);
+      await templateRepository.save(otherTemplate);
+
+      const category = CategoryMother.withAccountAndTemplateIds(account.id, [
+        template.id,
+        otherTemplate.id,
+      ]);
+      await repository.save(category);
+
+      category.change(
+        category.name,
+        category.description,
+        category.templateIds.filter((id) => id !== otherTemplate.id)
+      );
+
+      await repository.save(category);
+
+      const expected = await repository.findById(
+        category.accountId,
+        category.id
+      );
+
+      expect(expected).toEqual(category);
+    });
   });
 
   describe('=> findById', () => {

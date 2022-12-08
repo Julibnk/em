@@ -24,6 +24,14 @@ export class PrismaCategoryRepository
     const templateManyToManyRelation =
       this.fillExplicitManyToManyTemplateRelations(category);
 
+    const deleteTemplateRelationQuery: Prisma.TemplatesOnCategoriesDeleteManyArgs =
+      {
+        where: {
+          categoryId: category.id.value,
+          accountId: category.accountId.value,
+        },
+      };
+
     const query = {
       where: {
         accountId_id: {
@@ -45,6 +53,10 @@ export class PrismaCategoryRepository
       },
     };
     try {
+      await this.client.templatesOnCategories.deleteMany(
+        deleteTemplateRelationQuery
+      );
+
       await this.client.category.upsert(query);
     } catch (error) {
       throw new CategoryPersistenceError(category);
