@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
 import { Outlet } from 'react-router-dom';
 import { Header } from '../Header';
+import { ErrorBoundary } from '../../ErrorBoundary';
 
 export const Main = () => {
   return (
@@ -8,7 +9,9 @@ export const Main = () => {
       <div className={styles.main_container}>
         <Header />
         <div className={styles.sub_container}>
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </div>
       </div>
     </main>

@@ -1,0 +1,18 @@
+.root {
+  height: calc(100vh - 16rem);
+  display: flex;
+  flex-direction: column;
+  padding: 3.2rem;
+  align-items: center;
+}
+
+.image {
+  /* height: 100%; */
+  width: 100%;
+  /* display: block; */
+  flex-grow: 1;
+  background-image: url(../../../assets/images/not-found.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+}
