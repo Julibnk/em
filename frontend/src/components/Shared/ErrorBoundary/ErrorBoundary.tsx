@@ -1,5 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { NotFoundContent } from './NotFoundScreen/NotFoundContent';
+import { ErrorBoundaryContent } from './ErrorBoundaryContent';
 
 export class ErrorBoundary extends Component<
   { children: ReactNode },
@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return <NotFoundContent></NotFoundContent>;
+      return <ErrorBoundaryContent />;
     }
 
     return this.props.children;

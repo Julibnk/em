@@ -1,0 +1,26 @@
+.root {
+  height: calc(100vh - 16rem);
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  padding: 3.2rem;
+  align-items: center;
+}
+.root h1 {
+  color: var(--mantine-color-turquoise-7);
+}
+.root h3 {
+  color: var(--mantine-color-turquoise-6);
+}
+.root a {
+  text-decoration: none;
+}
+
+.image {
+  width: 100%;
+  flex-grow: 1;
+  background-image: url(../../../assets/images/not-found.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: center;
+}
