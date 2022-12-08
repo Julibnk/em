@@ -3,6 +3,6 @@ import { Category, CategoryOnlyIds } from './Category';
 
 export interface CategoryRepository {
   searchAll(): Promise<Category[]>;
-  searchById(categoryId: string): Promise<Nullable<Category>>;
+  searchById(id: string): Promise<Nullable<Category>>;
   save(category: CategoryOnlyIds): Promise<void>;
 }

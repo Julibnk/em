@@ -6,8 +6,8 @@ import { CategoryRepository } from './CategoryRepository';
 export class RestCategoryRespository implements CategoryRepository {
   constructor(private client: RestClient) {}
 
-  async searchById(categoryId: string): Promise<Nullable<Category>> {
-    const response = await this.client.get(`category/${categoryId}`);
+  async searchById(id: string): Promise<Nullable<Category>> {
+    const response = await this.client.get(`category/${id}`);
     const category: Nullable<Category> = await response.json();
     return category;
   }

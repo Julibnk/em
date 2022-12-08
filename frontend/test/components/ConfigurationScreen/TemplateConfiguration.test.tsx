@@ -1,16 +1,32 @@
 import { ConfigurationTabs } from '../../../src/components/ConfigurationScreen/ConfigurationTabs';
 import { render, screen } from '../../test-utils';
 
-// import { TemplateConfiguration } from '../../../../src/components/ConfigurationScreen/TemplateConfiguration/TemplateConfiguration';
+import { MockTemplateRepository } from '../../core/Template/__mocks__/MockTemplateRepository';
+import { MockCategoryRepository } from '../../core/Category/__mocks__/MockCategoryRepository';
+import { ConfigurationScreenProvider } from '../../../src/components/ConfigurationScreen/ConfigurationScreenContext';
+import { TemplateRepository } from '../../../src/core/Template/TemplateRepository';
+import { CategoryRepository } from '../../../src/core/Category/CategoryRepository';
+
+let templateRepository: TemplateRepository;
+let categoryRepository: CategoryRepository;
 
 describe('ConfigurationTabs Tabs', () => {
-  it('Should render configuration tabs', async () => {
-    // render(<div></div>);
-    // const a = 'Si sale es mal';
-    // console.log(a);
-    render(<ConfigurationTabs />);
+  beforeEach(() => {
+    templateRepository = new MockTemplateRepository();
+    categoryRepository = new MockCategoryRepository();
+  });
 
-    // const tabs = await screen.findByRole('tablist');
-    // expect(tabs).toBeInTheDocument();
+  it('Should render configuration tabs', async () => {
+    render(
+      <ConfigurationScreenProvider
+        categoryRepository={categoryRepository}
+        templateRepository={templateRepository}
+      >
+        <ConfigurationTabs />
+      </ConfigurationScreenProvider>
+    );
+
+    const tabs = await screen.findByRole('tablist');
+    expect(tabs).toBeInTheDocument();
   });
 });
