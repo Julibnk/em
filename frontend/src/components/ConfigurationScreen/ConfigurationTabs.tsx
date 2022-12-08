@@ -6,9 +6,11 @@ import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfigura
 import { TemplateConfiguration } from './TemplateConfiguration/TemplateConfiguration';
 import { RestTemplateRepository } from '../../core/Template/RestTemplateRepository';
 import { RestCategoryRespository } from '../../core/Category/RestCategoryRepository';
+import { FetchRestClient } from '../../core/RestClient/FetchRestClient';
 
-const templateRepository = new RestTemplateRepository();
-const categoryRepository = new RestCategoryRespository();
+const restClient = new FetchRestClient();
+const templateRepository = new RestTemplateRepository(restClient);
+const categoryRepository = new RestCategoryRespository(restClient);
 
 export const ConfigurationTabs = () => {
   const t = useTranslation();
