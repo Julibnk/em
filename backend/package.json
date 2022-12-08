@@ -67,7 +67,6 @@
     "glob": "^8.0.3",
     "helmet": "^5.1.0",
     "http-status": "^1.5.2",
-    "i": "^0.3.7",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13",
     "uuid": "^8.3.2",

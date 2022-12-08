@@ -13,7 +13,10 @@ export class RestTemplateRepository implements TemplateRepository {
   }
 
   async save(template: Template): Promise<void> {
-    await this.client.put<Template>(`template/${template.id}`, template);
+    const response = await this.client.put<Template>(
+      `template/${template.id}`,
+      template
+    );
   }
 
   async searchAll(): Promise<Template[]> {
