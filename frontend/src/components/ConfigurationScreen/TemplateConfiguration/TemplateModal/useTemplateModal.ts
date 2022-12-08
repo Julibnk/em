@@ -1,70 +1,11 @@
 import { useCallback, useReducer } from 'react';
-import { Nullable } from '../../../../core/Shared/Nullable';
 import { Uuid } from '../../../../core/Shared/Uuid';
-import { Template } from '../../../../core/Template/Template';
 import { TemplateRepository } from '../../../../core/Template/TemplateRepository';
-import { ModalMode } from '../../../Shared/Modal/Modal';
-
-enum TemplateModalActionTypes {
-  CREATE = 'CREATE',
-  CLOSE = 'CLOSE',
-  EDIT = 'EDIT',
-  LOADING = 'LOADING',
-}
-export interface TemplateModalState {
-  template: Nullable<Template>;
-  loading: boolean;
-  opened: boolean;
-  mode: Nullable<ModalMode>;
-}
-
-const initialState: TemplateModalState = {
-  template: null,
-  loading: false,
-  opened: false,
-  mode: null,
-};
-
-type TemplateModalAction =
-  | {
-      type: TemplateModalActionTypes.CLOSE | TemplateModalActionTypes.LOADING;
-    }
-  | {
-      type: TemplateModalActionTypes.CREATE | TemplateModalActionTypes.EDIT;
-      payload: Template;
-    };
-
-const templateModalReducer = (
-  state: TemplateModalState,
-  action: TemplateModalAction
-): TemplateModalState => {
-  switch (action.type) {
-    case TemplateModalActionTypes.CREATE:
-      return {
-        ...initialState,
-        opened: true,
-        mode: ModalMode.CREATE,
-        template: action.payload,
-      };
-
-    case TemplateModalActionTypes.EDIT:
-      return {
-        ...initialState,
-        opened: true,
-        mode: ModalMode.EDIT,
-        template: action.payload,
-      };
-
-    case TemplateModalActionTypes.CLOSE:
-      return initialState;
-
-    case TemplateModalActionTypes.LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-  }
-};
+import {
+  initialState,
+  TemplateModalActionTypes,
+  templateModalReducer,
+} from './templateModalReducer';
 
 export function useTemplateModal(repository: TemplateRepository) {
   const [templateModalState, dispatch] = useReducer(
@@ -73,9 +14,11 @@ export function useTemplateModal(repository: TemplateRepository) {
   );
 
   const add = useCallback(() => {
+    const payload = { id: Uuid.create(), name: '' };
+
     dispatch({
       type: TemplateModalActionTypes.CREATE,
-      payload: { id: Uuid.create(), name: '' },
+      payload,
     });
   }, []);
 
