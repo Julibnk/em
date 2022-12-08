@@ -12,7 +12,7 @@ import { Nullable } from '../../Shared/domain/Nullable';
 import { AccountPersistenceError } from '../domain/exceptions/AccountPersistenceError';
 
 type PrismaAccountWithMetaAccount = PrismaAccount & {
-  MetaAccount: PrismaMetaAccount;
+  metaAccount: PrismaMetaAccount;
 };
 @injectable()
 export class PrismaAccountRepository
@@ -32,7 +32,7 @@ export class PrismaAccountRepository
         region: account.address.region.value,
         country: account.address.country.value,
         disabled: account.disabled.value,
-        MetaAccount: {
+        metaAccount: {
           update: {},
         },
       },
@@ -46,7 +46,7 @@ export class PrismaAccountRepository
         region: account.address.region.value,
         country: account.address.country.value,
         disabled: account.disabled.value,
-        MetaAccount: {
+        metaAccount: {
           create: { id: account.metaAccount.id.value },
         },
       },
@@ -65,7 +65,7 @@ export class PrismaAccountRepository
         id: id.value,
       },
       include: {
-        MetaAccount: true,
+        metaAccount: true,
       },
     });
 
@@ -91,7 +91,7 @@ export class PrismaAccountRepository
         region: prismaEntity.region,
         country: prismaEntity.country,
       },
-      metaAccount: { id: prismaEntity.MetaAccount.id },
+      metaAccount: { id: prismaEntity.metaAccount.id },
     });
   }
 }

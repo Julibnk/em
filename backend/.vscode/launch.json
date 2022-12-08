@@ -41,19 +41,5 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
     }
-    // {
-    //   "type": "node",
-    //   "request": "launch",
-    //   "name": "Debug tests",
-    //   "skipFiles": ["<node_internals>/**"],
-    //   "program": "${workspaceFolder}/dist/start.js",
-    //   "env": { "NODE_ENV": "test" }
-    //   // "resolveSourceMapLocations": [
-    //   //   "${workspaceFolder}/**",
-    //   //   "!**/node_modules/**"
-    //   // ],
-    //   // "preLaunchTask": "tsc: build - tsconfig.json",
-    //   // "outFiles": ["${workspaceFolder}/dist/**/*.js"]
-    // }
   ]
 }

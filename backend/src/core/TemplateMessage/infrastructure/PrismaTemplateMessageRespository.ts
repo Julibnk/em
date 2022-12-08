@@ -66,9 +66,9 @@ export class PrismaTemplateMessageRepository
         },
       },
       include: {
-        Template: true,
-        AccountPhone: true,
-        Contact: true,
+        template: true,
+        accountPhone: true,
+        contact: true,
       },
     };
 

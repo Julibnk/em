@@ -3,7 +3,9 @@ import { Category } from '../domain/Category';
 import { CategoryRepository } from '../domain/CategoryRepository';
 import {
   Category as PrismaCategory,
-  Template as PrismaTemplate,
+  // Template as PrismaTemplate,
+  TemplatesOnCategories,
+  Prisma,
 } from '@prisma/client';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 import { CategoryId } from '../domain/value-object/CategoryId';
@@ -11,8 +13,11 @@ import { CategoryPersistenceError } from '../domain/exceptions/CategoryPersisten
 import { Nullable } from '../../Shared/domain/Nullable';
 import { CategoryName } from '../domain/value-object/CategoryName';
 
+// type PrismaCategoryWithTemplate = PrismaCategory & {
+//   templates: Array<{ id: PrismaTemplate['id'] }>;
+// };
 type PrismaCategoryWithTemplate = PrismaCategory & {
-  Template: Array<{ id: PrismaTemplate['id'] }>;
+  templates: TemplatesOnCategories[];
 };
 
 export class PrismaCategoryRepository
@@ -20,14 +25,8 @@ export class PrismaCategoryRepository
   implements CategoryRepository
 {
   async save(category: Category): Promise<void> {
-    const templateConnection = category.templateIds.map((templateId) => {
-      return {
-        accountId_id: {
-          accountId: category.accountId.value,
-          id: templateId.value,
-        },
-      };
-    });
+    const templateManyToManyRelation =
+      this.fillExplicitManyToManyTemplateRelations(category);
 
     const query = {
       where: {
@@ -39,14 +38,14 @@ export class PrismaCategoryRepository
       update: {
         name: category.name.value,
         description: category.description.value,
-        Template: { connect: templateConnection },
+        templates: templateManyToManyRelation,
       },
       create: {
         accountId: category.accountId.value,
         id: category.id.value,
         name: category.name.value,
         description: category.description.value,
-        Template: { connect: templateConnection },
+        templates: templateManyToManyRelation,
       },
     };
     try {
@@ -68,7 +67,7 @@ export class PrismaCategoryRepository
         },
       },
       include: {
-        Template: { select: { id: true } },
+        templates: true,
       },
     };
 
@@ -85,7 +84,7 @@ export class PrismaCategoryRepository
     const query = {
       where: { accountId: accountId.value },
       include: {
-        Template: { select: { id: true } },
+        templates: true,
       },
     };
 
@@ -103,7 +102,7 @@ export class PrismaCategoryRepository
     const query = {
       where: { accountId: accountId.value, name: name.value },
       include: {
-        Template: { select: { id: true } },
+        templates: true,
       },
     };
 
@@ -124,7 +123,38 @@ export class PrismaCategoryRepository
       id: prismaEntity.id,
       name: prismaEntity.name,
       description: prismaEntity.description || '',
-      templateIds: prismaEntity.Template.map((template) => template.id),
+      templateIds: prismaEntity.templates.map(
+        (template) => template.templateId
+      ),
     });
+  }
+
+  fillExplicitManyToManyTemplateRelations(
+    category: Category
+  ): Prisma.TemplatesOnCategoriesCreateNestedManyWithoutCategoryInput {
+    return {
+      connectOrCreate: category.templateIds.map((templateId) => {
+        return {
+          where: {
+            accountId_categoryId_templateId: {
+              accountId: category.accountId.value,
+              categoryId: category.id.value,
+              templateId: templateId.value,
+            },
+          },
+          create: {
+            account: { connect: { id: category.accountId.value } },
+            template: {
+              connect: {
+                accountId_id: {
+                  accountId: category.accountId.value,
+                  id: templateId.value,
+                },
+              },
+            },
+          },
+        };
+      }),
+    };
   }
 }
