@@ -3,7 +3,6 @@ import { Category } from '../domain/Category';
 import { CategoryRepository } from '../domain/CategoryRepository';
 import {
   Category as PrismaCategory,
-  // Template as PrismaTemplate,
   TemplatesOnCategories,
   Prisma,
 } from '@prisma/client';
@@ -13,9 +12,6 @@ import { CategoryPersistenceError } from '../domain/exceptions/CategoryPersisten
 import { Nullable } from '../../Shared/domain/Nullable';
 import { CategoryName } from '../domain/value-object/CategoryName';
 
-// type PrismaCategoryWithTemplate = PrismaCategory & {
-//   templates: Array<{ id: PrismaTemplate['id'] }>;
-// };
 type PrismaCategoryWithTemplate = PrismaCategory & {
   templates: TemplatesOnCategories[];
 };
