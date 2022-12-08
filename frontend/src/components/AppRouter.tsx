@@ -3,7 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { NotFoundScreen } from './Shared/NotFoundScreen/NotFoundScreen';
 import { Layout } from './Shared/Layout';
 import { lazy, Suspense } from 'react';
-import { FullPageLoader } from './Shared/Layout/FullPageLoader/index';
+
+import { LoadingOverlay } from './Shared/Loading';
 
 const HomeScreen = lazy(() => import('./HomeScreen'));
 const ContactScreen = lazy(() => import('./ContactScreen'));
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: (
-      <Suspense fallback={<FullPageLoader />}>
+      <Suspense fallback={<LoadingOverlay loading />}>
         <LoginScreen />
       </Suspense>
     ),
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: (
-          <Suspense fallback={<FullPageLoader />}>
+          <Suspense fallback={<LoadingOverlay loading />}>
             <HomeScreen />
           </Suspense>
         ),
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: 'message/*',
         element: (
-          <Suspense fallback={<FullPageLoader />}>
+          <Suspense fallback={<LoadingOverlay loading />}>
             <MessageScreen />
           </Suspense>
         ),
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: 'contact/*',
         element: (
-          <Suspense fallback={<FullPageLoader />}>
+          <Suspense fallback={<LoadingOverlay loading />}>
             <ContactScreen />
           </Suspense>
         ),
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
       {
         path: 'configuration/*',
         element: (
-          <Suspense fallback={<FullPageLoader />}>
+          <Suspense fallback={<LoadingOverlay loading />}>
             <ConfigurationScreen />
           </Suspense>
         ),
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
       {
         path: 'profile/*',
         element: (
-          <Suspense fallback={<FullPageLoader />}>
+          <Suspense fallback={<LoadingOverlay loading />}>
             <ProfileScreen />
           </Suspense>
         ),
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: (
-          <Suspense fallback={<FullPageLoader />}>
+          <Suspense fallback={<LoadingOverlay loading />}>
             <NotFoundScreen />
           </Suspense>
         ),
