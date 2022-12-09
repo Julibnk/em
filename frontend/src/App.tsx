@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Modals } from './components/Modals';
+// import { Modals } from './components/Modals';
 import { AppRouter } from './components/AppRouter';
 import { useInitApp } from './core/Shared/hooks/useInitApp';
 import { MantineProvider } from './components/MantineProvider';
@@ -13,7 +13,6 @@ export const App = () => {
     <MantineProvider>
       <NotificationsProvider>
         <AppRouter />
-        <Modals />
       </NotificationsProvider>
     </MantineProvider>
   );

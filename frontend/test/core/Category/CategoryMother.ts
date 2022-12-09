@@ -8,7 +8,7 @@ export class CategoryMother {
       id: UuidMother.random(),
       name: WordMother.random(),
       description: WordMother.random(),
-      templateIds: [],
+      templates: [],
       ...params,
     };
     return category;

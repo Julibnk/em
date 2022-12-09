@@ -92,6 +92,7 @@ export const TemplateForm = ({
       <Group position='right' mt='md'>
         <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
         <Button
+          role={'submit'}
           type='submit'
           leftIcon={<FontAwesomeIcon icon={mainButtonIcon} />}
         >

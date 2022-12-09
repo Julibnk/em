@@ -41,7 +41,7 @@ describe('ConfigurationTabs Tabs', () => {
     const tabs = await screen.findAllByRole('tab');
     expect(tabs.length).toBe(2);
   });
-  it('Should have Categories selected by default', async () => {
+  it('Category tab should be default', async () => {
     render(
       <ConfigurationScreenProvider
         categoryRepository={categoryRepository}

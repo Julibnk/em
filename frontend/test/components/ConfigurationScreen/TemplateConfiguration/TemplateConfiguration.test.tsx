@@ -1,4 +1,4 @@
-import { render, screen } from '../../../test-utils';
+import { render, screen, userEvent } from '../../../test-utils';
 
 import { TemplateConfiguration } from '../../../../src/components/ConfigurationScreen/TemplateConfiguration/TemplateConfiguration';
 import { TemplateRepository } from '../../../../src/core/Template/TemplateRepository';
@@ -15,7 +15,7 @@ describe('TemplateConfiguration Tabs', () => {
     templateRepository = new MockTemplateRepository();
     categoryRepository = new MockCategoryRepository();
   });
-  it('Should render category configuration by default', async () => {
+  it('Should open modal when pushing add button', async () => {
     render(
       <ConfigurationScreenProvider
         categoryRepository={categoryRepository}
@@ -25,7 +25,13 @@ describe('TemplateConfiguration Tabs', () => {
       </ConfigurationScreenProvider>
     );
 
-    const a = await screen.findByRole('button');
-    expect(a).toBeInTheDocument();
+    const addButton = await screen.findByRole('button', { name: /añadir/i });
+    expect(addButton).toBeInTheDocument();
+
+    userEvent.click(addButton);
+
+    const createTemplateModal = await screen.findByRole('dialog');
+
+    expect(createTemplateModal).toBeInTheDocument();
   });
 });

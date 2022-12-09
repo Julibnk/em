@@ -3,18 +3,31 @@ import { Template } from '../../../../src/core/Template/Template';
 import { TemplateRepository } from '../../../../src/core/Template/TemplateRepository';
 
 export class MockTemplateRepository implements TemplateRepository {
-  private templates: Template[] = [];
+  mockSearchAll = vi.fn();
+  mockSearchById = vi.fn();
+  mockSave = vi.fn();
+
+  private templateById: Nullable<Template> = null;
+  private allTemplates: Template[] = [];
 
   async searchAll(): Promise<Template[]> {
-    return this.templates;
+    this.mockSearchAll();
+    return this.allTemplates;
   }
 
   async searchById(id: string): Promise<Nullable<Template>> {
-    return null;
-    // return this.categories.find((category) => category.id === id);
+    this.mockSearchById(id);
+    return this.templateById;
   }
 
   async save(template: Template): Promise<void> {
-    // return null;
+    this.mockSave(template);
+  }
+
+  setTemplateById(template: Nullable<Template>): void {
+    this.templateById = template;
+  }
+  setAllTemplates(templates: Template[]): void {
+    this.allTemplates = templates;
   }
 }

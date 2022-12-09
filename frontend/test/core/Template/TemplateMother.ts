@@ -3,7 +3,7 @@ import { UuidMother } from '../Shared/UuidMother';
 import { WordMother } from '../Shared/WordMother';
 
 export class TemplateMother {
-  static create(params: Partial<Template>): Template {
+  static create(params?: Partial<Template>): Template {
     const template: Template = {
       id: UuidMother.random(),
       name: WordMother.random(),
