@@ -43,6 +43,7 @@ export const Table = ({ children, className }: TableProps) => {
     <MantineTable
       highlightOnHover
       className={`${styles.table} ${className && className}`}
+      verticalSpacing='xs'
     >
       {children}
     </MantineTable>

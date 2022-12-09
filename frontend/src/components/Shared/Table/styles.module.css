@@ -39,9 +39,9 @@
   border-top-right-radius: 8px;
 }
 
-.td {
-  padding: 1.2rem 1.2rem !important;
-}
+/* .td { */
+/* padding: 1.2rem 1.2rem !important; */
+/* } */
 
 .table tr:hover {
   background-color: var(--mantine-color-gray-0) !important;

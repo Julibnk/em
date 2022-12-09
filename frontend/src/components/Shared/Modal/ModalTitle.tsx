@@ -2,6 +2,7 @@ import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
 import { Nullable } from '../../../core/Shared/Nullable';
 import { ModalMode } from './Modal';
 
+//TODO - Translate
 export enum ModalTitleEntity {
   CATEGORY = 'categoria',
   TEMPLATE = 'plantilla',
