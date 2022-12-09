@@ -7,10 +7,10 @@
   align-items: center;
 }
 .root h1 {
-  color: var(--mantine-color-turquoise-7);
+  color: var(--color-primary-7);
 }
 .root h3 {
-  color: var(--mantine-color-turquoise-6);
+  color: var(--color-primary-6);
 }
 .root a {
   text-decoration: none;

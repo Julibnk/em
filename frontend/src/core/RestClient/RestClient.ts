@@ -6,12 +6,22 @@ export interface RequestParameters {
   [key: string]: string;
 }
 
-export type responseType = 'json' | 'text' | 'blob' | 'arraybuffer';
+export type ResponseType = 'json' | 'text' | 'blob' | 'arraybuffer';
+
+export type ResponseWithMessage = {
+  message: string;
+};
+
+export const isResponseWithMessage = (
+  body: unknown
+): body is ResponseWithMessage => {
+  return typeof body === 'object' && body !== null && 'message' in body;
+};
 
 export interface RequestOptions {
   headers?: RequestHeaders;
   params?: RequestParameters;
-  responseType?: responseType;
+  responseType?: ResponseType;
   withCredentials?: boolean;
   timeout?: number;
 }

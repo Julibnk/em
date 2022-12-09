@@ -10,6 +10,7 @@ export const ConfigurationTabs = () => {
     children: <></>,
     classNames: { tab: styles.tab, panel: styles.panel },
     defaultValue: 'category',
+    variant: 'pills',
   };
 
   return (

@@ -1,4 +1,4 @@
-import { RestClient } from '../RestClient/RestClient';
+import { RestClient, isResponseWithMessage } from '../RestClient/RestClient';
 import { Nullable } from '../Shared/Nullable';
 import { Template } from './Template';
 import { TemplateRepository } from './TemplateRepository';
@@ -13,10 +13,21 @@ export class RestTemplateRepository implements TemplateRepository {
   }
 
   async save(template: Template): Promise<void> {
+    // debugger; // eslint-disable-line
     const response = await this.client.put<Template>(
       `template/${template.id}`,
       template
     );
+
+    if (!response.ok) {
+      const body: unknown = await response.json();
+
+      if (isResponseWithMessage(body)) {
+        throw new Error(body.message);
+      }
+
+      throw new Error('La plantilla no se ha podido guardar');
+    }
   }
 
   async searchAll(): Promise<Template[]> {
