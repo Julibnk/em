@@ -1,3 +1,4 @@
+import '../../../config/i18n';
 import { useTranslation as externalUseTranslation } from 'react-i18next';
 
 export type TranslationParams = {

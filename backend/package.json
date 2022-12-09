@@ -10,6 +10,7 @@
     "start:production": "env-cmd -f .env nodemon start.ts",
     "test": "jest --runInBand",
     "test:local": "env-cmd -f .env.test jest --silent=false --runInBand",
+    "test:vscode": "env-cmd -f .env.test jest",
     "build": "tsc --build",
     "build:production": "npm ci && npm run build",
     "prisma:generate:development": "env-cmd -f .env.development prisma generate",

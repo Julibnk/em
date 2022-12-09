@@ -1,4 +1,4 @@
-import { render } from '../../../test-utils';
+import { render, screen } from '../../../test-utils';
 
 import { TemplateConfiguration } from '../../../../src/components/ConfigurationScreen/TemplateConfiguration/TemplateConfiguration';
 import { TemplateRepository } from '../../../../src/core/Template/TemplateRepository';
@@ -24,5 +24,8 @@ describe('TemplateConfiguration Tabs', () => {
         <TemplateConfiguration />
       </ConfigurationScreenProvider>
     );
+
+    const a = await screen.findByRole('button');
+    expect(a).toBeInTheDocument();
   });
 });

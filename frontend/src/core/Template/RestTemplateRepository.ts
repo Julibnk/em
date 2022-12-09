@@ -13,7 +13,6 @@ export class RestTemplateRepository implements TemplateRepository {
   }
 
   async save(template: Template): Promise<void> {
-    // debugger; // eslint-disable-line
     const response = await this.client.put<Template>(
       `template/${template.id}`,
       template

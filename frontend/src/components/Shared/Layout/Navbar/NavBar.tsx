@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 export const Navbar = () => {
   const { navbarCollapsed } = useSelector((state) => state.layout);
-
+  /*TODO Lo rompe la tabla!! 
   /*La animacion del sidebar se peta al hacer el collapse, por culpa de los navitems
   el navbarCollapsed hace que se oculten los textos de los botones
   y el flexbox automaticamente se reduce rompiendo la animacion

@@ -4,29 +4,37 @@ import { Tabs, TabsProps } from '@mantine/core';
 import { useTranslation } from '../../core/Shared/hooks/useTranslation';
 import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfiguration';
 import { TemplateConfiguration } from './TemplateConfiguration/TemplateConfiguration';
+
+enum ConfigurationSections {
+  CATEGORY = 'category',
+  TEMPLATE = 'template',
+}
+
 export const ConfigurationTabs = () => {
   const t = useTranslation();
   const tabsProps: TabsProps = {
     children: <></>,
     classNames: { tab: styles.tab, panel: styles.panel },
-    defaultValue: 'category',
+    defaultValue: ConfigurationSections.CATEGORY,
     variant: 'pills',
   };
 
   return (
     <Tabs {...tabsProps}>
       <Tabs.List>
-        <Tabs.Tab value='category'>{t('category', { plural: true })}</Tabs.Tab>
-        <Tabs.Tab value='template'>
+        <Tabs.Tab value={ConfigurationSections.CATEGORY}>
+          {t('category', { plural: true })}
+        </Tabs.Tab>
+        <Tabs.Tab value={ConfigurationSections.TEMPLATE}>
           {t('whatsappTemplate', { plural: true })}
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value='category'>
+      <Tabs.Panel value={ConfigurationSections.CATEGORY}>
         <CategoryConfiguration />
       </Tabs.Panel>
 
-      <Tabs.Panel value='template'>
+      <Tabs.Panel value={ConfigurationSections.TEMPLATE}>
         <TemplateConfiguration />
       </Tabs.Panel>
     </Tabs>

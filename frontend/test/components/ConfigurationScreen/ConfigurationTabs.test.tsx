@@ -15,7 +15,6 @@ describe('ConfigurationTabs Tabs', () => {
     templateRepository = new MockTemplateRepository();
     categoryRepository = new MockCategoryRepository();
   });
-
   it('Should render configuration tabs', async () => {
     render(
       <ConfigurationScreenProvider
@@ -26,7 +25,33 @@ describe('ConfigurationTabs Tabs', () => {
       </ConfigurationScreenProvider>
     );
 
-    const tabs = await screen.findByRole('tablist');
-    expect(tabs).toBeInTheDocument();
+    const tablist = await screen.findByRole('tablist');
+    expect(tablist).toBeInTheDocument();
+  });
+  it('Should have two tabs', async () => {
+    render(
+      <ConfigurationScreenProvider
+        categoryRepository={categoryRepository}
+        templateRepository={templateRepository}
+      >
+        <ConfigurationTabs />
+      </ConfigurationScreenProvider>
+    );
+
+    const tabs = await screen.findAllByRole('tab');
+    expect(tabs.length).toBe(2);
+  });
+  it('Should have Categories selected by default', async () => {
+    render(
+      <ConfigurationScreenProvider
+        categoryRepository={categoryRepository}
+        templateRepository={templateRepository}
+      >
+        <ConfigurationTabs />
+      </ConfigurationScreenProvider>
+    );
+
+    const tab = await screen.findByRole('tab', { name: /categorías/i });
+    expect(tab).toHaveAttribute('aria-selected', 'true');
   });
 });
