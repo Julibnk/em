@@ -1,5 +1,4 @@
 import { render, screen, userEvent } from '../../../test-utils';
-import { axe } from 'vitest-axe';
 import { TemplateConfiguration } from '../../../../src/components/ConfigurationScreen/TemplateConfiguration/TemplateConfiguration';
 import { TemplateRepository } from '../../../../src/core/Template/TemplateRepository';
 import { CategoryRepository } from '../../../../src/core/Category/CategoryRepository';
@@ -16,20 +15,20 @@ describe('TemplateConfiguration Tabs', () => {
     categoryRepository = new MockCategoryRepository();
   });
 
-  it('Should be accesible', async () => {
-    const { container } = render(
-      <ConfigurationScreenProvider
-        categoryRepository={categoryRepository}
-        templateRepository={templateRepository}
-      >
-        <TemplateConfiguration />
-      </ConfigurationScreenProvider>
-    );
-    const results = await axe(container);
+  // it('Should be accesible', async () => {
+  //   const { container } = render(
+  //     <ConfigurationScreenProvider
+  //       categoryRepository={categoryRepository}
+  //       templateRepository={templateRepository}
+  //     >
+  //       <TemplateConfiguration />
+  //     </ConfigurationScreenProvider>
+  //   );
+  //   const results = await axe(container);
 
-    expect(results).toHaveNoViolations();
-    // ).toBeInTheDocument();
-  });
+  //   expect(results).toHaveNoViolations();
+  //   // ).toBeInTheDocument();
+  // });
 
   it('Should open modal when pushing add button', async () => {
     render(

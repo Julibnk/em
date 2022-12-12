@@ -1,5 +1,5 @@
 import { ConfigurationTabs } from '../../../src/components/ConfigurationScreen/ConfigurationTabs';
-import { render, screen } from '../../test-utils';
+import { render, screen, userEvent } from '../../test-utils';
 
 import { MockTemplateRepository } from '../../core/Template/__mocks__/MockTemplateRepository';
 import { MockCategoryRepository } from '../../core/Category/__mocks__/MockCategoryRepository';
@@ -53,7 +53,33 @@ describe('ConfigurationTabs Tabs', () => {
       </ConfigurationScreenProvider>
     );
 
-    const tab = await screen.findByRole('tab', { name: /categorías/i });
-    expect(tab).toHaveAttribute('aria-selected', 'true');
+    const categoryTab = await screen.findByRole('tab', { name: /categorías/i });
+    expect(categoryTab).toHaveAttribute('aria-selected', 'true');
+
+    const categoryPanel = await screen.findByRole('tabpanel', {
+      name: /categorías/i,
+    });
+    expect(categoryPanel).toBeInTheDocument();
+  });
+
+  it('Should render template panel after user changes tabs', async () => {
+    render(
+      <ConfigurationScreenProvider
+        categoryRepository={categoryRepository}
+        templateRepository={templateRepository}
+      >
+        <ConfigurationTabs />
+      </ConfigurationScreenProvider>
+    );
+
+    const templateTab = await screen.findByRole('tab', { name: /plantillas/i });
+    await userEvent.click(templateTab);
+
+    expect(templateTab).toHaveAttribute('aria-selected', 'true');
+
+    const categoryPanel = await screen.findByRole('tabpanel', {
+      name: /plantillas/i,
+    });
+    expect(categoryPanel).toBeInTheDocument();
   });
 });

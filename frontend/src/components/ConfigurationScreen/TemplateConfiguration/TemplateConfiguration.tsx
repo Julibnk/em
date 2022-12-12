@@ -22,7 +22,6 @@ export const TemplateConfiguration = () => {
 
   return (
     <ScreenContent>
-      <h1>ASD</h1>
       <TemplateTableHeader handleAdd={add} />
       <TemplateTable
         templates={templates}
