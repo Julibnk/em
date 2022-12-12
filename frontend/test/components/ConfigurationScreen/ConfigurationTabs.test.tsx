@@ -28,6 +28,7 @@ describe('ConfigurationTabs Tabs', () => {
     const tablist = await screen.findByRole('tablist');
     expect(tablist).toBeInTheDocument();
   });
+
   it('Should have two tabs', async () => {
     render(
       <ConfigurationScreenProvider
@@ -41,6 +42,7 @@ describe('ConfigurationTabs Tabs', () => {
     const tabs = await screen.findAllByRole('tab');
     expect(tabs.length).toBe(2);
   });
+
   it('Category tab should be default', async () => {
     render(
       <ConfigurationScreenProvider
