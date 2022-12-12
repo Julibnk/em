@@ -30,7 +30,13 @@ export const TemplateForm = ({
 }: Props) => {
   const t = useTranslation();
 
-  const form = useForm({ initialValues: template });
+  //TODO Traducir
+  const form = useForm({
+    initialValues: template,
+    validate: {
+      name: (value) => !value && 'El nombre de la plantilla es obligatorio',
+    },
+  });
 
   const mainButtonIcon = mode === 'CREATE' ? faFile : faFloppyDisk;
   const mainButtonText = mode === 'CREATE' ? t('create') : t('save');
@@ -56,7 +62,11 @@ export const TemplateForm = ({
         </a>
       </Alert>
 
-      <TextInput required label={t('name')} {...form.getInputProps('name')} />
+      <TextInput
+        withAsterisk
+        label={t('name')}
+        {...form.getInputProps('name')}
+      />
 
       <TextInput
         label={t('description')}

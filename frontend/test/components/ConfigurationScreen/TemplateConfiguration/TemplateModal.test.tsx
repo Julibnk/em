@@ -54,10 +54,36 @@ describe('TemplateModal', () => {
       await userEvent.type(variable2Input, template.variable2);
       await userEvent.type(variable3Input, template.variable3);
 
-      const submitButton = await screen.findByRole('submit');
+      const submitButton = await screen.getByRole('submit');
       await userEvent.click(submitButton);
 
       expect(templateRepository.mockSave).toHaveBeenCalledWith(template);
+    });
+
+    it('Should show two alerts on mandatory fields', async () => {
+      const template = TemplateMother.create();
+
+      Uuid.create = vi.fn(() => template.id);
+
+      render(
+        <ConfigurationScreenProvider
+          categoryRepository={categoryRepository}
+          templateRepository={templateRepository}
+        >
+          <TemplateConfiguration />
+        </ConfigurationScreenProvider>
+      );
+
+      const addButton = await screen.findByRole('button', { name: /añadir/i });
+      await userEvent.click(addButton);
+
+      const submitButton = await screen.getByRole('submit');
+      await userEvent.click(submitButton);
+
+      const alerts = await screen.getAllByRole('alert');
+
+      //Tiene un alert que siempre se muestra
+      expect(alerts.length).toBe(2);
     });
   });
 });

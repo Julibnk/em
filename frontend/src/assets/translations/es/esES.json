@@ -18,6 +18,7 @@
   "create_subject": "Crear {{subject}}",
   "edit_subject": "Editar {{subject}}",
   "delete_subject": "Eliminar {{subject}}",
+  "invalid_subject": "{{subject}} no válido",
 
   "message_one": "Mensaje",
   "message_other": "Mensajes",
