@@ -27,6 +27,7 @@ export class MockTemplateRepository implements TemplateRepository {
   setTemplateById(template: Nullable<Template>): void {
     this.templateById = template;
   }
+
   setAllTemplates(templates: Template[]): void {
     this.allTemplates = templates;
   }
