@@ -18,99 +18,97 @@ describe('TemplateModal', () => {
     categoryRepository = new MockCategoryRepository();
   });
 
-  describe('CreateTemplate', () => {
-    describe('When user clicks on submit button', () => {
-      describe('And all fields are filled', () => {
-        it('Should call save method on repository', async () => {
-          const template = TemplateMother.create();
+  describe('When user clicks add template button', () => {
+    describe('And all fields are filled', () => {
+      it('Should call save method on repository', async () => {
+        const template = TemplateMother.create();
 
-          Uuid.create = vi.fn(() => template.id);
+        Uuid.create = vi.fn(() => template.id);
 
-          render(
-            <ConfigurationScreenProvider
-              categoryRepository={categoryRepository}
-              templateRepository={templateRepository}
-            >
-              <TemplateConfiguration />
-            </ConfigurationScreenProvider>
-          );
+        render(
+          <ConfigurationScreenProvider
+            categoryRepository={categoryRepository}
+            templateRepository={templateRepository}
+          >
+            <TemplateConfiguration />
+          </ConfigurationScreenProvider>
+        );
 
-          const addButton = await screen.findByRole('button', {
-            name: /añadir/i,
-          });
-          await userEvent.click(addButton);
-
-          const nameInput = await screen.findByLabelText(/nombre/i);
-          const descriptionInput = await screen.findByLabelText(/descripción/i);
-          const previewInput = await screen.findByLabelText(/vista previa/i);
-          const variable1Input = await screen.findByLabelText(/variable 1/i);
-          const variable2Input = await screen.findByLabelText(/variable 2/i);
-          const variable3Input = await screen.findByLabelText(/variable 3/i);
-
-          await userEvent.type(nameInput, template.name);
-          await userEvent.type(descriptionInput, template.description);
-          await userEvent.type(previewInput, template.preview);
-          await userEvent.type(variable1Input, template.variable1);
-          await userEvent.type(variable2Input, template.variable2);
-          await userEvent.type(variable3Input, template.variable3);
-
-          const submitButton = await screen.getByRole('submit');
-          await userEvent.click(submitButton);
-
-          expect(templateRepository.mockSave).toHaveBeenCalledWith(template);
+        const addButton = await screen.findByRole('button', {
+          name: /añadir/i,
         });
+        await userEvent.click(addButton);
+
+        const nameInput = await screen.findByLabelText(/nombre/i);
+        const descriptionInput = await screen.findByLabelText(/descripción/i);
+        const previewInput = await screen.findByLabelText(/vista previa/i);
+        const variable1Input = await screen.findByLabelText(/variable 1/i);
+        const variable2Input = await screen.findByLabelText(/variable 2/i);
+        const variable3Input = await screen.findByLabelText(/variable 3/i);
+
+        await userEvent.type(nameInput, template.name);
+        await userEvent.type(descriptionInput, template.description);
+        await userEvent.type(previewInput, template.preview);
+        await userEvent.type(variable1Input, template.variable1);
+        await userEvent.type(variable2Input, template.variable2);
+        await userEvent.type(variable3Input, template.variable3);
+
+        const submitButton = await screen.getByRole('submit');
+        await userEvent.click(submitButton);
+
+        expect(templateRepository.mockSave).toHaveBeenCalledWith(template);
       });
+    });
 
-      describe('And all fields are empty', () => {
-        it('Should show two alerts', async () => {
-          render(
-            <ConfigurationScreenProvider
-              categoryRepository={categoryRepository}
-              templateRepository={templateRepository}
-            >
-              <TemplateConfiguration />
-            </ConfigurationScreenProvider>
-          );
+    describe('And all fields are empty', () => {
+      it('Should show two alerts', async () => {
+        render(
+          <ConfigurationScreenProvider
+            categoryRepository={categoryRepository}
+            templateRepository={templateRepository}
+          >
+            <TemplateConfiguration />
+          </ConfigurationScreenProvider>
+        );
 
-          const addButton = await screen.findByRole('button', {
-            name: /añadir/i,
-          });
-          await userEvent.click(addButton);
-
-          const submitButton = await screen.getByRole('submit');
-          await userEvent.click(submitButton);
-
-          const alerts = await screen.getAllByRole('alert');
-
-          //Tiene un alert que siempre se muestra
-          expect(alerts.length).toBe(2);
+        const addButton = await screen.findByRole('button', {
+          name: /añadir/i,
         });
+        await userEvent.click(addButton);
+
+        const submitButton = await screen.getByRole('submit');
+        await userEvent.click(submitButton);
+
+        const alerts = await screen.getAllByRole('alert');
+
+        //Tiene un alert que siempre se muestra
+        expect(alerts.length).toBe(2);
       });
+    });
 
-      describe('And name is empty', () => {
-        it('Should show error message', async () => {
-          render(
-            <ConfigurationScreenProvider
-              categoryRepository={categoryRepository}
-              templateRepository={templateRepository}
-            >
-              <TemplateConfiguration />
-            </ConfigurationScreenProvider>
-          );
+    describe('And name is empty', () => {
+      it('Should show error message', async () => {
+        render(
+          <ConfigurationScreenProvider
+            categoryRepository={categoryRepository}
+            templateRepository={templateRepository}
+          >
+            <TemplateConfiguration />
+          </ConfigurationScreenProvider>
+        );
 
-          const addButton = await screen.findByRole('button', {
-            name: /añadir/i,
-          });
-          await userEvent.click(addButton);
-
-          const submitButton = await screen.getByRole('submit');
-          await userEvent.click(submitButton);
-
-          //Tiene un alert que siempre se muestra
-          expect(
-            await screen.findByText(/el nombre de la plantilla es obligatorio/i)
-          ).toBeInTheDocument();
+        const addButton = await screen.findByRole('button', {
+          name: /añadir/i,
         });
+        await userEvent.click(addButton);
+
+        const submitButton = await screen.getByRole('submit');
+        await userEvent.click(submitButton);
+
+        //Tiene un alert que siempre se muestra
+        expect(
+          await screen.findByText(/el nombre de la plantilla es obligatorio/i)
+        ).toBeInTheDocument();
       });
     });
   });
