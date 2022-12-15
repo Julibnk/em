@@ -1,13 +1,11 @@
 import { render, screen, userEvent } from '../../../test-utils';
 import { TemplateConfiguration } from '../../../../src/components/ConfigurationScreen/TemplateConfiguration/TemplateConfiguration';
-import { TemplateRepository } from '../../../../src/core/Template/TemplateRepository';
-import { CategoryRepository } from '../../../../src/core/Category/CategoryRepository';
 import { MockTemplateRepository } from '../../../core/Template/__mocks__/MockTemplateRepository';
 import { MockCategoryRepository } from '../../../core/Category/__mocks__/MockCategoryRepository';
 import { ConfigurationScreenProvider } from '../../../../src/components/ConfigurationScreen/ConfigurationScreenContext';
 
-let templateRepository: TemplateRepository;
-let categoryRepository: CategoryRepository;
+let templateRepository: MockTemplateRepository;
+let categoryRepository: MockCategoryRepository;
 
 describe('TemplateConfiguration Tabs', () => {
   beforeEach(() => {
@@ -48,5 +46,17 @@ describe('TemplateConfiguration Tabs', () => {
     const createTemplateModal = await screen.findByRole('dialog');
 
     expect(createTemplateModal).toBeInTheDocument();
+  });
+  it('Search all templates must be called', async () => {
+    render(
+      <ConfigurationScreenProvider
+        categoryRepository={categoryRepository}
+        templateRepository={templateRepository}
+      >
+        <TemplateConfiguration />
+      </ConfigurationScreenProvider>
+    );
+
+    expect(templateRepository.mockSearchAll).toHaveBeenCalled();
   });
 });

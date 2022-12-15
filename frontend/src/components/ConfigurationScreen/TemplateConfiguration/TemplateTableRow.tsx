@@ -42,10 +42,16 @@ export const TemplateTableRow = ({
       </Td>
       <Td>
         <ActionCell>
-          <ActionIcon onClick={() => handleEdit(id)}>
+          <ActionIcon
+            aria-label='Editar plantilla'
+            onClick={() => handleEdit(id)}
+          >
             <FontAwesomeIcon size='lg' icon={faPen}></FontAwesomeIcon>
           </ActionIcon>
-          <ActionIcon onClick={() => handleDelete(id)}>
+          <ActionIcon
+            aria-label='Eliminar plantilla'
+            onClick={() => handleDelete(id)}
+          >
             <FontAwesomeIcon size='lg' icon={faTrashAlt}></FontAwesomeIcon>
           </ActionIcon>
         </ActionCell>

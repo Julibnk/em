@@ -112,4 +112,83 @@ describe('TemplateModal', () => {
       });
     });
   });
+
+  describe('When user edits a template', () => {
+    it('Find by id must be called', async () => {
+      const templates = [
+        TemplateMother.create(),
+        TemplateMother.create(),
+        TemplateMother.create(),
+      ];
+
+      const template = templates[1];
+
+      templateRepository.setAllTemplates(templates);
+      templateRepository.setTemplateById(template);
+
+      render(
+        <ConfigurationScreenProvider
+          categoryRepository={categoryRepository}
+          templateRepository={templateRepository}
+        >
+          <TemplateConfiguration />
+        </ConfigurationScreenProvider>
+      );
+
+      const allEditButtons = await screen.findAllByRole('button', {
+        name: /editar plantilla/i,
+      });
+
+      // Eliminar plantilla
+
+      await userEvent.click(allEditButtons[1]);
+
+      expect(templateRepository.mockSearchById).toHaveBeenCalledWith(
+        template.id
+      );
+    });
+    it('Modal should open with template values', async () => {
+      const templates = [
+        TemplateMother.create(),
+        TemplateMother.create(),
+        TemplateMother.create(),
+      ];
+
+      const template = templates[1];
+
+      templateRepository.setAllTemplates(templates);
+      templateRepository.setTemplateById(template);
+
+      render(
+        <ConfigurationScreenProvider
+          categoryRepository={categoryRepository}
+          templateRepository={templateRepository}
+        >
+          <TemplateConfiguration />
+        </ConfigurationScreenProvider>
+      );
+
+      const allEditButtons = await screen.findAllByRole('button', {
+        name: /editar plantilla/i,
+      });
+
+      // Eliminar plantilla
+
+      await userEvent.click(allEditButtons[1]);
+
+      const nameInput = await screen.findByLabelText(/nombre/i);
+      const descriptionInput = await screen.findByLabelText(/descripción/i);
+      const previewInput = await screen.findByLabelText(/vista previa/i);
+      const variable1Input = await screen.findByLabelText(/variable 1/i);
+      const variable2Input = await screen.findByLabelText(/variable 2/i);
+      const variable3Input = await screen.findByLabelText(/variable 3/i);
+
+      expect(nameInput).toHaveValue(template.name);
+      expect(descriptionInput).toHaveValue(template.description);
+      expect(previewInput).toHaveValue(template.preview);
+      expect(variable1Input).toHaveValue(template.variable1);
+      expect(variable2Input).toHaveValue(template.variable2);
+      expect(variable3Input).toHaveValue(template.variable3);
+    });
+  });
 });
