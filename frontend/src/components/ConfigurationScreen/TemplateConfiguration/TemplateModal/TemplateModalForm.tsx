@@ -35,6 +35,16 @@ export const TemplateForm = ({
     initialValues: template,
     validate: {
       name: (value) => !value && 'El nombre de la plantilla es obligatorio',
+      variable2(value, values) {
+        if (value && !values.variable1) {
+          return 'Las variables deben de estar definidas en orden';
+        }
+      },
+      variable3(value, values) {
+        if (value && (!values.variable2 || !values.variable1)) {
+          return 'Las variables deben de estar definidas en orden';
+        }
+      },
     },
   });
 

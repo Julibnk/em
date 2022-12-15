@@ -3,6 +3,7 @@ import { showNotification } from '../../../../core/Shared/Notification';
 import { Uuid } from '../../../../core/Shared/Uuid';
 import { Template } from '../../../../core/Template/Template';
 import { useConfigurationScreenContext } from '../../ConfigurationScreenContext';
+import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
 import {
   initialState,
   TemplateModalActionTypes,
@@ -10,6 +11,8 @@ import {
 } from './templateModalReducer';
 
 export function useTemplateModal(onSubmitSuccess: () => void) {
+  const t = useTranslation();
+
   const { templateRepository } = useConfigurationScreenContext();
 
   const [templateModalState, dispatch] = useReducer(
@@ -52,7 +55,14 @@ export function useTemplateModal(onSubmitSuccess: () => void) {
       dispatch({ type: TemplateModalActionTypes.CLOSE });
       onSubmitSuccess();
     } catch (error) {
-      showNotification({ title: 'Error', message: 'error' });
+      showNotification({
+        title: t('error'),
+        message:
+          error instanceof Error
+            ? error.message
+            : 'Ha ocurrido un error al guardar la plantilla',
+        color: 'red',
+      });
       dispatch({ type: TemplateModalActionTypes.LOADING, payload: false });
     }
   }, []);

@@ -111,6 +111,71 @@ describe('TemplateModal', () => {
         ).toBeInTheDocument();
       });
     });
+
+    describe('And variable 3 is defined but variables 1 and 2 are empty', () => {
+      it('Should show error message', async () => {
+        const template = TemplateMother.create();
+
+        render(
+          <ConfigurationScreenProvider
+            categoryRepository={categoryRepository}
+            templateRepository={templateRepository}
+          >
+            <TemplateConfiguration />
+          </ConfigurationScreenProvider>
+        );
+
+        const addButton = await screen.findByRole('button', {
+          name: /añadir/i,
+        });
+        await userEvent.click(addButton);
+        const variable3Input = await screen.findByLabelText(/variable 3/i);
+
+        await userEvent.type(variable3Input, template.variable3);
+
+        const submitButton = await screen.getByRole('submit');
+        await userEvent.click(submitButton);
+
+        //Tiene un alert que siempre se muestra
+        expect(
+          await screen.findByText(
+            /las variables deben de estar definidas en orden/i
+          )
+        ).toBeInTheDocument();
+      });
+    });
+    describe('And variable 2 is defined but variable1 is empty', () => {
+      it('Should show error message', async () => {
+        const template = TemplateMother.create();
+
+        render(
+          <ConfigurationScreenProvider
+            categoryRepository={categoryRepository}
+            templateRepository={templateRepository}
+          >
+            <TemplateConfiguration />
+          </ConfigurationScreenProvider>
+        );
+
+        const addButton = await screen.findByRole('button', {
+          name: /añadir/i,
+        });
+        await userEvent.click(addButton);
+        const variable2Input = await screen.findByLabelText(/variable 2/i);
+
+        await userEvent.type(variable2Input, template.variable3);
+
+        const submitButton = await screen.getByRole('submit');
+        await userEvent.click(submitButton);
+
+        //Tiene un alert que siempre se muestra
+        expect(
+          await screen.findByText(
+            /las variables deben de estar definidas en orden/i
+          )
+        ).toBeInTheDocument();
+      });
+    });
   });
 
   describe('When user edits a template', () => {
@@ -139,15 +204,13 @@ describe('TemplateModal', () => {
         name: /editar plantilla/i,
       });
 
-      // Eliminar plantilla
-
       await userEvent.click(allEditButtons[1]);
 
       expect(templateRepository.mockSearchById).toHaveBeenCalledWith(
         template.id
       );
     });
-    it('Modal should open with template values', async () => {
+    it('Modal should opened with template values', async () => {
       const templates = [
         TemplateMother.create(),
         TemplateMother.create(),
@@ -171,8 +234,6 @@ describe('TemplateModal', () => {
       const allEditButtons = await screen.findAllByRole('button', {
         name: /editar plantilla/i,
       });
-
-      // Eliminar plantilla
 
       await userEvent.click(allEditButtons[1]);
 
