@@ -213,5 +213,25 @@ describe('TemplateModal', () => {
       expect(variable2Input).toHaveValue(template.variable2);
       expect(variable3Input).toHaveValue(template.variable3);
     });
+    it('Modal name must be disabled', async () => {
+      const templates = [TemplateMother.create()];
+
+      const template = templates[0];
+
+      templateRepository.setAllTemplates(templates);
+      templateRepository.setTemplateById(template);
+
+      customRender(<TemplateConfiguration />);
+
+      const allEditButtons = await screen.findAllByRole('button', {
+        name: /editar plantilla/i,
+      });
+
+      await userEvent.click(allEditButtons[0]);
+
+      const nameInput = await screen.findByLabelText(/nombre/i);
+
+      expect(nameInput).toBeDisabled();
+    });
   });
 });
