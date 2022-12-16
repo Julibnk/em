@@ -11,6 +11,17 @@ vi.mock('../../../../src/core/Shared/Uuid');
 let templateRepository: MockTemplateRepository;
 let categoryRepository: MockCategoryRepository;
 
+const customRender = (ui: React.ReactElement) => {
+  return render(
+    <ConfigurationScreenProvider
+      categoryRepository={categoryRepository}
+      templateRepository={templateRepository}
+    >
+      {ui}
+    </ConfigurationScreenProvider>
+  );
+};
+
 describe('TemplateModal', () => {
   beforeEach(() => {
     vi.mocked(Uuid.create).mockReset();
@@ -25,14 +36,7 @@ describe('TemplateModal', () => {
 
         Uuid.create = vi.fn(() => template.id);
 
-        render(
-          <ConfigurationScreenProvider
-            categoryRepository={categoryRepository}
-            templateRepository={templateRepository}
-          >
-            <TemplateConfiguration />
-          </ConfigurationScreenProvider>
-        );
+        customRender(<TemplateConfiguration />);
 
         const addButton = await screen.findByRole('button', {
           name: /añadir/i,
@@ -62,14 +66,7 @@ describe('TemplateModal', () => {
 
     describe('And all fields are empty', () => {
       it('Should show two alerts', async () => {
-        render(
-          <ConfigurationScreenProvider
-            categoryRepository={categoryRepository}
-            templateRepository={templateRepository}
-          >
-            <TemplateConfiguration />
-          </ConfigurationScreenProvider>
-        );
+        customRender(<TemplateConfiguration />);
 
         const addButton = await screen.findByRole('button', {
           name: /añadir/i,
@@ -88,14 +85,7 @@ describe('TemplateModal', () => {
 
     describe('And name is empty', () => {
       it('Should show error message', async () => {
-        render(
-          <ConfigurationScreenProvider
-            categoryRepository={categoryRepository}
-            templateRepository={templateRepository}
-          >
-            <TemplateConfiguration />
-          </ConfigurationScreenProvider>
-        );
+        customRender(<TemplateConfiguration />);
 
         const addButton = await screen.findByRole('button', {
           name: /añadir/i,
@@ -116,14 +106,7 @@ describe('TemplateModal', () => {
       it('Should show error message', async () => {
         const template = TemplateMother.create();
 
-        render(
-          <ConfigurationScreenProvider
-            categoryRepository={categoryRepository}
-            templateRepository={templateRepository}
-          >
-            <TemplateConfiguration />
-          </ConfigurationScreenProvider>
-        );
+        customRender(<TemplateConfiguration />);
 
         const addButton = await screen.findByRole('button', {
           name: /añadir/i,
@@ -148,14 +131,7 @@ describe('TemplateModal', () => {
       it('Should show error message', async () => {
         const template = TemplateMother.create();
 
-        render(
-          <ConfigurationScreenProvider
-            categoryRepository={categoryRepository}
-            templateRepository={templateRepository}
-          >
-            <TemplateConfiguration />
-          </ConfigurationScreenProvider>
-        );
+        customRender(<TemplateConfiguration />);
 
         const addButton = await screen.findByRole('button', {
           name: /añadir/i,
@@ -191,14 +167,7 @@ describe('TemplateModal', () => {
       templateRepository.setAllTemplates(templates);
       templateRepository.setTemplateById(template);
 
-      render(
-        <ConfigurationScreenProvider
-          categoryRepository={categoryRepository}
-          templateRepository={templateRepository}
-        >
-          <TemplateConfiguration />
-        </ConfigurationScreenProvider>
-      );
+      customRender(<TemplateConfiguration />);
 
       const allEditButtons = await screen.findAllByRole('button', {
         name: /editar plantilla/i,
@@ -222,14 +191,7 @@ describe('TemplateModal', () => {
       templateRepository.setAllTemplates(templates);
       templateRepository.setTemplateById(template);
 
-      render(
-        <ConfigurationScreenProvider
-          categoryRepository={categoryRepository}
-          templateRepository={templateRepository}
-        >
-          <TemplateConfiguration />
-        </ConfigurationScreenProvider>
-      );
+      customRender(<TemplateConfiguration />);
 
       const allEditButtons = await screen.findAllByRole('button', {
         name: /editar plantilla/i,

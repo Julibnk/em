@@ -60,7 +60,7 @@ export function useTemplateModal(onSubmitSuccess: () => void) {
         message:
           error instanceof Error
             ? error.message
-            : 'Ha ocurrido un error al guardar la plantilla',
+            : 'Ha ocurrido un error al guardar la plantilla', //TODO traducir
         color: 'red',
       });
       dispatch({ type: TemplateModalActionTypes.LOADING, payload: false });

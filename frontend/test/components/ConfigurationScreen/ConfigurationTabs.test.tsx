@@ -10,48 +10,38 @@ import { CategoryRepository } from '../../../src/core/Category/CategoryRepositor
 let templateRepository: TemplateRepository;
 let categoryRepository: CategoryRepository;
 
+const customRender = (ui: React.ReactElement) => {
+  return render(
+    <ConfigurationScreenProvider
+      categoryRepository={categoryRepository}
+      templateRepository={templateRepository}
+    >
+      {ui}
+    </ConfigurationScreenProvider>
+  );
+};
+
 describe('ConfigurationTabs Tabs', () => {
   beforeEach(() => {
     templateRepository = new MockTemplateRepository();
     categoryRepository = new MockCategoryRepository();
   });
   it('Should render configuration tabs', async () => {
-    render(
-      <ConfigurationScreenProvider
-        categoryRepository={categoryRepository}
-        templateRepository={templateRepository}
-      >
-        <ConfigurationTabs />
-      </ConfigurationScreenProvider>
-    );
+    customRender(<ConfigurationTabs />);
 
     const tablist = await screen.findByRole('tablist');
     expect(tablist).toBeInTheDocument();
   });
 
   it('Should have two tabs', async () => {
-    render(
-      <ConfigurationScreenProvider
-        categoryRepository={categoryRepository}
-        templateRepository={templateRepository}
-      >
-        <ConfigurationTabs />
-      </ConfigurationScreenProvider>
-    );
+    customRender(<ConfigurationTabs />);
 
     const tabs = await screen.findAllByRole('tab');
     expect(tabs.length).toBe(2);
   });
 
   it('Category tab should be default', async () => {
-    render(
-      <ConfigurationScreenProvider
-        categoryRepository={categoryRepository}
-        templateRepository={templateRepository}
-      >
-        <ConfigurationTabs />
-      </ConfigurationScreenProvider>
-    );
+    customRender(<ConfigurationTabs />);
 
     const categoryTab = await screen.findByRole('tab', { name: /categorías/i });
     expect(categoryTab).toHaveAttribute('aria-selected', 'true');
@@ -63,14 +53,7 @@ describe('ConfigurationTabs Tabs', () => {
   });
 
   it('Should render template panel after user changes tabs', async () => {
-    render(
-      <ConfigurationScreenProvider
-        categoryRepository={categoryRepository}
-        templateRepository={templateRepository}
-      >
-        <ConfigurationTabs />
-      </ConfigurationScreenProvider>
-    );
+    customRender(<ConfigurationTabs />);
 
     const templateTab = await screen.findByRole('tab', { name: /plantillas/i });
     await userEvent.click(templateTab);

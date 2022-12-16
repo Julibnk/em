@@ -50,6 +50,7 @@ export const TemplateForm = ({
 
   const mainButtonIcon = mode === 'CREATE' ? faFile : faFloppyDisk;
   const mainButtonText = mode === 'CREATE' ? t('create') : t('save');
+  const nameDisabled = mode === 'EDIT';
 
   return (
     <form
@@ -75,6 +76,7 @@ export const TemplateForm = ({
       <TextInput
         withAsterisk
         label={t('name')}
+        disabled={nameDisabled}
         {...form.getInputProps('name')}
       />
 

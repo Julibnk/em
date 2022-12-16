@@ -7,6 +7,17 @@ import { ConfigurationScreenProvider } from '../../../../src/components/Configur
 let templateRepository: MockTemplateRepository;
 let categoryRepository: MockCategoryRepository;
 
+const customRender = (ui: React.ReactElement) => {
+  return render(
+    <ConfigurationScreenProvider
+      categoryRepository={categoryRepository}
+      templateRepository={templateRepository}
+    >
+      {ui}
+    </ConfigurationScreenProvider>
+  );
+};
+
 describe('TemplateConfiguration Tabs', () => {
   beforeEach(() => {
     templateRepository = new MockTemplateRepository();
@@ -29,14 +40,7 @@ describe('TemplateConfiguration Tabs', () => {
   // });
 
   it('Should open modal when pushing add button', async () => {
-    render(
-      <ConfigurationScreenProvider
-        categoryRepository={categoryRepository}
-        templateRepository={templateRepository}
-      >
-        <TemplateConfiguration />
-      </ConfigurationScreenProvider>
-    );
+    customRender(<TemplateConfiguration />);
 
     const addButton = await screen.findByRole('button', { name: /añadir/i });
     expect(addButton).toBeInTheDocument();
@@ -48,14 +52,7 @@ describe('TemplateConfiguration Tabs', () => {
     expect(createTemplateModal).toBeInTheDocument();
   });
   it('Search all templates must be called', async () => {
-    render(
-      <ConfigurationScreenProvider
-        categoryRepository={categoryRepository}
-        templateRepository={templateRepository}
-      >
-        <TemplateConfiguration />
-      </ConfigurationScreenProvider>
-    );
+    customRender(<TemplateConfiguration />);
 
     expect(templateRepository.mockSearchAll).toHaveBeenCalled();
   });
