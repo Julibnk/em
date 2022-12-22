@@ -1,0 +1,8 @@
+.primaryTitle {
+  color: var(--mantine-color-gray-9);
+}
+
+.secondaryTitle {
+  color: var(--mantine-color-gray-5);
+  font-weight: 400;
+}

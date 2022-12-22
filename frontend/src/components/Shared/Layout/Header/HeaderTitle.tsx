@@ -1,23 +1,26 @@
-import styles from './styles.module.css';
-import { Title } from '@mantine/core';
-
 import { Routes, Route } from 'react-router-dom';
 import { screenConfig } from '../../../AppRouter';
 import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
+import { PrimaryTitle } from '../../Titles/PrimaryTitle';
+import { SecondaryTitle } from '../../Titles/SecondaryTitle';
 
 export const HeaderTitle = () => {
   const t = useTranslation();
   return (
     <Routes>
-      {screenConfig.map(({ path, title }, i) => {
+      {screenConfig.map(({ path, title, subtitle }, i) => {
         return (
           <Route
             key={i}
             path={path}
             element={
-              <Title className={styles.title} order={2}>
-                {t(title, { plural: true })}
-              </Title>
+              <div>
+                <PrimaryTitle text={t(title, { plural: true })} order={2} />
+                <SecondaryTitle
+                  text={t(subtitle, { plural: true })}
+                  order={5}
+                />
+              </div>
             }
           />
         );
