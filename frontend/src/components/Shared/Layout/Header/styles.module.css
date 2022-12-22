@@ -4,11 +4,6 @@
   gap: 1.2rem;
 }
 
-.headerBar {
-  height: 1px;
-  background-color: var(--mantine-color-gray-3);
-}
-
 .avatar {
   border: 3px solid var(--color-primary-7);
 }

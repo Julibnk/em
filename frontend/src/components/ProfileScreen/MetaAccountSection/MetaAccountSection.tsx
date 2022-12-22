@@ -1,5 +1,11 @@
-import React from 'react';
+import { HorizontalBar } from '../../Shared/HorizontalBar/HorizontalBar';
+import { MetaAccountSectionHeader } from './MetaAccountSectionHeader';
 
 export const MetaAccountSection = () => {
-  return <div>MetaAccountSection</div>;
+  return (
+    <>
+      <MetaAccountSectionHeader />
+      <HorizontalBar />
+    </>
+  );
 };

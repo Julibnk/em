@@ -1,5 +1,11 @@
-import React from 'react';
+import { HorizontalBar } from '../../Shared/HorizontalBar/HorizontalBar';
+import { AccountSectionHeader } from './AccountSectionHeader';
 
 export const AccountSection = () => {
-  return <div>AccountSection</div>;
+  return (
+    <>
+      <AccountSectionHeader />
+      <HorizontalBar />
+    </>
+  );
 };

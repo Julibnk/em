@@ -1,0 +1,4 @@
+.headerBar {
+  height: 1px;
+  background-color: var(--mantine-color-gray-3);
+}

@@ -1,5 +1,11 @@
-import React from 'react';
+import { HorizontalBar } from '../../Shared/HorizontalBar/HorizontalBar';
+import { BillingSectionHeader } from './BillingSectionHeader';
 
 export const BillingSection = () => {
-  return <div>BillingSection</div>;
+  return (
+    <>
+      <BillingSectionHeader />
+      <HorizontalBar />
+    </>
+  );
 };

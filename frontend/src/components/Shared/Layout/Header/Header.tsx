@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 
 import { HeaderSecondaryTitle } from './HeaderSecondaryTitle';
 import { HeaderTitle } from './HeaderTitle';
-import { HeaderBar } from './HeaderBar';
+import { HorizontalBar } from '../../HorizontalBar/HorizontalBar';
 // import { HeaderTop } from './HeaderTop';
 
 export const Header = () => {
@@ -13,7 +13,7 @@ export const Header = () => {
         <HeaderTitle />
         <HeaderSecondaryTitle />
       </div>
-      <HeaderBar />
+      <HorizontalBar />
     </div>
   );
 };
