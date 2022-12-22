@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-import { Breadcrum } from '../Breadcrum';
+import { Breadcrum } from '../Breadcrum/Breadcrum';
 import { HeaderTopRight } from './HeaderTopRight';
 
 export const HeaderTop = () => {
