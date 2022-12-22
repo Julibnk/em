@@ -12,7 +12,7 @@ const MessageScreen = lazy(() => import('./MessageScreen'));
 const ConfigurationScreen = lazy(
   () => import('./ConfigurationScreen/ConfigurationScreen')
 );
-const ProfileScreen = lazy(() => import('./ProfileScreen'));
+const ProfileScreen = lazy(() => import('./ProfileScreen/ProfileScreen'));
 const LoginScreen = lazy(() => import('./LoginScreen'));
 
 const router = createBrowserRouter([

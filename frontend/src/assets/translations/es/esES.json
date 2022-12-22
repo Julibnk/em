@@ -36,6 +36,13 @@
   "whatsappTemplate_one": "Plantilla Whatsapp",
   "whatsappTemplate_other": "Plantillas Whatsapp",
 
+  "user_one": "Usuario",
+  "user_other": "Usuarios",
+
+  "account": "Cuenta",
+  "metaAccount": "Cuenta Meta",
+  "billing": "Facturación",
+
   "filter_one": "Filtro",
   "filter_other": "Filtros",
 
