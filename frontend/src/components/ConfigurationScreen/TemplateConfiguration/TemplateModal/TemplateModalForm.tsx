@@ -53,10 +53,7 @@ export const TemplateForm = ({
   const nameDisabled = mode === 'EDIT';
 
   return (
-    <form
-      className='modal_form'
-      onSubmit={form.onSubmit((values) => handleSubmit(values))}
-    >
+    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
       <Alert
         icon={<FontAwesomeIcon icon={faTriangleExclamation}></FontAwesomeIcon>}
         title={t('template_warning_title')}

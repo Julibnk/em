@@ -49,10 +49,7 @@ export const CategoryModalForm = ({
   }));
 
   return (
-    <form
-      className='modal_form'
-      onSubmit={form.onSubmit((values) => handleSubmit(values))}
-    >
+    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
       <TextInput required label={t('name')} {...form.getInputProps('name')} />
       <TextInput
         label={t('description')}
