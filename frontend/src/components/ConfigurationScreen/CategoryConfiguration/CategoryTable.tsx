@@ -18,7 +18,7 @@ export const CategoryTable = ({
   const t = useTranslation();
 
   return (
-    <Table className={`${styles.table} shadow`}>
+    <Table className={`${styles.table}`}>
       <thead>
         <tr>
           <Th>{t('name')}</Th>

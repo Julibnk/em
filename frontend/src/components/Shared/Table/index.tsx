@@ -42,7 +42,7 @@ export const Table = ({ children, className }: TableProps) => {
   return (
     <MantineTable
       highlightOnHover
-      className={`${styles.table} ${className && className}`}
+      className={`${styles.table} ${className && className} shadow`}
       verticalSpacing='xs'
     >
       {children}
