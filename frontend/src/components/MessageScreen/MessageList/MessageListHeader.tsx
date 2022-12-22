@@ -27,7 +27,7 @@ export const MessageListHeader = () => {
     );
   };
   const handleOnMessageLoad = () => {
-    navigate('../load');
+    navigate('load');
   };
 
   return (

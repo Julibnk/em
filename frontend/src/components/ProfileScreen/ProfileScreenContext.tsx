@@ -26,7 +26,7 @@ export const ProfileScreenProvider = ({
   );
 };
 
-export const useConfigurationScreenContext = () => {
+export const useProfileScreenContext = () => {
   const { accountRepository } = useContext(ProfileScreenContext);
 
   if (!accountRepository) {

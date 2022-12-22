@@ -1,7 +1,7 @@
-import { ScreenContent } from '../../components/Shared/Layout/ScreenContent';
+import { ScreenContent } from '../Shared/Layout/ScreenContent';
 import { MessageLoadHeader } from './MessageLoadHeader';
 
-export const MessageLoadScreen = () => {
+const MessageLoadScreen = () => {
   return (
     <ScreenContent>
       <MessageLoadHeader />
@@ -9,3 +9,5 @@ export const MessageLoadScreen = () => {
     </ScreenContent>
   );
 };
+
+export default MessageLoadScreen;
