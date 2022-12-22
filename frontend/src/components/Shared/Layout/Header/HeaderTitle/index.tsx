@@ -19,7 +19,7 @@ export const HeaderTitle = () => {
             key={i}
             path={path}
             element={
-              <Title className={styles.title} order={1}>
+              <Title className={styles.title} order={2}>
                 {t(title, { plural: true })}
               </Title>
             }

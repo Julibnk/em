@@ -16,7 +16,7 @@ export const HeaderSubtitle = () => {
             key={i}
             path={path}
             element={
-              <Title className={styles.title} order={4}>
+              <Title className={styles.title} order={5}>
                 {t(subtitle)}
               </Title>
             }
