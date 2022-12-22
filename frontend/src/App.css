@@ -63,3 +63,7 @@
 .flex-col {
   flex-direction: column;
 }
+
+.mantine-Modal-root {
+  z-index: 1000;
+}
