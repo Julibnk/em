@@ -61,6 +61,7 @@ form {
 }
 
 .flex-col {
+  display: flex;
   flex-direction: column;
 }
 

@@ -4,7 +4,8 @@ main {
 }
 
 .mainContainer {
-  background-color: var(--mantine-color-white);
+  /* background-color: var(--mantine-color-white); */
+
   background-image: url(../../../../assets/images/main-background.svg);
   background-repeat: no-repeat;
   background-size: cover;

@@ -18,8 +18,8 @@ export const AccountSection = () => {
 
             // onSubmit={form.onSubmit((values) => handleSubmit(values))}
             >
-              <TextInput />
-              <TextInput />
+              <TextInput disabled placeholder='Nombre' />
+              <TextInput disabled placeholder='Cif' />
             </form>
           </div>
         </div>
@@ -34,6 +34,12 @@ export const AccountSection = () => {
             <form
             // onSubmit={form.onSubmit((values) => handleSubmit(values))}
             >
+              <div className='flex gap-sm'>
+                <TextInput />
+
+                <TextInput />
+              </div>
+              <TextInput />
               <TextInput />
               <TextInput />
             </form>
