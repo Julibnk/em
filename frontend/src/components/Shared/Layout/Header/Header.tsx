@@ -1,8 +1,8 @@
 import styles from './styles.module.css';
 
-import { HeaderSubtitle } from './HeaderSubtitle';
+import { HeaderSecondaryTitle } from './HeaderSecondaryTitle';
 import { HeaderTitle } from './HeaderTitle';
-import { HeaderBar } from './HeaderBar/index';
+import { HeaderBar } from './HeaderBar';
 import { HeaderTop } from './HeaderTop';
 
 export const Header = () => {
@@ -11,7 +11,7 @@ export const Header = () => {
       <HeaderTop />
       <div>
         <HeaderTitle />
-        <HeaderSubtitle />
+        <HeaderSecondaryTitle />
       </div>
       <HeaderBar />
     </div>

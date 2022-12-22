@@ -1,13 +1,9 @@
 import styles from './styles.module.css';
 import { Title } from '@mantine/core';
 
-// import { routes } from '../../../../../config';
-
-// export screenConfig
-
 import { Routes, Route } from 'react-router-dom';
-import { screenConfig } from '../../../../AppRouter';
-import { useTranslation } from '../../../../../core/Shared/hooks/useTranslation';
+import { screenConfig } from '../../../AppRouter';
+import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
 
 export const HeaderTitle = () => {
   const t = useTranslation();

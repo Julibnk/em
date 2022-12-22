@@ -1,14 +1,14 @@
 import styles from './styles.module.css';
 import { Outlet } from 'react-router-dom';
-import { Header } from '../Header';
+import { Header } from '../Header/Header';
 import { ErrorBoundary } from '../../ErrorBoundary/ErrorBoundary';
 
 export const Main = () => {
   return (
     <main>
-      <div className={styles.main_container}>
+      <div className={styles.mainContainer}>
         <Header />
-        <div className={styles.sub_container}>
+        <div className={styles.subContainer}>
           <ErrorBoundary>
             <Outlet />
           </ErrorBoundary>

@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 import { Navbar } from './Navbar/NavBar';
-import { Main } from './Main';
+import { Main } from './Main/Main';
 
 export const Layout = () => {
   return (

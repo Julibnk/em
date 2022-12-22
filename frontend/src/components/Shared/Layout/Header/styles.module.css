@@ -3,3 +3,27 @@
   flex-direction: column;
   gap: 1.2rem;
 }
+
+.headerBar {
+  height: 1px;
+  background-color: var(--mantine-color-gray-3);
+}
+
+.avatar {
+  border: 3px solid var(--color-primary-7);
+}
+
+.title {
+  color: var(--mantine-color-gray-9);
+}
+
+.secondaryTitle {
+  color: var(--mantine-color-gray-5);
+  font-weight: 400;
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+}
