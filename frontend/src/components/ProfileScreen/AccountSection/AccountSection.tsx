@@ -8,8 +8,8 @@ export const AccountSection = () => {
     <>
       <AccountSectionHeader />
       <HorizontalBar />
-      <div style={{ padding: '2.4rem 2.4rem 1.2rem 2.4rem' }}>
-        <div style={{ display: 'flex', paddingBottom: '1.2rem' }}>
+      <div style={{ padding: '1.8rem' }}>
+        <div style={{ display: 'flex' }}>
           <div style={{ flexBasis: '33.33%' }}>
             <SecondaryTitle text={'Información fiscal'} order={5} />
           </div>
@@ -23,10 +23,10 @@ export const AccountSection = () => {
             </form>
           </div>
         </div>
-        <HorizontalBar />
       </div>
-      <div style={{ padding: '2.4rem' }}>
-        <div style={{ display: 'flex', paddingBottom: '1.2rem' }}>
+      <HorizontalBar />
+      <div style={{ padding: '1.8rem' }}>
+        <div style={{ display: 'flex' }}>
           <div style={{ flexBasis: '33.33%' }}>
             <SecondaryTitle text={'Direccion'} order={5} />
           </div>
@@ -45,8 +45,8 @@ export const AccountSection = () => {
             </form>
           </div>
         </div>
-        <HorizontalBar />
       </div>
+      <HorizontalBar />
     </>
   );
 };

@@ -18,7 +18,7 @@ export const TemplateTable = ({
   const t = useTranslation();
 
   return (
-    <Table className={styles.table}>
+    <Table className={`${styles.table} shadow`}>
       <thead>
         <tr>
           <Th>{t('name')}</Th>
