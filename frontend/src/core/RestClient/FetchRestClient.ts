@@ -37,6 +37,21 @@ export class FetchRestClient implements RestClient {
     });
   }
 
+  async post<T>(
+    url: string,
+    body: T,
+    options?: RequestOptions
+  ): Promise<Response> {
+    return fetch(`${this.baseUrl}/${url}`, {
+      headers: {
+        ...this.headers,
+        ...options?.headers,
+      },
+      body: JSON.stringify(body),
+      method: 'POST',
+    });
+  }
+
   async delete(
     url: string,
     options?: RequestOptions | undefined

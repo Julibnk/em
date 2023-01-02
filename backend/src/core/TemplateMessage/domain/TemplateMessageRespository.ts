@@ -11,5 +11,5 @@ export interface TemplateMessageRepository {
     id: TemplateMessageId
   ): Promise<Nullable<TemplateMessage>>;
 
-  // searchAll(accountId: AccountId): Promise<TemplateMessage[]>;
+  search(accountId: AccountId): Promise<TemplateMessage[]>;
 }

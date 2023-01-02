@@ -1,20 +1,26 @@
 import { Table, Th } from '../../Shared/Table';
 import { MessageTableRow } from './MessageTableRow';
 import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
-import { useMessageTable } from './useMessageTable';
+import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
 
-export const MessageTable = () => {
+export interface Props {
+  messages: TemplateMessage[];
+  handleEdit: (messageId: string) => void;
+}
+
+export const MessageTable = ({ messages }: Props) => {
   const t = useTranslation();
-  const { messages } = useMessageTable();
 
   return (
     <Table>
       <thead>
         <tr>
-          <Th>{t('name')}</Th>
-          <Th>{t('preview')}</Th>
-          <Th textAlign='center'>{t('variable', { plural: true })}</Th>
-          <Th textAlign='center'>{t('category', { plural: true })}</Th>
+          <Th textAlign='center'>Estado</Th>
+          <Th>Fecha y hora de envío</Th>
+          <Th>Contacto</Th>
+          <Th>Teléfono</Th>
+          <Th>Plantilla</Th>
+          <Th>Categoría</Th>
           <Th textAlign='center'>{t('actions')}</Th>
         </tr>
       </thead>

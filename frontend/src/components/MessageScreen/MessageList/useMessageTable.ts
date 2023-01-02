@@ -8,8 +8,8 @@ export function useMessageTable() {
   const [messages, setMessages] = useState<TemplateMessage[]>([]);
 
   const loadMessages = useCallback(async () => {
-    // const templates = await templateMessageRepository.searchAll();
-    setMessages([]);
+    const messages = await templateMessageRepository.search();
+    setMessages(messages);
   }, [templateMessageRepository]);
 
   return {

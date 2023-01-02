@@ -81,6 +81,25 @@ export class PrismaTemplateMessageRepository
     return this.mapPrismaEntityToDomainEntity(templateMessage);
   }
 
+  async search(accountId: AccountId): Promise<TemplateMessage[]> {
+    const query = {
+      where: {
+        accountId: accountId.value,
+      },
+      include: {
+        template: true,
+        accountPhone: true,
+        contact: true,
+      },
+    };
+
+    const templateMessages = await this.client.message.findMany(query);
+
+    return templateMessages.map((templateMessage) =>
+      this.mapPrismaEntityToDomainEntity(templateMessage)
+    );
+  }
+
   mapPrismaEntityToDomainEntity(prismaEntity: PrismaMessage): TemplateMessage {
     return TemplateMessage.fromPrimitives({
       id: prismaEntity.id,

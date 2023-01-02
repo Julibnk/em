@@ -31,6 +31,10 @@ export const register = (router: Router) => {
     DiController.templateMessageGet
   );
 
+  const templateMessagePostController = container.get<Controller>(
+    DiController.templateMessagePost
+  );
+
   router.put(
     '/templateMessage/:id',
     putPostSchema,
@@ -43,5 +47,12 @@ export const register = (router: Router) => {
     getSchema,
     validateReqSchema,
     (req: Request, res: Response) => templateMessageGetController.run(req, res)
+  );
+
+  router.post(
+    '/templateMessage',
+    // getSchema,
+    // validateReqSchema,
+    (req: Request, res: Response) => templateMessagePostController.run(req, res)
   );
 };

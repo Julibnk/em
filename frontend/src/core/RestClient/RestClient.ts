@@ -29,5 +29,6 @@ export interface RequestOptions {
 export interface RestClient {
   get(url: string, options?: RequestOptions): Promise<Response>;
   put<T>(url: string, body: T, options?: RequestOptions): Promise<Response>;
+  post<T>(url: string, body: T, options?: RequestOptions): Promise<Response>;
   delete(url: string, options?: RequestOptions): Promise<Response>;
 }

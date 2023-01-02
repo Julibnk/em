@@ -31,10 +31,6 @@ export const register = (router: Router) => {
       accountPhonePutController.run(req, res)
   );
 
-  // router.get('/category', (req: Request, res: Response) =>
-  //   searchAllCategoriesController.run(req, res)
-  // );
-
   router.get(
     '/accountPhone/:id',
     getSchema,

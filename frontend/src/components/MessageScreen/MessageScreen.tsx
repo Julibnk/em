@@ -1,7 +1,7 @@
 import { ScreenContent } from '../Shared/Layout/ScreenContent';
 import { MessageTable } from './MessageList/MessageTable';
 import { MessageListHeader } from './MessageList/MessageListHeader';
-import { RestTemplateMessageRepository } from '../../core/TemplateMessage/RestTemplateRepository';
+import { RestTemplateMessageRepository } from '../../core/TemplateMessage/RestTemplateMessageRepository';
 import { MessageScreenProvider } from './MessageScreenContext';
 
 import { FetchRestClient } from '../../core/RestClient/FetchRestClient';
@@ -10,7 +10,6 @@ import { useCallback, useEffect } from 'react';
 import { useMessageModal } from './MessageModal/useMessageModal';
 import { MessageFileModal } from './MessageFileModal/MessageFileModal';
 import { MessageModal } from './MessageModal/MessageModal';
-import { TemplateMessage } from '../../core/TemplateMessage/TemplateMessage';
 import { useMessageFileModal } from './MessageFileModal/useMessageFileModal';
 
 const MessageScreen = () => {
@@ -25,7 +24,7 @@ const MessageScreen = () => {
     add,
     close: closeMessageModal,
     submit,
-    // edit,
+    edit,
   } = useMessageModal(onSubmitSuccess);
 
   const {
@@ -42,7 +41,7 @@ const MessageScreen = () => {
   return (
     <ScreenContent>
       <MessageListHeader handleAdd={add} handleLoad={openLoadModal} />
-      <MessageTable />
+      <MessageTable messages={messages} handleEdit={edit} />
       <MessageModal
         state={messageModalState}
         handleClose={closeMessageModal}

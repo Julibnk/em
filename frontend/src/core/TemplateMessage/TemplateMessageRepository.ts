@@ -5,4 +5,6 @@ export interface TemplateMessageRepository {
   save(templateMessage: TemplateMessage): Promise<void>;
 
   searchById(id: string): Promise<Nullable<TemplateMessage>>;
+
+  search(): Promise<TemplateMessage[]>;
 }

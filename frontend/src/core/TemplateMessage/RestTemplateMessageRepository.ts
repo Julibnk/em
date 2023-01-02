@@ -10,8 +10,8 @@ export class RestTemplateMessageRepository
 
   async searchById(id: string): Promise<Nullable<TemplateMessage>> {
     const response = await this.client.get(`templateMessage/${id}`);
-    const template: Nullable<TemplateMessage> = await response.json();
-    return template;
+    const message: Nullable<TemplateMessage> = await response.json();
+    return message;
   }
 
   async save(templateMessage: TemplateMessage): Promise<void> {
@@ -29,5 +29,11 @@ export class RestTemplateMessageRepository
 
       throw new Error('El mensaje no se ha podido guardar');
     }
+  }
+  async search(): Promise<TemplateMessage[]> {
+    const response = await this.client.post<unknown>(`templateMessage`, {});
+
+    const messages: TemplateMessage[] = await response.json();
+    return messages;
   }
 }

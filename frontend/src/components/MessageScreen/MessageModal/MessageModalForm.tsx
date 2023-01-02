@@ -55,12 +55,18 @@ export const MessageForm = ({
   return (
     <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
       <TextInput
-        withAsterisk
+        // withAsterisk
         label={t('name')}
         {...form.getInputProps('name')}
       />
+      <TextInput
+        withAsterisk
+        label='Teléfono'
+        {...form.getInputProps('phone')}
+      />
 
       <Select
+        label='Categoría'
         data={[
           { value: '1', label: '1' },
           { value: '1', label: '1' },
@@ -69,7 +75,9 @@ export const MessageForm = ({
         ]}
         value='1'
       />
+
       <Select
+        label='Plantilla'
         data={[
           { value: '1', label: '1' },
           { value: '1', label: '1' },
@@ -84,14 +92,14 @@ export const MessageForm = ({
         {...form.getInputProps('description')}
       />
 
-      <Text fz='xs'>Default text</Text>
+      <Text fz='md'>Variables</Text>
       <div className='flex gap-sm'>
         <TextInput placeholder={'{{1}}'} {...form.getInputProps('variable1')} />
         <TextInput placeholder={'{{2}}'} {...form.getInputProps('variable2')} />
         <TextInput placeholder={'{{3}}'} {...form.getInputProps('variable3')} />
       </div>
 
-      <Text fz='xs'>Default text</Text>
+      <Text fz='xs'>Programar envío</Text>
       <div className='flex gap-sm'>
         <TextInput placeholder={'{{1}}'} {...form.getInputProps('variable1')} />
         <TextInput placeholder={'{{2}}'} {...form.getInputProps('variable2')} />

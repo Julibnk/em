@@ -9,8 +9,10 @@ export class TemplateMessageRepositoryMock
 {
   mockSave = jest.fn();
   mockFindById = jest.fn();
+  mockSearch = jest.fn();
 
   private messageById: Nullable<TemplateMessage> = null;
+  private messageSearch: TemplateMessage[] = [];
 
   returnFindById(message: TemplateMessage): void {
     this.messageById = message;
@@ -27,5 +29,11 @@ export class TemplateMessageRepositoryMock
     this.mockFindById(accountId, id);
 
     return this.messageById;
+  }
+
+  async search(accountId: AccountId): Promise<TemplateMessage[]> {
+    this.mockSearch(accountId);
+
+    return this.messageSearch;
   }
 }

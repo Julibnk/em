@@ -27,10 +27,6 @@ export const register = (router: Router) => {
     DiController.searchAllContacts
   );
 
-  // const templateGetController = container.get<Controller>(
-  //   DiController.templateGet
-  // );
-
   router.put(
     '/contact/:id',
     putPostSchema,
@@ -41,11 +37,4 @@ export const register = (router: Router) => {
   router.get('/contact', (req: Request, res: Response) =>
     contactSearchAllController.run(req, res)
   );
-
-  // router.get(
-  //   '/template/:id',
-  //   getSchema,
-  //   validateReqSchema,
-  //   (req: Request, res: Response) => templateGetController.run(req, res)
-  // );
 };

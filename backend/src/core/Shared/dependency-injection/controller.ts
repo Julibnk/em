@@ -14,6 +14,7 @@ import { AccountPhoneGetController } from '../../../apps/controllers/AccountPhon
 import { AccountPhonePutController } from '../../../apps/controllers/AccountPhone/AccountPhonePutController';
 import { TemplateMessageGetController } from '../../../apps/controllers/TemplateMessage/TemplateMessageGetController';
 import { TemplateMessagePutController } from '../../../apps/controllers/TemplateMessage/TemplateMessagePutController';
+import { TemplateMessagePostController } from '../../../apps/controllers/TemplateMessage/TemplateMessagePostController';
 
 export const enum DiController {
   templatePut = 'app.template.putController',
@@ -35,6 +36,7 @@ export const enum DiController {
 
   templateMessagePut = 'app.templateMessage.putController',
   templateMessageGet = 'app.templateMessage.getController',
+  templateMessagePost = 'app.templateMessage.postController',
 }
 
 export const templateControllerModule = new ContainerModule((bind) => {
@@ -76,5 +78,8 @@ export const templateMessageControllerModule = new ContainerModule((bind) => {
   );
   bind<Controller>(DiController.templateMessagePut).to(
     TemplateMessagePutController
+  );
+  bind<Controller>(DiController.templateMessagePost).to(
+    TemplateMessagePostController
   );
 });
