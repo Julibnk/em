@@ -6,6 +6,7 @@ import { ModalMode } from './Modal';
 export enum ModalTitleEntity {
   CATEGORY = 'categoria',
   TEMPLATE = 'plantilla',
+  MESSAGE = 'mensaje',
 }
 
 interface Props {

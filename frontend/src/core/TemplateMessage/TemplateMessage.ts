@@ -1,3 +1,5 @@
+import { Nullable } from '../Shared/Nullable';
+
 export enum TemplateMessageStatus {
   DRAFT = 'DRAFT',
   SENT = 'SENT',
@@ -8,13 +10,13 @@ export enum TemplateMessageStatus {
 
 export interface TemplateMessage {
   id: string;
-  status: TemplateMessageStatus;
+  status: Nullable<TemplateMessageStatus>;
   templateId: string;
   accountPhoneId: string;
   contactId: string;
   parameter1: string;
   parameter2: string;
   parameter3: string;
-  scheduleDate: Date;
-  sentDate: Date;
+  scheduleDate: Nullable<Date>;
+  sentDate: Nullable<Date>;
 }

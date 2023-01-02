@@ -15,7 +15,7 @@ const ConfigurationScreen = () => {
       categoryRepository={categoryRepository}
       templateRepository={templateRepository}
     >
-      <ConfigurationTabs></ConfigurationTabs>
+      <ConfigurationTabs />
     </ConfigurationScreenProvider>
   );
 };

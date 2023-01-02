@@ -7,6 +7,7 @@
   "load": "Cargar",
   "edit": "Editar",
   "add": "Añadir",
+  "send": "Enviar",
   "preview": "Vista previa",
   "actions": "Acciones",
   "home": "Inicio",
@@ -54,6 +55,7 @@
   "waba_variable_number": "{{{{number}}}} ",
 
   "profile": "Perfil",
+  "send_message": "Enviar mensaje",
 
   "--- SECTION SUBTITLE ----": "",
   "message_subtitle": "Consulte y envie Whatsapps a sus contactos",
