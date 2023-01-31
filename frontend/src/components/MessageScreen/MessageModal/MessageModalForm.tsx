@@ -5,7 +5,14 @@ import {
   faPaperPlane,
 } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Group, Select, Textarea, TextInput } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Select,
+  Switch,
+  Textarea,
+  TextInput,
+} from '@mantine/core';
 import { InputLabel } from '@mantine/core/lib/Input/InputLabel/InputLabel';
 import { useForm } from '@mantine/form';
 import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
@@ -14,6 +21,7 @@ import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
 import { ModalMode } from '../../Shared/Modal/Modal';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { Text } from '@mantine/core';
+import { DatePicker, TimeInput } from '@mantine/dates';
 
 export interface Props {
   handleClose: () => void;
@@ -59,19 +67,26 @@ export const MessageForm = ({
         label={t('name')}
         {...form.getInputProps('name')}
       />
-      <TextInput
-        withAsterisk
-        label='Teléfono'
-        {...form.getInputProps('phone')}
-      />
+
+      <Text className='input_label' size={14} weight={500}>
+        Teléfono
+      </Text>
+      <div className='flex gap-sm'>
+        <TextInput
+          withAsterisk
+          placeholder='+34'
+          {...form.getInputProps('phone')}
+        />
+        <TextInput withAsterisk {...form.getInputProps('phone')} />
+      </div>
 
       <Select
         label='Categoría'
         data={[
           { value: '1', label: '1' },
-          { value: '1', label: '1' },
-          { value: '1', label: '1' },
-          { value: '1', label: '1' },
+          { value: '2', label: '2' },
+          { value: '3', label: '3' },
+          { value: '4', label: '4' },
         ]}
         value='1'
       />
@@ -80,9 +95,9 @@ export const MessageForm = ({
         label='Plantilla'
         data={[
           { value: '1', label: '1' },
-          { value: '1', label: '1' },
-          { value: '1', label: '1' },
-          { value: '1', label: '1' },
+          { value: '2', label: '2' },
+          { value: '3', label: '3' },
+          { value: '4', label: '4' },
         ]}
         value='1'
       />
@@ -92,18 +107,22 @@ export const MessageForm = ({
         {...form.getInputProps('description')}
       />
 
-      <Text fz='md'>Variables</Text>
-      <div className='flex gap-sm'>
+      <Text className='input_label' size={14} weight={500}>
+        Variables
+      </Text>
+      <div className='flex gap-sm input_label'>
         <TextInput placeholder={'{{1}}'} {...form.getInputProps('variable1')} />
         <TextInput placeholder={'{{2}}'} {...form.getInputProps('variable2')} />
         <TextInput placeholder={'{{3}}'} {...form.getInputProps('variable3')} />
       </div>
 
-      <Text fz='xs'>Programar envío</Text>
+      <Text className='input_label' size={14} weight={500}>
+        Programar envío
+      </Text>
       <div className='flex gap-sm'>
-        <TextInput placeholder={'{{1}}'} {...form.getInputProps('variable1')} />
-        <TextInput placeholder={'{{2}}'} {...form.getInputProps('variable2')} />
-        <TextInput placeholder={'{{3}}'} {...form.getInputProps('variable3')} />
+        <Switch />
+        <DatePicker placeholder='Pick date' withAsterisk />
+        <TimeInput withSeconds defaultValue={new Date()} />
       </div>
 
       <Group position='right' mt='md'>
