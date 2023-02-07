@@ -1,9 +1,9 @@
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
-import { Modal, Props as ModalProps } from '../../Shared/Modal/Modal';
-import { ModalTitle, ModalTitleEntity } from '../../Shared/Modal/ModalTitle';
+import { LoadingOverlay } from '../../Shared/Loading';
+import { ModalTitle, ModalTitleEntity } from '../../Shared/ModalTitle';
 import { MessageForm } from './MessageModalForm';
 import { MessageModalState } from './messageModalReducer';
-// import { MessageForm } from '../../Shared/Layout/Modals/MessageModal/MessageModalForm';
+import { Modal, ModalProps } from '@mantine/core';
 
 export interface Props {
   state: MessageModalState;
@@ -12,7 +12,7 @@ export interface Props {
 }
 
 export const MessageModal = ({ state, handleClose, handleSubmit }: Props) => {
-  const { opened, mode, message } = state;
+  const { opened, mode, message, loading } = state;
 
   const modalProps: ModalProps = {
     opened: opened,
@@ -21,13 +21,13 @@ export const MessageModal = ({ state, handleClose, handleSubmit }: Props) => {
       <ModalTitle mode={mode} entity={ModalTitleEntity.MESSAGE} subject={''} />
     ),
     size: 600,
-    loading: state.loading,
   };
 
   if (!message) return null;
 
   return (
     <Modal {...modalProps}>
+      <LoadingOverlay loading={loading} />
       <MessageForm
         handleClose={handleClose}
         handleSubmit={handleSubmit}

@@ -64,12 +64,3 @@ form {
   flex-direction: column;
   gap: 0.8rem;
 }
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.mantine-Modal-root {
-  z-index: 1000;
-}

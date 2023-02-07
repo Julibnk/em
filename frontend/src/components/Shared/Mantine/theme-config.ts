@@ -25,18 +25,6 @@ export const theme: MantineThemeOverride = {
       '#0A4B3E',
       '#05261F',
     ],
-    // silver: [
-    //   '#F8F9F9',
-    //   '#E5E7E9',
-    //   '#DEE1E3',
-    //   '#D1D5D8',
-    //   '#CACFD2',
-    //   '#BDC3C7',
-    //   '#979C9F',
-    //   '#84898B',
-    //   '#4C4E50',
-    //   '#262728',
-    // ],
   },
   components: {
     Tabs: {
@@ -52,6 +40,20 @@ export const theme: MantineThemeOverride = {
     InputWrapper: {
       classNames: {
         label: styles.inputLabel,
+      },
+    },
+    Modal: {
+      classNames: {
+        root: styles.modalRoot,
+        modal: styles.modalModal,
+        header: styles.modalHeader,
+        title: styles.modalTitle,
+        body: styles.modalBody,
+        close: styles.modalClose,
+      },
+      defaultProps: {
+        centered: true,
+        closeOnClickOutside: false,
       },
     },
   },

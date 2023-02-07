@@ -1,8 +1,9 @@
 import { CategoryModalState } from './categoryModalReducer';
-import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
+import { Modal, ModalProps } from '@mantine/core';
 import { CategoryModalForm } from './CategoryModalForm';
-import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';
+import { ModalTitle, ModalTitleEntity } from '../../../Shared/ModalTitle';
 import { CategoryOnlyIds } from '../../../../core/Category/Category';
+import { LoadingOverlay } from '../../../Shared/Loading';
 
 export interface Props {
   state: CategoryModalState;
@@ -11,7 +12,7 @@ export interface Props {
 }
 
 export const CategoryModal = ({ state, handleClose, handleSubmit }: Props) => {
-  const { opened, mode, category, allTemplates } = state;
+  const { opened, mode, category, allTemplates, loading } = state;
 
   const modalProps: ModalProps = {
     opened: opened,
@@ -23,13 +24,13 @@ export const CategoryModal = ({ state, handleClose, handleSubmit }: Props) => {
         subject={category?.name || ''}
       />
     ),
-    loading: state.loading,
   };
 
   if (!category) return null;
 
   return (
     <Modal {...modalProps}>
+      <LoadingOverlay loading={loading} />
       <CategoryModalForm
         handleClose={handleClose}
         handleSubmit={handleSubmit}

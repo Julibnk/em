@@ -1,12 +1,17 @@
-import { useTranslation } from '../hooks/useTranslation';
-import { Nullable } from '../../../core/Shared/Nullable';
-import { ModalMode } from './Modal';
+import { useTranslation } from './hooks/useTranslation';
+import { Nullable } from '../../core/Shared/Nullable';
 
 //TODO - Translate
 export enum ModalTitleEntity {
   CATEGORY = 'categoria',
   TEMPLATE = 'plantilla',
   MESSAGE = 'mensaje',
+}
+
+export enum ModalMode {
+  EDIT = 'EDIT',
+  CREATE = 'CREATE',
+  DISPLAY = 'DISPLAY',
 }
 
 interface Props {

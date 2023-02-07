@@ -12,8 +12,8 @@ import {
 
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
 import { Template } from '../../../../core/Template/Template';
-import { ModalMode } from '../../../Shared/Modal/Modal';
 import { Nullable } from '../../../../core/Shared/Nullable';
+import { ModalMode } from '../../../Shared/ModalTitle';
 
 export interface Props {
   handleClose: () => void;

@@ -10,3 +10,38 @@
 .tabPanel {
   padding: 2.4rem 1.2rem 0 1.2rem;
 }
+
+.modalRoot {
+  z-index: 1000;
+}
+
+.modalModal {
+  padding: 0;
+}
+.modalHeader {
+  padding: 1.6rem 2.4rem;
+  background-color: var(--color-primary-6);
+  margin-right: 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.modalTitle {
+  letter-spacing: 1px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-primary-0);
+}
+.modalBody {
+  padding: 1.2rem 2.4rem 2.4rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.modalClose {
+  color: var(--color-primary-0);
+}
+.modalClose:hover {
+  background-color: var(--color-primary-6);
+}

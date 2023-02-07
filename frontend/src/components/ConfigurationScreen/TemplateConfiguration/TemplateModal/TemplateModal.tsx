@@ -1,8 +1,9 @@
-import { Modal, Props as ModalProps } from '../../../Shared/Modal/Modal';
+import { Modal, ModalProps } from '@mantine/core';
 import { TemplateForm } from './TemplateModalForm';
 import { TemplateModalState } from './templateModalReducer';
-import { ModalTitle, ModalTitleEntity } from '../../../Shared/Modal/ModalTitle';
+import { ModalTitle, ModalTitleEntity } from '../../../Shared/ModalTitle';
 import { Template } from '../../../../core/Template/Template';
+import { LoadingOverlay } from '../../../Shared/Loading';
 
 export interface Props {
   state: TemplateModalState;
@@ -11,7 +12,7 @@ export interface Props {
 }
 
 export const TemplateModal = ({ state, handleClose, handleSubmit }: Props) => {
-  const { opened, mode, template } = state;
+  const { opened, mode, template, loading } = state;
 
   const modalProps: ModalProps = {
     opened: opened,
@@ -24,13 +25,13 @@ export const TemplateModal = ({ state, handleClose, handleSubmit }: Props) => {
       />
     ),
     size: 600,
-    loading: state.loading,
   };
 
   if (!template) return null;
 
   return (
     <Modal {...modalProps}>
+      <LoadingOverlay loading={loading} />
       <TemplateForm
         handleClose={handleClose}
         handleSubmit={handleSubmit}

@@ -1,4 +1,4 @@
-import { Button, Group } from '@mantine/core';
+import { Button, Group, Modal, ModalProps } from '@mantine/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
@@ -7,8 +7,8 @@ import { Dropzone } from '@mantine/dropzone';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { MessageFileModalState } from './messageFileModalReducer';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
-import { Modal, Props as ModalProps } from '../../Shared/Modal/Modal';
-import { ModalTitle, ModalTitleEntity } from '../../Shared/Modal/ModalTitle';
+import { ModalTitle, ModalTitleEntity } from '../../Shared/ModalTitle';
+import { LoadingOverlay } from '../../Shared/Loading';
 
 interface Props {
   state: MessageFileModalState;
@@ -21,7 +21,7 @@ export const MessageFileModal = ({ state, handleClose }: Props) => {
   const { opened, loading } = state;
 
   const modalProps: ModalProps = {
-    opened: opened,
+    opened,
     onClose: handleClose,
     title: (
       <ModalTitle
@@ -31,11 +31,11 @@ export const MessageFileModal = ({ state, handleClose }: Props) => {
       />
     ),
     size: 600,
-    loading,
   };
 
   return (
     <Modal {...modalProps}>
+      <LoadingOverlay loading={loading} />
       <Dropzone
         onDrop={(files) => console.log('accepted files', files)}
         onReject={(files) => console.log('rejected files', files)}

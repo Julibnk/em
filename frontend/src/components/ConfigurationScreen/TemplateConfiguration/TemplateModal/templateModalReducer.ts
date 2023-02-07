@@ -1,6 +1,6 @@
 import { Nullable } from '../../../../core/Shared/Nullable';
 import { Template } from '../../../../core/Template/Template';
-import { ModalMode } from '../../../Shared/Modal/Modal';
+import { ModalMode } from '../../../Shared/ModalTitle';
 
 export enum TemplateModalActionTypes {
   CREATE = 'CREATE',

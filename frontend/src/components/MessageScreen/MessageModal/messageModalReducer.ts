@@ -1,6 +1,6 @@
 import { Nullable } from '../../../core/Shared/Nullable';
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
-import { ModalMode } from '../../Shared/Modal/Modal';
+import { ModalMode } from '../../Shared/ModalTitle';
 
 export enum MessageModalActionTypes {
   CREATE = 'CREATE',

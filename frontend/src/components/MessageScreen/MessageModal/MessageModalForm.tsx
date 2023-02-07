@@ -1,27 +1,14 @@
-// import styles from './styles.module.css';
-import {
-  faFile,
-  faFloppyDisk,
-  faPaperPlane,
-} from '@fortawesome/free-regular-svg-icons';
+import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  Button,
-  Group,
-  Select,
-  Switch,
-  Textarea,
-  TextInput,
-} from '@mantine/core';
-import { InputLabel } from '@mantine/core/lib/Input/InputLabel/InputLabel';
+import { Button, Group, Select, Switch, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Nullable } from '../../../core/Shared/Nullable';
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
-import { ModalMode } from '../../Shared/Modal/Modal';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { Text } from '@mantine/core';
 import { DatePicker, TimeInput } from '@mantine/dates';
+import { ModalMode } from '../../Shared/ModalTitle';
 
 export interface Props {
   handleClose: () => void;
