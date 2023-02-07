@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import { Dropzone } from '@mantine/dropzone';
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { MessageFileModalState } from './messageFileModalReducer';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { Modal, Props as ModalProps } from '../../Shared/Modal/Modal';

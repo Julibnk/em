@@ -3,7 +3,7 @@ import { showNotification } from '../../../../core/Shared/Notification';
 import { Uuid } from '../../../../core/Shared/Uuid';
 import { Template } from '../../../../core/Template/Template';
 import { useConfigurationScreenContext } from '../../ConfigurationScreenContext';
-import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../../Shared/hooks/useTranslation';
 import {
   initialState,
   TemplateModalActionTypes,

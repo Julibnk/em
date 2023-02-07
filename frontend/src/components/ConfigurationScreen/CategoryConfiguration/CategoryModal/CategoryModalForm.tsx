@@ -13,7 +13,7 @@ import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { Category, CategoryOnlyIds } from '../../../../core/Category/Category';
 import { ModalMode } from '../../../Shared/Modal/Modal';
 import { Nullable } from '../../../../core/Shared/Nullable';
-import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../../Shared/hooks/useTranslation';
 import { Template } from '../../../../core/Template/Template';
 
 export interface Props {

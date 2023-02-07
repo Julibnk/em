@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { screenConfig } from '../../../AppRouter';
-import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../hooks/useTranslation';
 import { PrimaryTitle } from '../../Titles/PrimaryTitle';
 import { SecondaryTitle } from '../../Titles/SecondaryTitle';
 

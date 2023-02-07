@@ -1,5 +1,5 @@
 import { useCallback, useReducer } from 'react';
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Uuid } from '../../../core/Shared/Uuid';
 import { useMessageScreenContext } from '../MessageScreenContext';
 import {

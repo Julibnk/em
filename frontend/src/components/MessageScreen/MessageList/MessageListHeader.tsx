@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
 
 export interface Props {
   handleAdd: () => void;

@@ -10,7 +10,7 @@ import {
   faTriangleExclamation,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { useTranslation } from '../../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../../Shared/hooks/useTranslation';
 import { Template } from '../../../../core/Template/Template';
 import { ModalMode } from '../../../Shared/Modal/Modal';
 import { Nullable } from '../../../../core/Shared/Nullable';

@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 import { Tabs, TabsProps } from '@mantine/core';
-import { useTranslation } from '../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../Shared/hooks/useTranslation';
 import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfiguration';
 import { TemplateConfiguration } from './TemplateConfiguration/TemplateConfiguration';
 

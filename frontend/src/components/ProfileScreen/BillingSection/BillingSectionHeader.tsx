@@ -1,6 +1,6 @@
 import { Title } from '@mantine/core';
 import styles from './styles.module.css';
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
 
 export const BillingSectionHeader = () => {
   const t = useTranslation();

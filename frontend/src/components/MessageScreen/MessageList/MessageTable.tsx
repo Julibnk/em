@@ -1,6 +1,6 @@
 import { Table, Th } from '../../Shared/Table';
 import { MessageTableRow } from './MessageTableRow';
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
 
 export interface Props {

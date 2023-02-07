@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 import { Title } from '@mantine/core';
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../hooks/useTranslation';
 import { Link } from 'react-router-dom';
 
 export const ErrorBoundaryContent = () => {

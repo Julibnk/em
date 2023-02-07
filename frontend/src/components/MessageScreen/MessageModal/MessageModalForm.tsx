@@ -15,7 +15,7 @@ import {
 } from '@mantine/core';
 import { InputLabel } from '@mantine/core/lib/Input/InputLabel/InputLabel';
 import { useForm } from '@mantine/form';
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Nullable } from '../../../core/Shared/Nullable';
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
 import { ModalMode } from '../../Shared/Modal/Modal';

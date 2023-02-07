@@ -1,4 +1,4 @@
-import { useTranslation } from '../../../core/Shared/hooks/useTranslation';
+import { useTranslation } from '../hooks/useTranslation';
 import { Nullable } from '../../../core/Shared/Nullable';
 import { ModalMode } from './Modal';
 
