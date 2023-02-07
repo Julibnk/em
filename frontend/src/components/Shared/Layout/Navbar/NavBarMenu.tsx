@@ -42,7 +42,6 @@ export const NavBarMenu = () => {
       />
       <NavBarMenuItem
         to='/configuration'
-        className='mt-auto'
         text={t('configuration', { plural: true })}
         icon={ConfigurationIcon}
       />

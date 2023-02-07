@@ -1,7 +1,7 @@
 import { render, screen, userEvent } from '../../../test-utils';
 import { MockTemplateRepository } from '../../../core/Template/__mocks__/MockTemplateRepository';
 import { MockCategoryRepository } from '../../../core/Category/__mocks__/MockCategoryRepository';
-import { ConfigurationScreenProvider } from '../../../../src/components/ConfigurationScreen/ConfigurationScreenContext';
+import { ConfigurationScreenProvider } from '../../../../src/components/ConfigurationScreen/ConfigurationScreenProvider';
 import { TemplateConfiguration } from '../../../../src/components/ConfigurationScreen/TemplateConfiguration/TemplateConfiguration';
 import { TemplateMother } from '../../../core/Template/TemplateMother';
 import { Uuid } from '../../../../src/core/Shared/Uuid';

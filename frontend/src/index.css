@@ -39,54 +39,29 @@ p {
   --color-primary-7: var(--mantine-color-turquoise-7);
   --color-primary-8: var(--mantine-color-turquoise-8);
   --color-primary-9: var(--mantine-color-turquoise-9);
+
+  --color-gray-0: var(--mantine-color-gray-0);
+  --color-gray-1: var(--mantine-color-gray-1);
+  --color-gray-2: var(--mantine-color-gray-2);
+  --color-gray-3: var(--mantine-color-gray-3);
+  --color-gray-4: var(--mantine-color-gray-4);
+  --color-gray-5: var(--mantine-color-gray-5);
+  --color-gray-6: var(--mantine-color-gray-6);
+  --color-gray-7: var(--mantine-color-gray-7);
+  --color-gray-8: var(--mantine-color-gray-8);
+  --color-gray-9: var(--mantine-color-gray-9);
+
+  --default-radius: var(--mantine-radius-md);
+  --default-shadow: var(--mantine-shadow-md);
 }
 
-.button_label {
+/* .button_label {
   font-weight: 500;
-}
-
-.input_label {
-  color: var(--mantine-color-gray-6);
-}
-
-.w-full {
-  width: 100% !important;
-}
-
-.p-none {
-  padding: 0 !important;
-}
-.block {
-  display: block !important;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.justify-self-end {
-  justify-self: end;
-}
-
-.display-none {
-  display: none !important;
-}
-
-.mt-auto {
-  margin-top: auto !important;
-}
+} */
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-}
-
-.flex {
-  display: flex;
-}
-
-.gap-sm {
   gap: 0.8rem;
 }
 
@@ -97,9 +72,4 @@ form {
 
 .mantine-Modal-root {
   z-index: 1000;
-}
-
-.shadow {
-  box-shadow: 0 1px 3px rgb(0 0 0 / 5%), rgb(0 0 0 / 5%) 0px 10px 15px -5px,
-    rgb(0 0 0 / 4%) 0px 7px 7px -5px;
 }

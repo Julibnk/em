@@ -1,6 +1,4 @@
-import styles from './styles.module.css';
-
-import { Tabs, TabsProps } from '@mantine/core';
+import { Tabs } from '@mantine/core';
 import { useTranslation } from '../Shared/hooks/useTranslation';
 import { AccountSection } from './AccountSection/AccountSection';
 import { MetaAccountSection } from './MetaAccountSection/MetaAccountSection';
@@ -16,15 +14,9 @@ enum ProfileSections {
 
 export const ProfileTabs = () => {
   const t = useTranslation();
-  const tabsProps: TabsProps = {
-    children: <></>,
-    classNames: { tab: styles.tab, panel: styles.panel },
-    defaultValue: ProfileSections.ACCOUNT,
-    variant: 'pills',
-  };
 
   return (
-    <Tabs {...tabsProps}>
+    <Tabs defaultValue={ProfileSections.ACCOUNT}>
       <Tabs.List>
         <Tabs.Tab value={ProfileSections.ACCOUNT}>{t('account')}</Tabs.Tab>
         <Tabs.Tab value={ProfileSections.META_ACCOUNT}>

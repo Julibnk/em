@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Template } from '../../../core/Template/Template';
-import { useConfigurationScreenContext } from '../ConfigurationScreenContext';
+import { useConfigurationScreenContext } from '../ConfigurationScreenProvider';
 
 export function useTemplateTable() {
   const { templateRepository } = useConfigurationScreenContext();

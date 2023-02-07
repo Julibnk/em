@@ -1,4 +1,4 @@
-import { ConfigurationScreenProvider } from '../../../../src/components/ConfigurationScreen/ConfigurationScreenContext';
+import { ConfigurationScreenProvider } from '../../../../src/components/ConfigurationScreen/ConfigurationScreenProvider';
 import { MockCategoryRepository } from '../../../core/Category/__mocks__/MockCategoryRepository';
 import { MockTemplateRepository } from '../../../core/Template/__mocks__/MockTemplateRepository';
 import { render, screen } from '../../../test-utils';

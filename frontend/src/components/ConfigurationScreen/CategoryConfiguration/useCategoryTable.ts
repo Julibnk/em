@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Category } from '../../../core/Category/Category';
-import { useConfigurationScreenContext } from '../ConfigurationScreenContext';
+import { useConfigurationScreenContext } from '../ConfigurationScreenProvider';
 
 export function useCategoryTable() {
   const { categoryRepository: repository } = useConfigurationScreenContext();

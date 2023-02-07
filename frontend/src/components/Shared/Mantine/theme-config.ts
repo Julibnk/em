@@ -1,13 +1,16 @@
-import { MantineThemeOverride } from '@mantine/core';
+import styles from './styles.module.css';
+import {
+  DefaultMantineColor,
+  MantineThemeOverride,
+  Tuple,
+} from '@mantine/core';
 
 export const theme: MantineThemeOverride = {
   black: '#05261F',
   primaryColor: 'turquoise',
   defaultRadius: 'md',
   fontFamily: 'Inter',
-  //   fontFamily
-  //   loader
-  //   datesLocale
+
   primaryShade: 6,
   colors: {
     turquoise: [
@@ -34,7 +37,31 @@ export const theme: MantineThemeOverride = {
     //   '#4C4E50',
     //   '#262728',
     // ],
-
-    // carrot: ['#e67e22'],
+  },
+  components: {
+    Tabs: {
+      defaultProps: {
+        variant: 'pills',
+        color: 'turquoise.1',
+      },
+      classNames: {
+        tabLabel: styles.tabLabel,
+        panel: styles.tabPanel,
+      },
+    },
+    InputWrapper: {
+      classNames: {
+        label: styles.inputLabel,
+      },
+    },
   },
 };
+
+// Extend Mantine theme colors
+type ExtendedCustomColors = 'turquoise' | DefaultMantineColor;
+
+declare module '@mantine/core' {
+  export interface MantineThemeColorsOverride {
+    colors: Record<ExtendedCustomColors, Tuple<string, 10>>;
+  }
+}

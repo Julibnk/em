@@ -3,7 +3,7 @@ import { render, screen, userEvent } from '../../test-utils';
 
 import { MockTemplateRepository } from '../../core/Template/__mocks__/MockTemplateRepository';
 import { MockCategoryRepository } from '../../core/Category/__mocks__/MockCategoryRepository';
-import { ConfigurationScreenProvider } from '../../../src/components/ConfigurationScreen/ConfigurationScreenContext';
+import { ConfigurationScreenProvider } from '../../../src/components/ConfigurationScreen/ConfigurationScreenProvider';
 import { TemplateRepository } from '../../../src/core/Template/TemplateRepository';
 import { CategoryRepository } from '../../../src/core/Category/CategoryRepository';
 

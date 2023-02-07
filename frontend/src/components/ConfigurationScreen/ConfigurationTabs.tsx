@@ -1,5 +1,3 @@
-import styles from './styles.module.css';
-
 import { Tabs, TabsProps } from '@mantine/core';
 import { useTranslation } from '../Shared/hooks/useTranslation';
 import { CategoryConfiguration } from './CategoryConfiguration/CategoryConfiguration';
@@ -14,7 +12,6 @@ export const ConfigurationTabs = () => {
   const t = useTranslation();
   const tabsProps: TabsProps = {
     children: <></>,
-    classNames: { tab: styles.tab, panel: styles.panel },
     defaultValue: ConfigurationSections.CATEGORY,
     variant: 'pills',
   };

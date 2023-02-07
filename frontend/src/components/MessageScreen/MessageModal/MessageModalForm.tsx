@@ -71,7 +71,7 @@ export const MessageForm = ({
       <Text className='input_label' size={14} weight={500}>
         Teléfono
       </Text>
-      <div className='flex gap-sm'>
+      <div>
         <TextInput
           withAsterisk
           placeholder='+34'
@@ -110,7 +110,7 @@ export const MessageForm = ({
       <Text className='input_label' size={14} weight={500}>
         Variables
       </Text>
-      <div className='flex gap-sm input_label'>
+      <div>
         <TextInput placeholder={'{{1}}'} {...form.getInputProps('variable1')} />
         <TextInput placeholder={'{{2}}'} {...form.getInputProps('variable2')} />
         <TextInput placeholder={'{{3}}'} {...form.getInputProps('variable3')} />
@@ -119,7 +119,7 @@ export const MessageForm = ({
       <Text className='input_label' size={14} weight={500}>
         Programar envío
       </Text>
-      <div className='flex gap-sm'>
+      <div>
         <Switch />
         <DatePicker placeholder='Pick date' withAsterisk />
         <TimeInput withSeconds defaultValue={new Date()} />

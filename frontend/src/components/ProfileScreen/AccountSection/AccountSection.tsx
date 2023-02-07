@@ -1,5 +1,4 @@
 import { TextInput } from '@mantine/core';
-import { HorizontalBar } from '../../Shared/HorizontalBar/HorizontalBar';
 import { SecondaryTitle } from '../../Shared/Titles/SecondaryTitle';
 import { AccountSectionHeader } from './AccountSectionHeader';
 
@@ -7,7 +6,7 @@ export const AccountSection = () => {
   return (
     <>
       <AccountSectionHeader />
-      <HorizontalBar />
+
       <div style={{ padding: '1.8rem' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ flexBasis: '33.33%' }}>
@@ -24,7 +23,7 @@ export const AccountSection = () => {
           </div>
         </div>
       </div>
-      <HorizontalBar />
+
       <div style={{ padding: '1.8rem' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ flexBasis: '33.33%' }}>
@@ -34,7 +33,7 @@ export const AccountSection = () => {
             <form
             // onSubmit={form.onSubmit((values) => handleSubmit(values))}
             >
-              <div className='flex gap-sm'>
+              <div>
                 <TextInput />
 
                 <TextInput />
@@ -46,7 +45,6 @@ export const AccountSection = () => {
           </div>
         </div>
       </div>
-      <HorizontalBar />
     </>
   );
 };

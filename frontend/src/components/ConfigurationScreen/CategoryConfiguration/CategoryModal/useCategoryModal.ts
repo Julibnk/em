@@ -7,7 +7,7 @@ import {
   categoryModalReducer,
   initialState,
 } from './categoryModalReducer';
-import { useConfigurationScreenContext } from '../../ConfigurationScreenContext';
+import { useConfigurationScreenContext } from '../../ConfigurationScreenProvider';
 
 export function useCategoryModal(onSubmitSuccess: () => void) {
   const { templateRepository, categoryRepository } =
