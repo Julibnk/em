@@ -3,7 +3,10 @@ import { LoadingOverlay } from '../../Shared/Loading';
 import { ModalTitle, ModalTitleEntity } from '../../Shared/ModalTitle';
 import { MessageForm } from './MessageModalForm';
 import { MessageModalState } from './messageModalReducer';
-import { Modal, ModalProps } from '@mantine/core';
+import { Button, Group, Modal, ModalProps } from '@mantine/core';
+import { SecondaryButton } from '../../Shared/SecondaryButton';
+import { useTranslation } from '../../Shared/hooks/useTranslation';
+import { IconSend } from '@tabler/icons-react';
 
 export interface Props {
   state: MessageModalState;
@@ -12,6 +15,7 @@ export interface Props {
 }
 
 export const MessageModal = ({ state, handleClose, handleSubmit }: Props) => {
+  const t = useTranslation();
   const { opened, mode, message, loading } = state;
 
   const modalProps: ModalProps = {
@@ -28,12 +32,13 @@ export const MessageModal = ({ state, handleClose, handleSubmit }: Props) => {
   return (
     <Modal {...modalProps}>
       <LoadingOverlay loading={loading} />
-      <MessageForm
-        handleClose={handleClose}
-        handleSubmit={handleSubmit}
-        mode={mode}
-        message={message}
-      />
+      <MessageForm handleSubmit={handleSubmit} message={message} />
+      <Group position='right' mt='md'>
+        <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
+        <Button role={'submit'} type='submit' leftIcon={<IconSend />}>
+          {t('send')}
+        </Button>
+      </Group>
     </Modal>
   );
 };

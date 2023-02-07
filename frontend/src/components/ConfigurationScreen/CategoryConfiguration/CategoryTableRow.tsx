@@ -1,11 +1,9 @@
 import { Td } from '../../Shared/Table';
 import { ActionCell, BadgeCell } from '../../Shared/TableCells';
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon } from '@mantine/core';
 import { Category } from '../../../core/Category/Category';
 import { Badge } from '../../Shared/Badge';
+import { IconPencil, IconTrash } from '@tabler/icons-react';
 
 type Props = {
   category: Category;
@@ -34,10 +32,10 @@ export const CategoryTableRow = ({
       <Td>
         <ActionCell>
           <ActionIcon onClick={() => handleEdit(id)}>
-            <FontAwesomeIcon size='lg' icon={faPen}></FontAwesomeIcon>
+            <IconPencil />
           </ActionIcon>
           <ActionIcon onClick={() => handleDelete(id)}>
-            <FontAwesomeIcon size='lg' icon={faTrashAlt}></FontAwesomeIcon>
+            <IconTrash />
           </ActionIcon>
         </ActionCell>
       </Td>

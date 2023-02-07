@@ -1,10 +1,6 @@
 import { Td } from '../../Shared/Table';
-
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon, Badge } from '@mantine/core';
-
+import { IconPencil, IconTrash } from '@tabler/icons-react';
 import {
   ActionCell,
   BadgeCell,
@@ -46,13 +42,13 @@ export const TemplateTableRow = ({
             aria-label='Editar plantilla'
             onClick={() => handleEdit(id)}
           >
-            <FontAwesomeIcon size='lg' icon={faPen}></FontAwesomeIcon>
+            <IconPencil />
           </ActionIcon>
           <ActionIcon
             aria-label='Eliminar plantilla'
             onClick={() => handleDelete(id)}
           >
-            <FontAwesomeIcon size='lg' icon={faTrashAlt}></FontAwesomeIcon>
+            <IconTrash />
           </ActionIcon>
         </ActionCell>
       </Td>

@@ -5,9 +5,9 @@ import { ModalTitle, ModalTitleEntity } from '../../../Shared/ModalTitle';
 import { CategoryOnlyIds } from '../../../../core/Category/Category';
 import { LoadingOverlay } from '../../../Shared/Loading';
 import { SecondaryButton } from '../../../Shared/SecondaryButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
+
+import { IconFile, IconDeviceFloppy } from '@tabler/icons-react';
 
 export interface Props {
   state: CategoryModalState;
@@ -33,7 +33,8 @@ export const CategoryModal = ({ state, handleClose, handleSubmit }: Props) => {
 
   if (!category) return null;
 
-  const mainButtonIcon = mode === 'CREATE' ? faFile : faFloppyDisk;
+  const mainButtonIcon =
+    mode === 'CREATE' ? <IconFile /> : <IconDeviceFloppy />;
   const mainButtonText = mode === 'CREATE' ? t('create') : t('save');
 
   return (
@@ -48,11 +49,7 @@ export const CategoryModal = ({ state, handleClose, handleSubmit }: Props) => {
       />
       <Group position='right' mt='md'>
         <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
-        <Button
-          type='submit'
-          form='category-form'
-          leftIcon={<FontAwesomeIcon icon={mainButtonIcon} />}
-        >
+        <Button type='submit' form='category-form' leftIcon={mainButtonIcon}>
           {mainButtonText}
         </Button>
       </Group>

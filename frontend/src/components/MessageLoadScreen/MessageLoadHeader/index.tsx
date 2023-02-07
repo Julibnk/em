@@ -1,21 +1,17 @@
 import styles from './styles.module.css';
 import { Button, TextInput } from '@mantine/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCloudArrowUp,
-  faFilter,
-  faSearch,
-} from '@fortawesome/free-solid-svg-icons';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
+import {
+  IconSend,
+  IconCloudUpload,
+  IconFilter,
+  IconSearch,
+} from '@tabler/icons-react';
 
 export const MessageLoadHeader = () => {
   const t = useTranslation();
-
-  // const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const handleOnCreateMessage = () => {
@@ -32,24 +28,21 @@ export const MessageLoadHeader = () => {
         <TextInput
           type='search'
           placeholder={t('search')}
-          icon={<FontAwesomeIcon icon={faSearch} />}
+          icon={<IconSearch />}
         />
-        <SecondaryButton leftIcon={<FontAwesomeIcon icon={faFilter} />}>
+        <SecondaryButton leftIcon={IconFilter}>
           {t('filter', { plural: true })}
         </SecondaryButton>
       </div>
 
       <div className={styles.right}>
-        <SecondaryButton
-          onClick={handleOnCreateMessage}
-          leftIcon={<FontAwesomeIcon icon={faPaperPlane} />}
-        >
+        <SecondaryButton onClick={handleOnCreateMessage} leftIcon={IconSend}>
           {t('create_message')}
         </SecondaryButton>
         <Button
           onClick={handleOnMessageLoad}
           variant='filled'
-          leftIcon={<FontAwesomeIcon icon={faCloudArrowUp} />}
+          leftIcon={<IconCloudUpload />}
         >
           {t('message_load')}
         </Button>

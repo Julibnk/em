@@ -1,7 +1,6 @@
 import styles from './styles.module.css';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ActionIcon, ActionIconProps, Navbar } from '@mantine/core';
+import { IconMenu2 } from '@tabler/icons-react';
 
 export const NavBarFooter = () => {
   // const { navbarCollapsed } = useSelector((state) => state.layout);
@@ -22,7 +21,7 @@ export const NavBarFooter = () => {
   return (
     <Navbar.Section className={styles.footer_root}>
       <ActionIcon onClick={handleClick} {...actionIconProps}>
-        <FontAwesomeIcon icon={faBars} />
+        <IconMenu2 />
       </ActionIcon>
     </Navbar.Section>
   );

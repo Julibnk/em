@@ -1,14 +1,15 @@
-import { faFontAwesome } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Navbar } from '@mantine/core';
+import { IconCategory2 } from '@tabler/icons-react';
 import { NavBarMenuItem } from './NavBarMenuItem';
-
-const Logo = <FontAwesomeIcon icon={faFontAwesome} />;
 
 export const NavBarHeader = () => {
   return (
     <Navbar.Section>
-      <NavBarMenuItem to='/' icon={Logo} text='EM'></NavBarMenuItem>
+      <NavBarMenuItem
+        to='/'
+        icon={<IconCategory2 />}
+        text='EM'
+      ></NavBarMenuItem>
     </Navbar.Section>
   );
 };

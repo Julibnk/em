@@ -1,14 +1,14 @@
 import styles from './styles.module.css';
 import { Button, TextInput } from '@mantine/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCloudArrowUp,
-  faFilter,
-  faSearch,
-} from '@fortawesome/free-solid-svg-icons';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
+
+import {
+  IconSend,
+  IconCloudUpload,
+  IconFilter,
+  IconSearch,
+} from '@tabler/icons-react';
 
 export interface Props {
   handleAdd: () => void;
@@ -24,24 +24,21 @@ export const MessageListHeader = ({ handleAdd, handleLoad }: Props) => {
         <TextInput
           type='search'
           placeholder={t('search')}
-          icon={<FontAwesomeIcon icon={faSearch} />}
+          icon={<IconSearch />}
         />
-        <SecondaryButton leftIcon={<FontAwesomeIcon icon={faFilter} />}>
+        <SecondaryButton leftIcon={IconFilter}>
           {t('filter', { plural: true })}
         </SecondaryButton>
       </div>
 
       <div className={styles.right}>
-        <SecondaryButton
-          onClick={handleAdd}
-          leftIcon={<FontAwesomeIcon icon={faPaperPlane} />}
-        >
+        <SecondaryButton onClick={handleAdd} leftIcon={IconSend}>
           {t('send_message')}
         </SecondaryButton>
         <Button
           onClick={handleLoad}
           variant='filled'
-          leftIcon={<FontAwesomeIcon icon={faCloudArrowUp} />}
+          leftIcon={<IconCloudUpload />}
         >
           {t('message_load')}
         </Button>

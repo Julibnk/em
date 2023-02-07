@@ -1,8 +1,8 @@
 import styles from './styles.module.css';
 import { Button, TextInput } from '@mantine/core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
+
+import { IconSearch, IconPlus } from '@tabler/icons-react';
 
 export interface Props {
   handleAdd: () => void;
@@ -16,14 +16,10 @@ export const TemplateTableHeader = ({ handleAdd }: Props) => {
       <TextInput
         type='search'
         placeholder={t('search')}
-        icon={<FontAwesomeIcon icon={faSearch} />}
+        icon={<IconSearch />}
       />
 
-      <Button
-        onClick={handleAdd}
-        variant='filled'
-        leftIcon={<FontAwesomeIcon icon={faAdd} />}
-      >
+      <Button onClick={handleAdd} variant='filled' leftIcon={<IconPlus />}>
         {t('add')}
       </Button>
     </header>

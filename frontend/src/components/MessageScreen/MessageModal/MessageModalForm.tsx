@@ -1,28 +1,16 @@
-import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Group, Select, Switch, TextInput } from '@mantine/core';
+import { Select, Switch, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
-import { Nullable } from '../../../core/Shared/Nullable';
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
-import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { Text } from '@mantine/core';
 import { DatePicker, TimeInput } from '@mantine/dates';
-import { ModalMode } from '../../Shared/ModalTitle';
 
 export interface Props {
-  handleClose: () => void;
   handleSubmit: (message: TemplateMessage) => void;
   message: TemplateMessage;
-  mode: Nullable<ModalMode>;
 }
 
-export const MessageForm = ({
-  handleClose,
-  handleSubmit,
-  message,
-  mode,
-}: Props) => {
+export const MessageForm = ({ handleSubmit, message }: Props) => {
   const t = useTranslation();
 
   //TODO Traducir
@@ -111,17 +99,6 @@ export const MessageForm = ({
         <DatePicker placeholder='Pick date' withAsterisk />
         <TimeInput withSeconds defaultValue={new Date()} />
       </div>
-
-      <Group position='right' mt='md'>
-        <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
-        <Button
-          role={'submit'}
-          type='submit'
-          leftIcon={<FontAwesomeIcon icon={faPaperPlane} />}
-        >
-          {t('send')}
-        </Button>
-      </Group>
     </form>
   );
 };

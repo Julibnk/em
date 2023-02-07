@@ -1,11 +1,10 @@
 import { Td } from '../../Shared/Table';
-import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import { faPen } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { ActionIcon } from '@mantine/core';
 import { ActionCell, BadgeCell } from '../../Shared/TableCells';
 import { TemplateMessage as Message } from '../../../core/TemplateMessage/TemplateMessage';
-import { EntityId } from '@reduxjs/toolkit';
+import { IconPencil, IconTrash } from '@tabler/icons-react';
+
 import { Badge } from '../../Shared/Badge';
 
 type Props = {
@@ -28,10 +27,10 @@ export const MessageTableRow = ({ message }: Props) => {
 
   // const dispatch = useDispatch();
 
-  const handleOnEdit = (id: EntityId) => {
+  const handleOnEdit = (id: string) => {
     //
   };
-  const handleOnDelete = (id: EntityId) => {
+  const handleOnDelete = (id: string) => {
     //
   };
 
@@ -59,10 +58,10 @@ export const MessageTableRow = ({ message }: Props) => {
       <Td>
         <ActionCell>
           <ActionIcon onClick={() => handleOnEdit(id)}>
-            <FontAwesomeIcon size='lg' icon={faPen}></FontAwesomeIcon>
+            <IconPencil />
           </ActionIcon>
           <ActionIcon onClick={() => handleOnDelete(id)}>
-            <FontAwesomeIcon size='lg' icon={faTrashAlt}></FontAwesomeIcon>
+            <IconTrash />
           </ActionIcon>
         </ActionCell>
       </Td>

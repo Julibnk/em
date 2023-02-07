@@ -1,14 +1,11 @@
 import { Button, Group, Modal, ModalProps } from '@mantine/core';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
-
 import { Dropzone } from '@mantine/dropzone';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { MessageFileModalState } from './messageFileModalReducer';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { ModalTitle, ModalTitleEntity } from '../../Shared/ModalTitle';
 import { LoadingOverlay } from '../../Shared/Loading';
+import { IconCloudUpload } from '@tabler/icons-react';
 
 interface Props {
   state: MessageFileModalState;
@@ -46,10 +43,7 @@ export const MessageFileModal = ({ state, handleClose }: Props) => {
       </Dropzone>
       <Group position='right' mt='md'>
         <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
-        <Button
-          type='submit'
-          leftIcon={<FontAwesomeIcon icon={faCloudArrowUp} />}
-        >
+        <Button type='submit' leftIcon={<IconCloudUpload />}>
           {t('load')}
         </Button>
       </Group>

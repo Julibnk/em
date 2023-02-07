@@ -1,33 +1,19 @@
 import styles from './styles.module.css';
 
 import { useForm } from '@mantine/form';
-import { Button, Group, TextInput, Textarea, Alert } from '@mantine/core';
-import { SecondaryButton } from '../../../Shared/SecondaryButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFile } from '@fortawesome/free-regular-svg-icons';
-import {
-  faFloppyDisk,
-  faTriangleExclamation,
-} from '@fortawesome/free-solid-svg-icons';
-
+import { TextInput, Textarea, Alert } from '@mantine/core';
 import { useTranslation } from '../../../Shared/hooks/useTranslation';
 import { Template } from '../../../../core/Template/Template';
 import { Nullable } from '../../../../core/Shared/Nullable';
 import { ModalMode } from '../../../Shared/ModalTitle';
-
+import { IconAlertTriangle } from '@tabler/icons-react';
 export interface Props {
-  handleClose: () => void;
   handleSubmit: (template: Template) => void;
   template: Template;
   mode: Nullable<ModalMode>;
 }
 
-export const TemplateForm = ({
-  handleClose,
-  handleSubmit,
-  template,
-  mode,
-}: Props) => {
+export const TemplateForm = ({ handleSubmit, template, mode }: Props) => {
   const t = useTranslation();
 
   //TODO Traducir
@@ -48,14 +34,15 @@ export const TemplateForm = ({
     },
   });
 
-  const mainButtonIcon = mode === 'CREATE' ? faFile : faFloppyDisk;
-  const mainButtonText = mode === 'CREATE' ? t('create') : t('save');
   const nameDisabled = mode === 'EDIT';
 
   return (
-    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+    <form
+      id='template-form'
+      onSubmit={form.onSubmit((values) => handleSubmit(values))}
+    >
       <Alert
-        icon={<FontAwesomeIcon icon={faTriangleExclamation}></FontAwesomeIcon>}
+        icon={<IconAlertTriangle />}
         title={t('template_warning_title')}
         color='yellow'
         className={styles.alert}
@@ -107,17 +94,6 @@ export const TemplateForm = ({
           {...form.getInputProps('variable3')}
         />
       </div>
-
-      <Group position='right' mt='md'>
-        <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
-        <Button
-          role={'submit'}
-          type='submit'
-          leftIcon={<FontAwesomeIcon icon={mainButtonIcon} />}
-        >
-          {mainButtonText}
-        </Button>
-      </Group>
     </form>
   );
 };
