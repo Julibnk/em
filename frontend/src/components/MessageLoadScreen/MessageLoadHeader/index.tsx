@@ -6,9 +6,6 @@ import {
   faFilter,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
-// import { useTranslation } from 'react-i18next';
-import { useDispatch } from '../../../config/store';
-import { setModalOpenend } from '../../Shared/Layout/layout-slice';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -17,14 +14,13 @@ import { useTranslation } from '../../Shared/hooks/useTranslation';
 export const MessageLoadHeader = () => {
   const t = useTranslation();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleOnCreateMessage = () => {
-    dispatch(
-      setModalOpenend({ modal: 'message', opened: true, mode: 'create' })
-    );
+    // dispatch();
+    // // setModalOpenend({ modal: 'message', opened: true, mode: 'create' })
   };
   const handleOnMessageLoad = () => {
     navigate('../load');

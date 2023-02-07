@@ -1,10 +1,5 @@
 import { Button, Group } from '@mantine/core';
-// import { Modal } from '../../../Modal/Modal';
-// import { setModalOpenend } from '../../layout-slice';
-// import { useSelector, useDispatch } from '../../../../../config/store';
-// import { selectModal } from '../../layout-selector';
 
-// import { SecondaryButton } from '../../../SecondaryButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 

@@ -3,12 +3,11 @@ import { NavBarFooter } from './NavBarFooter';
 import { NavBarHeader } from './NavBarHeader';
 import { NavBarMenu } from './NavBarMenu';
 import { animated, useSpring } from '@react-spring/web';
-import { useSelector } from '../../../../config/store';
 
 import styles from './styles.module.css';
 
 export const Navbar = () => {
-  const { navbarCollapsed } = useSelector((state) => state.layout);
+  const navbarCollapsed = true;
   /*TODO Lo rompe la tabla!! 
   /*La animacion del sidebar se peta al hacer el collapse, por culpa de los navitems
   el navbarCollapsed hace que se oculten los textos de los botones

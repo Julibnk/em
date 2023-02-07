@@ -8,7 +8,7 @@ export interface AuthState {
 }
 
 export const initialState: AuthState = {
-  authorized: false,
+  authorized: true,
   jwt: '',
   user: null,
 };

@@ -1,5 +1,3 @@
-// import { Nullable } from 'vitest';
-
 export enum AppActionType {
   LOADING = 'LOADING',
 }

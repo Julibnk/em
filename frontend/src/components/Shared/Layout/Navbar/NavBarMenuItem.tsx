@@ -2,7 +2,6 @@ import styles from './styles.module.css';
 
 import { Button, ButtonProps, ButtonVariant } from '@mantine/core';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import { useSelector } from '../../../../config/store';
 
 type Props = {
   to: string;
@@ -32,7 +31,9 @@ const getClassNames = (variant: ButtonVariant, collapsed: boolean) => {
 };
 
 export const NavBarMenuItem = ({ text, icon, className, to }: Props) => {
-  const { navbarCollapsed } = useSelector((state) => state.layout);
+  // const { navbarCollapsed } = useSelector((state) => state.layout);
+
+  const navbarCollapsed = true;
 
   const resolved = useResolvedPath(to);
   const match = useMatch({ path: `${resolved.pathname}/*`, end: true });

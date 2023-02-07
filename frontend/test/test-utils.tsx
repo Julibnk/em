@@ -2,8 +2,7 @@
 
 import { cleanup, render, RenderOptions } from '@testing-library/react';
 import { afterEach } from 'vitest';
-import { Provider as ReduxProvider } from 'react-redux';
-import { store } from '../src/config/store';
+
 import { MantineProvider } from '../src/components/Shared/Mantine/MantineProvider';
 import React from 'react';
 
@@ -14,11 +13,7 @@ afterEach(() => {
 const AllTheProviders: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  return (
-    <ReduxProvider store={store}>
-      <MantineProvider>{children}</MantineProvider>
-    </ReduxProvider>
-  );
+  return <MantineProvider>{children}</MantineProvider>;
 };
 
 const customRender = (
