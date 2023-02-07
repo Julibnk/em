@@ -1,4 +1,4 @@
-import { FetchRestClient } from '../../core/RestClient/FetchRestClient';
+import { FetchRestClient } from '../../core/Shared/RestClient/FetchRestClient';
 import { RestAccountRespository } from '../../core/Account/RestAccountRepository';
 import { ProfileTabs } from './ProfileTabs';
 import { ProfileScreenProvider } from './ProfileScreenContext';

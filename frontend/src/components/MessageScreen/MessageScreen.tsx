@@ -4,7 +4,7 @@ import { MessageListHeader } from './MessageList/MessageListHeader';
 import { RestTemplateMessageRepository } from '../../core/TemplateMessage/RestTemplateMessageRepository';
 import { MessageScreenProvider } from './MessageScreenContext';
 
-import { FetchRestClient } from '../../core/RestClient/FetchRestClient';
+import { FetchRestClient } from '../../core/Shared/RestClient/FetchRestClient';
 import { useMessageTable } from './MessageList/useMessageTable';
 import { useCallback, useEffect } from 'react';
 import { useMessageModal } from './MessageModal/useMessageModal';

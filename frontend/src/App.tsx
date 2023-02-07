@@ -1,9 +1,21 @@
 import { AppRouter } from './components/AppRouter';
 import { useInitApp } from './components/Shared/hooks/useInitApp';
-import { MantineProvider } from './components/MantineProvider';
+import { MantineProvider } from './components/Shared/Mantine/MantineProvider';
 import { NotificationsProvider } from '@mantine/notifications';
+import { RestMasterdataRepository } from './core/Shared/Masterdata/RestMasterdataRepository';
+import { AppContextProvider } from './AppContextProvider';
 
-export const App = () => {
+const masterdataRepository = RestMasterdataRepository.create();
+
+const AppWrapper = () => {
+  return (
+    <AppContextProvider masterdataRepository={masterdataRepository}>
+      <App />
+    </AppContextProvider>
+  );
+};
+
+const App = () => {
   useInitApp();
 
   return (
@@ -14,3 +26,5 @@ export const App = () => {
     </MantineProvider>
   );
 };
+
+export default AppWrapper;

@@ -1,0 +1,21 @@
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAppContext } from '../../AppContextProvider';
+
+interface Props {
+  children: React.ReactNode;
+}
+
+export const PublicRoute = ({ children }: Props) => {
+  const {
+    authState: { authorized },
+  } = useAppContext();
+
+  const location = useLocation();
+
+  if (authorized) {
+    return <Navigate to='/' state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+};

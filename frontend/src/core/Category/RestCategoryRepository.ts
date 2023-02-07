@@ -1,4 +1,4 @@
-import { RestClient } from '../RestClient/RestClient';
+import { RestClient } from '../Shared/RestClient/RestClient';
 import { Nullable } from '../Shared/Nullable';
 import { Category, CategoryOnlyIds } from './Category';
 import { CategoryRepository } from './CategoryRepository';

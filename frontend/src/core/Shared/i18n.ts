@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import esES from '../assets/translations/es/esES.json';
+import esES from '../../assets/translations/es/esES.json';
 
 const resources = {
   es: {

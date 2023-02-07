@@ -1,3 +1,4 @@
+import { Token } from '../Token';
 import { RequestHeaders, RequestOptions, RestClient } from './RestClient';
 
 export class FetchRestClient implements RestClient {
@@ -14,12 +15,7 @@ export class FetchRestClient implements RestClient {
   }
 
   async get(url: string, options?: RequestOptions): Promise<Response> {
-    return fetch(`${this.baseUrl}/${url}`, {
-      headers: {
-        ...this.headers,
-        ...options?.headers,
-      },
-    });
+    return this.fetch(url, 'GET', undefined, options);
   }
 
   async put<T>(
@@ -27,41 +23,49 @@ export class FetchRestClient implements RestClient {
     body: T,
     options?: RequestOptions
   ): Promise<Response> {
-    return fetch(`${this.baseUrl}/${url}`, {
-      headers: {
-        ...this.headers,
-        ...options?.headers,
-      },
-      body: JSON.stringify(body),
-      method: 'PUT',
-    });
+    return this.fetch(url, 'PUT', body, options);
   }
 
-  async post<T>(
+  async post(
     url: string,
-    body: T,
+    body: unknown,
     options?: RequestOptions
   ): Promise<Response> {
-    return fetch(`${this.baseUrl}/${url}`, {
-      headers: {
-        ...this.headers,
-        ...options?.headers,
-      },
-      body: JSON.stringify(body),
-      method: 'POST',
-    });
+    return this.fetch(url, 'POST', body, options);
   }
 
   async delete(
     url: string,
     options?: RequestOptions | undefined
   ): Promise<Response> {
-    return fetch(`${this.baseUrl}/${url}`, {
+    return this.fetch(url, 'DELETE', undefined, options);
+  }
+
+  private async fetch<T>(
+    url: string,
+    method: string,
+    body?: T,
+    options?: RequestOptions | undefined
+  ): Promise<Response> {
+    const res = await fetch(`${this.baseUrl}/${url}`, {
       headers: {
         ...this.headers,
         ...options?.headers,
       },
-      method: 'DELETE',
+      method,
+      body: body && JSON.stringify(body),
     });
+
+    if (res.status === 401) {
+      Token.delete();
+      window.location.href = '/login';
+      throw new Error('Unauthorized');
+    }
+
+    if (!res.ok) {
+      throw new Error('Request failed');
+    }
+
+    return res;
   }
 }

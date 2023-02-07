@@ -1,4 +1,7 @@
-import { RestClient, isResponseWithMessage } from '../RestClient/RestClient';
+import {
+  RestClient,
+  isResponseWithMessage,
+} from '../Shared/RestClient/RestClient';
 import { Nullable } from '../Shared/Nullable';
 import { Template } from './Template';
 import { TemplateRepository } from './TemplateRepository';
