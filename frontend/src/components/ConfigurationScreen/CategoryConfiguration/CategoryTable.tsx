@@ -1,6 +1,5 @@
 import styles from './styles.module.css';
 import { CategoryTableRow } from './CategoryTableRow';
-// import { Table, Th } from '../../Shared/Table';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Category } from '../../../core/Category/Category';
 import { Table } from '@mantine/core';

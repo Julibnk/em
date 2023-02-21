@@ -1,7 +1,7 @@
-import { Table, Th } from '../../Shared/Table';
 import { MessageTableRow } from './MessageTableRow';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
+import { Table } from '@mantine/core';
 
 export interface Props {
   messages: TemplateMessage[];
@@ -15,13 +15,13 @@ export const MessageTable = ({ messages }: Props) => {
     <Table>
       <thead>
         <tr>
-          <Th textAlign='center'>Estado</Th>
-          <Th>Fecha y hora de envío</Th>
-          <Th>Contacto</Th>
-          <Th>Teléfono</Th>
-          <Th>Plantilla</Th>
-          <Th>Categoría</Th>
-          <Th textAlign='center'>{t('actions')}</Th>
+          <th>Estado</th>
+          <th>Fecha y hora de envío</th>
+          <th>Contacto</th>
+          <th>Teléfono</th>
+          <th>Plantilla</th>
+          <th>Categoría</th>
+          <th>{t('actions')}</th>
         </tr>
       </thead>
       <tbody>

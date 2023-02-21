@@ -1,4 +1,3 @@
-import { Td } from '../../Shared/Table';
 import { ActionIcon, Badge } from '@mantine/core';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 import {
@@ -24,19 +23,19 @@ export const TemplateTableRow = ({
 
   return (
     <tr key={id}>
-      <Td>
+      <td>
         <CellWithSubtitle title={name || ''} subtitle={description || ''} />
-      </Td>
-      <Td>{preview}</Td>
+      </td>
+      <td>{preview}</td>
 
-      <Td>
+      <td>
         <BadgeCell>
           {variable1 && <Badge color='violet'>{variable1}</Badge>}
           {variable2 && <Badge color='cyan'>{variable2}</Badge>}
           {variable3 && <Badge color='yellow'>{variable3}</Badge>}
         </BadgeCell>
-      </Td>
-      <Td>
+      </td>
+      <td>
         <ActionCell>
           <ActionIcon
             aria-label='Editar plantilla'
@@ -51,7 +50,7 @@ export const TemplateTableRow = ({
             <IconTrash />
           </ActionIcon>
         </ActionCell>
-      </Td>
+      </td>
     </tr>
   );
 };

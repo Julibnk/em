@@ -1,4 +1,3 @@
-import { Td } from '../../Shared/Table';
 import { ActionCell, BadgeCell } from '../../Shared/TableCells';
 import { ActionIcon } from '@mantine/core';
 import { Category } from '../../../core/Category/Category';
@@ -20,16 +19,16 @@ export const CategoryTableRow = ({
 
   return (
     <tr key={id}>
-      <Td emphasized>{name}</Td>
-      <Td>{description}</Td>
-      <Td>
+      <td>{name}</td>
+      <td>{description}</td>
+      <td>
         <BadgeCell>
           {templates.map((template) => {
             return <Badge key={template.id} text={template.name} />;
           })}
         </BadgeCell>
-      </Td>
-      <Td>
+      </td>
+      <td>
         <ActionCell>
           <ActionIcon onClick={() => handleEdit(id)}>
             <IconPencil />
@@ -38,7 +37,7 @@ export const CategoryTableRow = ({
             <IconTrash />
           </ActionIcon>
         </ActionCell>
-      </Td>
+      </td>
     </tr>
   );
 };

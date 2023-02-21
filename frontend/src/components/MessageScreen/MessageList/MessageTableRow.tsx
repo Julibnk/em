@@ -1,5 +1,3 @@
-import { Td } from '../../Shared/Table';
-
 import { ActionIcon } from '@mantine/core';
 import { ActionCell, BadgeCell } from '../../Shared/TableCells';
 import { TemplateMessage as Message } from '../../../core/TemplateMessage/TemplateMessage';
@@ -43,19 +41,19 @@ export const MessageTableRow = ({ message }: Props) => {
 
   return (
     <tr key={id}>
-      <Td>
+      <td>
         <BadgeCell>
           {status && <Badge color='violet' text={status} />}
         </BadgeCell>
-      </Td>
-      <Td>{sentDate && sentDate.toString()}</Td>
-      <Td>{contactId}</Td>
-      <Td>{contactId}</Td>
-      <Td>{templateId}</Td>
-      <Td></Td>
-      <Td></Td>
+      </td>
+      <td>{sentDate && sentDate.toString()}</td>
+      <td>{contactId}</td>
+      <td>{contactId}</td>
+      <td>{templateId}</td>
+      <td></td>
+      <td></td>
 
-      <Td>
+      <td>
         <ActionCell>
           <ActionIcon onClick={() => handleOnEdit(id)}>
             <IconPencil />
@@ -64,7 +62,7 @@ export const MessageTableRow = ({ message }: Props) => {
             <IconTrash />
           </ActionIcon>
         </ActionCell>
-      </Td>
+      </td>
     </tr>
   );
 };

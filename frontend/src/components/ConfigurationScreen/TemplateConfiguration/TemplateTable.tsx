@@ -1,8 +1,8 @@
 import styles from './styles.module.css';
-import { Table, Th } from '../../Shared/Table';
 import { TemplateTableRow } from './TemplateTableRow';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Template } from '../../../core/Template/Template';
+import { Table } from '@mantine/core';
 
 export interface Props {
   templates: Template[];
@@ -18,17 +18,16 @@ export const TemplateTable = ({
   const t = useTranslation();
 
   return (
-    <Table className={`${styles.table}`}>
+    <Table>
       <thead>
         <tr>
-          <Th>{t('name')}</Th>
-          <Th>{t('preview')}</Th>
-          <Th textAlign='center'>{t('variable', { plural: true })}</Th>
-          {/* <Th textAlign='center'>{t('category', { plural: true })}</Th> */}
-          <Th textAlign='center'>{t('actions')}</Th>
+          <th>{t('name')}</th>
+          <th>{t('preview')}</th>
+          <th>{t('variable', { plural: true })}</th>
+          <th>{t('actions')}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className={`${styles.tbody}`}>
         {templates.map((template) => (
           <TemplateTableRow
             key={template.id}

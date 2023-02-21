@@ -1,5 +1,5 @@
-import { TextInput } from '@mantine/core';
-import { SecondaryTitle } from '../../Shared/Titles/SecondaryTitle';
+import { TextInput, Title } from '@mantine/core';
+// import { SecondaryTitle } from '../../Shared/Titles/SecondaryTitle';
 import { AccountSectionHeader } from './AccountSectionHeader';
 
 export const AccountSection = () => {
@@ -10,7 +10,7 @@ export const AccountSection = () => {
       <div style={{ padding: '1.8rem' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ flexBasis: '33.33%' }}>
-            <SecondaryTitle text={'Información fiscal'} order={5} />
+            <Title order={5}>{'Información fiscal'}</Title>
           </div>
           <div style={{ flexBasis: '66.66%', paddingRight: '25%' }}>
             <form
@@ -27,7 +27,7 @@ export const AccountSection = () => {
       <div style={{ padding: '1.8rem' }}>
         <div style={{ display: 'flex' }}>
           <div style={{ flexBasis: '33.33%' }}>
-            <SecondaryTitle text={'Direccion'} order={5} />
+            <Title order={5}>{'Direccion'}</Title>
           </div>
           <div style={{ flexBasis: '66.66%', paddingRight: '25%' }}>
             <form
