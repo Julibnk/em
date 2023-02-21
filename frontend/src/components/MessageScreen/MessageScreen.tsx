@@ -4,7 +4,6 @@ import { MessageListHeader } from './MessageList/MessageListHeader';
 import { RestTemplateMessageRepository } from '../../core/TemplateMessage/RestTemplateMessageRepository';
 import { MessageScreenProvider } from './MessageScreenContext';
 
-import { FetchRestClient } from '../../core/Shared/RestClient/FetchRestClient';
 import { useMessageTable } from './MessageList/useMessageTable';
 import { useCallback, useEffect } from 'react';
 import { useMessageModal } from './MessageModal/useMessageModal';
@@ -55,9 +54,7 @@ const MessageScreen = () => {
   );
 };
 
-const client = new FetchRestClient();
-
-const templateMessageRepository = new RestTemplateMessageRepository(client);
+const templateMessageRepository = RestTemplateMessageRepository.create();
 
 const MessageScreenWrapper = () => {
   return (

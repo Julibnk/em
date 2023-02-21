@@ -2,6 +2,7 @@ import { RestClient } from '../Shared/RestClient/RestClient';
 import { Nullable } from '../Shared/Nullable';
 import { AccountRepository } from './AccountRepository';
 import { Account } from './Account';
+import { FetchRestClient } from '../Shared/RestClient/FetchRestClient';
 
 export class RestAccountRespository implements AccountRepository {
   constructor(private client: RestClient) {}
@@ -14,5 +15,9 @@ export class RestAccountRespository implements AccountRepository {
 
   async save(account: Account): Promise<void> {
     await this.client.put<Account>(`account/${account.id}`, account);
+  }
+
+  static create(): RestAccountRespository {
+    return new RestAccountRespository(new FetchRestClient());
   }
 }

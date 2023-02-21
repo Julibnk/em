@@ -2,6 +2,7 @@ import { RestClient } from '../Shared/RestClient/RestClient';
 import { Nullable } from '../Shared/Nullable';
 import { Category, CategoryOnlyIds } from './Category';
 import { CategoryRepository } from './CategoryRepository';
+import { FetchRestClient } from '../Shared/RestClient/FetchRestClient';
 
 export class RestCategoryRespository implements CategoryRepository {
   constructor(private client: RestClient) {}
@@ -20,5 +21,9 @@ export class RestCategoryRespository implements CategoryRepository {
     const response = await this.client.get('category');
     const categories: Category[] = await response.json();
     return categories;
+  }
+
+  static create(): RestCategoryRespository {
+    return new RestCategoryRespository(new FetchRestClient());
   }
 }

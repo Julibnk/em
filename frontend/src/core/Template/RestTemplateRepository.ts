@@ -5,6 +5,7 @@ import {
 import { Nullable } from '../Shared/Nullable';
 import { Template } from './Template';
 import { TemplateRepository } from './TemplateRepository';
+import { FetchRestClient } from '../Shared/RestClient/FetchRestClient';
 
 export class RestTemplateRepository implements TemplateRepository {
   constructor(private client: RestClient) {}
@@ -36,5 +37,9 @@ export class RestTemplateRepository implements TemplateRepository {
     const response = await this.client.get('template');
     const categories: Template[] = await response.json();
     return categories;
+  }
+
+  static create(): RestTemplateRepository {
+    return new RestTemplateRepository(new FetchRestClient());
   }
 }

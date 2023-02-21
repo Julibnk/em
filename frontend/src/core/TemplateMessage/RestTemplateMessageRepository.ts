@@ -5,6 +5,7 @@ import {
 import { Nullable } from '../Shared/Nullable';
 import { TemplateMessageRepository } from './TemplateMessageRepository';
 import { TemplateMessage } from './TemplateMessage';
+import { FetchRestClient } from '../Shared/RestClient/FetchRestClient';
 
 export class RestTemplateMessageRepository
   implements TemplateMessageRepository
@@ -38,5 +39,9 @@ export class RestTemplateMessageRepository
 
     const messages: TemplateMessage[] = await response.json();
     return messages;
+  }
+
+  static create(): RestTemplateMessageRepository {
+    return new RestTemplateMessageRepository(new FetchRestClient());
   }
 }
