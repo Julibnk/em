@@ -52,7 +52,9 @@ p {
   --color-gray-9: var(--mantine-color-gray-9);
 
   --default-radius: var(--mantine-radius-md);
+
   --default-shadow: var(--mantine-shadow-md);
+  --light-shadow: var(--mantine-shadow-xs);
 }
 
 /* .button_label {
@@ -63,4 +65,14 @@ form {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-5);
+  border-radius: 100px;
 }

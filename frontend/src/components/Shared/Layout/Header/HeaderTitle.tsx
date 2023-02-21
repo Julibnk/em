@@ -1,8 +1,7 @@
+import { Title } from '@mantine/core';
 import { Routes, Route } from 'react-router-dom';
 import { screenConfig } from '../../../AppRouter';
 import { useTranslation } from '../../hooks/useTranslation';
-import { PrimaryTitle } from '../../Titles/PrimaryTitle';
-import { SecondaryTitle } from '../../Titles/SecondaryTitle';
 
 export const HeaderTitle = () => {
   const t = useTranslation();
@@ -15,11 +14,12 @@ export const HeaderTitle = () => {
             path={path}
             element={
               <div>
-                <PrimaryTitle text={t(title, { plural: true })} order={2} />
-                <SecondaryTitle
-                  text={t(subtitle, { plural: true })}
-                  order={5}
-                />
+                <Title color='gray.9' order={2}>
+                  {t(title, { plural: true })}
+                </Title>
+                <Title color='gray.6' weight={400} order={5}>
+                  {t(subtitle, { plural: true })}
+                </Title>
               </div>
             }
           />
