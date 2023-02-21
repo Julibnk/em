@@ -9,9 +9,9 @@ export const Main = () => {
       <div className={styles.mainContainer}>
         <Header />
         <div className={styles.subContainer}>
-          <ErrorBoundary>
-            <Outlet />
-          </ErrorBoundary>
+          {/* <ErrorBoundary> */}
+          <Outlet />
+          {/* </ErrorBoundary> */}
         </div>
       </div>
     </main>
