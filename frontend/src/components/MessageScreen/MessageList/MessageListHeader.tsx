@@ -26,15 +26,14 @@ export const MessageListHeader = ({ handleAdd, handleLoad }: Props) => {
           placeholder={t('search')}
           icon={<IconSearch />}
         />
-        {/* <SecondaryButton leftIcon={IconFilter}>
-          {t('filter', { plural: true })}
-        </SecondaryButton> */}
+
+        <SecondaryButton>{t('filter', { plural: true })}</SecondaryButton>
       </div>
 
       <div className={styles.right}>
-        {/* <SecondaryButton onClick={handleAdd} leftIcon={IconSend}>
+        <SecondaryButton onClick={handleAdd}>
           {t('send_message')}
-        </SecondaryButton> */}
+        </SecondaryButton>
         <Button
           onClick={handleLoad}
           variant='filled'

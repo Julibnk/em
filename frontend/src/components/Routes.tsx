@@ -46,35 +46,28 @@ export const routes = [
         ),
       },
 
-      // {
-      //   path: 'message/*',
-      //   children: [
-      //     {
-      //       index: true,
-      //       element: (
-      //         <Suspense fallback={<LoadingOverlay loading />}>
-      //           <MessageListScreen />
-      //         </Suspense>
-      //       ),
-      //     },
-      //     {
-      //       path: 'load',
-      //       element: (
-      //         <Suspense fallback={<LoadingOverlay loading />}>
-      //           <MessageLoadScreen />
-      //         </Suspense>
-      //       ),
-      //     },
-      //   ],
-      // },
       {
         path: 'message/*',
-        element: (
-          <Suspense fallback={<LoadingOverlay loading />}>
-            <MessageListScreen />
-          </Suspense>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<LoadingOverlay loading />}>
+                <MessageListScreen />
+              </Suspense>
+            ),
+          },
+          {
+            path: 'load',
+            element: (
+              <Suspense fallback={<LoadingOverlay loading />}>
+                <MessageLoadScreen />
+              </Suspense>
+            ),
+          },
+        ],
       },
+
       {
         path: 'contact/*',
         element: (

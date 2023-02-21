@@ -1,3 +1,4 @@
+import { Contact } from '../Contact/Contact';
 import { Nullable } from '../Shared/Nullable';
 
 export enum TemplateMessageStatus {
@@ -13,10 +14,11 @@ export interface TemplateMessage {
   status: Nullable<TemplateMessageStatus>;
   templateId: string;
   accountPhoneId: string;
-  contactId: string;
+  contact: Contact;
   parameter1: string;
   parameter2: string;
   parameter3: string;
+  isScheduled: boolean;
   scheduleDate: Nullable<Date>;
   sentDate: Nullable<Date>;
 }

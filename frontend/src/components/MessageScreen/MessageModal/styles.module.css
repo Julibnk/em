@@ -1,0 +1,17 @@
+.variables {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.phoneInput {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  gap: 0.8rem;
+}
+
+.schedule {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 10rem 1fr 1fr;
+  gap: 0.8rem;
+}

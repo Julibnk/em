@@ -27,10 +27,19 @@ export function useMessageModal(onSubmitSuccess: () => void) {
       status: null,
       templateId: '',
       accountPhoneId: '',
-      contactId: '',
+      contact: {
+        id: '',
+        name: '',
+        lastName: '',
+        phone: {
+          prefix: '+34',
+          number: '',
+        },
+      },
       parameter1: '',
       parameter2: '',
       parameter3: '',
+      isScheduled: false,
       scheduleDate: null,
       sentDate: null,
     };

@@ -1,9 +1,8 @@
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
 import { LoadingOverlay } from '../../Shared/Loading';
-import { ModalTitle, ModalTitleEntity } from '../../Shared/ModalTitle';
 import { MessageForm } from './MessageModalForm';
 import { MessageModalState } from './messageModalReducer';
-import { Button, Group, Modal, ModalProps } from '@mantine/core';
+import { Button, Group, Modal, ModalProps, Title } from '@mantine/core';
 import { SecondaryButton } from '../../Shared/SecondaryButton';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { IconSend } from '@tabler/icons-react';
@@ -16,14 +15,12 @@ export interface Props {
 
 export const MessageModal = ({ state, handleClose, handleSubmit }: Props) => {
   const t = useTranslation();
-  const { opened, mode, message, loading } = state;
+  const { opened, message, loading } = state;
 
   const modalProps: ModalProps = {
     opened: opened,
     onClose: handleClose,
-    title: (
-      <ModalTitle mode={mode} entity={ModalTitleEntity.MESSAGE} subject={''} />
-    ),
+    title: <Title order={3}>Enviar mensaje</Title>,
     size: 600,
   };
 
@@ -34,8 +31,15 @@ export const MessageModal = ({ state, handleClose, handleSubmit }: Props) => {
       <LoadingOverlay loading={loading} />
       <MessageForm handleSubmit={handleSubmit} message={message} />
       <Group position='right' mt='md'>
-        <SecondaryButton onClick={handleClose}>{t('cancel')}</SecondaryButton>
-        <Button role={'submit'} type='submit' leftIcon={<IconSend />}>
+        <SecondaryButton onClick={handleClose}>
+          Guardar sin enviar
+        </SecondaryButton>
+        <Button
+          role={'submit'}
+          form='message-form'
+          type='submit'
+          leftIcon={<IconSend />}
+        >
           {t('send')}
         </Button>
       </Group>
