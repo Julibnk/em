@@ -11,21 +11,6 @@ export const theme: MantineThemeOverride = {
   defaultRadius: 'md',
   fontFamily: 'Inter',
 
-  primaryShade: 6,
-  colors: {
-    turquoise: [
-      '#E8F8F5',
-      '#BAEBE1',
-      '#8DDECE',
-      '#76D7C4',
-      '#48C9B0',
-      '#1ABC9C',
-      '#15967D',
-      '#10715E',
-      '#0A4B3E',
-      '#05261F',
-    ],
-  },
   components: {
     Tabs: {
       defaultProps: {
@@ -56,6 +41,28 @@ export const theme: MantineThemeOverride = {
         closeOnClickOutside: false,
       },
     },
+    Table: {
+      defaultProps: {
+        highlightOnHover: true,
+        verticalSpacing: 'xs',
+        className: styles.table,
+      },
+    },
+  },
+  primaryShade: 6,
+  colors: {
+    turquoise: [
+      '#E8F8F5',
+      '#BAEBE1',
+      '#8DDECE',
+      '#76D7C4',
+      '#48C9B0',
+      '#1ABC9C',
+      '#15967D',
+      '#10715E',
+      '#0A4B3E',
+      '#05261F',
+    ],
   },
 };
 

@@ -1,8 +1,9 @@
 import styles from './styles.module.css';
 import { CategoryTableRow } from './CategoryTableRow';
-import { Table, Th } from '../../Shared/Table';
+// import { Table, Th } from '../../Shared/Table';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Category } from '../../../core/Category/Category';
+import { Table } from '@mantine/core';
 
 export interface Props {
   categories: Category[];
@@ -18,16 +19,16 @@ export const CategoryTable = ({
   const t = useTranslation();
 
   return (
-    <Table className={`${styles.table}`}>
+    <Table>
       <thead>
         <tr>
-          <Th>{t('name')}</Th>
-          <Th>{t('description')}</Th>
-          <Th textAlign='center'>{t('template', { plural: true })}</Th>
-          <Th textAlign='center'>{t('actions')}</Th>
+          <th>{t('name')}</th>
+          <th>{t('description')}</th>
+          <th>{t('template', { plural: true })}</th>
+          <th>{t('actions')}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className={styles.tbody}>
         {categories.map((category) => (
           <CategoryTableRow
             key={category.id}

@@ -42,6 +42,55 @@
 .modalClose {
   color: var(--color-primary-0);
 }
+
 .modalClose:hover {
   background-color: var(--color-primary-6);
+}
+
+/* Table styling  */
+
+.table {
+  border-spacing: 0;
+  border: 1px solid var(--color-gray-4);
+  border-radius: 8px;
+  border-collapse: separate;
+  background-color: #fff;
+  color: var(--color-gray-5);
+  table-layout: fixed;
+}
+
+.table thead {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.table tbody {
+  display: block;
+  overflow-y: auto;
+}
+
+.table tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Header */
+.table thead tr th {
+  background-color: var(--color-gray-1);
+  color: var(--color-gray-6);
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+}
+
+.table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.table[data-hover] tbody tr:hover {
+  background-color: var(--mantine-color-gray-0);
 }
