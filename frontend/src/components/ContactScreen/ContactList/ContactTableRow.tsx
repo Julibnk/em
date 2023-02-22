@@ -9,31 +9,27 @@ type Props = {
   handleEdit: (contactId: string) => void;
 };
 
-export const ContactTableRow = ({ contact }: Props) => {
+export const ContactTableRow = ({ contact, handleEdit }: Props) => {
   const { id, name, lastName, phone } = contact;
-
-  // const dispatch = useDispatch();
-
-  const handleOnEdit = (id: string) => {
-    //
-  };
-  const handleOnDelete = (id: string) => {
-    //
-  };
 
   return (
     <tr>
       <td>{name}</td>
       <td>{lastName}</td>
-      <td>{phone.number}</td>
-      <td>{phone.prefix}</td>
+      <td>
+        {phone.prefix}-{phone.number}
+      </td>
 
       <td>
         <ActionCell>
-          <ActionIcon onClick={() => handleOnEdit(id)}>
+          <ActionIcon onClick={() => handleEdit(id)}>
             <IconPencil />
           </ActionIcon>
-          <ActionIcon onClick={() => handleOnDelete(id)}>
+          <ActionIcon
+            onClick={() => {
+              console.log('To implement');
+            }}
+          >
             <IconTrash />
           </ActionIcon>
         </ActionCell>

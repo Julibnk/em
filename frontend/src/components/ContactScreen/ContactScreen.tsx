@@ -4,10 +4,19 @@ import { ContactScreenProvider } from './ContactScreenContext';
 import { ContactListHeader } from './ContactList/ContactListHeader';
 import { ContactTable } from './ContactList/ContactTable';
 import { useContactTable } from './ContactList/useContactTable';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import { useContactModal } from './ContactModal/useContactModal';
+import { ContactModal } from './ContactModal/ContactModal';
 
 const ContactScreen = () => {
   const { contacts, loadContacts } = useContactTable();
+
+  const onSubmitSuccess = useCallback(() => {
+    loadMessages();
+  }, []);
+
+  const { contactModalState, add, close, submit, edit } =
+    useContactModal(onSubmitSuccess);
 
   useEffect(() => {
     loadContacts();
@@ -15,29 +24,16 @@ const ContactScreen = () => {
 
   return (
     <ScreenContent>
-      <ContactListHeader />
-      <ContactTable
-        contacts={contacts}
-        handleEdit={() => {
-          console.log('object');
-        }}
-      ></ContactTable>
-      {/* <MessageListHeader handleAdd={add} handleLoad={openLoadModal} />
-      <MessageTable messages={messages} handleEdit={edit} />
-      <MessageModal
-        state={messageModalState}
-        handleClose={closeMessageModal}
+      <ContactListHeader handleAdd={add} />
+      <ContactTable contacts={contacts} handleEdit={edit} />
+      <ContactModal
+        state={contactModalState}
+        handleClose={close}
         handleSubmit={submit}
       />
-      <MessageFileModal
-        state={messageFileModalState}
-        handleClose={closeLoadModal}
-      /> */}
     </ScreenContent>
   );
 };
-
-// export default ContactScreen;
 
 const contactRepository = RestContactRepository.create();
 
@@ -50,3 +46,6 @@ const ContactScreenWrapper = () => {
 };
 
 export default ContactScreenWrapper;
+function loadMessages() {
+  throw new Error('Function not implemented.');
+}

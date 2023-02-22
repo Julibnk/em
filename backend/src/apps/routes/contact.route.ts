@@ -17,8 +17,6 @@ const putPostSchema = [
   body('phone.number').exists().isString(),
 ];
 
-// const getSchema = [param('id').exists().isString()];
-
 export const register = (router: Router) => {
   const contactPutController = container.get<Controller>(
     DiController.contactPut

@@ -28,7 +28,6 @@ const MessageScreen = () => {
 
   const {
     messageFileModalState,
-    // confirm,
     close: closeLoadModal,
     open: openLoadModal,
   } = useMessageFileModal();

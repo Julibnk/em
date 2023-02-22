@@ -32,6 +32,10 @@ export class RestContactRepository implements ContactRepository {
     return contacts;
   }
 
+  async searchById(): Promise<Contact> {
+    throw new Error('Method not implemented.');
+  }
+
   static create(): RestContactRepository {
     return new RestContactRepository(new FetchRestClient());
   }
