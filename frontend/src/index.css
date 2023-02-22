@@ -57,16 +57,6 @@ p {
   --light-shadow: var(--mantine-shadow-xs);
 }
 
-/* .button_label {
-  font-weight: 500;
-} */
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

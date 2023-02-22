@@ -22,10 +22,10 @@ export const ProfileTabs = () => {
         <Tabs.Tab value={ProfileSections.META_ACCOUNT}>
           {t('metaAccount')}
         </Tabs.Tab>
-        <Tabs.Tab value={ProfileSections.BILING}>{t('billing')}</Tabs.Tab>
-        <Tabs.Tab value={ProfileSections.USERS}>
+        {/* <Tabs.Tab value={ProfileSections.BILING}>{t('billing')}</Tabs.Tab> */}
+        {/* <Tabs.Tab value={ProfileSections.USERS}>
           {t('user', { plural: true })}
-        </Tabs.Tab>
+        </Tabs.Tab> */}
       </Tabs.List>
 
       <Tabs.Panel value={ProfileSections.ACCOUNT}>

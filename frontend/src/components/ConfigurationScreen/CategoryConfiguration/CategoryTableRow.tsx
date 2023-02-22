@@ -1,4 +1,8 @@
-import { ActionCell, BadgeCell } from '../../Shared/TableCells';
+import {
+  ActionCell,
+  BadgeCell,
+  CellWithSubtitle,
+} from '../../Shared/TableCells';
 import { ActionIcon } from '@mantine/core';
 import { Category } from '../../../core/Category/Category';
 import { Badge } from '../../Shared/Badge';
@@ -19,7 +23,9 @@ export const CategoryTableRow = ({
 
   return (
     <tr key={id}>
-      <td>{name}</td>
+      <td>
+        <CellWithSubtitle title={name || ''} subtitle='' />
+      </td>
       <td>{description}</td>
       <td>
         <BadgeCell>

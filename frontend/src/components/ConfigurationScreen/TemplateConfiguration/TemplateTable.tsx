@@ -23,11 +23,13 @@ export const TemplateTable = ({
         <tr>
           <th>{t('name')}</th>
           <th>{t('preview')}</th>
-          <th>{t('variable', { plural: true })}</th>
-          <th>{t('actions')}</th>
+          <th className={styles.textCenter}>
+            {t('variable', { plural: true })}
+          </th>
+          <th className={styles.textCenter}>{t('actions')}</th>
         </tr>
       </thead>
-      <tbody className={`${styles.tbody}`}>
+      <tbody className={styles.tbody}>
         {templates.map((template) => (
           <TemplateTableRow
             key={template.id}

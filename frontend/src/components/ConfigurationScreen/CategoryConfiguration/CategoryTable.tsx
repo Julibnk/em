@@ -23,8 +23,10 @@ export const CategoryTable = ({
         <tr>
           <th>{t('name')}</th>
           <th>{t('description')}</th>
-          <th>{t('template', { plural: true })}</th>
-          <th>{t('actions')}</th>
+          <th className={styles.textCenter}>
+            {t('template', { plural: true })}
+          </th>
+          <th className={styles.textCenter}>{t('actions')}</th>
         </tr>
       </thead>
       <tbody className={styles.tbody}>

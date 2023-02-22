@@ -7,7 +7,7 @@ export const AccountSectionHeader = () => {
   const t = useTranslation();
   return (
     <div className={styles.header}>
-      <Title order={4}>{t('account')}</Title>
+      {/* <Title order={4}>{t('account')}</Title> */}
       <Button variant='filled' leftIcon={<IconDeviceFloppy />}>
         {t('save')}
       </Button>

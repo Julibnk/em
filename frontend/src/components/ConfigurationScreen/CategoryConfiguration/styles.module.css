@@ -1,8 +1,12 @@
 .tbody {
-  max-height: calc(100vh - 38rem);
+  max-height: calc(100vh - 31rem);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+}
+
+.textCenter {
+  text-align: center !important;
 }
