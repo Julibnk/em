@@ -7,7 +7,7 @@ import { PrivateRoute } from './Shared/PrivateRoute';
 
 const LoginScreen = lazy(() => import('./LoginScreen'));
 const HomeScreen = lazy(() => import('./HomeScreen'));
-const ContactScreen = lazy(() => import('./ContactScreen'));
+const ContactScreen = lazy(() => import('./ContactScreen/ContactScreen'));
 const ConfigurationScreen = lazy(
   () => import('./ConfigurationScreen/ConfigurationScreen')
 );

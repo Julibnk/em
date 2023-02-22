@@ -63,7 +63,17 @@ export class FetchRestClient implements RestClient {
     }
 
     if (!res.ok) {
-      throw new Error('Request failed');
+      const contentType = res.headers.get('content-type');
+
+      if (contentType && contentType.indexOf('application/json') !== -1) {
+        const body = await res.json();
+
+        if (body?.message) {
+          throw new Error(body.message);
+        }
+      }
+
+      throw new Error('An error occurred');
     }
 
     return res;

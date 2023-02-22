@@ -40,7 +40,7 @@ export const MessageTableRow = ({ message }: Props) => {
   // <Th>Plantilla</Th>
 
   return (
-    <tr key={id}>
+    <tr>
       <td>
         <BadgeCell>
           {status && <Badge color='violet' text={status} />}

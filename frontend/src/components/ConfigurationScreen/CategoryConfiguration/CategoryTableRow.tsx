@@ -22,7 +22,7 @@ export const CategoryTableRow = ({
   const { id, name, description, templates } = category;
 
   return (
-    <tr key={id}>
+    <tr>
       <td>
         <CellWithSubtitle title={name || ''} subtitle='' />
       </td>

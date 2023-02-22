@@ -22,7 +22,7 @@ export const TemplateTableRow = ({
     template;
 
   return (
-    <tr key={id}>
+    <tr>
       <td>
         <CellWithSubtitle title={name || ''} subtitle={description || ''} />
       </td>
