@@ -25,8 +25,10 @@ export class ContactPutController implements Controller {
         id: req.params.id,
         name: req.body.name,
         lastName: req.body.lastName || '',
-        prefix: req.body.prefix || '',
-        number: req.body.number,
+        phone: {
+          prefix: req.body.phone.prefix || '',
+          number: req.body.phone.number,
+        },
       };
 
       await this.saveContactUseCase.run(useCaseParams);

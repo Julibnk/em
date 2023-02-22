@@ -110,8 +110,7 @@ export class PrismaContactRepository
       id: prismaEntity.id,
       name: prismaEntity.name,
       lastName: prismaEntity.lastName || '',
-      prefix: prismaEntity.prefix,
-      number: prismaEntity.number,
+      phone: { prefix: prismaEntity.prefix, number: prismaEntity.number },
     });
   }
 }

@@ -1,37 +1,38 @@
 import { createContext, useContext } from 'react';
 import { Nullable } from '../../core/Shared/Nullable';
-import { TemplateMessageRepository } from '../../core/TemplateMessage/TemplateMessageRepository';
+// import { TemplateMessageRepository } from '../../core/TemplateMessage/TemplateMessageRepository';
+import { ContactRepository } from '../../core/Contact/ContactRepository';
 
-interface MessageScreenContext {
-  templateMessageRepository: Nullable<TemplateMessageRepository>;
+interface ContactScreenContext {
+  contactRepository: Nullable<ContactRepository>;
 }
 
 export interface Props {
-  templateMessageRepository: TemplateMessageRepository;
+  contactRepository: ContactRepository;
   children: React.ReactNode;
 }
 
-const MessageScreenContext = createContext<MessageScreenContext>({
-  templateMessageRepository: null,
+const ContactScreenContext = createContext<ContactScreenContext>({
+  contactRepository: null,
 });
 
-export const MessageScreenProvider = ({
-  templateMessageRepository,
+export const ContactScreenProvider = ({
+  contactRepository,
   children,
 }: Props) => {
   return (
-    <MessageScreenContext.Provider value={{ templateMessageRepository }}>
+    <ContactScreenContext.Provider value={{ contactRepository }}>
       {children}
-    </MessageScreenContext.Provider>
+    </ContactScreenContext.Provider>
   );
 };
 
-export const useMessageScreenContext = () => {
-  const { templateMessageRepository } = useContext(MessageScreenContext);
+export const useContactScreenContext = () => {
+  const { contactRepository } = useContext(ContactScreenContext);
 
-  if (!templateMessageRepository) {
-    throw new Error('Template message repository is not defined');
+  if (!contactRepository) {
+    throw new Error('Contact repository is not defined');
   }
 
-  return { templateMessageRepository };
+  return { contactRepository };
 };

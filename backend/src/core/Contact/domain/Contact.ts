@@ -7,7 +7,9 @@ import { ContactLastName } from './value-object/ContactLastName';
 import { AccountId } from '../../Account/domain/value-object/AccountId';
 
 type PhonePrimitives = Primitives<Phone>;
-type ContactPrimitives = Omit<Primitives<Contact>, 'phone'> & PhonePrimitives;
+type ContactPrimitives = Omit<Primitives<Contact>, 'phone'> & {
+  phone: PhonePrimitives;
+};
 
 export class Contact extends AggregateRoot {
   constructor(
@@ -38,7 +40,7 @@ export class Contact extends AggregateRoot {
       new ContactId(plainData.id),
       new ContactName(plainData.name),
       new ContactLastName(plainData.lastName),
-      Phone.fromPrimitives(plainData.prefix, plainData.number)
+      Phone.fromPrimitives(plainData.phone.prefix, plainData.phone.number)
     );
   }
 
@@ -58,8 +60,10 @@ export class Contact extends AggregateRoot {
       id: this.id.value,
       name: this.name.value,
       lastName: this.lastName.value,
-      prefix: this.phone.prefix.value,
-      number: this.phone.number.value,
+      phone: {
+        prefix: this.phone.prefix.value,
+        number: this.phone.number.value,
+      },
     };
   }
 }

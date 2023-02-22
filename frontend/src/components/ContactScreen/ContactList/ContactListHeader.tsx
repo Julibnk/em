@@ -5,13 +5,13 @@ import { useTranslation } from '../../Shared/hooks/useTranslation';
 
 import { IconCloudUpload, IconSearch } from '@tabler/icons-react';
 
-export interface Props {
-  handleAdd: () => void;
-  handleLoad: () => void;
-}
+// export interface Props {
+// handleAdd: () => void;
+// handleLoad: () => void;
+// }
 
-export const ContactListHeader = ({ handleAdd, handleLoad }: Props) => {
-  const t = useTranslation();
+export const ContactListHeader = () => {
+  // const t = useTranslation();
 
   return (
     <header className={styles.root}>

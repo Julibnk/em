@@ -8,8 +8,10 @@ type ControllerResponse = Array<{
   id: string;
   name: string;
   lastName: string;
-  number: string;
-  prefix: string;
+  phone: {
+    number: string;
+    prefix: string;
+  };
 }>;
 
 @injectable()

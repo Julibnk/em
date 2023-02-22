@@ -16,8 +16,7 @@ export type Params = {
   id: string;
   name: string;
   lastName: string;
-  prefix?: string;
-  number: string;
+  phone: { prefix?: string; number: string };
 };
 
 @injectable()
@@ -32,8 +31,8 @@ export class SaveContactUseCase {
     const name = new ContactName(params.name);
     const lastName = new ContactLastName(params.lastName);
     const phone = new Phone(
-      new PhonePrefix(params.prefix),
-      new PhoneNumber(params.number)
+      new PhonePrefix(params.phone.prefix),
+      new PhoneNumber(params.phone.number)
     );
 
     let contact = await this.repository.findById(accountId, id);
