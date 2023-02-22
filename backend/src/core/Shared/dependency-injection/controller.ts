@@ -15,6 +15,7 @@ import { AccountPhonePutController } from '../../../apps/controllers/AccountPhon
 import { TemplateMessageGetController } from '../../../apps/controllers/TemplateMessage/TemplateMessageGetController';
 import { TemplateMessagePutController } from '../../../apps/controllers/TemplateMessage/TemplateMessagePutController';
 import { TemplateMessagePostController } from '../../../apps/controllers/TemplateMessage/TemplateMessagePostController';
+import { ContactGetController } from '../../../apps/controllers/Contact/ContactGetController';
 
 export const enum DiController {
   templatePut = 'app.template.putController',
@@ -26,6 +27,7 @@ export const enum DiController {
   searchAllCategories = 'app.category.searchAllController',
 
   contactPut = 'app.contact.putController',
+  contactGet = 'app.contact.getController',
   searchAllContacts = 'app.contact.searchAllController',
 
   accountPhonePut = 'app.accountPhone.putController',
@@ -57,6 +59,7 @@ export const categoryControllerModule = new ContainerModule((bind) => {
 
 export const contactControllerModule = new ContainerModule((bind) => {
   bind<Controller>(DiController.contactPut).to(ContactPutController);
+  bind<Controller>(DiController.contactGet).to(ContactGetController);
   bind<Controller>(DiController.searchAllContacts).to(
     SearchAllContactsController
   );

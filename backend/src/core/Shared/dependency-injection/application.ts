@@ -14,6 +14,7 @@ import { FindAccountPhoneUseCase } from '../../AccountPhone/application/FindAcco
 import { SaveTemplateMessageUseCase } from '../../TemplateMessage/application/SaveTemplateMessage';
 import { FindTemplateMessageUseCase } from '../../TemplateMessage/application/FindTemplateMessage';
 import { SearchTemplateMessageUseCase } from '../../TemplateMessage/application/SearchTemplateMessage';
+import { FindContactUseCase } from '../../Contact/application/FindContact';
 
 export const templateUseCasesModule = new ContainerModule((bind) => {
   bind<SearchAllTemplatesUseCase>(SearchAllTemplatesUseCase).toSelf();
@@ -30,6 +31,7 @@ export const categoryUseCasesModule = new ContainerModule((bind) => {
 export const contactUseCasesModule = new ContainerModule((bind) => {
   bind<SearchAllContactsUseCase>(SearchAllContactsUseCase).toSelf();
   bind<SaveContactUseCase>(SaveContactUseCase).toSelf();
+  bind<FindContactUseCase>(FindContactUseCase).toSelf();
 });
 
 export const accountUseCasesModule = new ContainerModule((bind) => {

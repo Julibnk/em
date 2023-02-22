@@ -17,6 +17,8 @@ const putPostSchema = [
   body('phone.number').exists().isString(),
 ];
 
+const getSchema = [param('id').exists().isString()];
+
 export const register = (router: Router) => {
   const contactPutController = container.get<Controller>(
     DiController.contactPut
@@ -24,6 +26,9 @@ export const register = (router: Router) => {
 
   const contactSearchAllController = container.get<Controller>(
     DiController.searchAllContacts
+  );
+  const contactGetController = container.get<Controller>(
+    DiController.contactGet
   );
 
   router.put(
@@ -35,5 +40,12 @@ export const register = (router: Router) => {
 
   router.get('/contact', (req: Request, res: Response) =>
     contactSearchAllController.run(req, res)
+  );
+
+  router.get(
+    '/contact/:id',
+    getSchema,
+    validateReqSchema,
+    (req: Request, res: Response) => contactGetController.run(req, res)
   );
 };

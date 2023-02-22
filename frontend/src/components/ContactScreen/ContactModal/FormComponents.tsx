@@ -11,25 +11,17 @@ export const PhoneInput = ({ form }: FormInputProps) => {
   return (
     <Input.Wrapper withAsterisk label='Teléfono'>
       <div className={styles.phoneInput}>
-        <TextInput
-          placeholder='+34'
-          {...form.getInputProps('contact.phone.prefix')}
-        />
-        <NumberInput
-          hideControls
-          {...form.getInputProps('contact.phone.number')}
-        />
+        <TextInput placeholder='+34' {...form.getInputProps('phone.prefix')} />
+        <NumberInput hideControls {...form.getInputProps('phone.number')} />
       </div>
     </Input.Wrapper>
   );
 };
 
 export const NameInput = ({ form }: FormInputProps) => {
-  return <TextInput label='Nombre' {...form.getInputProps('contact.name')} />;
+  return <TextInput label='Nombre' {...form.getInputProps('name')} />;
 };
 
 export const LastNameInput = ({ form }: FormInputProps) => {
-  return (
-    <TextInput label='Apellidos' {...form.getInputProps('contact.lastName')} />
-  );
+  return <TextInput label='Apellidos' {...form.getInputProps('lastName')} />;
 };
