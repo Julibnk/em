@@ -18,6 +18,13 @@ export const ContactModalForm = ({ handleSubmit, contact }: Props) => {
     //   },
     //   templateId: notEmpty('La plantilla es obligatoria'),
     // },
+    transformValues: (values) => ({
+      ...values,
+      phone: {
+        ...values.phone,
+        number: String(values.phone.number),
+      },
+    }),
   });
 
   return (

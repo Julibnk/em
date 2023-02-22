@@ -12,7 +12,7 @@ const putPostSchema = [
   param('id').exists().isString(),
   body('name').exists().isString(),
   body('lastName').optional().isString(),
-  body('phone').exists().isString(),
+  body('phone').exists().isObject(),
   body('phone.prefix').optional().isString(),
   body('phone.number').exists().isString(),
 ];

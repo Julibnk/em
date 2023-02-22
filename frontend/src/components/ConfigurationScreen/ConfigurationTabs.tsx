@@ -18,7 +18,7 @@ export const ConfigurationTabs = () => {
 
   return (
     <Tabs {...tabsProps}>
-      <Tabs.List>
+      <Tabs.List position='center'>
         <Tabs.Tab value={ConfigurationSections.CATEGORY}>
           {t('category', { plural: true })}
         </Tabs.Tab>

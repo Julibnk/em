@@ -12,7 +12,7 @@ const ContactScreen = () => {
   const { contacts, loadContacts } = useContactTable();
 
   const onSubmitSuccess = useCallback(() => {
-    loadMessages();
+    loadContacts();
   }, []);
 
   const { contactModalState, add, close, submit, edit } =
@@ -46,6 +46,3 @@ const ContactScreenWrapper = () => {
 };
 
 export default ContactScreenWrapper;
-function loadMessages() {
-  throw new Error('Function not implemented.');
-}

@@ -1,6 +1,5 @@
-// import { MessageTableRow } from './MessageTableRow';
+import styles from './styles.module.css';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
-// import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
 import { Table } from '@mantine/core';
 import { Contact } from '../../../core/Contact/Contact';
 import { ContactTableRow } from './ContactTableRow';
@@ -20,7 +19,7 @@ export const ContactTable = ({ contacts, handleEdit }: Props) => {
           <th>Nombre</th>
           <th>Apellidos</th>
           <th>Telefono</th>
-          <th>{t('actions')}</th>
+          <th className={styles.textCenter}>{t('actions')}</th>
         </tr>
       </thead>
       <tbody>

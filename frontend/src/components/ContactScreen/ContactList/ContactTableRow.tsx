@@ -1,5 +1,5 @@
 import { ActionIcon } from '@mantine/core';
-import { ActionCell } from '../../Shared/TableCells';
+import { ActionCell, CellWithSubtitle } from '../../Shared/TableCells';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
 
 import { Contact } from '../../../core/Contact/Contact';
@@ -14,7 +14,9 @@ export const ContactTableRow = ({ contact, handleEdit }: Props) => {
 
   return (
     <tr>
-      <td>{name}</td>
+      <td>
+        <CellWithSubtitle title={name} subtitle='' />
+      </td>
       <td>{lastName}</td>
       <td>
         {phone.prefix}-{phone.number}

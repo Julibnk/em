@@ -11,12 +11,16 @@
   padding: 1.2rem 0;
   align-items: center;
   max-height: calc(100vh - 26.5rem);
-
-  overflow-y: scroll;
+  box-shadow: var(--default-shadow);
+  background-color: #fff;
+  border-radius: var(--default-radius);
+  border: 1px solid var(--color-gray-4);
 }
 
 .formContainer form {
   width: 100rem;
+  overflow-y: scroll;
+  padding: 0 3.2rem;
 }
 
 .formContainer fieldset {

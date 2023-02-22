@@ -57,6 +57,7 @@
   background-color: #fff;
   color: var(--color-gray-5);
   table-layout: fixed;
+  box-shadow: var(--default-shadow);
 }
 
 .table thead {
@@ -81,6 +82,10 @@
   color: var(--color-gray-6);
   font-weight: 600;
   padding: 0.8rem 1.2rem;
+}
+
+.table tbody tr td {
+  color: var(--color-gray-7);
 }
 
 .table th:first-child {

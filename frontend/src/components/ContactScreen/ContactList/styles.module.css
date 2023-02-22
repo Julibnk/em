@@ -8,3 +8,7 @@
   display: flex;
   gap: 1.2rem;
 }
+
+.textCenter {
+  text-align: center !important;
+}

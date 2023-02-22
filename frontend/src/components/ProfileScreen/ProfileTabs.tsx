@@ -17,7 +17,7 @@ export const ProfileTabs = () => {
 
   return (
     <Tabs defaultValue={ProfileSections.ACCOUNT}>
-      <Tabs.List>
+      <Tabs.List position='center'>
         <Tabs.Tab value={ProfileSections.ACCOUNT}>{t('account')}</Tabs.Tab>
         <Tabs.Tab value={ProfileSections.META_ACCOUNT}>
           {t('metaAccount')}
