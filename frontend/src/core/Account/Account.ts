@@ -9,3 +9,20 @@ export interface Account {
   address: Address;
   metaAccount: MetaAccount;
 }
+
+export const initialAccount: Account = {
+  id: '',
+  companyName: '',
+  vat: '',
+  disabled: false,
+  address: {
+    street: '',
+    addressNumber: '',
+    postalCode: '',
+    region: '',
+    country: '',
+  },
+  metaAccount: {
+    id: '',
+  },
+};

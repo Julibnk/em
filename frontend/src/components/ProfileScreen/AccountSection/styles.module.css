@@ -1,16 +1,15 @@
-.header {
+.footer {
   display: flex;
   justify-content: end;
-  align-items: center;
-  padding-bottom: 1.2rem;
+  padding: 0 3.2rem;
 }
 
 .formContainer {
   display: flex;
   flex-direction: column;
-  padding: 1.2rem 0;
-  align-items: center;
-  max-height: calc(100vh - 26.5rem);
+  gap: 2.4rem;
+  padding: 1.2rem 3.2rem;
+  max-height: calc(100vh - 20.5rem);
   box-shadow: var(--default-shadow);
   background-color: #fff;
   border-radius: var(--default-radius);
@@ -21,6 +20,7 @@
   width: 100rem;
   overflow-y: scroll;
   padding: 0 3.2rem;
+  align-self: center;
 }
 
 .formContainer fieldset {

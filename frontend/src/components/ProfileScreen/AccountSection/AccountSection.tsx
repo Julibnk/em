@@ -1,97 +1,59 @@
 import { TextInput, Title } from '@mantine/core';
 import styles from './styles.module.css';
-// import { SecondaryTitle } from '../../Shared/Titles/SecondaryTitle';
-import { AccountSectionHeader } from './AccountSectionHeader';
+
+import { AccountSectionFooter } from './AccountSectionFooter';
 import { useForm } from '@mantine/form';
-import { CategorySelect } from './FormComponents';
+import {
+  BussinesIdInput,
+  CompanyNameInput,
+  CountryCodeSelect,
+  NumberInput,
+  PostalCodeInput,
+  RegionCodeSelect,
+  StreetInput,
+  VatInut,
+} from './FormComponents';
+import { Account, initialAccount } from '../../../core/Account/Account';
+import { useAccountSection } from './useAccountSection';
+import { LoadingOverlay } from '../../Shared/Loading';
 
 export const AccountSection = () => {
-  const form = useForm<any>({});
+  const { account, isLoading } = useAccountSection();
+
+  const form = useForm<Account>({ initialValues: account ?? initialAccount });
 
   return (
-    <>
-      <AccountSectionHeader />
-
-      <div className={styles.formContainer}>
-        <form
-          id='account-form'
-          // onSubmit={form.onSubmit((values) => handleSubmit(values))}
-        >
-          <fieldset>
-            <legend>Información fiscal</legend>
-            <div className={styles.content}>
-              <CategorySelect form={form} />
-              <CategorySelect form={form} />
-              <CategorySelect form={form} />
-              <CategorySelect form={form} />
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Dirección</legend>
-            <div className={styles.content}>
-              <CategorySelect form={form} />
-              <CategorySelect form={form} />
-              <CategorySelect form={form} />
-              <CategorySelect form={form} />
-              {/* <ContractDatesInput form={form} /> */}
-              {/* <PenaltyTypeInput form={form} /> */}
-            </div>
-          </fieldset>
-          {/* <fieldset> */}
-          {/* <legend>{t('integrationInfo')}</legend> */}
-          {/* <div className={styles.content}> */}
-          {/* <DimensionCodeInput form={form} /> */}
-          {/* <ErpCustomerCodeInput form={form} /> */}
-          {/* </div> */}
-          {/* </fieldset> */}
-        </form>
-      </div>
-    </>
+    <div className={styles.formContainer}>
+      <LoadingOverlay loading={isLoading}></LoadingOverlay>
+      <form
+        id='account-form'
+        // onSubmit={form.onSubmit((values) => handleSubmit(values))}
+      >
+        <fieldset>
+          <legend>Información fiscal</legend>
+          <div className={styles.content}>
+            <CompanyNameInput form={form} />
+            <VatInut form={form} />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Dirección</legend>
+          <div className={styles.content}>
+            <StreetInput form={form} />
+            <NumberInput form={form} />
+            <PostalCodeInput form={form} />
+            <RegionCodeSelect form={form} />
+            <CountryCodeSelect form={form} />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Meta info</legend>
+          <div className={styles.content}>
+            <BussinesIdInput form={form} />
+          </div>
+        </fieldset>
+      </form>
+      <AccountSectionFooter />
+    </div>
   );
 };
-// export const AccountSection = () => {
-//   return (
-//     <>
-//       <AccountSectionHeader />
-
-//       <div style={{ padding: '1.8rem' }}>
-//         <div style={{ display: 'flex' }}>
-//           <div style={{ flexBasis: '33.33%' }}>
-//             <Title order={5}>{'Información fiscal'}</Title>
-//           </div>
-//           <div style={{ flexBasis: '66.66%', paddingRight: '25%' }}>
-//             <form
-
-//             // onSubmit={form.onSubmit((values) => handleSubmit(values))}
-//             >
-//               <TextInput disabled placeholder='Nombre' />
-//               <TextInput disabled placeholder='Cif' />
-//             </form>
-//           </div>
-//         </div>
-//       </div>
-
-//       <div style={{ padding: '1.8rem' }}>
-//         <div style={{ display: 'flex' }}>
-//           <div style={{ flexBasis: '33.33%' }}>
-//             <Title order={5}>{'Direccion'}</Title>
-//           </div>
-//           <div style={{ flexBasis: '66.66%', paddingRight: '25%' }}>
-//             <form
-//             // onSubmit={form.onSubmit((values) => handleSubmit(values))}
-//             >
-//               <div>
-//                 <TextInput />
-
-//                 <TextInput />
-//               </div>
-//               <TextInput />
-//               <TextInput />
-//               <TextInput />
-//             </form>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
