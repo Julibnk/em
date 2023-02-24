@@ -4,28 +4,20 @@ import { ContactScreenProvider } from './ContactScreenContext';
 import { ContactListHeader } from './ContactList/ContactListHeader';
 import { ContactTable } from './ContactList/ContactTable';
 import { useContactTable } from './ContactList/useContactTable';
-import { useCallback, useEffect } from 'react';
 import { useContactModal } from './ContactModal/useContactModal';
 import { ContactModal } from './ContactModal/ContactModal';
+import { LoadingOverlay } from '../Shared/Loading';
 
 const ContactScreen = () => {
-  const { contacts, loadContacts } = useContactTable();
+  const { isLoading } = useContactTable();
 
-  const onSubmitSuccess = useCallback(() => {
-    loadContacts();
-  }, []);
-
-  const { contactModalState, add, close, submit, edit } =
-    useContactModal(onSubmitSuccess);
-
-  useEffect(() => {
-    loadContacts();
-  }, []);
+  const { contactModalState, add, close, submit, edit } = useContactModal();
 
   return (
     <ScreenContent>
+      <LoadingOverlay loading={isLoading} />
       <ContactListHeader handleAdd={add} />
-      <ContactTable contacts={contacts} handleEdit={edit} />
+      <ContactTable handleEdit={edit} />
       <ContactModal
         state={contactModalState}
         handleClose={close}

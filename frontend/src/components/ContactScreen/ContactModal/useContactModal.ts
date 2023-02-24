@@ -9,11 +9,16 @@ import {
 import { showNotification } from '../../../core/Shared/Notification';
 import { useContactScreenContext } from '../ContactScreenContext';
 import { Contact } from '../../../core/Contact/Contact';
+import { useContactTable } from '../ContactList/useContactTable';
 
-export function useContactModal(onSubmitSuccess: () => void) {
+export function useContactModal() {
   const t = useTranslation();
 
+  // const is
+
   const { contactRepository } = useContactScreenContext();
+
+  const { loadContacts } = useContactTable();
 
   const [contactModalState, dispatch] = useReducer(
     contactModalReducer,
@@ -53,7 +58,7 @@ export function useContactModal(onSubmitSuccess: () => void) {
       dispatch({ type: ContactModalActionTypes.LOADING, payload: true });
       await contactRepository.save(contact);
       dispatch({ type: ContactModalActionTypes.CLOSE });
-      onSubmitSuccess();
+      loadContacts();
     } catch (error) {
       showNotification({
         title: t('error'),

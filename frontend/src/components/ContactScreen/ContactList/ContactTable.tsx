@@ -3,14 +3,20 @@ import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Table } from '@mantine/core';
 import { Contact } from '../../../core/Contact/Contact';
 import { ContactTableRow } from './ContactTableRow';
+import { useContactTable } from './useContactTable';
 
 export interface Props {
-  contacts: Contact[];
+  // contacts: Contact[];
   handleEdit: (contactId: string) => void;
 }
 
-export const ContactTable = ({ contacts, handleEdit }: Props) => {
+export const ContactTable = ({ handleEdit }: Props) => {
   const t = useTranslation();
+  const { contacts } = useContactTable();
+
+  if (!contacts) {
+    return null;
+  }
 
   return (
     <Table>
