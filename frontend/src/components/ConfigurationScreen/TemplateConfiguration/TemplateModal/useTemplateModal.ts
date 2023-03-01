@@ -1,5 +1,8 @@
 import { useCallback, useReducer } from 'react';
-import { showNotification } from '../../../../core/Shared/Notification';
+import {
+  showNotification,
+  apiErrorNotification,
+} from '../../../../core/Shared/Notification';
 import { Uuid } from '../../../../core/Shared/Uuid';
 import { Template } from '../../../../core/Template/Template';
 import { useConfigurationScreenContext } from '../../ConfigurationScreenProvider';
@@ -55,14 +58,7 @@ export function useTemplateModal(onSubmitSuccess: () => void) {
       dispatch({ type: TemplateModalActionTypes.CLOSE });
       onSubmitSuccess();
     } catch (error) {
-      showNotification({
-        title: t('error'),
-        message:
-          error instanceof Error
-            ? error.message
-            : 'Ha ocurrido un error al guardar la plantilla', //TODO traducir
-        color: 'red',
-      });
+      apiErrorNotification(error);
       dispatch({ type: TemplateModalActionTypes.LOADING, payload: false });
     }
   }, []);

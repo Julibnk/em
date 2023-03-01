@@ -8,7 +8,7 @@ import {
   MessageModalActionTypes,
 } from './messageModalReducer';
 import { TemplateMessage } from '../../../core/TemplateMessage/TemplateMessage';
-import { showNotification } from '../../../core/Shared/Notification';
+import { apiErrorNotification } from '../../../core/Shared/Notification';
 
 export function useMessageModal(onSubmitSuccess: () => void) {
   const t = useTranslation();
@@ -68,15 +68,7 @@ export function useMessageModal(onSubmitSuccess: () => void) {
       dispatch({ type: MessageModalActionTypes.CLOSE });
       onSubmitSuccess();
     } catch (error) {
-      showNotification({
-        title: t('error'),
-        message:
-          error instanceof Error
-            ? error.message
-            : 'Ha ocurrido un error al guardar el mensaje', //TODO traducir
-        color: 'red',
-      });
-      dispatch({ type: MessageModalActionTypes.LOADING, payload: false });
+      apiErrorNotification(error);
     }
   }, []);
 

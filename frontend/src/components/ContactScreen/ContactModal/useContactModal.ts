@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback, useReducer, useState, useEffect } from 'react';
 import { useTranslation } from '../../Shared/hooks/useTranslation';
 import { Uuid } from '../../../core/Shared/Uuid';
 import {
@@ -6,77 +6,110 @@ import {
   contactModalReducer,
   ContactModalActionTypes,
 } from './contactModalReducer';
-import { showNotification } from '../../../core/Shared/Notification';
 import { useContactScreenContext } from '../ContactScreenContext';
 import { Contact } from '../../../core/Contact/Contact';
 import { useContactTable } from '../ContactList/useContactTable';
+import useSWRMutation, {
+  MutationFetcher,
+  SWRMutationConfiguration,
+} from 'swr/mutation';
+import { apiErrorNotification } from '../../../core/Shared/Notification';
+import useSWR, { Fetcher, Key } from 'swr';
+import { Nullable } from 'vitest';
+
+const enum ModalMode {
+  ADD = 'ADD',
+  EDIT = 'EDIT',
+}
+
+interface ContactModalState {
+  opened: boolean;
+  contactId: Nullable<string>;
+  mode: Nullable<ModalMode>;
+}
+
+const initialModalState: ContactModalState = {
+  opened: false,
+  contactId: null,
+  mode: null,
+};
 
 export function useContactModal() {
   const t = useTranslation();
 
-  // const is
-
   const { contactRepository } = useContactScreenContext();
 
-  const { loadContacts } = useContactTable();
+  const [modalState, setModalState] =
+    useState<ContactModalState>(initialModalState);
 
-  const [contactModalState, dispatch] = useReducer(
-    contactModalReducer,
-    initialState
+  const saveFetcher: MutationFetcher<void, Contact, string> = (
+    _url,
+    { arg: contact }
+  ) => contactRepository.save(contact);
+
+  const { trigger: saveContact, isMutating: mutating } = useSWRMutation(
+    'contact',
+    saveFetcher
   );
 
-  const add = useCallback(() => {
-    const payload: Contact = {
-      id: Uuid.create(),
-      name: '',
-      lastName: '',
-      phone: {
-        prefix: '',
-        number: '',
-      },
-    };
+  const { contactId, mode } = modalState;
 
-    dispatch({
-      type: ContactModalActionTypes.CREATE,
-      payload,
+  const contactKey = contactId && mode ? ['contact', contactId, mode] : null;
+
+  const { data: contact, isLoading: loading } = useSWR<
+    Contact,
+    string,
+    Nullable<string[]>
+  >(contactKey, ([_url, id, mode]) => {
+    if (mode === ModalMode.ADD) {
+      const newContact: Contact = {
+        id,
+        name: '',
+        lastName: '',
+        phone: {
+          prefix: '',
+          number: '',
+        },
+      };
+      return newContact;
+    }
+
+    return contactRepository.searchById(id);
+  });
+
+  const add = useCallback(() => {
+    setModalState({
+      opened: true,
+      contactId: Uuid.create(),
+      mode: ModalMode.ADD,
     });
   }, []);
 
   const close = useCallback(() => {
-    dispatch({ type: ContactModalActionTypes.CLOSE });
+    setModalState(initialModalState);
   }, []);
 
-  const edit = useCallback(async (contactId: string) => {
-    const contact = await contactRepository.searchById(contactId);
-
-    if (contact)
-      dispatch({ type: ContactModalActionTypes.EDIT, payload: contact });
+  const edit = useCallback((contactId: string) => {
+    setModalState({ opened: true, contactId, mode: ModalMode.EDIT });
   }, []);
 
   const submit = useCallback(async (contact: Contact) => {
     try {
-      dispatch({ type: ContactModalActionTypes.LOADING, payload: true });
-      await contactRepository.save(contact);
-      dispatch({ type: ContactModalActionTypes.CLOSE });
-      loadContacts();
+      await saveContact(contact);
+      close();
     } catch (error) {
-      showNotification({
-        title: t('error'),
-        message:
-          error instanceof Error
-            ? error.message
-            : 'Ha ocurrido un error al guardar el contacto', //TODO traducir
-        color: 'red',
-      });
-      dispatch({ type: ContactModalActionTypes.LOADING, payload: false });
+      apiErrorNotification(error);
     }
   }, []);
 
   return {
-    contactModalState,
+    contact,
+    loading,
     add,
     close,
     submit,
     edit,
+    mutating,
+    modalState,
   };
 }

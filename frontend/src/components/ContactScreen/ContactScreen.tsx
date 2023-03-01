@@ -9,17 +9,27 @@ import { ContactModal } from './ContactModal/ContactModal';
 import { LoadingOverlay } from '../Shared/Loading';
 
 const ContactScreen = () => {
-  const { isLoading } = useContactTable();
+  const { loading: tableLoading } = useContactTable();
 
-  const { contactModalState, add, close, submit, edit } = useContactModal();
+  const {
+    add,
+    submit,
+    edit,
+    close,
+    loading: modalLoading,
+    modalState: { opened },
+    contact,
+  } = useContactModal();
 
   return (
     <ScreenContent>
-      <LoadingOverlay loading={isLoading} />
+      <LoadingOverlay loading={tableLoading} />
       <ContactListHeader handleAdd={add} />
       <ContactTable handleEdit={edit} />
       <ContactModal
-        state={contactModalState}
+        opened={opened}
+        loading={modalLoading}
+        contact={contact}
         handleClose={close}
         handleSubmit={submit}
       />

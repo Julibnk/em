@@ -1,7 +1,7 @@
 import { useCallback, useReducer } from 'react';
 import { CategoryOnlyIds } from '../../../../core/Category/Category';
 import { Uuid } from '../../../../core/Shared/Uuid';
-import { showNotification } from '../../../../core/Shared/Notification';
+import { apiErrorNotification } from '../../../../core/Shared/Notification';
 import {
   CategoryModalActionTypes,
   categoryModalReducer,
@@ -61,7 +61,7 @@ export function useCategoryModal(onSubmitSuccess: () => void) {
       dispatch({ type: CategoryModalActionTypes.CLOSE });
       onSubmitSuccess();
     } catch (error) {
-      showNotification({ title: 'Error', message: 'error' });
+      apiErrorNotification(error);
       dispatch({ type: CategoryModalActionTypes.LOADING, payload: false });
     }
   }, []);
