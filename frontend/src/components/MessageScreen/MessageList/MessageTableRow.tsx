@@ -15,7 +15,7 @@ export const MessageTableRow = ({ message }: Props) => {
     status,
     templateId,
     accountPhoneId,
-    contactId,
+    // contactId,
     parameter1,
     parameter2,
     parameter3,
@@ -47,8 +47,8 @@ export const MessageTableRow = ({ message }: Props) => {
         </BadgeCell>
       </td>
       <td>{sentDate && sentDate.toString()}</td>
-      <td>{contactId}</td>
-      <td>{contactId}</td>
+      {/* <td>{contactId}</td>
+      <td>{contactId}</td> */}
       <td>{templateId}</td>
       <td></td>
       <td></td>

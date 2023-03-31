@@ -9,14 +9,14 @@ import { ContactModal } from './ContactModal/ContactModal';
 import { LoadingOverlay } from '../Shared/Loading';
 
 const ContactScreen = () => {
-  const { loading: tableLoading } = useContactTable();
+  const { loading: tableLoading, contacts } = useContactTable();
 
   const {
     add,
     submit,
     edit,
     close,
-    loading: modalLoading,
+    isLoading: modalLoading,
     modalState: { opened },
     contact,
   } = useContactModal();
@@ -25,7 +25,7 @@ const ContactScreen = () => {
     <ScreenContent>
       <LoadingOverlay loading={tableLoading} />
       <ContactListHeader handleAdd={add} />
-      <ContactTable handleEdit={edit} />
+      <ContactTable handleEdit={edit} contacts={contacts} />
       <ContactModal
         opened={opened}
         loading={modalLoading}

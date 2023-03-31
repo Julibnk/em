@@ -1,23 +1,13 @@
-import { useCallback, useReducer, useState, useEffect } from 'react';
-import { useTranslation } from '../../Shared/hooks/useTranslation';
+import { useCallback, useState } from 'react';
 import { Uuid } from '../../../core/Shared/Uuid';
-import {
-  initialState,
-  contactModalReducer,
-  ContactModalActionTypes,
-} from './contactModalReducer';
-import { useContactScreenContext } from '../ContactScreenContext';
-import { Contact } from '../../../core/Contact/Contact';
-import { useContactTable } from '../ContactList/useContactTable';
-import useSWRMutation, {
-  MutationFetcher,
-  SWRMutationConfiguration,
-} from 'swr/mutation';
-import { apiErrorNotification } from '../../../core/Shared/Notification';
-import useSWR, { Fetcher, Key } from 'swr';
-import { Nullable } from 'vitest';
 
-const enum ModalMode {
+import { Contact } from '../../../core/Contact/Contact';
+
+import { apiErrorNotification } from '../../../core/Shared/Notification';
+import { Nullable } from 'vitest';
+import { useContactModalQuery } from './useContactModalQuery';
+
+export const enum ModalMode {
   ADD = 'ADD',
   EDIT = 'EDIT',
 }
@@ -34,47 +24,27 @@ const initialModalState: ContactModalState = {
   mode: null,
 };
 
-export function useContactModal() {
-  const t = useTranslation();
+type GetFetcherKey = Nullable<{
+  url: string;
+  args: { id: string; mode: ModalMode };
+}>;
 
-  const { contactRepository } = useContactScreenContext();
+export function useContactModal() {
+  // const { mutate } = useSWRConfig();
 
   const [modalState, setModalState] =
     useState<ContactModalState>(initialModalState);
 
-  const saveFetcher: MutationFetcher<void, Contact, string> = (
-    _url,
-    { arg: contact }
-  ) => contactRepository.save(contact);
-
-  const { trigger: saveContact, isMutating: mutating } = useSWRMutation(
-    'contact',
-    saveFetcher
-  );
-
   const { contactId, mode } = modalState;
 
-  const contactKey = contactId && mode ? ['contact', contactId, mode] : null;
-
-  const { data: contact, isLoading: loading } = useSWR<
-    Contact,
-    string,
-    Nullable<string[]>
-  >(contactKey, ([_url, id, mode]) => {
-    if (mode === ModalMode.ADD) {
-      const newContact: Contact = {
-        id,
-        name: '',
-        lastName: '',
-        phone: {
-          prefix: '',
-          number: '',
-        },
-      };
-      return newContact;
-    }
-
-    return contactRepository.searchById(id);
+  const {
+    saveContact,
+    isSaving,
+    isLoading,
+    data: contact,
+  } = useContactModalQuery({
+    id: contactId,
+    mode,
   });
 
   const add = useCallback(() => {
@@ -97,6 +67,7 @@ export function useContactModal() {
     try {
       await saveContact(contact);
       close();
+      // mutate('contacts');
     } catch (error) {
       apiErrorNotification(error);
     }
@@ -104,12 +75,12 @@ export function useContactModal() {
 
   return {
     contact,
-    loading,
+    isLoading,
     add,
     close,
     submit,
     edit,
-    mutating,
+    isSaving,
     modalState,
   };
 }

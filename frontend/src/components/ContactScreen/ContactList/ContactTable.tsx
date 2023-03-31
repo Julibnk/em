@@ -4,15 +4,15 @@ import { Table } from '@mantine/core';
 import { Contact } from '../../../core/Contact/Contact';
 import { ContactTableRow } from './ContactTableRow';
 import { useContactTable } from './useContactTable';
+import { Nullable } from '../../../core/Shared/Nullable';
 
 export interface Props {
-  // contacts: Contact[];
+  contacts: Nullable<Contact[]>;
   handleEdit: (contactId: string) => void;
 }
 
-export const ContactTable = ({ handleEdit }: Props) => {
+export const ContactTable = ({ handleEdit, contacts }: Props) => {
   const t = useTranslation();
-  const { contacts } = useContactTable();
 
   if (!contacts) {
     return null;

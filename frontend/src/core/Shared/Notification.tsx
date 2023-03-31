@@ -1,21 +1,16 @@
 import { MantineColor } from '@mantine/core';
 import { showNotification as mantineShowNotification } from '@mantine/notifications';
-import { IconCheck, IconX } from '@tabler/icons';
+import { IconCheck, IconX } from '@tabler/icons-react';
 
-export enum NotificationType {
-  SUCCESS = 'SUCCESS',
-  ERROR = 'ERROR',
-  WARNING = 'WARNING',
-}
+export type NotificationType = 'SUCCESS' | 'ERROR' | 'WARNING';
 
 export const showNotification = (
   title: string,
   message: string,
-  type: NotificationType = NotificationType.ERROR
+  type: NotificationType = 'ERROR'
 ) => {
-  const color: MantineColor =
-    type === NotificationType.SUCCESS ? 'green' : 'red';
-  const icon = type === NotificationType.SUCCESS ? <IconCheck /> : <IconX />;
+  const color: MantineColor = type === 'SUCCESS' ? 'green' : 'red';
+  const icon = type === 'SUCCESS' ? <IconCheck /> : <IconX />;
 
   mantineShowNotification({ title, message, color, icon });
 };
@@ -25,5 +20,5 @@ export const apiErrorNotification = (error: unknown) => {
     return showNotification('Error', error.message);
   }
 
-  showNotification(NotificationType.ERROR, 'An error occurred');
+  showNotification('ERROR', 'An error occurred');
 };

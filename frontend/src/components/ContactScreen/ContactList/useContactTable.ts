@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { useContactScreenContext } from '../ContactScreenContext';
-import useSWR from 'swr';
 
 export function useContactTable() {
   const { contactRepository } = useContactScreenContext();
@@ -7,8 +7,11 @@ export function useContactTable() {
   const {
     data: contacts,
     isLoading: loading,
-    mutate: loadContacts,
-  } = useSWR('contacts', () => contactRepository.searchAll());
+    refetch: loadContacts,
+  } = useQuery({
+    queryKey: ['contacts'],
+    queryFn: () => contactRepository.searchAll(),
+  });
 
   return {
     contacts,

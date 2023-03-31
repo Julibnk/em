@@ -23,23 +23,12 @@ export const ContactModal = ({
   handleClose,
   handleSubmit,
 }: Props) => {
-  // const {
-  //   add,
-  //   submit,
-  //   edit,
-  //   close,
-  //   loading,
-  //   modalState: { opened },
-  // } = useContactModal();
-
   const modalProps: ModalProps = {
     opened,
     onClose: close,
     title: <Title order={3}>Contacto</Title>,
     size: 600,
   };
-
-  // const { contact } = useContactModal();
 
   if (!contact) return null;
 
